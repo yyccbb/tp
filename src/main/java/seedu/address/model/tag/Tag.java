@@ -9,7 +9,7 @@ import java.util.Set;
  * Represents a Tag in the address book.
  * Guarantees: immutable; name is valid as declared in {@link #isValidTagName(String)}
  */
-public class Tag {
+public abstract class Tag {
 
     public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric";
     public static final String VALIDATION_REGEX = "\\p{Alnum}+";
@@ -134,5 +134,13 @@ public class Tag {
         default:
             return TagType.DEFAULT_TYPE;
         }
+    }
+
+    public boolean isAttendance() {
+        return tagType == TagType.ATTENDANCE;
+    }
+
+    public boolean isAssignment() {
+        return tagType == TagType.ASSIGNMENT;
     }
 }
