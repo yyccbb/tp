@@ -7,7 +7,11 @@ public enum TagStatus {
     COMPLETE_GOOD, // complete before deadline
     COMPLETE_BAD, // complete after deadline
     INCOMPLETE_GOOD, // incomplete before deadline
-    INCOMPLETE_BAD; // incomplete after deadline
+    INCOMPLETE_BAD, // incomplete after deadline
+
+    PRESENT,
+    ABSENT,
+    ABSENT_WITH_REASON;
 
     public static final TagStatus DEFAULT_STATUS = INCOMPLETE_GOOD;
     public static final String COMPLETE_GOOD_KEYWORD = "cg";

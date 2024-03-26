@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.TagStatus;
+import seedu.address.model.tag.TagType;
 
 /**
  * Jackson-friendly version of {@link Tag}.
@@ -14,15 +15,18 @@ class JsonAdaptedTag {
 
     private final String tagName;
     private final TagStatus tagStatus;
+    private final TagType tagType;
 
     /**
      * Constructs a {@code JsonAdaptedTag} with the given {@code tagName}.
      */
     @JsonCreator
     public JsonAdaptedTag(@JsonProperty("tagName") String tagName,
-                          @JsonProperty("tagStatus") TagStatus tagStatus) {
+                          @JsonProperty("tagStatus") TagStatus tagStatus,
+                          @JsonProperty("tagType") TagType tagType) {
         this.tagName = tagName;
         this.tagStatus = tagStatus;
+        this.tagType = tagType;
     }
 
     /**
@@ -31,6 +35,7 @@ class JsonAdaptedTag {
     public JsonAdaptedTag(Tag source) {
         tagName = source.tagName;
         tagStatus = source.getTagStatus();
+        tagType = source.getTagType();
     }
 
     @JsonProperty("tagName")
@@ -42,6 +47,12 @@ class JsonAdaptedTag {
     public TagStatus getTagStatus() {
         return tagStatus;
     }
+
+    @JsonProperty("tagType")
+    public TagType getTagType() {
+        return tagType;
+    }
+
 
     /**
      * Converts this Jackson-friendly adapted tag object into the model's {@code Tag} object.

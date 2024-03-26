@@ -18,6 +18,7 @@ import seedu.address.model.person.PersonType;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.TagStatus;
+import seedu.address.model.tag.TagType;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -142,7 +143,7 @@ public class ParserUtil {
         if (!Tag.isValidTagName(trimmedTag)) {
             throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
         }
-        return new Tag(trimmedTag, TagStatus.INCOMPLETE_GOOD);
+        return Tag.createTag(trimmedTag, TagStatus.INCOMPLETE_GOOD);// new Tag(trimmedTag, TagStatus.INCOMPLETE_GOOD);
     }
 
     /**

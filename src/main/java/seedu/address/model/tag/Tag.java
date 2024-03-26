@@ -17,6 +17,8 @@ public class Tag {
     public final String tagName;
 
     private TagStatus tagStatus;
+    // set to assignment as default for now
+    private TagType tagType = TagType.ASSIGNMENT;
 
     /**
      * Constructs a {@code Tag}.
@@ -32,10 +34,26 @@ public class Tag {
         checkArgument(isValidTagName(tagName), MESSAGE_CONSTRAINTS);
         this.tagName = tagName;
         this.tagStatus = tagStatus;
+        this.tagType = getTagType(tagStatus);
+    }
+
+    public static Tag createTag(String tagName, TagStatus tagStatus) {
+        System.out.println("1");
+        requireNonNull(tagName);
+        // require the tagStatus not to be null for now
+        // in the future, a null tagStatus input should be set to INCOMPLETE_GOOD
+        // by default
+        requireNonNull(tagStatus);
+        checkArgument(isValidTagName(tagName), MESSAGE_CONSTRAINTS);
+        return new AssignmentTag(tagName, tagStatus);
     }
 
     public TagStatus getTagStatus() {
         return tagStatus;
+    }
+
+    public TagType getTagType() {
+        return tagType;
     }
 
     /**
@@ -88,10 +106,21 @@ public class Tag {
         // and then add in a new Tag with the same tagName but updated tagStatus.
         // This is to avoid having linearly check through the hashset to retrieve
         // the existing Tag
-        Tag newTag = new Tag(tagName, tagStatus);
+        Tag newTag = Tag.createTag(tagName, tagStatus);//new Tag(tagName, tagStatus);
         currTags.remove(newTag);
-        currTags.add(new Tag(tagName, tagStatus));
+        currTags.add(Tag.createTag(tagName, tagStatus));
         return currTags;
     }
 
+    private static TagType getTagType(TagStatus ts) {
+        switch (ts) {
+            case COMPLETE_GOOD:
+            case COMPLETE_BAD:
+            case INCOMPLETE_GOOD:
+            case INCOMPLETE_BAD:
+                return TagType.ASSIGNMENT;
+            default:
+                return TagType.DEFAULT_TYPE;
+        }
+    }
 }
