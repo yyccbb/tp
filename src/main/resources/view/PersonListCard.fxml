@@ -26,7 +26,8 @@
         </minWidth>
         <Label fx:id="type" text="\$type" />
       </HBox>
-      <FlowPane fx:id="tags" />
+      <FlowPane fx:id="tags1" />
+      <FlowPane fx:id="tags2" />
       <Label fx:id="id" styleClass="cell_small_label" text="\$id" style="-fx-text-fill: black"/>
       <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" style="-fx-text-fill: black"/>
       <Label fx:id="address" styleClass="cell_small_label" text="\$address" style="-fx-text-fill: black"/>

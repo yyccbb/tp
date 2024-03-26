@@ -18,6 +18,9 @@ public enum TagStatus {
     public static final String COMPLETE_BAD_KEYWORD = "cb";
     public static final String INCOMPLETE_GOOD_KEYWORD = "ig";
     public static final String INCOMPLETE_BAD_KEYWORD = "ib";
+    public static final String PRESENT_KEYWORD = "p";
+    public static final String ABSENT_KEYWORD = "a";
+    public static final String ABSENT_WITH_REASON_KEYWORD = "awr";
 
 
     /**
@@ -34,6 +37,12 @@ public enum TagStatus {
             return TagStatus.INCOMPLETE_GOOD;
         case INCOMPLETE_BAD_KEYWORD:
             return TagStatus.INCOMPLETE_BAD;
+        case PRESENT_KEYWORD:
+            return PRESENT;
+        case ABSENT_KEYWORD:
+            return ABSENT;
+        case ABSENT_WITH_REASON_KEYWORD:
+            return ABSENT_WITH_REASON;
         default:
             return TagStatus.DEFAULT_STATUS;
         }

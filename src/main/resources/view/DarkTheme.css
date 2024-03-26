@@ -383,13 +383,25 @@
 }
 
 #tags .label.complete_bad {
-    -fx-background-color: red; /* Red color for tags with complete_bad status */
+    -fx-background-color: orange; /* Red color for tags with complete_bad status */
 }
 
 #tags .label.incomplete_good {
-    -fx-background-color: blue; /* Blue color for tags with incomplete_good status */
+    -fx-background-color: grey; /* Blue color for tags with incomplete_good status */
 }
 
 #tags .label.incomplete_bad {
-    -fx-background-color: orange; /* Orange color for tags with incomplete_bad status */
+    -fx-background-color: red; /* Orange color for tags with incomplete_bad status */
+}
+
+#tags .label.present {
+    -fx-background-color: green; /* Green color for tags with complete_good status */
+}
+
+#tags .label.absent {
+    -fx-background-color: red; /* Red color for tags with complete_bad status */
+}
+
+#tags .label.absent_with_reason {
+    -fx-background-color: orange; /* Blue color for tags with incomplete_good status */
 }

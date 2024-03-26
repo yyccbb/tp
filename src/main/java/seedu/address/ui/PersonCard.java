@@ -43,7 +43,9 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label type;
     @FXML
-    private FlowPane tags;
+    private FlowPane tags1;
+    @FXML
+    private FlowPane tags2;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -64,7 +66,15 @@ public class PersonCard extends UiPart<Region> {
                     Label tagLabel = new Label(tag.tagName);
                     tagLabel.getStyleClass().addAll("label",
                             tag.getTagStatus().toString().toLowerCase()); // Add base and status-based style classes
-                    tags.getChildren().add(tagLabel);
+                    tags1.getChildren().add(tagLabel);
+                });
+        person.getTags().stream()
+                .sorted(Comparator.comparing(tag -> tag.tagName))
+                .forEach(tag -> {
+                    Label tagLabel = new Label(tag.tagName);
+                    tagLabel.getStyleClass().addAll("label",
+                            tag.getTagStatus().toString().toLowerCase()); // Add base and status-based style classes
+                    tags2.getChildren().add(tagLabel);
                 });
     }
 }

@@ -15,17 +15,15 @@ public class Tag {
     public static final String VALIDATION_REGEX = "\\p{Alnum}+";
 
     public final String tagName;
-
     private TagStatus tagStatus;
-    // set to assignment as default for now
-    private TagType tagType = TagType.ASSIGNMENT;
+    private TagType tagType;
 
     /**
      * Constructs a {@code Tag}.
      *
      * @param tagName A valid tag name.
      */
-    public Tag(String tagName, TagStatus tagStatus) {
+    protected Tag(String tagName, TagStatus tagStatus) {
         requireNonNull(tagName);
         // require the tagStatus not to be null for now
         // in the future, a null tagStatus input should be set to INCOMPLETE_GOOD
@@ -38,14 +36,24 @@ public class Tag {
     }
 
     public static Tag createTag(String tagName, TagStatus tagStatus) {
-        System.out.println("1");
         requireNonNull(tagName);
         // require the tagStatus not to be null for now
         // in the future, a null tagStatus input should be set to INCOMPLETE_GOOD
         // by default
         requireNonNull(tagStatus);
         checkArgument(isValidTagName(tagName), MESSAGE_CONSTRAINTS);
-        return new AssignmentTag(tagName, tagStatus);
+        TagType tagType = getTagType(tagStatus);
+
+        switch (tagType) {
+        case ASSIGNMENT:
+            return new AssignmentTag(tagName, tagStatus);
+        case TUTORIAL:
+            return new TutorialTag(tagName, tagStatus);
+        case ATTENDANCE:
+            return new AttendanceTag(tagName,tagStatus);
+        default:
+            return new AssignmentTag(tagName, tagStatus);
+        }
     }
 
     public TagStatus getTagStatus() {
@@ -114,13 +122,17 @@ public class Tag {
 
     private static TagType getTagType(TagStatus ts) {
         switch (ts) {
-            case COMPLETE_GOOD:
-            case COMPLETE_BAD:
-            case INCOMPLETE_GOOD:
-            case INCOMPLETE_BAD:
-                return TagType.ASSIGNMENT;
-            default:
-                return TagType.DEFAULT_TYPE;
+        case COMPLETE_GOOD:
+        case COMPLETE_BAD:
+        case INCOMPLETE_GOOD:
+        case INCOMPLETE_BAD:
+            return TagType.ASSIGNMENT;
+        case PRESENT:
+        case ABSENT:
+        case ABSENT_WITH_REASON:
+            return TagType.ATTENDANCE;
+        default:
+            return TagType.DEFAULT_TYPE;
         }
     }
 }
