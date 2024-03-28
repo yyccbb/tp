@@ -39,9 +39,13 @@ public class FindCommandParser implements Parser<FindCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_ID, PREFIX_PHONE,
                         PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
 
-        PersonType type = ParserUtil.parsePersonType(argMultimap.getPreamble()); // SOMETHING HERE
-
         List<FieldContainsKeywordsPredicate> predicates = new ArrayList<>();
+
+        PersonType type = ParserUtil.parseFindPersonType(argMultimap.getPreamble());
+        if (type != null) {
+            List<String> separated = Arrays.asList(type.toString().split("//s+"));
+            predicates.add(new FieldContainsKeywordsPredicate(separated));
+        }
 
         List<Prefix> allPrefixes = Arrays.asList(PREFIX_NAME, PREFIX_ID, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS);
         for (Prefix prefix: allPrefixes) {

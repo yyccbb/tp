@@ -24,9 +24,16 @@ public class FieldContainsKeywordsPredicate implements Predicate<Person> {
         this.keywords = keywords;
     }
 
+    public FieldContainsKeywordsPredicate(List<String> keywords) {
+        this.keywords = keywords;
+    }
+
     @Override
     public boolean test(Person person) {
-        if (this.prefix.equals(PREFIX_NAME)) {
+        if (this.prefix == null) { // type
+            return keywords.stream()
+                    .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getType().name(), keyword));
+        } else if (this.prefix.equals(PREFIX_NAME)) {
             return keywords.stream()
                     .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getName().fullName, keyword));
         } else if (this.prefix.equals(PREFIX_ID)) {

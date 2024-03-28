@@ -9,7 +9,7 @@ public class ListUtil {
         List<String> separatedList = new ArrayList<>();
         for (String str : originalList) {
             if (str.contains(" ")) {
-                String[] parts = str.split(" ");
+                String[] parts = str.split("\\s+");
                 for (String part : parts) {
                     separatedList.add(part);
                 }

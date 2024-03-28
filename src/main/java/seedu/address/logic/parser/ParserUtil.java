@@ -42,6 +42,7 @@ public class ParserUtil {
     /**
      * Parses a {@code String type} into a {@code PersonType}.
      * Leading and trailing whitespaces will be trimmed.
+     * An unspecified person type will default to student.
      *
      * @throws ParseException if the given {@code type} is invalid.
      */
@@ -52,6 +53,25 @@ public class ParserUtil {
             throw new ParseException(PersonType.MESSAGE_CONSTRAINTS);
         }
         return PersonType.getPersonType(trimmedType);
+    }
+
+    /**
+     * Parses a {@code String type} into a {@code PersonType} for the find command.
+     * Leading and trailing whitespaces will be trimmed.
+     * An unspecified person type will return null.
+     *
+     * @throws ParseException if the given {@code type} is invalid.
+     */
+    public static PersonType parseFindPersonType(String type) throws ParseException {
+        requireNonNull(type);
+        String trimmedType = type.trim();
+        if (!PersonType.isValidPersonType(trimmedType) && !trimmedType.isEmpty()) {
+            throw new ParseException(PersonType.MESSAGE_CONSTRAINTS);
+        } else if (trimmedType.isEmpty()) {
+            return null;
+        } else {
+            return PersonType.getPersonType(trimmedType);
+        }
     }
 
 
