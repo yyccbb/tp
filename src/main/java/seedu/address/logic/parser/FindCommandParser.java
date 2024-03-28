@@ -52,9 +52,6 @@ public class FindCommandParser implements Parser<FindCommand> {
             if (ParserUtil.arePrefixesPresent(argMultimap, prefix)) {
                 List<String> keywords = argMultimap.getAllValues(prefix);
                 List<String> separated = ListUtil.separateWithSpaces(keywords);
-                for (String string : separated) {
-                    System.out.println(string);
-                }
                 predicates.add(new FieldContainsKeywordsPredicate(prefix, separated));
             }
         }
