@@ -14,14 +14,15 @@ public class StringUtil {
 
     /**
      * Returns true if the {@code sentence} contains the {@code word}.
-     *   Ignores case, but a full word match is required.
+     *   Ignores case, and performs subword matching.
      *   <br>examples:<pre>
      *       containsWordIgnoreCase("ABc def", "abc") == true
      *       containsWordIgnoreCase("ABc def", "DEF") == true
-     *       containsWordIgnoreCase("ABc def", "AB") == false //not a full word match
+     *       containsWordIgnoreCase("ABc def", "AB") == true
+     *       containsWordIgnoreCase("ABc def", "Ac") == false //not a match
      *       </pre>
      * @param sentence cannot be null
-     * @param word cannot be null, cannot be empty, must be a single word
+     * @param word cannot be null, cannot be empty
      */
     public static boolean containsSubwordIgnoreCase(String sentence, String word) {
         requireNonNull(sentence);
