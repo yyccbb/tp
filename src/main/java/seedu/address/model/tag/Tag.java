@@ -52,12 +52,11 @@ public abstract class Tag {
         TagType tagType = getTagType(tagStatus);
 
         switch (tagType) {
-        case ASSIGNMENT:
-            return new AssignmentTag(tagName, tagStatus);
         case TUTORIAL:
             return new TutorialTag(tagName, tagStatus);
         case ATTENDANCE:
             return new AttendanceTag(tagName, tagStatus);
+        case ASSIGNMENT:
         default:
             return new AssignmentTag(tagName, tagStatus);
         }

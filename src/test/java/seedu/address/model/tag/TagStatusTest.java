@@ -22,6 +22,13 @@ class TagStatusTest {
         assertTrue(TagStatus.DEFAULT_STATUS.equals(TagStatus.getTagStatus(
                 emptyTagStatus)));
 
+        assertTrue(TagStatus.PRESENT.equals(TagStatus.getTagStatus(
+                TagStatus.PRESENT_KEYWORD)));
+        assertTrue(TagStatus.ABSENT.equals(TagStatus.getTagStatus(
+                TagStatus.ABSENT_KEYWORD)));
+        assertTrue(TagStatus.ABSENT_WITH_REASON.equals(TagStatus.getTagStatus(
+                TagStatus.ABSENT_WITH_REASON_KEYWORD)));
+
         assertTrue(TagStatus.W08.equals(TagStatus.getTagStatus(
                 TagStatus.W08_KEYWORD)));
         assertTrue(TagStatus.W09.equals(TagStatus.getTagStatus(
@@ -34,7 +41,6 @@ class TagStatusTest {
                 TagStatus.W12_KEYWORD)));
         assertTrue(TagStatus.W13.equals(TagStatus.getTagStatus(
                 TagStatus.W13_KEYWORD)));
-
         assertTrue(TagStatus.T08.equals(TagStatus.getTagStatus(
                 TagStatus.T08_KEYWORD)));
         assertTrue(TagStatus.T09.equals(TagStatus.getTagStatus(
@@ -55,7 +61,6 @@ class TagStatusTest {
                 TagStatus.T16_KEYWORD)));
         assertTrue(TagStatus.T17.equals(TagStatus.getTagStatus(
                 TagStatus.T17_KEYWORD)));
-
         assertTrue(TagStatus.F08.equals(TagStatus.getTagStatus(
                 TagStatus.F08_KEYWORD)));
         assertTrue(TagStatus.F09.equals(TagStatus.getTagStatus(

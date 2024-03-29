@@ -44,4 +44,25 @@ public class TagTest {
         assert(Tag.createTag(validTagName, TagStatus.W08).isTutorial());
     }
 
+    @Test
+    public void equals_tagsWithTheSameTagName_success() {
+        String validTagName = "test";
+        Tag tag1 = Tag.createTag(validTagName, TagStatus.DEFAULT_STATUS);
+        Tag tag2 = Tag.createTag(validTagName, TagStatus.DEFAULT_STATUS);
+        assert(tag1.equals(tag2));
+    }
+
+    @Test
+    public void equals_theSameTag_success() {
+        String validTagName = "test";
+        Tag tag1 = Tag.createTag(validTagName, TagStatus.DEFAULT_STATUS);
+        assert(tag1.equals(tag1));
+    }
+
+    @Test
+    public void equals_tagNotEqualToNonTagObjects_success() {
+        String validTagName = "test";
+        Tag tag1 = Tag.createTag(validTagName, TagStatus.DEFAULT_STATUS);
+        assert(!tag1.equals(new Object()));
+    }
 }
