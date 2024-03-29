@@ -13,10 +13,11 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
-import seedu.address.commons.util.ListUtil;
+import seedu.address.commons.util.StringListUtil;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.*;
+import seedu.address.model.person.FieldContainsKeywordsPredicate;
+import seedu.address.model.person.PersonType;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -51,7 +52,7 @@ public class FindCommandParser implements Parser<FindCommand> {
         for (Prefix prefix: allPrefixes) {
             if (ParserUtil.arePrefixesPresent(argMultimap, prefix)) {
                 List<String> keywords = argMultimap.getAllValues(prefix);
-                List<String> separated = ListUtil.separateWithSpaces(keywords);
+                List<String> separated = StringListUtil.separateWithSpaces(keywords);
                 predicates.add(new FieldContainsKeywordsPredicate(prefix, separated));
             }
         }

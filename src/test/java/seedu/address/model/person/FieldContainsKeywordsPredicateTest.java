@@ -3,6 +3,7 @@ package seedu.address.model.person;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -26,7 +27,8 @@ public class FieldContainsKeywordsPredicateTest {
         assertTrue(firstPredicate.equals(firstPredicate));
 
         // same values -> returns true
-        FieldContainsKeywordsPredicate firstPredicateCopy = new FieldContainsKeywordsPredicate(firstPredicateKeywordList);
+        FieldContainsKeywordsPredicate firstPredicateCopy =
+                new FieldContainsKeywordsPredicate(firstPredicateKeywordList);
         assertTrue(firstPredicate.equals(firstPredicateCopy));
 
         // different types -> returns false
@@ -42,19 +44,20 @@ public class FieldContainsKeywordsPredicateTest {
     @Test
     public void test_nameContainsKeywords_returnsTrue() {
         // One keyword
-        FieldContainsKeywordsPredicate predicate = new FieldContainsKeywordsPredicate(Collections.singletonList("Alice"));
+        FieldContainsKeywordsPredicate predicate = new FieldContainsKeywordsPredicate(PREFIX_NAME,
+                Collections.singletonList("Alice"));
         assertTrue(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
 
         // Multiple keywords
-        predicate = new FieldContainsKeywordsPredicate(Arrays.asList("Alice", "Bob"));
+        predicate = new FieldContainsKeywordsPredicate(PREFIX_NAME, Arrays.asList("Alice", "Bob"));
         assertTrue(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
 
         // Only one matching keyword
-        predicate = new FieldContainsKeywordsPredicate(Arrays.asList("Bob", "Carol"));
+        predicate = new FieldContainsKeywordsPredicate(PREFIX_NAME, Arrays.asList("Bob", "Carol"));
         assertTrue(predicate.test(new PersonBuilder().withName("Alice Carol").build()));
 
         // Mixed-case keywords
-        predicate = new FieldContainsKeywordsPredicate(Arrays.asList("aLIce", "bOB"));
+        predicate = new FieldContainsKeywordsPredicate(PREFIX_NAME, Arrays.asList("aLIce", "bOB"));
         assertTrue(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
     }
 
@@ -77,9 +80,10 @@ public class FieldContainsKeywordsPredicateTest {
     @Test
     public void toStringMethod() {
         List<String> keywords = List.of("keyword1", "keyword2");
-        FieldContainsKeywordsPredicate predicate = new FieldContainsKeywordsPredicate(keywords);
+        FieldContainsKeywordsPredicate predicate = new FieldContainsKeywordsPredicate(PREFIX_NAME, keywords);
 
-        String expected = FieldContainsKeywordsPredicate.class.getCanonicalName() + "{keywords=" + keywords + "}";
+        String expected = FieldContainsKeywordsPredicate.class.getCanonicalName() + "{" + PREFIX_NAME
+                + " keywords=" + keywords + "}";
         assertEquals(expected, predicate.toString());
     }
 }

@@ -56,8 +56,10 @@ public class FindCommand extends Command {
     // UPDATE THIS
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
-                .add("predicate", predicates)
-                .toString();
+        ToStringBuilder sb = new ToStringBuilder(this);
+        for (FieldContainsKeywordsPredicate predicate : predicates) {
+            sb.add("predicate", predicate);
+        }
+        return sb.toString();
     }
 }

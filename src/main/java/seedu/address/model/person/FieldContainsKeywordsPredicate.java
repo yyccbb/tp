@@ -1,13 +1,17 @@
 package seedu.address.model.person;
 
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+
 import java.util.List;
 import java.util.function.Predicate;
 
 import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.parser.Prefix;
-
-import static seedu.address.logic.parser.CliSyntax.*;
 
 /**
  * Tests that a {@code Person}'s {@code Name} matches any of the keywords given.
@@ -16,11 +20,20 @@ public class FieldContainsKeywordsPredicate implements Predicate<Person> {
     private Prefix prefix;
     private final List<String> keywords;
 
+    /**
+     * Constructor for predicate with a prefix
+     * @param prefix prefix category to search within
+     * @param keywords keywords to search for
+     */
     public FieldContainsKeywordsPredicate(Prefix prefix, List<String> keywords) {
         this.prefix = prefix;
         this.keywords = keywords;
     }
 
+    /**
+     * Constructor for predicate without a prefix. Used for type finding.
+     * @param keywords keywords to search for
+     */
     public FieldContainsKeywordsPredicate(List<String> keywords) {
         this.keywords = keywords;
     }
@@ -67,6 +80,6 @@ public class FieldContainsKeywordsPredicate implements Predicate<Person> {
     //TO UPDATE
     @Override
     public String toString() {
-        return new ToStringBuilder(this).add("keywords", keywords).toString();
+        return new ToStringBuilder(this).add(this.prefix + " keywords", keywords).toString();
     }
 }
