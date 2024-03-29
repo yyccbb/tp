@@ -1,6 +1,7 @@
 package seedu.address.ui;
 
 import java.util.Comparator;
+import java.util.function.Predicate;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -63,33 +64,19 @@ public class PersonCard extends UiPart<Region> {
         email.setText(person.getEmail().value);
         type.setText(person.getType().toString());
         type.getStyleClass().setAll(person.getType() == PersonType.TA ? "type-ta" : "type-stu");
-        person.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .filter(Tag::isAssignment)
-                .forEach(tag -> {
-                    Label tagLabel = new Label(tag.tagName);
-                    tagLabel.getStyleClass().addAll("label",
-                            tag.getTagStatus().toString().toLowerCase()); // Add base and status-based style classes
-                    assignmentTags.getChildren().add(tagLabel);
-                });
-        person.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .filter(Tag::isAttendance)
-                .forEach(tag -> {
-                    Label tagLabel = new Label(tag.tagName);
-                    tagLabel.getStyleClass().addAll("label",
-                            tag.getTagStatus().toString().toLowerCase()); // Add base and status-based style classes
-                    attendanceTags.getChildren().add(tagLabel);
-                });
-        person.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .filter(Tag::isTutorial)
-                .forEach(tag -> {
-                    Label tagLabel = new Label(tag.tagName);
-                    tagLabel.getStyleClass().addAll("label",
-                            tag.getTagStatus().toString().toLowerCase()); // Add base and status-based style classes
-                    tutorialTags.getChildren().add(tagLabel);
-                });
+        addTagsToContainer(person, Tag::isAssignment, assignmentTags);
+        addTagsToContainer(person, Tag::isAttendance, attendanceTags);
+        addTagsToContainer(person, Tag::isTutorial, tutorialTags);
+    }
 
+    private void addTagsToContainer(Person person, Predicate<Tag> filterPredicate, FlowPane container) {
+        person.getTags().stream()
+                .sorted(Comparator.comparing(tag -> tag.tagName))
+                .filter(filterPredicate)
+                .forEach(tag -> {
+                    Label tagLabel = new Label(tag.tagName);
+                    tagLabel.getStyleClass().addAll("label", tag.getTagStatus().toString().toLowerCase());
+                    container.getChildren().add(tagLabel);
+                });
     }
 }
