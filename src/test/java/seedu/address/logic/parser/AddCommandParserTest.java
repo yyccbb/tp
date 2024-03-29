@@ -132,8 +132,8 @@ public class AddCommandParserTest {
     public void parse_optionalFieldsMissing_success() {
         // zero tags
         Person expectedPerson = new PersonBuilder(AMY).withTags().build();
-        assertParseSuccess(parser, NAME_DESC_AMY + ID_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
-                        , new AddCommand(expectedPerson));
+        assertParseSuccess(parser, NAME_DESC_AMY + ID_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY,
+                new AddCommand(expectedPerson));
     }
 
     @Test
@@ -141,20 +141,20 @@ public class AddCommandParserTest {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
 
         // missing name prefix
-        assertParseFailure(parser, VALID_NAME_BOB + ID_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                , expectedMessage);
+        assertParseFailure(parser, VALID_NAME_BOB + ID_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB,
+                expectedMessage);
 
         // missing phone prefix
-        assertParseFailure(parser, NAME_DESC_BOB + ID_DESC_BOB + VALID_PHONE_BOB + EMAIL_DESC_BOB
-                , expectedMessage);
+        assertParseFailure(parser, NAME_DESC_BOB + ID_DESC_BOB + VALID_PHONE_BOB + EMAIL_DESC_BOB,
+                expectedMessage);
 
         // missing email prefix
-        assertParseFailure(parser, NAME_DESC_BOB + ID_DESC_BOB + PHONE_DESC_BOB + VALID_EMAIL_BOB
-                , expectedMessage);
+        assertParseFailure(parser, NAME_DESC_BOB + ID_DESC_BOB + PHONE_DESC_BOB + VALID_EMAIL_BOB,
+                expectedMessage);
 
         // all prefixes missing
-        assertParseFailure(parser, VALID_NAME_BOB + ID_DESC_BOB + VALID_PHONE_BOB + VALID_EMAIL_BOB
-                , expectedMessage);
+        assertParseFailure(parser, VALID_NAME_BOB + ID_DESC_BOB + VALID_PHONE_BOB + VALID_EMAIL_BOB,
+                expectedMessage);
     }
 
     @Test
@@ -185,8 +185,8 @@ public class AddCommandParserTest {
 
         // two invalid values, only first invalid value reported
         assertParseFailure(parser,
-                TYPE_DESC_BOB + INVALID_NAME_DESC + PHONE_DESC_BOB + ID_DESC_BOB + EMAIL_DESC_BOB
-                        , Name.MESSAGE_CONSTRAINTS);
+                TYPE_DESC_BOB + INVALID_NAME_DESC + PHONE_DESC_BOB + ID_DESC_BOB + EMAIL_DESC_BOB,
+                Name.MESSAGE_CONSTRAINTS);
 
         // invalid person type
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + TYPE_DESC_BOB + NAME_DESC_BOB + ID_DESC_BOB
