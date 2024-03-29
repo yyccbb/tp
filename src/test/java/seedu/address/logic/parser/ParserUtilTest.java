@@ -15,7 +15,11 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.*;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.PersonType;
+import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.TagStatus;
 
@@ -52,12 +56,12 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parsePersonType_validInput_success() throws Exception{
+    public void parsePersonType_validInput_success() throws Exception {
         assertEquals(PersonType.STU, ParserUtil.parsePersonType(" stu"));
     }
 
     @Test
-    public void parsePersonType_nullInput_success() throws Exception{
+    public void parsePersonType_nullInput_success() throws Exception {
         assertEquals(PersonType.STU, ParserUtil.parsePersonType("   "));
     }
 
@@ -67,12 +71,12 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseFindPersonType_validInput_success() throws Exception{
+    public void parseFindPersonType_validInput_success() throws Exception {
         assertEquals(PersonType.STU, ParserUtil.parseFindPersonType(" stu"));
     }
 
     @Test
-    public void parseFindPersonType_nullInput_success() throws Exception{
+    public void parseFindPersonType_nullInput_success() throws Exception {
         assertNull(ParserUtil.parseFindPersonType("   "));
     }
 
