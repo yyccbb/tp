@@ -23,9 +23,25 @@ public class TagTest {
     }
 
     @Test
+    public void constructor_validTagNameAndValidTagStatus_success() {
+        String validTagName = "test";
+        assert(Tag.createTag(validTagName, TagStatus.COMPLETE_GOOD) instanceof AssignmentTag);
+        assert(Tag.createTag(validTagName, TagStatus.PRESENT) instanceof AttendanceTag);
+        assert(Tag.createTag(validTagName, TagStatus.W08) instanceof TutorialTag);
+    }
+
+    @Test
     public void isValidTagName() {
         // null tag name
         assertThrows(NullPointerException.class, () -> Tag.isValidTagName(null));
+    }
+
+    @Test
+    public void correct_tagType() {
+        String validTagName = "test";
+        assert(Tag.createTag(validTagName, TagStatus.COMPLETE_GOOD).isAssignment());
+        assert(Tag.createTag(validTagName, TagStatus.PRESENT).isAttendance());
+        assert(Tag.createTag(validTagName, TagStatus.W08).isTutorial());
     }
 
 }
