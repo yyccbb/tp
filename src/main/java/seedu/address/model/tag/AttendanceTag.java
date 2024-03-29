@@ -1,5 +1,8 @@
 package seedu.address.model.tag;
 
+/**
+ * Represents an attendance tag.
+ */
 public class AttendanceTag extends Tag {
     /**
      * Constructs a {@code Tag}.

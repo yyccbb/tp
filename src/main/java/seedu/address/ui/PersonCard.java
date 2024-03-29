@@ -47,6 +47,8 @@ public class PersonCard extends UiPart<Region> {
     private FlowPane assignmentTags;
     @FXML
     private FlowPane attendanceTags;
+    @FXML
+    private FlowPane tutorialTags;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -78,6 +80,15 @@ public class PersonCard extends UiPart<Region> {
                     tagLabel.getStyleClass().addAll("label",
                             tag.getTagStatus().toString().toLowerCase()); // Add base and status-based style classes
                     attendanceTags.getChildren().add(tagLabel);
+                });
+        person.getTags().stream()
+                .sorted(Comparator.comparing(tag -> tag.tagName))
+                .filter(Tag::isTutorial)
+                .forEach(tag -> {
+                    Label tagLabel = new Label(tag.tagName);
+                    tagLabel.getStyleClass().addAll("label",
+                            tag.getTagStatus().toString().toLowerCase()); // Add base and status-based style classes
+                    tutorialTags.getChildren().add(tagLabel);
                 });
 
     }

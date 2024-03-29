@@ -8,18 +8,18 @@ public class TagTest {
 
     @Test
     public void constructor_nullTagName_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new Tag(null, TagStatus.INCOMPLETE_GOOD));
+        assertThrows(NullPointerException.class, () -> Tag.createTag(null, TagStatus.INCOMPLETE_GOOD));
     }
 
     @Test
     public void constructor_nullTagStatus_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new Tag("Test", null));
+        assertThrows(NullPointerException.class, () -> Tag.createTag("Test", null));
     }
 
     @Test
     public void constructor_invalidTagName_throwsIllegalArgumentException() {
         String invalidTagName = "";
-        assertThrows(IllegalArgumentException.class, () -> new Tag(invalidTagName, TagStatus.INCOMPLETE_GOOD));
+        assertThrows(IllegalArgumentException.class, () -> Tag.createTag(invalidTagName, TagStatus.INCOMPLETE_GOOD));
     }
 
     @Test

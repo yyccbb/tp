@@ -1,5 +1,8 @@
 package seedu.address.model.tag;
 
+/**
+ * Represents a tutorial tag.
+ */
 public class TutorialTag extends Tag {
     /**
      * Constructs a {@code Tag}.

@@ -35,6 +35,13 @@ public abstract class Tag {
         this.tagType = getTagType(tagStatus);
     }
 
+    /**
+     * Creates a new Tag with specified tagName and tagStatus.
+     *
+     * @param tagName Name of the tag to be created.
+     * @param tagStatus Status of the tag.
+     * @return A new tag of specific type corresponding to the TagStatus input.
+     */
     public static Tag createTag(String tagName, TagStatus tagStatus) {
         requireNonNull(tagName);
         // require the tagStatus not to be null for now
@@ -50,7 +57,7 @@ public abstract class Tag {
         case TUTORIAL:
             return new TutorialTag(tagName, tagStatus);
         case ATTENDANCE:
-            return new AttendanceTag(tagName,tagStatus);
+            return new AttendanceTag(tagName, tagStatus);
         default:
             return new AssignmentTag(tagName, tagStatus);
         }
@@ -62,6 +69,47 @@ public abstract class Tag {
 
     public TagType getTagType() {
         return tagType;
+    }
+
+    private static TagType getTagType(TagStatus ts) {
+        switch (ts) {
+        case COMPLETE_GOOD:
+        case COMPLETE_BAD:
+        case INCOMPLETE_GOOD:
+        case INCOMPLETE_BAD:
+            return TagType.ASSIGNMENT;
+        case PRESENT:
+        case ABSENT:
+        case ABSENT_WITH_REASON:
+            return TagType.ATTENDANCE;
+        case W08:
+        case W09:
+        case W10:
+        case W11:
+        case W12:
+        case W13:
+        case T08:
+        case T09:
+        case T10:
+        case T11:
+        case T12:
+        case T13:
+        case T14:
+        case T15:
+        case T16:
+        case T17:
+        case F08:
+        case F09:
+        case F10:
+        case F11:
+        case F12:
+        case F13:
+        case F14:
+        case F15:
+            return TagType.TUTORIAL;
+        default:
+            return TagType.DEFAULT_TYPE;
+        }
     }
 
     /**
@@ -114,26 +162,10 @@ public abstract class Tag {
         // and then add in a new Tag with the same tagName but updated tagStatus.
         // This is to avoid having linearly check through the hashset to retrieve
         // the existing Tag
-        Tag newTag = Tag.createTag(tagName, tagStatus);//new Tag(tagName, tagStatus);
+        Tag newTag = Tag.createTag(tagName, tagStatus);
         currTags.remove(newTag);
         currTags.add(Tag.createTag(tagName, tagStatus));
         return currTags;
-    }
-
-    private static TagType getTagType(TagStatus ts) {
-        switch (ts) {
-        case COMPLETE_GOOD:
-        case COMPLETE_BAD:
-        case INCOMPLETE_GOOD:
-        case INCOMPLETE_BAD:
-            return TagType.ASSIGNMENT;
-        case PRESENT:
-        case ABSENT:
-        case ABSENT_WITH_REASON:
-            return TagType.ATTENDANCE;
-        default:
-            return TagType.DEFAULT_TYPE;
-        }
     }
 
     public boolean isAttendance() {
@@ -142,5 +174,9 @@ public abstract class Tag {
 
     public boolean isAssignment() {
         return tagType == TagType.ASSIGNMENT;
+    }
+
+    public boolean isTutorial() {
+        return tagType == TagType.TUTORIAL;
     }
 }

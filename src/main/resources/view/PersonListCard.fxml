@@ -29,6 +29,7 @@
       <VBox spacing="5">
         <FlowPane fx:id="assignmentTags" />
         <FlowPane fx:id="attendanceTags" />
+        <FlowPane fx:id="tutorialTags" />
       </VBox>
       <Label fx:id="id" styleClass="cell_small_label" text="\$id" style="-fx-text-fill: black"/>
       <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" style="-fx-text-fill: black"/>

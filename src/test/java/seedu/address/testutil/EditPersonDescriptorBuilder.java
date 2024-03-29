@@ -87,7 +87,8 @@ public class EditPersonDescriptorBuilder {
      * that we are building.
      */
     public EditPersonDescriptorBuilder withTags(String... tags) {
-        Set<Tag> tagSet = Stream.of(tags).map(t -> new Tag(t, TagStatus.DEFAULT_STATUS)).collect(Collectors.toSet());
+        Set<Tag> tagSet = Stream.of(tags).map(t -> Tag.createTag(t, TagStatus.DEFAULT_STATUS))
+                .collect(Collectors.toSet());
         descriptor.setTags(tagSet);
         return this;
     }
