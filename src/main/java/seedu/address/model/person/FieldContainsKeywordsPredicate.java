@@ -77,7 +77,7 @@ public class FieldContainsKeywordsPredicate implements Predicate<Person> {
         FieldContainsKeywordsPredicate otherFieldContainsKeywordsPredicate = (FieldContainsKeywordsPredicate) other;
         return keywords.equals(otherFieldContainsKeywordsPredicate.keywords);
     }
-    //TO UPDATE
+
     @Override
     public String toString() {
         return new ToStringBuilder(this).add(this.prefix + " keywords", keywords).toString();
