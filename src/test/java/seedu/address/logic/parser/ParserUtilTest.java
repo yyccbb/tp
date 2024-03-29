@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -14,10 +15,7 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
+import seedu.address.model.person.*;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.TagStatus;
 
@@ -46,6 +44,36 @@ public class ParserUtilTest {
     public void parseIndex_outOfRangeInput_throwsParseException() {
         assertThrows(ParseException.class, MESSAGE_INVALID_INDEX, ()
             -> ParserUtil.parseIndex(Long.toString(Integer.MAX_VALUE + 1)));
+    }
+
+    @Test
+    public void parsePersonType_invalidInput_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parsePersonType("prof"));
+    }
+
+    @Test
+    public void parsePersonType_validInput_success() throws Exception{
+        assertEquals(PersonType.STU, ParserUtil.parsePersonType(" stu"));
+    }
+
+    @Test
+    public void parsePersonType_nullInput_success() throws Exception{
+        assertEquals(PersonType.STU, ParserUtil.parsePersonType("   "));
+    }
+
+    @Test
+    public void parseFindPersonType_invalidInput_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseFindPersonType("prof"));
+    }
+
+    @Test
+    public void parseFindPersonType_validInput_success() throws Exception{
+        assertEquals(PersonType.STU, ParserUtil.parseFindPersonType(" stu"));
+    }
+
+    @Test
+    public void parseFindPersonType_nullInput_success() throws Exception{
+        assertNull(ParserUtil.parseFindPersonType("   "));
     }
 
     @Test
