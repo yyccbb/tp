@@ -49,11 +49,9 @@ public class Person {
     public Id getId() {
         return id;
     }
-
     public Phone getPhone() {
         return phone;
     }
-
     public Email getEmail() {
         return email;
     }
