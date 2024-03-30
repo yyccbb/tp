@@ -262,14 +262,14 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* head TA of CS2103T
-* has a need to manage a significant number of contacts
+* Head TA of CS2103T
+* has a need to manage a significant number of contacts of students and other TAs
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage students and tutors faster than a typical mouse/GUI driven app
+**Value proposition**: manage students and TAs faster than a typical mouse/GUI driven app
 
 
 ### User stories
