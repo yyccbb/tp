@@ -1,7 +1,6 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -38,7 +37,7 @@ public class FindCommandParser implements Parser<FindCommand> {
 
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_ID, PREFIX_PHONE,
-                        PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
+                        PREFIX_EMAIL, PREFIX_TAG);
 
         List<FieldContainsKeywordsPredicate> predicates = new ArrayList<>();
 
@@ -48,7 +47,7 @@ public class FindCommandParser implements Parser<FindCommand> {
             predicates.add(new FieldContainsKeywordsPredicate(separated));
         }
 
-        List<Prefix> allPrefixes = Arrays.asList(PREFIX_NAME, PREFIX_ID, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS);
+        List<Prefix> allPrefixes = Arrays.asList(PREFIX_NAME, PREFIX_ID, PREFIX_PHONE, PREFIX_EMAIL);
         for (Prefix prefix: allPrefixes) {
             if (ParserUtil.arePrefixesPresent(argMultimap, prefix)) {
                 List<String> keywords = argMultimap.getAllValues(prefix);
