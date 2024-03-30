@@ -72,5 +72,4 @@ public class SampleDataUtilTest {
         assertEquals(expectedPerson.getTags().size(), actualPerson.getTags().size());
         assertTrue(actualPerson.getTags().containsAll(expectedPerson.getTags()));
     }
-
 }
