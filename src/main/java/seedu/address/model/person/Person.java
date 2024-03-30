@@ -2,12 +2,8 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
 
-import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -39,6 +35,18 @@ public abstract class Person {
         this.address = address;
     }
 
+    /**
+     * Creates either a Student or a TA.
+     * All fields are compulsory.
+     *
+     * @param type
+     * @param name
+     * @param id
+     * @param phone
+     * @param email
+     * @param address
+     * @param tags
+     */
     public static Person of(PersonType type, Name name, Id id, Phone phone, Email email, Address address,
                      Set<Tag> tags) {
         requireAllNonNull(type, name, id, phone, email, address, tags);

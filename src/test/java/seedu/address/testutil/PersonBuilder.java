@@ -125,7 +125,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(type, name, id, phone, email, address, tags);
+        return Person.of(type, name, id, phone, email, address, tags);
     }
 
 }

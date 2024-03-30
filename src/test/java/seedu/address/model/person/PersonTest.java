@@ -89,7 +89,7 @@ public class PersonTest {
     @Test
     public void toStringMethod() {
         String expected =
-                Person.class.getCanonicalName() + "{type=" + ALICE.getType() + ", name=" + ALICE.getName()
+                Student.class.getCanonicalName() + "{type=" + ALICE.getType() + ", name=" + ALICE.getName()
                         + ", id=" + ALICE.getId()
                         + ", phone=" + ALICE.getPhone()
                         + ", email=" + ALICE.getEmail()

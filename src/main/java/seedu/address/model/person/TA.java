@@ -1,14 +1,18 @@
 package seedu.address.model.person;
 
-import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.tag.Tag;
-
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-public class TA extends Person{
+import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.tag.Tag;
+
+/**
+ * Represents a TA in TrAcker.
+ * A TA is a type of Person.
+ */
+public class TA extends Person {
     private final Set<Tag> tags = new HashSet<>();
     /**
      * Every field must be present and not null.
