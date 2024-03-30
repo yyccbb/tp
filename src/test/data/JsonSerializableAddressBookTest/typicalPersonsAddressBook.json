@@ -53,7 +53,7 @@
     "address" : "michegan ave",
     "tags" : [ ]
   }, {
-    "type" : "stu",
+    "type" : "ta",
     "name" : "Fiona Kunz",
     "id" : "B5678012F",
     "phone" : "9482427",
@@ -61,7 +61,7 @@
     "address" : "little tokyo",
     "tags" : [ ]
   }, {
-    "type" : "stu",
+    "type" : "ta",
     "name" : "George Best",
     "id" : "A0000000X",
     "phone" : "9482442",

@@ -43,10 +43,10 @@ public class TypicalPersons {
     public static final Person ELLE = new PersonBuilder().withType("stu").withName("Elle Meyer")
             .withId("B3334444F").withPhone("9482224").withEmail("werner@example.com")
             .withAddress("michegan ave").build();
-    public static final Person FIONA = new PersonBuilder().withType("stu").withName("Fiona Kunz")
+    public static final Person FIONA = new PersonBuilder().withType("ta").withName("Fiona Kunz")
             .withId("B5678012F").withPhone("9482427").withEmail("lydia@example.com")
             .withAddress("little tokyo").build();
-    public static final Person GEORGE = new PersonBuilder().withType("stu").withName("George Best")
+    public static final Person GEORGE = new PersonBuilder().withType("ta").withName("George Best")
             .withId("A0000000X").withPhone("9482442")
             .withEmail("anna@example.com").withAddress("4th street").build();
 
@@ -54,7 +54,7 @@ public class TypicalPersons {
     public static final Person HOON = new PersonBuilder().withType("stu").withName("Hoon Meier")
             .withId("A0123456W").withPhone("8482424").withEmail("stefan@example.com")
             .withAddress("little india").build();
-    public static final Person IDA = new PersonBuilder().withType("stu").withName("Ida Mueller")
+    public static final Person IDA = new PersonBuilder().withType("ta").withName("Ida Mueller")
             .withId("P9876543N").withPhone("8482131").withEmail("hans@example.com")
             .withAddress("chicago ave").build();
 

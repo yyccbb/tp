@@ -12,7 +12,7 @@ import seedu.address.model.tag.Tag;
  * Represents a TA in TrAcker.
  * A TA is a type of Person.
  */
-public class TA extends Person {
+public class Ta extends Person {
     private final Set<Tag> tags = new HashSet<>();
     /**
      * Every field must be present and not null.
@@ -24,7 +24,7 @@ public class TA extends Person {
      * @param address
      * @param tags
      */
-    public TA(Name name, Id id, Phone phone, Email email, Address address, Set<Tag> tags) {
+    public Ta(Name name, Id id, Phone phone, Email email, Address address, Set<Tag> tags) {
         super(PersonType.TA, name, id, phone, email, address);
         this.tags.addAll(tags);
     }
@@ -45,11 +45,11 @@ public class TA extends Person {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof TA)) {
+        if (!(other instanceof Ta)) {
             return false;
         }
 
-        TA otherTA = (TA) other;
+        Ta otherTA = (Ta) other;
         return name.equals(otherTA.name)
                 && type.equals(otherTA.type)
                 && id.equals(otherTA.id)

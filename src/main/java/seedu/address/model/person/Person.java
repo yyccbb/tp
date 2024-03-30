@@ -53,7 +53,7 @@ public abstract class Person {
         if (type == PersonType.STU) {
             return new Student(name, id, phone, email, address, tags);
         } else {
-            return new TA(name, id, phone, email, address, tags);
+            return new Ta(name, id, phone, email, address, tags);
         }
     }
 
