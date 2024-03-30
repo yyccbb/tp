@@ -101,7 +101,7 @@ public class MarkCommand extends Command {
      */
     private static Person createEditedPerson(Person personToEdit, Set<Tag> newTags) {
         assert personToEdit != null;
-        return new Person(personToEdit.getType(), personToEdit.getName(), personToEdit.getId(),
+        return Person.of(personToEdit.getType(), personToEdit.getName(), personToEdit.getId(),
                 personToEdit.getPhone(), personToEdit.getEmail(), personToEdit.getAddress(), newTags);
     }
     @Override

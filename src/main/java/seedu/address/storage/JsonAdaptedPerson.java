@@ -129,7 +129,7 @@ class JsonAdaptedPerson {
         final Address modelAddress = new Address(address);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(personType, modelName, modelId, modelPhone, modelEmail, modelAddress, modelTags);
+        return Person.of(personType, modelName, modelId, modelPhone, modelEmail, modelAddress, modelTags);
     }
 
 }
