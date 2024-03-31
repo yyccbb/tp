@@ -10,7 +10,6 @@ import java.util.stream.Stream;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Id;
 import seedu.address.model.person.Name;
@@ -42,6 +41,7 @@ public class ParserUtil {
     /**
      * Parses a {@code String type} into a {@code PersonType}.
      * Leading and trailing whitespaces will be trimmed.
+     * An unspecified person type will default to student.
      *
      * @throws ParseException if the given {@code type} is invalid.
      */
@@ -52,6 +52,25 @@ public class ParserUtil {
             throw new ParseException(PersonType.MESSAGE_CONSTRAINTS);
         }
         return PersonType.getPersonType(trimmedType);
+    }
+
+    /**
+     * Parses a {@code String type} into a {@code PersonType} for the find command.
+     * Leading and trailing whitespaces will be trimmed.
+     * An unspecified person type will return null.
+     *
+     * @throws ParseException if the given {@code type} is invalid.
+     */
+    public static PersonType parseFindPersonType(String type) throws ParseException {
+        requireNonNull(type);
+        String trimmedType = type.trim();
+        if (!PersonType.isValidPersonType(trimmedType) && !trimmedType.isEmpty()) {
+            throw new ParseException(PersonType.MESSAGE_CONSTRAINTS);
+        } else if (trimmedType.isEmpty()) {
+            return null;
+        } else {
+            return PersonType.getPersonType(trimmedType);
+        }
     }
 
 
@@ -98,21 +117,6 @@ public class ParserUtil {
             throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
         }
         return new Phone(trimmedPhone);
-    }
-
-    /**
-     * Parses a {@code String address} into an {@code Address}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code address} is invalid.
-     */
-    public static Address parseAddress(String address) throws ParseException {
-        requireNonNull(address);
-        String trimmedAddress = address.trim();
-        if (!Address.isValidAddress(trimmedAddress)) {
-            throw new ParseException(Address.MESSAGE_CONSTRAINTS);
-        }
-        return new Address(trimmedAddress);
     }
 
     /**

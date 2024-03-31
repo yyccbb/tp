@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -21,7 +22,7 @@ public class ModelManager implements Model {
 
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
-    private final FilteredList<Person> filteredPersons;
+    private FilteredList<Person> filteredPersons;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -128,6 +129,14 @@ public class ModelManager implements Model {
         filteredPersons.setPredicate(predicate);
     }
 
+    @Override
+    public void persistentUpdateFilteredList(List<? extends Predicate<Person>> predicates) {
+        Predicate<Person> combinedPredicate = predicates.stream()
+                .<Predicate<Person>>map(p -> (Predicate<Person>) p)
+                .reduce(Predicate::or)
+                .orElse(person -> true);
+        filteredPersons.setPredicate(combinedPredicate);
+    }
     @Override
     public boolean equals(Object other) {
         if (other == this) {
