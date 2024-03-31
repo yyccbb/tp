@@ -1,6 +1,5 @@
 package seedu.address.model.person;
 
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -55,9 +54,6 @@ public class FieldContainsKeywordsPredicate implements Predicate<Person> {
         } else if (this.prefix.equals(PREFIX_EMAIL)) {
             return keywords.stream()
                     .anyMatch(keyword -> StringUtil.containsSubwordIgnoreCase(person.getEmail().value, keyword));
-        } else if (this.prefix.equals(PREFIX_ADDRESS)) {
-            return keywords.stream()
-                    .anyMatch(keyword -> StringUtil.containsSubwordIgnoreCase(person.getAddress().value, keyword));
         } else {
             return false;
         }

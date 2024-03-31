@@ -54,7 +54,6 @@ public class PersonCard extends UiPart<Region> {
         name.setText(person.getName().fullName);
         id.setText(person.getId().value);
         phone.setText(person.getPhone().value);
-        address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
         type.setText(person.getType().toString());
         type.getStyleClass().setAll(person.getType() == PersonType.TA ? "type-ta" : "type-stu");

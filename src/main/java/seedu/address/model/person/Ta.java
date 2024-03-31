@@ -21,11 +21,10 @@ public class Ta extends Person {
      * @param id
      * @param phone
      * @param email
-     * @param address
      * @param tags
      */
-    public Ta(Name name, Id id, Phone phone, Email email, Address address, Set<Tag> tags) {
-        super(PersonType.TA, name, id, phone, email, address);
+    public Ta(Name name, Id id, Phone phone, Email email, Set<Tag> tags) {
+        super(PersonType.TA, name, id, phone, email);
         this.tags.addAll(tags);
     }
 
@@ -55,14 +54,13 @@ public class Ta extends Person {
                 && id.equals(otherTA.id)
                 && phone.equals(otherTA.phone)
                 && email.equals(otherTA.email)
-                && address.equals(otherTA.address)
                 && tags.equals(otherTA.tags);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(type, name, phone, email, address, tags);
+        return Objects.hash(type, name, phone, email, tags);
     }
 
     @Override
@@ -73,7 +71,6 @@ public class Ta extends Person {
                 .add("id", id)
                 .add("phone", phone)
                 .add("email", email)
-                .add("address", address)
                 .add("tags", tags)
                 .toString();
     }

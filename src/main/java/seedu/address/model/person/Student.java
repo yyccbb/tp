@@ -21,11 +21,10 @@ public class Student extends Person {
      * @param id
      * @param phone
      * @param email
-     * @param address
      * @param tags
      */
-    public Student(Name name, Id id, Phone phone, Email email, Address address, Set<Tag> tags) {
-        super(PersonType.STU, name, id, phone, email, address);
+    public Student(Name name, Id id, Phone phone, Email email, Set<Tag> tags) {
+        super(PersonType.STU, name, id, phone, email);
         this.tags.addAll(tags);
     }
 
@@ -55,14 +54,13 @@ public class Student extends Person {
                 && id.equals(otherStudent.id)
                 && phone.equals(otherStudent.phone)
                 && email.equals(otherStudent.email)
-                && address.equals(otherStudent.address)
                 && tags.equals(otherStudent.tags);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(type, name, phone, email, address, tags);
+        return Objects.hash(type, name, phone, email, tags);
     }
 
     @Override
@@ -73,7 +71,6 @@ public class Student extends Person {
                 .add("id", id)
                 .add("phone", phone)
                 .add("email", email)
-                .add("address", address)
                 .add("tags", tags)
                 .toString();
     }

@@ -18,21 +18,16 @@ public abstract class Person {
     final Id id;
     final Phone phone;
     final Email email;
-
-    // Data fields
-    final Address address;
-
     /**
      * Every field must be present and not null.
      */
-    Person(PersonType type, Name name, Id id, Phone phone, Email email, Address address) {
-        requireAllNonNull(type, name, id, phone, email, address);
+    Person(PersonType type, Name name, Id id, Phone phone, Email email) {
+        requireAllNonNull(type, name, id, phone, email);
         this.type = type;
         this.name = name;
         this.id = id;
         this.phone = phone;
         this.email = email;
-        this.address = address;
     }
 
     /**
@@ -44,16 +39,15 @@ public abstract class Person {
      * @param id
      * @param phone
      * @param email
-     * @param address
      * @param tags
      */
-    public static Person of(PersonType type, Name name, Id id, Phone phone, Email email, Address address,
+    public static Person of(PersonType type, Name name, Id id, Phone phone, Email email,
                      Set<Tag> tags) {
-        requireAllNonNull(type, name, id, phone, email, address, tags);
+        requireAllNonNull(type, name, id, phone, email, tags);
         if (type == PersonType.STU) {
-            return new Student(name, id, phone, email, address, tags);
+            return new Student(name, id, phone, email, tags);
         } else {
-            return new Ta(name, id, phone, email, address, tags);
+            return new Ta(name, id, phone, email, tags);
         }
     }
 
@@ -66,17 +60,11 @@ public abstract class Person {
     public Id getId() {
         return id;
     }
-
     public Phone getPhone() {
         return phone;
     }
-
     public Email getEmail() {
         return email;
-    }
-
-    public Address getAddress() {
-        return address;
     }
 
     /**
