@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-**TrAcker** is a **desktop app for CS head Teaching Assistants (TAs) to manage the contact information of TAs and 
+**TrAcker** is a **desktop app for CS Head Teaching Assistants (TAs) to manage the contact information of TAs and 
 students, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User 
 Interface (GUI). If you can type fast, TrAcker can get your contact management tasks done faster than traditional GUI 
 apps.

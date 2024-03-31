@@ -32,7 +32,6 @@ class TaTest {
                         + ", id=" + FIONA.getId()
                         + ", phone=" + FIONA.getPhone()
                         + ", email=" + FIONA.getEmail()
-                        + ", address=" + FIONA.getAddress()
                         + ", tags=" + FIONA.getTags() + "}";
         assertEquals(expected, FIONA.toString());
     }
