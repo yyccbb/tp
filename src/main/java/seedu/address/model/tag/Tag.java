@@ -52,13 +52,14 @@ public abstract class Tag {
         TagType tagType = getTagType(tagStatus);
 
         switch (tagType) {
+        case ASSIGNMENT:
+            return new AssignmentTag(tagName, tagStatus);
         case TUTORIAL:
             return new TutorialTag(tagName, tagStatus);
         case ATTENDANCE:
             return new AttendanceTag(tagName, tagStatus);
-        case ASSIGNMENT:
         default:
-            return new AssignmentTag(tagName, tagStatus);
+            return null;
         }
     }
 
@@ -81,30 +82,8 @@ public abstract class Tag {
         case ABSENT:
         case ABSENT_WITH_REASON:
             return TagType.ATTENDANCE;
-        case W08:
-        case W09:
-        case W10:
-        case W11:
-        case W12:
-        case W13:
-        case T08:
-        case T09:
-        case T10:
-        case T11:
-        case T12:
-        case T13:
-        case T14:
-        case T15:
-        case T16:
-        case T17:
-        case F08:
-        case F09:
-        case F10:
-        case F11:
-        case F12:
-        case F13:
-        case F14:
-        case F15:
+        case ASSIGNED:
+        case AVAILABLE:
             return TagType.TUTORIAL;
         default:
             return TagType.DEFAULT_TYPE;

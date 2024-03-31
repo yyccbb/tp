@@ -40,19 +40,19 @@ public class MarkCommandParser implements Parser<MarkCommand> {
         String tagName = argMultimap.getValue(PREFIX_TAG).get();
         String statusIdentifier = argMultimap.getValue(PREFIX_TAGSTATUS).get();
 
-        TagStatus tagStatus = TagStatus.getTagStatus(statusIdentifier);
+
 
         // an alternative approach is to instantiate the Tag object and try to
         // catch the Illegal Exception Error. The tag can then be fed into the
         // MarkCommand. The author decided to pass in the tagName instead as the
         // TagName might be used to search for tags in future implementations
         try {
+            TagStatus tagStatus = TagStatus.getTagStatus(statusIdentifier);
             Tag.isTagNameValid(tagName);
+            return new MarkCommand(index, tagName, tagStatus);
         } catch (IllegalArgumentException e) {
             throw new ParseException(e.getMessage());
         }
-
-        return new MarkCommand(index, tagName, tagStatus);
     }
 
 }

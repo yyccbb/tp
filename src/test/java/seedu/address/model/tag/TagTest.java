@@ -27,7 +27,7 @@ public class TagTest {
         String validTagName = "test";
         assert(Tag.createTag(validTagName, TagStatus.COMPLETE_GOOD) instanceof AssignmentTag);
         assert(Tag.createTag(validTagName, TagStatus.PRESENT) instanceof AttendanceTag);
-        assert(Tag.createTag(validTagName, TagStatus.W08) instanceof TutorialTag);
+        assert(Tag.createTag(validTagName, TagStatus.ASSIGNED) instanceof TutorialTag);
     }
 
     @Test
@@ -41,7 +41,7 @@ public class TagTest {
         String validTagName = "test";
         assert(Tag.createTag(validTagName, TagStatus.COMPLETE_GOOD).isAssignment());
         assert(Tag.createTag(validTagName, TagStatus.PRESENT).isAttendance());
-        assert(Tag.createTag(validTagName, TagStatus.W08).isTutorial());
+        assert(Tag.createTag(validTagName, TagStatus.ASSIGNED).isTutorial());
     }
 
     @Test
