@@ -9,21 +9,21 @@ import java.util.Set;
  * Represents a Tag in the address book.
  * Guarantees: immutable; name is valid as declared in {@link #isValidTagName(String)}
  */
-public class Tag {
+public abstract class Tag {
 
     public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric";
     public static final String VALIDATION_REGEX = "\\p{Alnum}+";
 
     public final String tagName;
-
     private TagStatus tagStatus;
+    private TagType tagType;
 
     /**
      * Constructs a {@code Tag}.
      *
      * @param tagName A valid tag name.
      */
-    public Tag(String tagName, TagStatus tagStatus) {
+    protected Tag(String tagName, TagStatus tagStatus) {
         requireNonNull(tagName);
         // require the tagStatus not to be null for now
         // in the future, a null tagStatus input should be set to INCOMPLETE_GOOD
@@ -32,10 +32,62 @@ public class Tag {
         checkArgument(isValidTagName(tagName), MESSAGE_CONSTRAINTS);
         this.tagName = tagName;
         this.tagStatus = tagStatus;
+        this.tagType = getTagType(tagStatus);
+    }
+
+    /**
+     * Creates a new Tag with specified tagName and tagStatus.
+     *
+     * @param tagName Name of the tag to be created.
+     * @param tagStatus Status of the tag.
+     * @return A new tag of specific type corresponding to the TagStatus input.
+     */
+    public static Tag createTag(String tagName, TagStatus tagStatus) {
+        requireNonNull(tagName);
+        // require the tagStatus not to be null for now
+        // in the future, a null tagStatus input should be set to INCOMPLETE_GOOD
+        // by default
+        requireNonNull(tagStatus);
+        checkArgument(isValidTagName(tagName), MESSAGE_CONSTRAINTS);
+        TagType tagType = getTagType(tagStatus);
+
+        switch (tagType) {
+        case ASSIGNMENT:
+            return new AssignmentTag(tagName, tagStatus);
+        case TUTORIAL:
+            return new TutorialTag(tagName, tagStatus);
+        case ATTENDANCE:
+            return new AttendanceTag(tagName, tagStatus);
+        default:
+            return null;
+        }
     }
 
     public TagStatus getTagStatus() {
         return tagStatus;
+    }
+
+    public TagType getTagType() {
+        return tagType;
+    }
+
+    private static TagType getTagType(TagStatus ts) {
+        switch (ts) {
+        case COMPLETE_GOOD:
+        case COMPLETE_BAD:
+        case INCOMPLETE_GOOD:
+        case INCOMPLETE_BAD:
+            return TagType.ASSIGNMENT;
+        case PRESENT:
+        case ABSENT:
+        case ABSENT_WITH_REASON:
+            return TagType.ATTENDANCE;
+        case ASSIGNED:
+        case AVAILABLE:
+            return TagType.TUTORIAL;
+        default:
+            return TagType.DEFAULT_TYPE;
+        }
     }
 
     /**
@@ -88,10 +140,21 @@ public class Tag {
         // and then add in a new Tag with the same tagName but updated tagStatus.
         // This is to avoid having linearly check through the hashset to retrieve
         // the existing Tag
-        Tag newTag = new Tag(tagName, tagStatus);
+        Tag newTag = Tag.createTag(tagName, tagStatus);
         currTags.remove(newTag);
-        currTags.add(new Tag(tagName, tagStatus));
+        currTags.add(Tag.createTag(tagName, tagStatus));
         return currTags;
     }
 
+    public boolean isAttendance() {
+        return tagType == TagType.ATTENDANCE;
+    }
+
+    public boolean isAssignment() {
+        return tagType == TagType.ASSIGNMENT;
+    }
+
+    public boolean isTutorial() {
+        return tagType == TagType.TUTORIAL;
+    }
 }

@@ -17,6 +17,7 @@ import seedu.address.model.person.Id;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.TagStatus;
+import seedu.address.model.tag.TagType;
 
 public class JsonAdaptedPersonTest {
     private static final String TYPE = "stu";
@@ -108,7 +109,7 @@ public class JsonAdaptedPersonTest {
     @Test
     public void toModelType_invalidTags_throwsIllegalValueException() {
         List<JsonAdaptedTag> invalidTags = new ArrayList<>(VALID_TAGS);
-        invalidTags.add(new JsonAdaptedTag(INVALID_TAG, TagStatus.INCOMPLETE_GOOD));
+        invalidTags.add(new JsonAdaptedTag(INVALID_TAG, TagStatus.INCOMPLETE_GOOD, TagType.DEFAULT_TYPE));
         JsonAdaptedPerson person =
                 new JsonAdaptedPerson(TYPE, VALID_NAME, VALID_ID, VALID_PHONE, VALID_EMAIL, invalidTags);
         assertThrows(IllegalValueException.class, person::toModelType);

@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.testutil.Assert;
+
 class TagStatusTest {
 
     @Test
@@ -19,7 +21,19 @@ class TagStatusTest {
                 TagStatus.INCOMPLETE_GOOD_KEYWORD)));
         assertTrue(TagStatus.INCOMPLETE_BAD.equals(TagStatus.getTagStatus(
                 TagStatus.INCOMPLETE_BAD_KEYWORD)));
-        assertTrue(TagStatus.DEFAULT_STATUS.equals(TagStatus.getTagStatus(
-                emptyTagStatus)));
+
+        assertTrue(TagStatus.PRESENT.equals(TagStatus.getTagStatus(
+                TagStatus.PRESENT_KEYWORD)));
+        assertTrue(TagStatus.ABSENT.equals(TagStatus.getTagStatus(
+                TagStatus.ABSENT_KEYWORD)));
+        assertTrue(TagStatus.ABSENT_WITH_REASON.equals(TagStatus.getTagStatus(
+                TagStatus.ABSENT_WITH_REASON_KEYWORD)));
+
+        assertTrue(TagStatus.ASSIGNED.equals(TagStatus.getTagStatus(
+                TagStatus.ASSIGNED_KEYWORD)));
+        assertTrue(TagStatus.AVAILABLE.equals(TagStatus.getTagStatus(
+                TagStatus.AVAILABLE_KEYWORD)));
+
+        Assert.assertThrows(IllegalArgumentException.class, () -> TagStatus.getTagStatus(emptyTagStatus));
     }
 }

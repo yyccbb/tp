@@ -146,7 +146,7 @@ public class ParserUtil {
         if (!Tag.isValidTagName(trimmedTag)) {
             throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
         }
-        return new Tag(trimmedTag, TagStatus.INCOMPLETE_GOOD);
+        return Tag.createTag(trimmedTag, TagStatus.DEFAULT_STATUS);
     }
 
     /**

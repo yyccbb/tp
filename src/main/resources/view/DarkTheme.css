@@ -364,12 +364,12 @@
     -fx-background-radius: 0;
 }
 
-#tags {
+#assignmentTags {
     -fx-hgap: 7;
     -fx-vgap: 3;
 }
 
-#tags .label {
+#assignmentTags .label {
     -fx-text-fill: white;
     -fx-background-color: #3e7b91;
     -fx-padding: 1 3 1 3;
@@ -378,18 +378,58 @@
     -fx-font-size: 11;
 }
 
-#tags .label.complete_good {
+#assignmentTags .label.complete_good {
     -fx-background-color: green; /* Green color for tags with complete_good status */
 }
 
-#tags .label.complete_bad {
+#assignmentTags .label.complete_bad {
+    -fx-background-color: orange; /* Red color for tags with complete_bad status */
+}
+
+#assignmentTags .label.incomplete_good {
+    -fx-background-color: grey; /* Blue color for tags with incomplete_good status */
+}
+
+#assignmentTags .label.incomplete_bad {
+    -fx-background-color: red; /* Orange color for tags with incomplete_bad status */
+}
+
+#attendanceTags {
+    -fx-hgap: 7;
+    -fx-vgap: 3;
+}
+
+#attendanceTags .label {
+    -fx-text-fill: white;
+    -fx-background-color: #3e7b91;
+    -fx-padding: 1 3 1 3;
+    -fx-border-radius: 2;
+    -fx-background-radius: 2;
+    -fx-font-size: 11;
+}
+
+#attendanceTags .label.present {
+    -fx-background-color: green; /* Green color for tags with complete_good status */
+}
+
+#attendanceTags .label.absent {
     -fx-background-color: red; /* Red color for tags with complete_bad status */
 }
 
-#tags .label.incomplete_good {
-    -fx-background-color: blue; /* Blue color for tags with incomplete_good status */
+#attendanceTags .label.absent_with_reason {
+    -fx-background-color: orange; /* Blue color for tags with incomplete_good status */
 }
 
-#tags .label.incomplete_bad {
-    -fx-background-color: orange; /* Orange color for tags with incomplete_bad status */
+#tutorialTags {
+    -fx-hgap: 7;
+    -fx-vgap: 3;
+}
+
+#tutorialTags .label {
+    -fx-text-fill: white;
+    -fx-background-color: #3e7b91;
+    -fx-padding: 1 3 1 3;
+    -fx-border-radius: 2;
+    -fx-background-radius: 2;
+    -fx-font-size: 11;
 }

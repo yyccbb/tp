@@ -1,6 +1,7 @@
 package seedu.address.ui;
 
 import java.util.Comparator;
+import java.util.function.Predicate;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -9,6 +10,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonType;
+import seedu.address.model.tag.Tag;
 
 /**
  * An UI component that displays information of a {@code Person}.
@@ -43,7 +45,11 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label type;
     @FXML
-    private FlowPane tags;
+    private FlowPane assignmentTags;
+    @FXML
+    private FlowPane attendanceTags;
+    @FXML
+    private FlowPane tutorialTags;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -57,13 +63,19 @@ public class PersonCard extends UiPart<Region> {
         email.setText(person.getEmail().value);
         type.setText(person.getType().toString());
         type.getStyleClass().setAll(person.getType() == PersonType.TA ? "type-ta" : "type-stu");
+        addTagsToContainer(person, Tag::isAssignment, assignmentTags);
+        addTagsToContainer(person, Tag::isAttendance, attendanceTags);
+        addTagsToContainer(person, Tag::isTutorial, tutorialTags);
+    }
+
+    private void addTagsToContainer(Person person, Predicate<Tag> filterPredicate, FlowPane container) {
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
+                .filter(filterPredicate)
                 .forEach(tag -> {
                     Label tagLabel = new Label(tag.tagName);
-                    tagLabel.getStyleClass().addAll("label",
-                            tag.getTagStatus().toString().toLowerCase()); // Add base and status-based style classes
-                    tags.getChildren().add(tagLabel);
+                    tagLabel.getStyleClass().addAll("label", tag.getTagStatus().toString().toLowerCase());
+                    container.getChildren().add(tagLabel);
                 });
     }
 }

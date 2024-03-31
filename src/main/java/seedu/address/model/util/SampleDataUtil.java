@@ -49,7 +49,7 @@ public class SampleDataUtil {
      */
     public static Set<Tag> getTagSet(String... strings) {
         return Arrays.stream(strings)
-                .map(tagName -> new Tag(tagName, TagStatus.DEFAULT_STATUS))
+                .map(tagName -> Tag.createTag(tagName, TagStatus.DEFAULT_STATUS))
                 .collect(Collectors.toSet());
     }
 
