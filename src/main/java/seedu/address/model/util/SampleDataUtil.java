@@ -21,17 +21,17 @@ import seedu.address.model.tag.TagStatus;
 public class SampleDataUtil {
     public static Person[] getSamplePersons() {
         return new Person[] {
-            new Person(PersonType.STU, new Name("Alex Yeoh"), new Id("A0777777L"), new Phone("87438807"),
+                Person.of(PersonType.STU, new Name("Alex Yeoh"), new Id("A0777777L"), new Phone("87438807"),
                     new Email("alexyeoh@example" + ".com"), getTagSet("Assignment1")),
-            new Person(PersonType.STU, new Name("Bernice Yu"), new Id("A9128392K"), new Phone("99272758"),
+                Person.of(PersonType.STU, new Name("Bernice Yu"), new Id("A9128392K"), new Phone("99272758"),
                     new Email("berniceyu@example.com"), getTagSet("Assignment1", "Assignment2")),
-            new Person(PersonType.STU, new Name("Charlotte Oliveiro"), new Id("A2222222P"), new Phone("93210283"),
+                Person.of(PersonType.STU, new Name("Charlotte Oliveiro"), new Id("A2222222P"), new Phone("93210283"),
                     new Email("charlotte@example.com"), getTagSet("Assignment1")),
-            new Person(PersonType.STU, new Name("David Li"), new Id("A9128392Z"), new Phone("91031282"),
+                Person.of(PersonType.STU, new Name("David Li"), new Id("A9128392Z"), new Phone("91031282"),
                     new Email("lidavid@example.com"), getTagSet("Assignment1")),
-            new Person(PersonType.STU, new Name("Irfan Ibrahim"), new Id("B0198266Z"), new Phone("92492021"),
+                Person.of(PersonType.STU, new Name("Irfan Ibrahim"), new Id("B0198266Z"), new Phone("92492021"),
                     new Email("irfan@example.com"), getTagSet("Assignment1")),
-            new Person(PersonType.STU, new Name("Roy Balakrishnan"), new Id("B0000666C"), new Phone("92624417"),
+                Person.of(PersonType.STU, new Name("Roy Balakrishnan"), new Id("B0000666C"), new Phone("92624417"),
                     new Email("royb@example.com"), getTagSet("Assignment1"))
         };
     }

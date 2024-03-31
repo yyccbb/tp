@@ -117,7 +117,8 @@ class JsonAdaptedPerson {
         final Email modelEmail = new Email(email);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(personType, modelName, modelId, modelPhone, modelEmail, modelTags);
+
+        return Person.of(personType, modelName, modelId, modelPhone, modelEmail, modelTags);
     }
 
 }

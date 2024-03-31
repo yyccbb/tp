@@ -110,8 +110,10 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Builds the {@code Person}.
+     */
     public Person build() {
-        return new Person(type, name, id, phone, email, tags);
+        return Person.of(type, name, id, phone, email, tags);
     }
-
 }
