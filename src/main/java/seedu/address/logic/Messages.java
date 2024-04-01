@@ -44,8 +44,11 @@ public class Messages {
                 .append("; Phone: ")
                 .append(person.getPhone())
                 .append("; Email: ")
-                .append(person.getEmail())
-                .append("; Tags: ");
+                .append(person.getEmail());
+        if (person.getTags().isEmpty()) {
+            return builder.toString();
+        }
+        builder.append("; Tags: ");
         person.getTags().forEach(builder::append);
         return builder.toString();
     }
