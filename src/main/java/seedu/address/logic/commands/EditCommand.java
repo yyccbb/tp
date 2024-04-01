@@ -94,14 +94,14 @@ public class EditCommand extends Command {
     private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
         assert personToEdit != null;
 
-        PersonType updatedType = editPersonDescriptor.getType().orElse(personToEdit.getType());
+        PersonType currentType = personToEdit.getType();
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
-        Id existingId = personToEdit.getId();
+        Id currentId = personToEdit.getId();
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
-        return Person.of(updatedType, updatedName, existingId, updatedPhone, updatedEmail,
+        return Person.of(currentType, updatedName, currentId, updatedPhone, updatedEmail,
                 updatedTags);
     }
 
@@ -134,7 +134,6 @@ public class EditCommand extends Command {
      * corresponding field value of the person.
      */
     public static class EditPersonDescriptor {
-        private PersonType type;
         private Name name;
         private Phone phone;
         private Email email;
@@ -147,7 +146,6 @@ public class EditCommand extends Command {
          * A defensive copy of {@code tags} is used internally.
          */
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
-            setType(toCopy.type);
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
@@ -159,14 +157,6 @@ public class EditCommand extends Command {
          */
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyNonNull(name, phone, email, tags);
-        }
-
-        public void setType(PersonType type) {
-            this.type = type;
-        }
-
-        public Optional<PersonType> getType() {
-            return Optional.ofNullable(type);
         }
 
         public void setName(Name name) {
@@ -222,8 +212,7 @@ public class EditCommand extends Command {
             }
 
             EditPersonDescriptor otherEditPersonDescriptor = (EditPersonDescriptor) other;
-            return Objects.equals(type, otherEditPersonDescriptor.type)
-                    && Objects.equals(name, otherEditPersonDescriptor.name)
+            return Objects.equals(name, otherEditPersonDescriptor.name)
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags);
@@ -232,7 +221,6 @@ public class EditCommand extends Command {
         @Override
         public String toString() {
             return new ToStringBuilder(this)
-                    .add("type", type)
                     .add("name", name)
                     .add("phone", phone)
                     .add("email", email)
