@@ -8,6 +8,8 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.person.UniqueTutorialTagList;
+import seedu.address.model.tag.TutorialTag;
 
 /**
  * Wraps all data at the address-book level
@@ -16,6 +18,7 @@ import seedu.address.model.person.UniquePersonList;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
+    private final UniqueTutorialTagList tutorialTags;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -26,6 +29,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         persons = new UniquePersonList();
+        tutorialTags = new UniqueTutorialTagList();
     }
 
     public AddressBook() {}
@@ -49,12 +53,21 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Replaces the contents of the tutorialTags list with {@code tutorialTags}.
+     * {@code tutorialTags} must not contain duplicate tutorialTags.
+     */
+    public void setTutorialTags(List<TutorialTag> tutorialTags) {
+        this.tutorialTags.setTutorialTags(tutorialTags);
+    }
+
+    /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
 
         setPersons(newData.getPersonList());
+        setTutorialTags(newData.getTutorialTagList());
     }
 
     //// person-level operations
@@ -94,6 +107,31 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.remove(key);
     }
 
+    //// tutorialTag-level operations
+
+    /**
+     */
+    public boolean hasTutorialTag(TutorialTag tutorialTag) {
+        requireNonNull(tutorialTag);
+        return tutorialTags.contains(tutorialTag);
+    }
+
+    /**
+     * Adds a tutorialTag to the address book.
+     * The tutorialTag must not already exist in the address book.
+     */
+    public void addTutorialTag(TutorialTag t) {
+        tutorialTags.add(t);
+    }
+
+    /**
+     * Removes {@code key} from this {@code AddressBook}.
+     * {@code key} must exist in the address book.
+     */
+    public void removeTutorialTag(TutorialTag key) {
+        tutorialTags.remove(key);
+    }
+
     //// util methods
 
     @Override
@@ -109,6 +147,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     @Override
+    public ObservableList<TutorialTag> getTutorialTagList() {
+        return tutorialTags.asUnmodifiableObservableList();
+    }
+
+    @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;
@@ -120,7 +163,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         }
 
         AddressBook otherAddressBook = (AddressBook) other;
-        return persons.equals(otherAddressBook.persons);
+        return persons.equals(otherAddressBook.persons) && tutorialTags.equals(otherAddressBook.tutorialTags);
     }
 
     @Override
