@@ -116,9 +116,10 @@ Examples:
 
 ### Locating persons by name: `find`
 
-Finds persons whose names contain any of the given keywords.
+Filters all persons whose contact details contain each of the specified keywords 
+under the specified flag and displays them as a list with index numbers.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `find [stu/ta] [/n NAME] [/i ID] [/p PHONE] [/e EMAIL]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
