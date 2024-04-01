@@ -122,16 +122,15 @@ under the specified flag and displays them as a list with index numbers.
 Format: `find [stu/ta] [/n NAME] [/i ID] [/p PHONE] [/e EMAIL]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* The order of the keywords under each flag does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* Prefixes will be matched e.g. `Han` will match `Hans`
+* The search filters for persons meeting ALL criteria, (i.e. `AND` search).
+    e.g. `find stu /n John` will find all Students whose names contain `John`.
 
 Examples:
 * `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+* `find ta` returns all TAs
+  ![result for 'find ta'](images/findTaResult.png)
 
 ### Deleting a person : `delete`
 
@@ -161,11 +160,11 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+TrAcker data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+TrAcker data is saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
