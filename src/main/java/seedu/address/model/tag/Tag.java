@@ -71,7 +71,7 @@ public abstract class Tag {
         return tagType;
     }
 
-    private static TagType getTagType(TagStatus ts) {
+    public static TagType getTagType(TagStatus ts) {
         switch (ts) {
         case COMPLETE_GOOD:
         case COMPLETE_BAD:

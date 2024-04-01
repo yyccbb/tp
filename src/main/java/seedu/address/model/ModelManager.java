@@ -13,6 +13,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.TutorialTag;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -152,6 +153,22 @@ public class ModelManager implements Model {
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredPersons.equals(otherModelManager.filteredPersons);
+    }
+
+    @Override
+    public void deleteTutorialTag(TutorialTag tutorialTag) {
+        addressBook.removeTutorialTag(tutorialTag);
+    }
+
+    @Override
+    public void addTutorialTag(TutorialTag tutorialTag) {
+        addressBook.addTutorialTag(tutorialTag);
+    }
+
+    @Override
+    public boolean hasTutorialTag(TutorialTag tutorialTag) {
+        requireNonNull(tutorialTag);
+        return addressBook.hasTutorialTag(tutorialTag);
     }
 
 }
