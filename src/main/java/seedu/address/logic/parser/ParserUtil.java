@@ -10,7 +10,7 @@ import java.util.stream.Stream;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Messages;
-import seedu.address.logic.commands.CreateTutTagCommand;
+import seedu.address.logic.commands.EditTutTagListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Id;
@@ -171,12 +171,16 @@ public class ParserUtil {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 
+    /**
+     * @param flag Command flag on whether the EditTutTagListCommand
+     * @throws IllegalArgumentException
+     */
     public static boolean isCreatingNewTag(String flag) throws IllegalArgumentException {
-        if (flag.equals(CreateTutTagCommand.ADD_FLAG)) {
+        if (flag.equals(EditTutTagListCommand.ADD_FLAG)) {
             return true;
         }
 
-        if (flag.equals(CreateTutTagCommand.DELETE_FLAG)) {
+        if (flag.equals(EditTutTagListCommand.DELETE_FLAG)) {
             return false;
         }
 

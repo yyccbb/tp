@@ -108,4 +108,7 @@ public interface Model {
      * Returns true if a tutorialTag with the same identity as {@code tutorialTag} exists in the address book.
      */
     boolean hasTutorialTag(TutorialTag tutorialTag);
+
+    /** Returns an unmodifiable view of the filtered tutorialTag list */
+    ObservableList<TutorialTag> getTutorialTagList();
 }

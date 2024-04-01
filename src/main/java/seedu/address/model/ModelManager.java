@@ -171,4 +171,9 @@ public class ModelManager implements Model {
         return addressBook.hasTutorialTag(tutorialTag);
     }
 
+    @Override
+    public ObservableList<TutorialTag> getTutorialTagList() {
+        return addressBook.getTutorialTagList();
+    }
+
 }

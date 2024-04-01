@@ -1,38 +1,26 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.*;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAGSTATUS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Set;
-
-import seedu.address.commons.util.StringListUtil;
-import seedu.address.logic.commands.CreateTutTagCommand;
-import seedu.address.logic.commands.FindCommand;
-import seedu.address.logic.commands.MarkCommand;
+import seedu.address.logic.commands.EditTutTagListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.FieldContainsKeywordsPredicate;
-import seedu.address.model.person.PersonType;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.tag.TagStatus;
 
 /**
  * Parses input arguments and creates a new FindCommand object
  */
-public class CreateTutTagCommandParser implements Parser<CreateTutTagCommand> {
+public class EditTutTagListCommandParser implements Parser<EditTutTagListCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the FindCommand
      * and returns a FindCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public CreateTutTagCommand parse(String args) throws ParseException {
+    public EditTutTagListCommand parse(String args) throws ParseException {
         if (args.trim().isEmpty()) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, CreateTutTagCommand.MESSAGE_USAGE));
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditTutTagListCommand.MESSAGE_USAGE));
         }
 
         ArgumentMultimap argMultimap =
@@ -40,7 +28,7 @@ public class CreateTutTagCommandParser implements Parser<CreateTutTagCommand> {
 
         if (!ParserUtil.arePrefixesPresent(argMultimap, PREFIX_TAG)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    CreateTutTagCommand.MESSAGE_USAGE));
+                    EditTutTagListCommand.MESSAGE_USAGE));
         }
 
         String commandFlag = argMultimap.getPreamble();
@@ -50,7 +38,7 @@ public class CreateTutTagCommandParser implements Parser<CreateTutTagCommand> {
         try {
             boolean isCreatingNewFlag = ParserUtil.isCreatingNewTag(commandFlag);
             Tag.isTagNameValid(tagName);
-            return new CreateTutTagCommand(tagName, isCreatingNewFlag);
+            return new EditTutTagListCommand(tagName, isCreatingNewFlag);
         } catch (IllegalArgumentException e) {
             throw new ParseException(e.getMessage());
         }

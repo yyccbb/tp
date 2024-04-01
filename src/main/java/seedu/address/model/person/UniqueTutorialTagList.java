@@ -1,17 +1,28 @@
 package seedu.address.model.person;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
+import java.util.Iterator;
+import java.util.List;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.person.exceptions.DuplicateTutorialTagException;
 import seedu.address.model.person.exceptions.TutorialTagNotFoundException;
 import seedu.address.model.tag.TutorialTag;
 
-import java.util.Iterator;
-import java.util.List;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-
+/**
+ * A list of tutorialTags that enforces uniqueness between its elements and does not allow nulls.
+ * A tutorialTag is considered unique by comparing using {@code TutorialTag#isSameTutorialTag(TutorialTag)}.
+ * As such, adding and updating of tutorialTags uses TutorialTag#isSameTutorialTag(TutorialTag) for equality so as to
+ * ensure that the tutorialTag being added or updated is unique in terms of identity in the UniqueTutorialTagList.
+ * However, the removal of a tutorialTag uses TutorialTag#equals(Object) so as to ensure that the tutorialTag
+ * with exactly the same TagName will be removed.
+ *
+ * Supports a minimal set of list operations.
+ */
 public class UniqueTutorialTagList implements Iterable<TutorialTag> {
     private final ObservableList<TutorialTag> internalList = FXCollections.observableArrayList();
     private final ObservableList<TutorialTag> internalUnmodifiableList =
