@@ -133,7 +133,7 @@ public class ModelManager implements Model {
     public void persistentUpdateFilteredList(List<? extends Predicate<Person>> predicates) {
         Predicate<Person> combinedPredicate = predicates.stream()
                 .<Predicate<Person>>map(p -> (Predicate<Person>) p)
-                .reduce(Predicate::or)
+                .reduce(Predicate::and)
                 .orElse(person -> true);
         filteredPersons.setPredicate(combinedPredicate);
     }
