@@ -146,6 +146,18 @@ public abstract class Tag {
         return currTags;
     }
 
+    /**
+     * @param currTags current tag set to be updated.
+     * @param tagName name of the new tag.
+     * @return
+     */
+    public static Set<Tag> deleteTagFromTagSet(Set<Tag> currTags, String tagName) {
+        // remove the potentially existing Tag of the same name from the hashset.
+        Tag newTag = Tag.createTag(tagName, TagStatus.DEFAULT_STATUS);
+        currTags.remove(newTag);
+        return currTags;
+    }
+
     public boolean isAttendance() {
         return tagType == TagType.ATTENDANCE;
     }
