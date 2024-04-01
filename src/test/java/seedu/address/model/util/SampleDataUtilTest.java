@@ -39,7 +39,7 @@ public class SampleDataUtilTest {
                 .withId("A2222222P")
                 .withPhone("93210283")
                 .withEmail("charlotte@example.com")
-                .withTags("Assignment1")
+                .withTags()
                 .build(), samplePersons[2]);
 
         assertPersonEquals(new PersonBuilder().withName("David Li")
