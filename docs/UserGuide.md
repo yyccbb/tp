@@ -46,7 +46,7 @@ tutor availability and much more with just a few keystrokes!
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Features
+## Basic Features
 
 <div markdown="block" class="alert alert-info">
 
@@ -171,9 +171,50 @@ If your changes to the data file makes its format invalid, AddressBook will disc
 Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
-### Archiving data files `[coming in v2.0]`
+--------------------------------------------------------------------------------------------------------------------
 
-_Details coming soon ..._
+## Tagging (WIP)
+
+With TrAcker, you can track Student assignments, attendance, tutorial groups
+(along with as TA tutorial groups and availability) using tags.
+
+**(implementation TBC)**
+
+### Tag Status
+
+| Tag type   | Status                                                                                                                                                                                                                                                                             |
+|------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Assignment | `cg` : <mark style="background-color: green">COMPLETE_GOOD</mark><br/>`cb` : <mark style="background-color: orange">COMPLETE_BAD</mark><br/>`ig` : <mark style="background-color: grey">INCOMPLETE_GOOD</mark><br/>`ib` : <mark style="background-color:red">INCOMPLETE_BAD</mark> |
+| Attendance | `p` : <mark style="background-color:  green">PRESENT</mark><br/>`a` : <mark style="background-color:red">ABSENT</mark><br/>`awr` : <mark style="background-color:orange">ABSENT_WITH_REASON</mark>                                                                                 |
+| Tag 3      | 3-letter abbreviation of the day of the week, followed by the time in `HH` format (24h)<br/>Examples:<br/>`MON08` : <mark style="background-color: #3e7b91">MON08</mark><br/>`TUE12` : <mark style="background-color: #3e7b91">TUE08</mark>                                        |
+
+### Marking a tag : `mark` (WIP)
+
+Updates the status of the specified tag with the specified status. If the
+tag specified does not exist, a new tag with the tag name and tag status will be
+created.
+
+Format: `mark INDEX /t TAG /ts TAGSTATUS`
+
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+* `TAGSTATUS` must be one of the [above specified values](#tag-status)
+
+Examples:
+* `mark 1 /t Assignment1 /ts cg` updates the `Assignment1` tag (or adds it, if it does not exist)
+to <mark style="background-color: green">COMPLETE_GOOD</mark> for the 1st person in the displayed list.
+
+### Deleting a tag: `deletetag`
+
+Deletes an individual tag from a person. If the specified tag does not exist, no change should happen.
+
+Format: `deletetag INDEX /t TAG`
+
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `deletetag 1 /t Assignment1` deletes the `Assignment1` tag from the 1st person in the displayed list.
 
 --------------------------------------------------------------------------------------------------------------------
 
