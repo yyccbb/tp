@@ -27,6 +27,10 @@ public class DeleteCommand extends Command {
 
     private final Index targetIndex;
 
+    /**
+     * Constructor for the delete command.
+     * @param targetIndex target index whose contact entry is to be deleted.
+     */
     public DeleteCommand(Index targetIndex) {
         this.needsWarningPopup = true;
         this.targetIndex = targetIndex;

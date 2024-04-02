@@ -40,7 +40,6 @@ public class DeletetagCommand extends Command {
      * @param tagName name of the tag to be deleted.
      */
     public DeletetagCommand(Index index, String tagName) {
-        this.needsWarningPopup = true;
         requireAllNonNull(index, tagName);
         this.index = index;
         this.tagName = tagName;

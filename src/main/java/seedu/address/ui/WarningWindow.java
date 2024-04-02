@@ -1,18 +1,15 @@
 package seedu.address.ui;
 
+import java.util.logging.Logger;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
 
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.stage.Stage;
-
-import java.util.logging.Logger;
-
+/**
+ * This class is the controller for the warning window pop-up.
+ */
 public class WarningWindow extends UiPart<Stage> {
 
     private static final Logger logger = LogsCenter.getLogger(WarningWindow.class);
@@ -54,7 +51,7 @@ public class WarningWindow extends UiPart<Stage> {
     }
 
     /**
-     * Shows the help window.
+     * Shows the warning window.
      * @throws IllegalStateException
      *     <ul>
      *         <li>
@@ -74,31 +71,34 @@ public class WarningWindow extends UiPart<Stage> {
     public void show() {
         logger.fine("Showing warning page about the application.");
         getRoot().show();
-//        getRoot().centerOnScreen();
-    }
-
-    public void showAndWait() {
-        logger.fine("Showing warning page about the application.");
-        getRoot().showAndWait();
-//        getRoot().centerOnScreen();
+        getRoot().centerOnScreen();
     }
 
     /**
-     * Returns true if the help window is currently being shown.
+     * Shows warning page and waits for user action.
+     */
+    public void showAndWait() {
+        logger.fine("Showing warning page about the application and waiting.");
+        getRoot().showAndWait();
+        getRoot().centerOnScreen();
+    }
+
+    /**
+     * Returns true if the warning window is currently being shown.
      */
     public boolean isShowing() {
         return getRoot().isShowing();
     }
 
     /**
-     * Hides the help window.
+     * Hides the warning window.
      */
     public void hide() {
         getRoot().hide();
     }
 
     /**
-     * Focuses on the help window.
+     * Focuses on the warning window.
      */
     public void focus() {
         getRoot().requestFocus();
