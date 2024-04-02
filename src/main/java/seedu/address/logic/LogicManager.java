@@ -41,13 +41,16 @@ public class LogicManager implements Logic {
         this.storage = storage;
         addressBookParser = new AddressBookParser();
     }
+    @Override
+    public Command parseCommand(String commandText) throws CommandException, ParseException {
+        logger.info("----------------[USER COMMAND][" + commandText + "]");
+        Command command = addressBookParser.parseCommand(commandText);
+        return command;
+    }
 
     @Override
-    public CommandResult execute(String commandText) throws CommandException, ParseException {
-        logger.info("----------------[USER COMMAND][" + commandText + "]");
-
+    public CommandResult execute(Command command) throws CommandException, ParseException {
         CommandResult commandResult;
-        Command command = addressBookParser.parseCommand(commandText);
         commandResult = command.execute(model);
 
         try {
