@@ -14,7 +14,7 @@ public abstract class Tag {
     public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric";
     public static final String VALIDATION_REGEX = "\\p{Alnum}+";
 
-    public final String tagName;
+    private final String tagName;
     private TagStatus tagStatus;
     private TagType tagType;
 
@@ -71,6 +71,9 @@ public abstract class Tag {
         return tagType;
     }
 
+    public String getTagName() {
+        return tagName;
+    }
     private static TagType getTagType(TagStatus ts) {
         switch (ts) {
         case COMPLETE_GOOD:

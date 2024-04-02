@@ -47,7 +47,7 @@ public class FindCommandParser implements Parser<FindCommand> {
             predicates.add(new FieldContainsKeywordsPredicate(separated));
         }
 
-        List<Prefix> allPrefixes = Arrays.asList(PREFIX_NAME, PREFIX_ID, PREFIX_PHONE, PREFIX_EMAIL);
+        List<Prefix> allPrefixes = Arrays.asList(PREFIX_NAME, PREFIX_ID, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_TAG);
         for (Prefix prefix: allPrefixes) {
             if (ParserUtil.arePrefixesPresent(argMultimap, prefix)) {
                 List<String> keywords = argMultimap.getAllValues(prefix);
@@ -55,7 +55,6 @@ public class FindCommandParser implements Parser<FindCommand> {
                 predicates.add(new FieldContainsKeywordsPredicate(prefix, separated));
             }
         }
-        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG)); // find tag not implemented
 
         return new FindCommand(predicates);
     }

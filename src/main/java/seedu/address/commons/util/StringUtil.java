@@ -1,5 +1,7 @@
 package seedu.address.commons.util;
 
+import seedu.address.model.tag.Tag;
+
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
@@ -24,6 +26,8 @@ public class StringUtil {
      * @param sentence cannot be null
      * @param word cannot be null, cannot be empty
      */
+
+    public static final String[] days = {"MON", "TUES08", "WED", "THU09", "FRI"};
     public static boolean containsSubwordIgnoreCase(String sentence, String word) {
         requireNonNull(sentence);
         requireNonNull(word);
@@ -37,6 +41,30 @@ public class StringUtil {
 
         return Arrays.stream(wordsInPreppedSentence)
                 .anyMatch(wordInPreppedSentence -> wordInPreppedSentence.toLowerCase().contains(preppedWord));
+    }
+
+    /**
+     * Returns true if the {@code tag} contains the {@code word}.
+     *   Ignores case, and performs subword matching if {@code word} is a subword of a valid tutorialtag,
+     *   else it performs a full word match.
+     * @param tag cannot be null
+     * @param word cannot be null, cannot be empty
+     */
+    public static boolean tagContainsWordIgnoreCase(Tag tag, String word) {
+        requireNonNull(tag);
+        requireNonNull(word);
+
+        String tagName = tag.getTagName().toLowerCase();
+        String preppedWord = word.trim();
+        checkArgument(!preppedWord.isEmpty(), "Word parameter cannot be empty");
+
+        for (String day : days) {
+            day = day.toLowerCase();
+            if (day.contains(preppedWord)) {
+                return tagName.contains(preppedWord) && tag.isTutorial();
+            }
+        }
+        return tagName.equalsIgnoreCase(preppedWord);
     }
 
     /**
