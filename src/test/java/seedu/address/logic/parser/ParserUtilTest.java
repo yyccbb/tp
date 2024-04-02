@@ -211,6 +211,6 @@ public class ParserUtilTest {
         assert(isCreatingNewTag(EditTutTagListCommand.ADD_FLAG));
         assertFalse(isCreatingNewTag(EditTutTagListCommand.DELETE_FLAG));
         String invalidCommandFlag = "";
-        assertThrows(IllegalArgumentException.class, () -> isCreatingNewTag(invalidCommandFlag));
+        assertThrows(ParseException.class, () -> isCreatingNewTag(invalidCommandFlag));
     }
 }

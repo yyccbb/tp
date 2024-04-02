@@ -26,7 +26,8 @@ public class EditTutTagListCommand extends Command {
             + "Example: " + COMMAND_WORD + " " + ADD_FLAG + " " + PREFIX_TAG + " THU10\n";
 
     public static final String SAMPLE_COMMAND = COMMAND_WORD + " " + ADD_FLAG + " " + PREFIX_TAG + " WED10";
-
+    public static final String MESSAGE_SUCCESS = "New tutorialTag added: %1$s";
+    public static final String MESSAGE_DUPLICATE_TUTORIALTAG = "This tutorialTag already exists in the address book";
     private final String tagName;
     private final boolean isAdding;
 
@@ -46,7 +47,8 @@ public class EditTutTagListCommand extends Command {
         requireNonNull(model);
         if (isAdding) {
             model.addTutorialTag(new TutorialTag(tagName, TagStatus.AVAILABLE));
-        } else {
+        }
+        if (!isAdding) {
             model.deleteTutorialTag(new TutorialTag(tagName, TagStatus.AVAILABLE));
         }
         return new CommandResult(model.getTutorialTagList().toString());

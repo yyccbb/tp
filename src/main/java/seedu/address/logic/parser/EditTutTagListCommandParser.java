@@ -39,6 +39,9 @@ public class EditTutTagListCommandParser implements Parser<EditTutTagListCommand
             boolean isCreatingNewFlag = ParserUtil.isCreatingNewTag(commandFlag);
             Tag.isTagNameValid(tagName);
             return new EditTutTagListCommand(tagName, isCreatingNewFlag);
+        } catch (ParseException e) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditTutTagListCommand.MESSAGE_USAGE));
         } catch (IllegalArgumentException e) {
             throw new ParseException(e.getMessage());
         }
