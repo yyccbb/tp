@@ -1,9 +1,11 @@
 package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
+import static seedu.address.logic.parser.ParserUtil.isCreatingNewTag;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
@@ -14,6 +16,7 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.EditTutTagListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -201,5 +204,13 @@ public class ParserUtilTest {
                 Tag.createTag(VALID_TAG_2, TagStatus.DEFAULT_STATUS)));
 
         assertEquals(expectedTagSet, actualTagSet);
+    }
+
+    @Test
+    public void parseEditTutTagListCommandFlag() throws Exception {
+        assert(isCreatingNewTag(EditTutTagListCommand.ADD_FLAG));
+        assertFalse(isCreatingNewTag(EditTutTagListCommand.DELETE_FLAG));
+        String invalidCommandFlag = "";
+        assertThrows(IllegalArgumentException.class, () -> isCreatingNewTag(invalidCommandFlag));
     }
 }
