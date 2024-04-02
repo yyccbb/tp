@@ -5,12 +5,15 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAGSTATUS;
 
+import java.util.Set;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.MarkCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.TagStatus;
+
 
 /**
  * Parses input arguments and creates a new {@code RemarkCommand} object
@@ -37,7 +40,9 @@ public class MarkCommandParser implements Parser<MarkCommand> {
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_TAG, PREFIX_TAGSTATUS);
-        String tagName = argMultimap.getValue(PREFIX_TAG).get();
+        String tagNamesString = argMultimap.getValue(PREFIX_TAG).get();
+        Set<String> tagNames = ParserUtil.parseTagNamesString(tagNamesString);
+
         String statusIdentifier = argMultimap.getValue(PREFIX_TAGSTATUS).get();
 
 
@@ -48,8 +53,8 @@ public class MarkCommandParser implements Parser<MarkCommand> {
         // TagName might be used to search for tags in future implementations
         try {
             TagStatus tagStatus = TagStatus.getTagStatus(statusIdentifier);
-            Tag.isTagNameValid(tagName);
-            return new MarkCommand(index, tagName, tagStatus);
+            tagNames.forEach(Tag::isTagNameValid);
+            return new MarkCommand(index, tagNames, tagStatus);
         } catch (IllegalArgumentException e) {
             throw new ParseException(e.getMessage());
         }

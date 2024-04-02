@@ -14,7 +14,9 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -49,36 +51,48 @@ public class CommandTestUtil {
     public static final String VALID_EMAIL_CARL = "heinz@example.com";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIENDS = "friends";
+    public static final String VALID_TAG_ASSIGNMENT1 = "Assignment1";
+    public static final String VALID_TAG_ASSIGNMENT2 = "Assignment2";
+    public static final String VALID_TAG_ASSIGNMENT3 = "Assignment3";
+
     public static final String VALID_TAGSTATUS_COMPLETE_GOOD = "cg";
     public static final String VALID_TAGSTATUS_COMPLETE_BAD = "cb";
 
     public static final String TYPE_DESC_AMY = " " + TYPE_STU + " ";
     public static final String TYPE_DESC_BOB = " " + TYPE_TA + " ";
-
     public static final String TYPE_DESC_CARL = " " + TYPE_STU + " ";
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + " " + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + " " + VALID_NAME_BOB;
     public static final String NAME_DESC_CARL = " " + PREFIX_NAME + " " + VALID_NAME_CARL;
     public static final String ID_DESC_AMY = " " + PREFIX_ID + " " + VALID_ID_AMY;
     public static final String ID_DESC_BOB = " " + PREFIX_ID + " " + VALID_ID_BOB;
-
     public static final String ID_DESC_CARL = " " + PREFIX_ID + " " + VALID_ID_CARL;
     public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + " " + VALID_PHONE_AMY;
     public static final String PHONE_DESC_BOB = " " + PREFIX_PHONE + " " + VALID_PHONE_BOB;
-
     public static final String PHONE_DESC_CARL = " " + PREFIX_PHONE + " " + VALID_PHONE_CARL;
     public static final String EMAIL_DESC_AMY = " " + PREFIX_EMAIL + " " + VALID_EMAIL_AMY;
     public static final String EMAIL_DESC_BOB = " " + PREFIX_EMAIL + " " + VALID_EMAIL_BOB;
-
     public static final String EMAIL_DESC_CARL = " " + PREFIX_EMAIL + " " + VALID_EMAIL_CARL;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + " " + VALID_TAG_FRIENDS;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + " " + VALID_TAG_HUSBAND;
+    public static final String TAG_DESC_ASS1_ASS2 =
+            " " + PREFIX_TAG + " " + VALID_TAG_ASSIGNMENT1 + " " + VALID_TAG_ASSIGNMENT2;
+    public static final String TAGSTATUS_DESC_COMPLETE_GOOD =
+            " " + PREFIX_TAGSTATUS + " " + VALID_TAGSTATUS_COMPLETE_GOOD;
+    public static final String TAGSTATUS_DESC_COMPLETE_BAD =
+            " " + PREFIX_TAGSTATUS + " " + VALID_TAGSTATUS_COMPLETE_BAD;
     public static final String TAG_FRIEND_TAGSTATUS_COMPLETE_GOOD = " " + PREFIX_TAG + " " + VALID_TAG_FRIENDS
-            + " " + PREFIX_TAGSTATUS + " " + VALID_TAGSTATUS_COMPLETE_GOOD;
+            + TAGSTATUS_DESC_COMPLETE_GOOD;
     public static final String TAG_FRIEND_TAGSTATUS_COMPLETE_BAD = " " + PREFIX_TAG + " " + VALID_TAG_FRIENDS
-            + " " + PREFIX_TAGSTATUS + " " + VALID_TAGSTATUS_COMPLETE_BAD;
-    public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + " " + "James&"; // '&' not allowed in names
+            + TAGSTATUS_DESC_COMPLETE_BAD;
+    public static final String TAG_ASS1_ASS2_TAGSTATUS_COMPLETE_GOOD =
+            TAG_DESC_ASS1_ASS2 + TAGSTATUS_DESC_COMPLETE_GOOD;
+    public static final Set<String> VALID_TAGNAMES_SET_ASSIGNMENT = new HashSet<>(Arrays.asList(VALID_TAG_ASSIGNMENT1,
+            VALID_TAG_ASSIGNMENT2));
+    public static final Set<String> VALID_TAGNAMES_SET_ASSIGNMENT_DIFFERENT = new HashSet<>(Arrays.asList(
+            VALID_TAG_ASSIGNMENT3));
 
+    public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + " " + "James&"; // '&' not allowed in names
     public static final String INVALID_ID_DESC = " " + PREFIX_ID + " " + "123456789";
     // IDs must start and end with a letter
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + " " + "911a"; // 'a' not allowed in phones

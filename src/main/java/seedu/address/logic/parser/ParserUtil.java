@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -159,6 +160,18 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String} of tag names separated by whitespaces
+     * into a {@code Set<String>}, where each element corresponds to a
+     * trimmed tag name.
+     */
+    public static Set<String> parseTagNamesString(String tagNames) {
+        requireNonNull(tagNames);
+        final Set<String> tagNamesSet = new HashSet<>();
+        tagNamesSet.addAll(Arrays.asList(tagNames.split("\\s")));
+        return tagNamesSet;
     }
 
     /**

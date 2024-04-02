@@ -3,8 +3,8 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIENDS;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAGNAMES_SET_ASSIGNMENT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAGNAMES_SET_ASSIGNMENT_DIFFERENT;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
@@ -37,9 +37,11 @@ public class MarkCommandTest {
 
         Person personInFilteredList = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
 
-        Person updatedPerson = new PersonBuilder(personInFilteredList).addTag(VALID_TAG_FRIENDS,
-                TagStatus.COMPLETE_GOOD).build();
-        MarkCommand markCommand = new MarkCommand(INDEX_FIRST_PERSON, VALID_TAG_FRIENDS,
+        PersonBuilder updatedPersonBuilder = new PersonBuilder(personInFilteredList);
+        VALID_TAGNAMES_SET_ASSIGNMENT.forEach(x -> updatedPersonBuilder.addTag(x, TagStatus.COMPLETE_GOOD));
+        Person updatedPerson = updatedPersonBuilder.build();
+
+        MarkCommand markCommand = new MarkCommand(INDEX_FIRST_PERSON, VALID_TAGNAMES_SET_ASSIGNMENT,
                 TagStatus.COMPLETE_GOOD);
 
         String expectedMessage = String.format(MarkCommand.MESSAGE_MARK_PERSON_SUCCESS, Messages.format(updatedPerson));
@@ -53,7 +55,7 @@ public class MarkCommandTest {
     @Test
     public void execute_invalidPersonIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
-        MarkCommand markCommand = new MarkCommand(outOfBoundIndex, VALID_TAG_FRIENDS,
+        MarkCommand markCommand = new MarkCommand(outOfBoundIndex, VALID_TAGNAMES_SET_ASSIGNMENT,
                 TagStatus.COMPLETE_GOOD);
 
         assertCommandFailure(markCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
@@ -70,7 +72,7 @@ public class MarkCommandTest {
         // ensures that outOfBoundIndex is still in bounds of address book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
 
-        MarkCommand markCommand = new MarkCommand(outOfBoundIndex, VALID_TAG_FRIENDS,
+        MarkCommand markCommand = new MarkCommand(outOfBoundIndex, VALID_TAGNAMES_SET_ASSIGNMENT,
                 TagStatus.COMPLETE_GOOD);
 
         assertCommandFailure(markCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
@@ -78,11 +80,11 @@ public class MarkCommandTest {
 
     @Test
     public void equals() {
-        final MarkCommand standardCommand = new MarkCommand(INDEX_FIRST_PERSON, VALID_TAG_FRIENDS,
+        final MarkCommand standardCommand = new MarkCommand(INDEX_FIRST_PERSON, VALID_TAGNAMES_SET_ASSIGNMENT,
                 TagStatus.DEFAULT_STATUS);
 
         // same values -> returns true
-        MarkCommand commandWithSameValues = new MarkCommand(INDEX_FIRST_PERSON, VALID_TAG_FRIENDS,
+        MarkCommand commandWithSameValues = new MarkCommand(INDEX_FIRST_PERSON, VALID_TAGNAMES_SET_ASSIGNMENT,
                 TagStatus.DEFAULT_STATUS);
         assertTrue(standardCommand.equals(commandWithSameValues));
 
@@ -96,24 +98,24 @@ public class MarkCommandTest {
         assertFalse(standardCommand.equals(new ClearCommand()));
 
         // different index -> returns false
-        assertFalse(standardCommand.equals(new MarkCommand(INDEX_SECOND_PERSON, VALID_TAG_FRIENDS,
+        assertFalse(standardCommand.equals(new MarkCommand(INDEX_SECOND_PERSON, VALID_TAGNAMES_SET_ASSIGNMENT,
                 TagStatus.DEFAULT_STATUS)));
 
         // different tagName -> returns false
-        assertFalse(standardCommand.equals(new MarkCommand(INDEX_FIRST_PERSON, VALID_TAG_HUSBAND,
-                TagStatus.DEFAULT_STATUS)));
+        assertFalse(standardCommand.equals(new MarkCommand(INDEX_FIRST_PERSON,
+                VALID_TAGNAMES_SET_ASSIGNMENT_DIFFERENT, TagStatus.DEFAULT_STATUS)));
 
         // different tagStatus -> returns false
-        assertFalse(standardCommand.equals(new MarkCommand(INDEX_FIRST_PERSON, VALID_TAG_FRIENDS,
+        assertFalse(standardCommand.equals(new MarkCommand(INDEX_FIRST_PERSON, VALID_TAGNAMES_SET_ASSIGNMENT,
                 TagStatus.COMPLETE_GOOD)));
     }
 
     @Test
     public void toStringMethod() {
         Index index = Index.fromOneBased(1);
-        MarkCommand markCommand = new MarkCommand(index, VALID_TAG_FRIENDS, TagStatus.COMPLETE_GOOD);
-        String expected = MarkCommand.class.getCanonicalName() + "{index=" + index + ", tagName="
-                + VALID_TAG_FRIENDS + ", tagStatus=" + TagStatus.COMPLETE_GOOD + "}";
+        MarkCommand markCommand = new MarkCommand(index, VALID_TAGNAMES_SET_ASSIGNMENT, TagStatus.COMPLETE_GOOD);
+        String expected = MarkCommand.class.getCanonicalName() + "{index=" + index + ", tagName(s)="
+                + VALID_TAGNAMES_SET_ASSIGNMENT + ", tagStatus=" + TagStatus.COMPLETE_GOOD + "}";
         assertEquals(expected, markCommand.toString());
     }
 

@@ -2,10 +2,10 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_TAGSTATUS_COMPLETE_GOOD;
+import static seedu.address.logic.commands.CommandTestUtil.TAG_ASS1_ASS2_TAGSTATUS_COMPLETE_GOOD;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_FRIEND_TAGSTATUS_COMPLETE_GOOD;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIENDS;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND_TAGSTATUS_COMPLETE_GOOD;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAGNAMES_SET_ASSIGNMENT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
@@ -62,9 +62,10 @@ class MarkCommandParserTest {
     @Test
     public void parse_validCommand_success() {
         Index targetIndex = INDEX_SECOND_PERSON;
-        String userInput = targetIndex.getOneBased() + VALID_TAG_FRIEND_TAGSTATUS_COMPLETE_GOOD;
+        String userInput = targetIndex.getOneBased() + TAG_ASS1_ASS2_TAGSTATUS_COMPLETE_GOOD;
 
-        MarkCommand expectedCommand = new MarkCommand(targetIndex, VALID_TAG_FRIENDS, TagStatus.COMPLETE_GOOD);
+        MarkCommand expectedCommand =
+                new MarkCommand(targetIndex, VALID_TAGNAMES_SET_ASSIGNMENT, TagStatus.COMPLETE_GOOD);
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }

@@ -34,23 +34,23 @@ public class MarkCommand extends Command {
             + "If the tag specified does not exist, a new tag with the tag name"
             + " and tag status would be created.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + PREFIX_TAG + " [TAG] " + PREFIX_TAGSTATUS + " [TAGSTATUS]\n"
+            + PREFIX_TAG + " TAG_NAME [OTHER_TAG_NAMES] " + PREFIX_TAGSTATUS + " TAG_STATUS\n"
             + "Example: " + SAMPLE_COMMAND;
 
     public static final String MESSAGE_MARK_PERSON_SUCCESS = "Updated Person: %1$s";
     private final Index index;
-    private final String tagName;
+    private final Set<String> tagNames;
     private final TagStatus tagStatus;
 
     /**
      * @param index of the person in the filtered person list to update tag status
-     * @param tagName name of the tag whose status is to be updated
+     * @param tagNames name of the tag whose status is to be updated
      * @param tagStatus the status to update the specified tag with
      */
-    public MarkCommand(Index index, String tagName, TagStatus tagStatus) {
-        requireAllNonNull(index, tagName, tagStatus);
+    public MarkCommand(Index index, Set<String> tagNames, TagStatus tagStatus) {
+        requireAllNonNull(index, tagNames, tagStatus);
         this.index = index;
-        this.tagName = tagName;
+        this.tagNames = tagNames;
         this.tagStatus = tagStatus;
     }
     @Override
@@ -67,8 +67,8 @@ public class MarkCommand extends Command {
         Set<Tag> currTags = new HashSet<>(personToEdit.getTags());
 
         // create a new person with the new tag, necessary as the person fields are currently final
-        Person editedPerson = createEditedPerson(personToEdit, Tag.updateTagsWithNewTag(currTags,
-                this.tagName, this.tagStatus));
+        Person editedPerson = createEditedPerson(personToEdit, Tag.updateTagsWithNewTags(currTags,
+                this.tagNames, this.tagStatus));
 
         // update the person list and make GUI show all existing person
         model.setPerson(personToEdit, editedPerson);
@@ -92,7 +92,7 @@ public class MarkCommand extends Command {
         // state check
         MarkCommand e = (MarkCommand) other;
         return index.equals(e.index)
-                && tagName.equals(e.tagName)
+                && tagNames.equals(e.tagNames)
                 && tagStatus.equals(e.tagStatus);
     }
 
@@ -108,7 +108,7 @@ public class MarkCommand extends Command {
     public String toString() {
         return new ToStringBuilder(this)
                 .add("index", index.toString())
-                .add("tagName", tagName)
+                .add("tagName(s)", tagNames)
                 .add("tagStatus", tagStatus)
                 .toString();
     }
