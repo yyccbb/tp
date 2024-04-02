@@ -66,7 +66,7 @@ public class MarkCommand extends Command {
         }
 
         // only tutorial tags with predefined tag names are allowed
-        if (Tag.getTagType(tagStatus) == TagType.TUTORIAL) {
+        if (Tag.getTagTypeWithTagStatus(tagStatus) == TagType.TUTORIAL) {
             TutorialTag tag = new TutorialTag(tagName, TagStatus.AVAILABLE);
             if (!model.hasTutorialTag(tag)) {
                 throw new CommandException(Messages.MESSAGE_INVALID_TUTORIAL_TAG_VALUE + tagName);

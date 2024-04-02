@@ -53,8 +53,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Replaces the contents of the tutorialTags list with {@code tutorialTags}.
-     * {@code tutorialTags} must not contain duplicate tutorialTags.
+     * Replaces the contents of the tutorial tags list with {@code tutorialTags}.
+     * {@code tutorialTags} must not contain duplicate tutorial tags.
      */
     public void setTutorialTags(List<TutorialTag> tutorialTags) {
         this.tutorialTags.setTutorialTags(tutorialTags);

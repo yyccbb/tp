@@ -14,11 +14,11 @@ import seedu.address.model.tag.TutorialTag;
 
 
 /**
- * A list of tutorialTags that enforces uniqueness between its elements and does not allow nulls.
- * A tutorialTag is considered unique by comparing using {@code TutorialTag#isSameTutorialTag(TutorialTag)}.
- * As such, adding and updating of tutorialTags uses TutorialTag#isSameTutorialTag(TutorialTag) for equality so as to
- * ensure that the tutorialTag being added or updated is unique in terms of identity in the UniqueTutorialTagList.
- * However, the removal of a tutorialTag uses TutorialTag#equals(Object) so as to ensure that the tutorialTag
+ * A list of tutorial tags that enforces uniqueness between its elements and does not allow nulls.
+ * A tutorial tag is considered unique by comparing using {@code TutorialTag#isSameTutorialTag(TutorialTag)}.
+ * As such, adding and updating of tutorial tags uses TutorialTag#isSameTutorialTag(TutorialTag) for equality so as to
+ * ensure that the tutorial tag being added or updated is unique in terms of identity in the UniqueTutorialTagList.
+ * However, the removal of a tutorial tag uses TutorialTag#equals(Object) so as to ensure that the tutorial tag
  * with exactly the same TagName will be removed.
  *
  * Supports a minimal set of list operations.
@@ -29,7 +29,7 @@ public class UniqueTutorialTagList implements Iterable<TutorialTag> {
             FXCollections.unmodifiableObservableList(internalList);
 
     /**
-     * Returns true if the list contains an equivalent TutorialTag as the given argument.
+     * Returns true if the list contains an equivalent tutorial tag as the given argument.
      */
     public boolean contains(TutorialTag toCheck) {
         requireNonNull(toCheck);
@@ -37,8 +37,8 @@ public class UniqueTutorialTagList implements Iterable<TutorialTag> {
     }
 
     /**
-     * Adds a TutorialTag to the list.
-     * The TutorialTag must not already exist in the list.
+     * Adds a tutorial tag to the list.
+     * The tutorial tag must not already exist in the list.
      */
     public void add(TutorialTag toAdd) {
         requireNonNull(toAdd);
@@ -49,8 +49,8 @@ public class UniqueTutorialTagList implements Iterable<TutorialTag> {
     }
 
     /**
-     * Removes the equivalent TutorialTag from the list.
-     * The TutorialTag must exist in the list.
+     * Removes the equivalent tutorial tag from the list.
+     * The tutorial tag must exist in the list.
      */
     public void remove(TutorialTag toRemove) {
         requireNonNull(toRemove);
@@ -66,7 +66,7 @@ public class UniqueTutorialTagList implements Iterable<TutorialTag> {
 
     /**
      * Replaces the contents of this list with {@code tutorialTags}.
-     * {@code tutorialTags} must not contain duplicate tutorialTags.
+     * {@code tutorialTags} must not contain duplicate tutorial tags.
      */
     public void setTutorialTags(List<TutorialTag> tutorialTags) {
         requireAllNonNull(tutorialTags);
@@ -114,7 +114,7 @@ public class UniqueTutorialTagList implements Iterable<TutorialTag> {
     }
 
     /**
-     * Returns true if {@code tutorialTags} contains only unique tutorialTags.
+     * Returns true if {@code tutorialTags} contains only unique tutorial tags.
      */
     private boolean tutorialTagsAreUnique(List<TutorialTag> tutorialTags) {
         for (int i = 0; i < tutorialTags.size() - 1; i++) {

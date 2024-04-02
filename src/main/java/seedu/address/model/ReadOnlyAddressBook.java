@@ -16,8 +16,8 @@ public interface ReadOnlyAddressBook {
     ObservableList<Person> getPersonList();
 
     /**
-     * Returns an unmodifiable view of the tutorialTag list.
-     * This list will not contain any duplicate tutorialTags.
+     * Returns an unmodifiable view of the tutorial tag list.
+     * This list will not contain any duplicate tutorial tags.
      */
     ObservableList<TutorialTag> getTutorialTagList();
 

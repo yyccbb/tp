@@ -15,8 +15,8 @@ import seedu.address.model.tag.TutorialTag;
 public class EditTutTagListCommand extends Command {
 
     public static final String COMMAND_WORD = "tuttag";
-    public static final String ADD_FLAG = "-a";
-    public static final String DELETE_FLAG = "-d";
+    public static final String ADD_FLAG = "add";
+    public static final String DELETE_FLAG = "del";
 
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates a TutorialTag to be used with the specified "
@@ -26,7 +26,7 @@ public class EditTutTagListCommand extends Command {
             + "Example: " + COMMAND_WORD + " " + ADD_FLAG + " " + PREFIX_TAG + " THU10\n";
 
     public static final String SAMPLE_COMMAND = COMMAND_WORD + " " + ADD_FLAG + " " + PREFIX_TAG + " WED10";
-    public static final String MESSAGE_SUCCESS = "New tutorialTag added: %1$s";
+    public static final String MESSAGE_SUCCESS = "New tutorial tag added: %1$s";
     public static final String MESSAGE_DUPLICATE_TUTORIALTAG = "This tutorialTag already exists in the address book";
     private final String tagName;
     private final boolean isAdding;
@@ -34,8 +34,8 @@ public class EditTutTagListCommand extends Command {
     /**
      * Creates a new EditTutTagListCommand.
      *
-     * @param tagName TagName of the TutorialTag to be added or deleted.
-     * @param isAdding whether the command is to add TutorialTag.
+     * @param tagName TagName of the tutorial tag to be added or deleted.
+     * @param isAdding whether the command is to add tutorial tag.
      */
     public EditTutTagListCommand(String tagName, boolean isAdding) {
         this.tagName = tagName;

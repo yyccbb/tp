@@ -22,7 +22,7 @@ public class Messages {
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
     public static final String MESSAGE_INVALID_TUTORIAL_TAG_VALUE =
-            "Specified TutorialTag tag name is not allowed: ";
+            "Specified tutorial tag name is not allowed: ";
 
     /**
      * Returns an error message indicating the duplicate prefixes.

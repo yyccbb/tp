@@ -32,7 +32,7 @@ public abstract class Tag {
         checkArgument(isValidTagName(tagName), MESSAGE_CONSTRAINTS);
         this.tagName = tagName;
         this.tagStatus = tagStatus;
-        this.tagType = getTagType(tagStatus);
+        this.tagType = getTagTypeWithTagStatus(tagStatus);
     }
 
     /**
@@ -49,7 +49,7 @@ public abstract class Tag {
         // by default
         requireNonNull(tagStatus);
         checkArgument(isValidTagName(tagName), MESSAGE_CONSTRAINTS);
-        TagType tagType = getTagType(tagStatus);
+        TagType tagType = getTagTypeWithTagStatus(tagStatus);
 
         switch (tagType) {
         case ASSIGNMENT:
@@ -71,7 +71,7 @@ public abstract class Tag {
         return tagType;
     }
 
-    public static TagType getTagType(TagStatus ts) {
+    public static TagType getTagTypeWithTagStatus(TagStatus ts) {
         switch (ts) {
         case COMPLETE_GOOD:
         case COMPLETE_BAD:
