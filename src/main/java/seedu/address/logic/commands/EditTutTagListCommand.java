@@ -25,6 +25,8 @@ public class EditTutTagListCommand extends Command {
             + PREFIX_TAG + " [TAGNAME]\n"
             + "Example: " + COMMAND_WORD + " " + ADD_FLAG + " " + PREFIX_TAG + " THU10\n";
 
+    public static final String SAMPLE_COMMAND = COMMAND_WORD + " " + ADD_FLAG + " " + PREFIX_TAG + " WED10";
+
     private final String tagName;
     private final boolean isAdding;
 
