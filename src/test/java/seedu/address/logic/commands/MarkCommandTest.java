@@ -128,4 +128,15 @@ public class MarkCommandTest {
         assertEquals(expected, markCommand.toString());
     }
 
+    @Test
+    public void execute_nonExistingTutorialTagMarking_failure() {
+        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+
+        MarkCommand markCommand = new MarkCommand(INDEX_FIRST_PERSON, VALID_TAG_FRIENDS,
+                TagStatus.AVAILABLE);
+
+        String expectedMessage = Messages.MESSAGE_INVALID_TUTORIAL_TAG_VALUE + VALID_TAG_FRIENDS;
+        assertCommandFailure(markCommand, model, expectedMessage);
+    }
+
 }

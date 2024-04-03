@@ -83,6 +83,8 @@ public class MainApp extends Application {
                 logger.info("Creating a new data file " + storage.getAddressBookFilePath()
                         + " populated with a sample AddressBook.");
             }
+            // need to check the initial data against the tutorial tag list to remove the invalid TutoiralTags
+            // (TutorialTags that are not in the UniqueTutorialTagList yet have been attached to contact entries)
             initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
         } catch (DataLoadingException e) {
             logger.warning("Data file at " + storage.getAddressBookFilePath() + " could not be loaded."

@@ -57,7 +57,8 @@ public class CommandTestUtil {
 
     public static final String VALID_TAGSTATUS_COMPLETE_GOOD = "cg";
     public static final String VALID_TAGSTATUS_COMPLETE_BAD = "cb";
-
+    public static final String INVALID_EDIT_TUTORIAL_TAG_FLAG = "out";
+    public static final String VALID_EDIT_TUTORIAL_TAG_FLAG = "add";
     public static final String TYPE_DESC_AMY = " " + TYPE_STU + " ";
     public static final String TYPE_DESC_BOB = " " + TYPE_TA + " ";
     public static final String TYPE_DESC_CARL = " " + TYPE_STU + " ";

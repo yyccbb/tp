@@ -17,11 +17,11 @@ public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose contact details contain "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Filters all persons whose contact details contain "
             + "the specified keywords (case-insensitive) under the specified flag and displays them as a list with "
             + "index numbers.\n"
-            + "Parameters: [FLAG] [KEYWORD] ...\n"
-            + "Example: " + COMMAND_WORD + " /n grace /p 900";
+            + "Parameters: [stu/ta] [/n NAME] [/i ID] [/p PHONE] [/e EMAIL]\n"
+            + "Example: " + COMMAND_WORD + " stu /n grace /p 900";
 
     private final List<FieldContainsKeywordsPredicate> predicates;
 
