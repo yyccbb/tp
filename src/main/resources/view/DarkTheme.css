@@ -114,11 +114,12 @@
     -fx-background-radius: 15;
 }
 
+/*
 .list-cell:filled:selected #cardPane {
     -fx-border-color: black;
     -fx-border-width: 2;
     -fx-border-radius: 15;
-}
+}*/
 
 .list-cell .label {
     -fx-text-fill: white;
