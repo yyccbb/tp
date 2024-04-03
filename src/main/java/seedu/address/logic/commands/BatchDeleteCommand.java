@@ -1,18 +1,27 @@
 package seedu.address.logic.commands;
 
-import seedu.address.commons.core.index.Index;
+import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+
+import java.util.Arrays;
+import java.util.List;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.FieldContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonType;
+import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.TutorialTag;
 
-import java.util.List;
-
-import static java.util.Objects.requireNonNull;
-
+/**
+ * Batch deletes contacts from address book.
+ */
 public class BatchDeleteCommand extends Command {
 
     public static final String COMMAND_WORD = "batchdelete";
@@ -22,7 +31,8 @@ public class BatchDeleteCommand extends Command {
             + "Parameters: TYPE /t TUTORIALTAG \n"
             + "Example: " + COMMAND_WORD + " stu /t TUE08";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s"; // to change
+    public static final String MESSAGE_BATCH_DELETE_PERSON_SUCCESS = "Batch delete %1$s"; // to change
+    public static final String MESSAGE_BATCH_DELETE_SUFFIX = "from %1$s";
 
     private final PersonType personType;
     private final TutorialTag tutorialTag;
@@ -30,34 +40,77 @@ public class BatchDeleteCommand extends Command {
     /**
      * Constructor for the batch delete command.
      * @param personType Person type specified for the batch delete.
-     * @param tutorialTag Tutorial tag specified for the batch delete.
+     * @param tag Tag specified for the batch delete.
      */
-    public BatchDeleteCommand(PersonType personType, TutorialTag tutorialTag) {
+    public BatchDeleteCommand(PersonType personType, Tag tag) throws CommandException {
         this.needsWarningPopup = true;
         this.personType = personType;
-        this.tutorialTag = tutorialTag;
+        if (tag != null) {
+            System.out.println(personType);
+            System.out.println(tag);
+            if (!tag.isTutorial()) {
+                throw new CommandException(Messages.MESSAGE_BATCH_DELETE_INVALID_TAG);
+            } else {
+                this.tutorialTag = (TutorialTag) tag;
+            }
+        } else {
+            this.tutorialTag = null;
+        }
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
 
         if (personType != PersonType.STU && personType != PersonType.TA) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_TYPE);
         } else if (personType == PersonType.TA && tutorialTag != null) {
-            throw new CommandException(Messages.MESSAGE_BATCH_DELETE_TA_INVALID_TUTORIALTAG);
-        } else if (personType == PersonType.STU && tutorialTag != null) {
-            throw new CommandException(Messages.MESSAGE_BATCH_DELETE_TA_INVALID_TUTORIALTAG);
+            throw new CommandException(Messages.MESSAGE_BATCH_DELETE_TA_TUTORIALTAG);
+        } else if (personType == PersonType.STU && !model.hasTutorialTag(tutorialTag)) {
+            throw new CommandException(Messages.MESSAGE_INVALID_TUTORIALTAG);
         }
 
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-        }
+        if (personType == PersonType.STU) {
+            String[] tutorialTagKeywordArr = {tutorialTag.getTagName()};
+            List<String> tutorialTagKeywordList = Arrays.asList(tutorialTagKeywordArr);
 
-        Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
-        model.deletePerson(personToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
+            String[] personTypeArr = {personType.toString()};
+            List<String> personTypeList = Arrays.asList(personTypeArr);
+
+            FieldContainsKeywordsPredicate[] predicateArr = {new FieldContainsKeywordsPredicate(personTypeList),
+                new FieldContainsKeywordsPredicate(PREFIX_TAG, tutorialTagKeywordList)};
+            List<FieldContainsKeywordsPredicate> predicateList = Arrays.asList(predicateArr);
+
+            FindCommand findCommand = new FindCommand(predicateList);
+            findCommand.execute(model);
+            for (Person person : model.getFilteredPersonList()) {
+                model.deletePerson(person);
+            }
+            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+
+            return new CommandResult(String.format(MESSAGE_BATCH_DELETE_PERSON_SUCCESS + MESSAGE_BATCH_DELETE_SUFFIX,
+                    "students", tutorialTag));
+        } else {
+            String[] personTypeArr = {personType.toString()};
+            List<String> personTypeList = Arrays.asList(personTypeArr);
+
+            FieldContainsKeywordsPredicate[] predicateArr = {new FieldContainsKeywordsPredicate(personTypeList)};
+            List<FieldContainsKeywordsPredicate> predicateList = Arrays.asList(predicateArr);
+
+            FindCommand findCommand = new FindCommand(predicateList);
+            findCommand.execute(model);
+            ObservableList<Person> matchingList = FXCollections.observableArrayList(model.getFilteredPersonList());
+            System.out.println(matchingList);
+            for (Person person : matchingList) {
+                model.deletePerson(person);
+                System.out.println("Deleted");
+                System.out.println(person);
+            }
+            System.out.println("HII");
+            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+
+            return new CommandResult(String.format(MESSAGE_BATCH_DELETE_PERSON_SUCCESS, "TAs"));
+        }
     }
 
     @Override

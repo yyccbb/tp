@@ -24,7 +24,10 @@ public class Messages {
     public static final String MESSAGE_INVALID_TUTORIAL_TAG_VALUE =
             "Specified tutorial tag name is not allowed: ";
 
-    public static final String MESSAGE_BATCH_DELETE_TA_INVALID_TUTORIALTAG = "No tutorial tag allowed for batchdelete TA.";
+    public static final String MESSAGE_BATCH_DELETE_TA_TUTORIALTAG = "No tutorial tag allowed for batchdelete TA.";
+
+    public static final String MESSAGE_INVALID_TUTORIALTAG = "Specified tutorial tag does not exist.";
+    public static final String MESSAGE_BATCH_DELETE_INVALID_TAG = "Specified tag is not a tutorial tag.";
 
 
     /**
