@@ -170,7 +170,7 @@ public class ParserUtil {
     public static Set<String> parseTagNamesString(String tagNames) {
         requireNonNull(tagNames);
         final Set<String> tagNamesSet = new HashSet<>();
-        tagNamesSet.addAll(Arrays.asList(tagNames.split("\\s")));
+        tagNamesSet.addAll(Arrays.asList(tagNames.split("\\s+")));
         return tagNamesSet;
     }
 

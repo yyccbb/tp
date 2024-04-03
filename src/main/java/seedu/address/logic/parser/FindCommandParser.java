@@ -43,7 +43,7 @@ public class FindCommandParser implements Parser<FindCommand> {
 
         PersonType type = ParserUtil.parseFindPersonType(argMultimap.getPreamble());
         if (type != null) {
-            List<String> separated = Arrays.asList(type.toString().split("//s+"));
+            List<String> separated = Arrays.asList(type.toString().split("\\s+"));
             predicates.add(new FieldContainsKeywordsPredicate(separated));
         }
 
