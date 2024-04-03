@@ -19,6 +19,7 @@ import java.util.List;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.TagStatus;
 
 /**
  * A utility class containing a list of {@code Person} objects to be used in tests.
@@ -53,6 +54,14 @@ public class TypicalPersons {
             .build();
     public static final Person IDA = new PersonBuilder().withType("ta").withName("Ida Mueller")
             .withId("P9876543N").withPhone("8482131").withEmail("hans@example.com")
+            .build();
+
+    public static final Person JANE = new PersonBuilder().withType("stu").withName("Jane Doe").withId("A0111111B")
+            .withPhone("98765432").withEmail("jane@example.com").addTag("W09", TagStatus.getTagStatus("as"))
+            .build();
+
+    public static final Person JOHN = new PersonBuilder().withType("ta").withName("John Doe").withId("A0111111D")
+            .withPhone("98765432").withEmail("john@example.com").addTag("W09", TagStatus.getTagStatus("av"))
             .build();
 
     // Manually added - Person's details found in {@code CommandTestUtil}

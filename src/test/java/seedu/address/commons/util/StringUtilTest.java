@@ -3,13 +3,14 @@ package seedu.address.commons.util;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalTutorialTag.WED10;
+import static seedu.address.testutil.TypicalModel.MODEL;
 
 import java.io.FileNotFoundException;
 
 import org.junit.jupiter.api.Test;
 
 public class StringUtilTest {
-
     //---------------- Tests for isNonZeroUnsignedInteger --------------------------------------
 
     @Test
@@ -139,6 +140,14 @@ public class StringUtilTest {
     @Test
     public void getDetails_nullGiven_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> StringUtil.getDetails(null));
+    }
+
+
+    //---------------- Tests for tagContainsWordIgnoreCase --------------------------------------
+    @Test
+    public void testTagContainsWordIgnoreCase_RandomWord() {
+        StringUtil testStringUtil = new StringUtil(MODEL);
+        assertFalse(testStringUtil.tagContainsWordIgnoreCase(WED10, "word"));
     }
 
 }

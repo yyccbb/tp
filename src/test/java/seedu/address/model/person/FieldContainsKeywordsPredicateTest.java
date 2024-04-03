@@ -78,6 +78,21 @@ public class FieldContainsKeywordsPredicateTest {
     }
 
     @Test
+    public void test_tagDoesNotContainKeywords_returnsFalse() {
+        // Zero keywords
+        FieldContainsKeywordsPredicate predicate = new FieldContainsKeywordsPredicate(Collections.emptyList());
+        assertFalse(predicate.test(new PersonBuilder().withTags("tag1").build()));
+
+        // Non-matching keyword
+        predicate = new FieldContainsKeywordsPredicate(Arrays.asList("tag2"));
+        assertFalse(predicate.test(new PersonBuilder().withTags("tag1").build()));
+
+        // Keywords match phone, email and address, but does not match name
+        predicate = new FieldContainsKeywordsPredicate(Arrays.asList("tag1", "tag2"));
+        assertFalse(predicate.test(new PersonBuilder().withTags("tag1").build()));
+    }
+
+    @Test
     public void toStringMethod() {
         List<String> keywords = List.of("keyword1", "keyword2");
         FieldContainsKeywordsPredicate predicate = new FieldContainsKeywordsPredicate(PREFIX_NAME, keywords);
