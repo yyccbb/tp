@@ -2,11 +2,13 @@ package seedu.address.model.person;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalTutorialTag.WED10;
 
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -109,5 +111,42 @@ class UniqueTutorialTagListTest {
     public void toStringMethod() {
         assertEquals(uniqueTutorialTagList.asUnmodifiableObservableList().toString(),
                 uniqueTutorialTagList.toString());
+    }
+
+    @Test
+    public void return_iterator_success() {
+        assert (uniqueTutorialTagList.iterator() instanceof Iterator);
+    }
+
+    @Test
+    public void equals_selfUniqueTutoiralTagList() {
+        assert uniqueTutorialTagList.equals(uniqueTutorialTagList);
+    }
+
+    @Test
+    public void equals_nullUniqueTutoiralTagList_fail() {
+        assertFalse(uniqueTutorialTagList.equals(null));
+    }
+
+    @Test
+    public void equals_nonUniqueTutoiralTagListObject_fail() {
+        assertFalse(uniqueTutorialTagList.equals(new Object()));
+    }
+
+    @Test
+    public void sameHashCode_forSameUniqueTutorialTagList() {
+        UniqueTutorialTagList list1 = new UniqueTutorialTagList();
+        UniqueTutorialTagList list2 = new UniqueTutorialTagList();
+        list1.add(WED10);
+        list2.add(WED10);
+        assertEquals(list1.hashCode(), list2.hashCode());
+    }
+
+    @Test
+    public void differentHashCode_forDifferentUniqueTutorialTagList() {
+        UniqueTutorialTagList list1 = new UniqueTutorialTagList();
+        UniqueTutorialTagList list2 = new UniqueTutorialTagList();
+        list1.add(WED10);
+        assertNotEquals(list1.hashCode(), list2.hashCode());
     }
 }

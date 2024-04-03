@@ -9,10 +9,12 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIENDS;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND_DESC;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.EditTutTagListCommand;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.Tag;
 
 class EditTutTagListCommandParserTest {
@@ -20,6 +22,12 @@ class EditTutTagListCommandParserTest {
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditTutTagListCommand.MESSAGE_USAGE);
 
     private EditTutTagListCommandParser parser = new EditTutTagListCommandParser();
+
+    @Test
+    public void parse_emptyArguments_failure() {
+        String emptyArgument = "";
+        assertThrows(ParseException.class, MESSAGE_INVALID_FORMAT, () -> parser.parse(emptyArgument));
+    }
 
     @Test
     public void parse_missingParts_failure() {
