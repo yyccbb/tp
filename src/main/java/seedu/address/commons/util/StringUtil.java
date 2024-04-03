@@ -1,6 +1,9 @@
 package seedu.address.commons.util;
 
+import javafx.collections.ObservableList;
+import seedu.address.model.Model;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.TutorialTag;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
@@ -14,6 +17,14 @@ import java.util.Arrays;
  */
 public class StringUtil {
 
+    private Model model;
+
+    private static ObservableList<TutorialTag> tutorials;
+    public StringUtil(Model model) {
+        this.model = model;
+        this.tutorials = model.getTutorialTagList();
+    }
+
     /**
      * Returns true if the {@code sentence} contains the {@code word}.
      *   Ignores case, and performs subword matching.
@@ -26,8 +37,6 @@ public class StringUtil {
      * @param sentence cannot be null
      * @param word cannot be null, cannot be empty
      */
-
-    public static final String[] days = {"MON", "TUES08", "WED", "THU09", "FRI"};
     public static boolean containsSubwordIgnoreCase(String sentence, String word) {
         requireNonNull(sentence);
         requireNonNull(word);
@@ -58,9 +67,9 @@ public class StringUtil {
         String preppedWord = word.trim();
         checkArgument(!preppedWord.isEmpty(), "Word parameter cannot be empty");
 
-        for (String day : days) {
-            day = day.toLowerCase();
-            if (day.contains(preppedWord)) {
+        for (TutorialTag tutorial : tutorials) {
+            String tutorialGroup = tutorial.getTagName().toLowerCase();
+            if (tutorialGroup.contains(preppedWord)) {
                 return tagName.contains(preppedWord) && tag.isTutorial();
             }
         }

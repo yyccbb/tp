@@ -15,6 +15,6 @@ public class TutorialTag extends Tag {
     }
 
     public boolean isSameTutorialTag(TutorialTag tutorialTag) {
-        return this.tagName.equals(tutorialTag.tagName);
+        return this.getTagName().equals(tutorialTag.getTagName());
     }
 }

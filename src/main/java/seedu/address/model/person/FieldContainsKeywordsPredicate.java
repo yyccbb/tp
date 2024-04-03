@@ -6,7 +6,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -20,8 +19,6 @@ import seedu.address.logic.parser.Prefix;
 public class FieldContainsKeywordsPredicate implements Predicate<Person> {
     private Prefix prefix;
     private final List<String> keywords;
-
-    private final List<String> days = Arrays.asList("MON", "TUE", "WED", "THU", "FRI");
 
     /**
      * Constructor for predicate with a prefix
