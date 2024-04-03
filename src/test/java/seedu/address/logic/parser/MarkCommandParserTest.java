@@ -9,6 +9,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAGNAMES_SET_AS
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAGNAMES_SET_ASS3;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.testutil.TypicalIndexes.INDEX_1_2_3_SET;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 
 import java.util.Arrays;
@@ -91,7 +92,29 @@ class MarkCommandParserTest {
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
-//    @Test
-//    public void parse_multipleIndices_success
+    @Test
+    public void parse_multipleIndices_success() throws ParseException {
+        String targetIndexString = "1 2 3";
+        Set<Index> targetIndexSet = INDEX_1_2_3_SET;
+
+        // one tag name
+        String userInput = targetIndexString + TAG_ASS3_TAGSTATUS_COMPLETE_BAD;
+        MarkCommand expectedCommand =
+                new MarkCommand(targetIndexSet, VALID_TAGNAMES_SET_ASS3, TagStatus.COMPLETE_BAD);
+        System.out.println(expectedCommand.equals(parser.parse(userInput)));
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        // multiple tag names
+        userInput = targetIndexString + TAG_ASS1_ASS2_TAGSTATUS_COMPLETE_GOOD;
+        expectedCommand =
+                new MarkCommand(targetIndexSet, VALID_TAGNAMES_SET_ASS1_ASS2, TagStatus.COMPLETE_GOOD);
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        // multiple taq names separated by multiple whitespaces
+        userInput = targetIndexString + TAG_ASS1_MULTIPLE_WHITESPACES_ASS2_TAGSTATUS_COMPLETE_GOOD;
+        expectedCommand =
+                new MarkCommand(targetIndexSet, VALID_TAGNAMES_SET_ASS1_ASS2, TagStatus.COMPLETE_GOOD);
+        assertParseSuccess(parser, userInput, expectedCommand);
+    }
 
 }
