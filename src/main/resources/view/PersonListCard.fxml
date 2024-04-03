@@ -17,7 +17,7 @@
       <ColumnConstraints hgrow="NEVER"/>
       <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150" />
     </columnConstraints>
-    <VBox alignment="TOP_CENTER" minHeight="105" GridPane.columnIndex="0">
+    <VBox alignment="TOP_CENTER" minHeight="105" prefWidth="50" GridPane.columnIndex="0">
       <padding>
         <Insets top="10" right="15" bottom="5" left="15" />
       </padding>
