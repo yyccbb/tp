@@ -8,7 +8,10 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 
+/**
+ * A utility class containing a {@code Model} object to be used in tests.
+ */
 public class TypicalModel {
-    private static final AddressBook testAb = new AddressBookBuilder().withPerson(JOHN).withPerson(JANE).build();
-    public static Model MODEL = new ModelManager(testAb, new UserPrefs());
+    public static final AddressBook AB = new AddressBookBuilder().withPerson(JOHN).withPerson(JANE).build();
+    public static final Model MODEL = new ModelManager(AB, new UserPrefs());
 }

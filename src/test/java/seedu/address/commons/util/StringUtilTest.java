@@ -3,8 +3,8 @@ package seedu.address.commons.util;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalTutorialTag.WED10;
 import static seedu.address.testutil.TypicalModel.MODEL;
+import static seedu.address.testutil.TypicalTutorialTag.WED10;
 
 import java.io.FileNotFoundException;
 
@@ -145,7 +145,7 @@ public class StringUtilTest {
 
     //---------------- Tests for tagContainsWordIgnoreCase --------------------------------------
     @Test
-    public void testTagContainsWordIgnoreCase_RandomWord() {
+    public void testTagContainsWordIgnoreCase_randomWord() {
         StringUtil testStringUtil = new StringUtil(MODEL);
         assertFalse(testStringUtil.tagContainsWordIgnoreCase(WED10, "word"));
     }
