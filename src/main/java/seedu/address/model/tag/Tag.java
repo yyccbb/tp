@@ -173,4 +173,5 @@ public abstract class Tag {
     public boolean isTutorial() {
         return tagType == TagType.TUTORIAL;
     }
+
 }
