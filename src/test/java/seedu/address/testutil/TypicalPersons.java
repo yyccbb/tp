@@ -57,8 +57,8 @@ public class TypicalPersons {
             .build();
 
     public static final Person JANE = new PersonBuilder().withType("stu").withName("Jane Doe").withId("A0111111B")
-            .withPhone("98765432").withEmail("jane@example.com").addTag("W09", TagStatus.getTagStatus("as"))
-            .build();
+            .withPhone("98765432").withEmail("jane@example.com").addTag("W10", TagStatus.getTagStatus("as"))
+            .addTag("Assignment1", TagStatus.getTagStatus("cg")).build();
 
     public static final Person JOHN = new PersonBuilder().withType("ta").withName("John Doe").withId("A0111111D")
             .withPhone("98765432").withEmail("john@example.com").addTag("W09", TagStatus.getTagStatus("av"))
