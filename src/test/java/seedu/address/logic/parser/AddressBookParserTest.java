@@ -20,6 +20,7 @@ import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeletetagCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.EditTutTagListCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
@@ -101,6 +102,11 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_deletetag() throws Exception {
         assertTrue(parser.parseCommand(DeletetagCommand.SAMPLE_COMMAND) instanceof DeletetagCommand);
+    }
+
+    @Test
+    public void parseCommand_editTutTagList() throws Exception {
+        assertTrue(parser.parseCommand(EditTutTagListCommand.SAMPLE_COMMAND) instanceof EditTutTagListCommand);
     }
 
     @Test
