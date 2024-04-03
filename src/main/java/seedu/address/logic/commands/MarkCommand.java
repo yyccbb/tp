@@ -72,14 +72,6 @@ public class MarkCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        // only tutorial tags with predefined tag names are allowed
-        if (Tag.getTagTypeWithTagStatus(tagStatus) == TagType.TUTORIAL) {
-            TutorialTag tag = new TutorialTag(tagName, TagStatus.AVAILABLE);
-            if (!model.hasTutorialTag(tag)) {
-                throw new CommandException(Messages.MESSAGE_INVALID_TUTORIAL_TAG_VALUE + tagName);
-            }
-        }
-
         Person personToEdit = lastShownList.get(index.getZeroBased());
         Set<Tag> currTags = new HashSet<>(personToEdit.getTags());
 
@@ -97,7 +89,17 @@ public class MarkCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        // need not check for duplicates because a Set is used
+        // need not check for duplicate indices because a Set is used
+
+        // only tutorial tags with predefined tag names are allowed
+        if (Tag.getTagTypeWithTagStatus(tagStatus) == TagType.TUTORIAL) {
+            for (String tagName: tagNames) {
+                TutorialTag tag = new TutorialTag(tagName, TagStatus.AVAILABLE);
+                if (!model.hasTutorialTag(tag)) {
+                    throw new CommandException(Messages.MESSAGE_INVALID_TUTORIAL_TAG_VALUE + tagName);
+                }
+            }
+        }
 
         StringBuilder resultStringBuilder;
         try {

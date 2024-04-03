@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAGNAMES_SET_ASS1_ASS2;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAGNAMES_SET_ASS3;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_ASSIGNMENT3;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
@@ -132,10 +133,10 @@ public class MarkCommandTest {
     public void execute_nonExistingTutorialTagMarking_failure() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
-        MarkCommand markCommand = new MarkCommand(INDEX_FIRST_PERSON, VALID_TAG_FRIENDS,
+        MarkCommand markCommand = new MarkCommand(INDEX_1_SET, VALID_TAGNAMES_SET_ASS3,
                 TagStatus.AVAILABLE);
 
-        String expectedMessage = Messages.MESSAGE_INVALID_TUTORIAL_TAG_VALUE + VALID_TAG_FRIENDS;
+        String expectedMessage = Messages.MESSAGE_INVALID_TUTORIAL_TAG_VALUE + VALID_TAG_ASSIGNMENT3;
         assertCommandFailure(markCommand, model, expectedMessage);
     }
 
