@@ -1,10 +1,5 @@
 package seedu.address.commons.util;
 
-import javafx.collections.ObservableList;
-import seedu.address.model.Model;
-import seedu.address.model.tag.Tag;
-import seedu.address.model.tag.TutorialTag;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
@@ -12,14 +7,23 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.Arrays;
 
+import javafx.collections.ObservableList;
+import seedu.address.model.Model;
+import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.TutorialTag;
+
 /**
  * Helper functions for handling strings.
  */
 public class StringUtil {
 
+    private static ObservableList<TutorialTag> tutorials;
     private Model model;
 
-    private static ObservableList<TutorialTag> tutorials;
+
+    /**
+     * Creates a StringUtil object with the given model.
+     */
     public StringUtil(Model model) {
         this.model = model;
         this.tutorials = model.getTutorialTagList();
