@@ -22,6 +22,9 @@ public class Messages {
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
 
+    public static final String MESSAGE_BATCH_DELETE_TA_INVALID_TUTORIALTAG = "No tutorial tag allowed for batchdelete TA.";
+
+
     /**
      * Returns an error message indicating the duplicate prefixes.
      */
