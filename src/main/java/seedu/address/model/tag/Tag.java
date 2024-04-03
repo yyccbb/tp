@@ -38,7 +38,7 @@ public abstract class Tag {
     /**
      * Creates a new Tag with specified tagName and tagStatus.
      *
-     * @param tagName Name of the tag to be created.
+     * @param tagName   Name of the tag to be created.
      * @param tagStatus Status of the tag.
      * @return A new tag of specific type corresponding to the TagStatus input.
      */
@@ -133,8 +133,8 @@ public abstract class Tag {
     }
 
     /**
-     * @param currTags current tag set to be updated.
-     * @param tagName name of the new tag.
+     * @param currTags  current tag set to be updated.
+     * @param tagName   name of the new tag.
      * @param tagStatus tagStatus of the new tag.
      * @return
      */
@@ -152,7 +152,7 @@ public abstract class Tag {
 
     /**
      * @param currTags current tag set to be updated.
-     * @param tagName name of the new tag.
+     * @param tagName  name of the new tag.
      * @return
      */
     public static Set<Tag> deleteTagFromTagSet(Set<Tag> currTags, String tagName) {
