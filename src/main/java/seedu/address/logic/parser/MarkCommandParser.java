@@ -28,9 +28,9 @@ public class MarkCommandParser implements Parser<MarkCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_TAG, PREFIX_TAGSTATUS);
 
-        Index index;
+        Set<Index> indices;
         try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
+            indices = ParserUtil.parseIndices(argMultimap.getPreamble());
         } catch (IllegalValueException ive) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkCommand.MESSAGE_USAGE), ive);
         }
@@ -54,7 +54,7 @@ public class MarkCommandParser implements Parser<MarkCommand> {
         try {
             TagStatus tagStatus = TagStatus.getTagStatus(statusIdentifier);
             tagNames.forEach(Tag::isTagNameValid);
-            return new MarkCommand(index, tagNames, tagStatus);
+            return new MarkCommand(indices, tagNames, tagStatus);
         } catch (IllegalArgumentException e) {
             throw new ParseException(e.getMessage());
         }

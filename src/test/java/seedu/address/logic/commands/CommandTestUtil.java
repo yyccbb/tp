@@ -93,9 +93,9 @@ public class CommandTestUtil {
     public static final String TAG_ASS3_TAGSTATUS_COMPLETE_BAD = TAG_DESC_ASS3 + TAGSTATUS_DESC_COMPLETE_BAD;
     public static final String TAG_ASS1_MULTIPLE_WHITESPACES_ASS2_TAGSTATUS_COMPLETE_GOOD =
             TAG_DESC_ASS1_MULTIPLE_WHITESPACES_ASS2 + TAGSTATUS_DESC_COMPLETE_GOOD;
-    public static final Set<String> VALID_TAGNAMES_SET_ASS1_ASS2 = new HashSet<>(Arrays.asList(VALID_TAG_ASSIGNMENT1,
+    public static final Set<String> VALID_TAGNAMES_SET_ASS1_ASS2 = new HashSet<>(List.of(VALID_TAG_ASSIGNMENT1,
             VALID_TAG_ASSIGNMENT2));
-    public static final Set<String> VALID_TAGNAMES_SET_ASS3 = new HashSet<>(Arrays.asList(
+    public static final Set<String> VALID_TAGNAMES_SET_ASS3 = new HashSet<>(List.of(
             VALID_TAG_ASSIGNMENT3));
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + " " + "James&"; // '&' not allowed in names
