@@ -195,8 +195,11 @@ public class MainWindow extends UiPart<Stage> {
                 if (warningWindow.isOkClicked()) {
                     return unsafeExecuteCommand(command);
                 } else {
-                    return new CommandResult("Execution of " + commandText + " aborted", false,
-                            false);
+                    CommandResult commandResult = new CommandResult("Execution of " + commandText
+                            + " aborted", false, false);
+                    logger.info("Result: " + commandResult.getFeedbackToUser());
+                    resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+                    return commandResult;
                 }
             } else {
                 return unsafeExecuteCommand(command);

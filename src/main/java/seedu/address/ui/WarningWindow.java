@@ -51,30 +51,6 @@ public class WarningWindow extends UiPart<Stage> {
     }
 
     /**
-     * Shows the warning window.
-     * @throws IllegalStateException
-     *     <ul>
-     *         <li>
-     *             if this method is called on a thread other than the JavaFX Application Thread.
-     *         </li>
-     *         <li>
-     *             if this method is called during animation or layout processing.
-     *         </li>
-     *         <li>
-     *             if this method is called on the primary stage.
-     *         </li>
-     *         <li>
-     *             if {@code dialogStage} is already showing.
-     *         </li>
-     *     </ul>
-     */
-    public void show() {
-        logger.fine("Showing warning page about the application.");
-        getRoot().show();
-        getRoot().centerOnScreen();
-    }
-
-    /**
      * Shows warning page and waits for user action.
      */
     public void showAndWait() {

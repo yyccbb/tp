@@ -34,6 +34,15 @@ public class AddCommandTest {
     }
 
     @Test
+    public void execute_getNeedsWarningPopup_returnsFalse() {
+        Person validPerson = new PersonBuilder().build();
+
+        AddCommand addCommand = new AddCommand(validPerson);
+
+        assertFalse(addCommand.getNeedsWarningPopup());
+    }
+
+    @Test
     public void execute_personAcceptedByModel_addSuccessful() throws Exception {
         ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
         Person validPerson = new PersonBuilder().build();

@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
@@ -11,6 +12,14 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 
 public class ClearCommandTest {
+
+    @Test
+    public void execute_getNeedsWarningPopup_returnsTrue() {
+
+        ClearCommand clearCommand = new ClearCommand();
+
+        assertTrue(clearCommand.getNeedsWarningPopup());
+    }
 
     @Test
     public void execute_emptyAddressBook_success() {
