@@ -18,6 +18,8 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.TagStatus;
+import seedu.address.model.tag.TagType;
+import seedu.address.model.tag.TutorialTag;
 
 /**
  * Changes the remark of an existing person in the address book.
@@ -61,6 +63,14 @@ public class MarkCommand extends Command {
         // check whether index specified is within valid range
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        }
+
+        // only tutorial tags with predefined tag names are allowed
+        if (Tag.getTagTypeWithTagStatus(tagStatus) == TagType.TUTORIAL) {
+            TutorialTag tag = new TutorialTag(tagName, TagStatus.AVAILABLE);
+            if (!model.hasTutorialTag(tag)) {
+                throw new CommandException(Messages.MESSAGE_INVALID_TUTORIAL_TAG_VALUE + tagName);
+            }
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
