@@ -173,8 +173,10 @@ public abstract class Tag {
     public boolean isTutorial() {
         return tagType == TagType.TUTORIAL;
     }
-
-    public boolean isAssigned() { return isTutorial() && tagStatus == TagStatus.ASSIGNED; }
-
-    public boolean isAvailable() { return isTutorial() && tagStatus == TagStatus.AVAILABLE; }
+    public boolean isAssigned() {
+        return isTutorial() && (tagStatus == TagStatus.ASSIGNED);
+    }
+    public boolean isAvailable() {
+        return isTutorial() && (tagStatus == TagStatus.AVAILABLE);
+    }
 }
