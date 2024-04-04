@@ -96,7 +96,7 @@ Examples:
 
 ### Listing all persons : `list`
 
-Shows a list of all persons in the address book.
+Shows a list of all persons in TrAcker.
 
 Format: `list`
 
@@ -258,6 +258,12 @@ Format: `tuttag del /t TAG`
 Examples:
 
 * `tuttag del /t WED09` deletes WED09 as a valid Tutorial tag.
+
+### Listing All Tutorials: `tuttag list`
+
+Lists all Tutorial tags in TrAcker.
+
+Format: `tuttag list`
 
 ### Deleting a tag: `deletetag`
 
