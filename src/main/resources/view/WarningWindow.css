@@ -6,11 +6,19 @@
     -fx-background-color: #e0e0e0;
 }
 
-#okButton, #cancelButton:hover {
+#okButton:hover {
     -fx-background-color: grey;
 }
 
-#okButton, #cancelButton:armed {
+#cancelButton:hover {
+    -fx-background-color: grey;
+}
+
+#okButton:armed {
+    -fx-background-color: grey;
+}
+
+#cancelButton:armed {
     -fx-background-color: grey;
 }
 
