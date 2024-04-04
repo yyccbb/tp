@@ -8,4 +8,6 @@ import seedu.address.model.tag.TutorialTag;
  */
 public class TypicalTutorialTag {
     public static final TutorialTag WED10 = new TutorialTag("WED10", TagStatus.AVAILABLE);
+
+    public static final TutorialTag THU10 = new TutorialTag("THU10", TagStatus.ASSIGNED);
 }

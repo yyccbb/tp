@@ -10,14 +10,12 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
 
 import seedu.address.commons.util.StringListUtil;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.FieldContainsKeywordsPredicate;
 import seedu.address.model.person.PersonType;
-import seedu.address.model.tag.Tag;
 
 /**
  * Parses input arguments and creates a new FindCommand object
@@ -47,7 +45,7 @@ public class FindCommandParser implements Parser<FindCommand> {
             predicates.add(new FieldContainsKeywordsPredicate(separated));
         }
 
-        List<Prefix> allPrefixes = Arrays.asList(PREFIX_NAME, PREFIX_ID, PREFIX_PHONE, PREFIX_EMAIL);
+        List<Prefix> allPrefixes = Arrays.asList(PREFIX_NAME, PREFIX_ID, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_TAG);
         for (Prefix prefix: allPrefixes) {
             if (ParserUtil.arePrefixesPresent(argMultimap, prefix)) {
                 List<String> keywords = argMultimap.getAllValues(prefix);
@@ -55,7 +53,6 @@ public class FindCommandParser implements Parser<FindCommand> {
                 predicates.add(new FieldContainsKeywordsPredicate(prefix, separated));
             }
         }
-        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG)); // find tag not implemented
 
         return new FindCommand(predicates);
     }
