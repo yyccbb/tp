@@ -74,10 +74,10 @@ public class PersonCard extends UiPart<Region> {
 
     private void addTagsToContainer(Person person, Predicate<Tag> filterPredicate, FlowPane container) {
         person.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
+                .sorted(Comparator.comparing(tag -> tag.getTagName()))
                 .filter(filterPredicate)
                 .forEach(tag -> {
-                    Label tagLabel = new Label(tag.tagName);
+                    Label tagLabel = new Label(tag.getTagName());
                     tagLabel.getStyleClass().addAll("label", tag.getTagStatus().toString().toLowerCase());
                     container.getChildren().add(tagLabel);
                 });

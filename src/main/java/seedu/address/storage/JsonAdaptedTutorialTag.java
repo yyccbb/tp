@@ -26,7 +26,7 @@ class JsonAdaptedTutorialTag {
      * Converts a given {@code TutorialTag} into this class for Jackson use.
      */
     public JsonAdaptedTutorialTag(TutorialTag source) {
-        tagName = source.tagName;
+        tagName = source.getTagName();
     }
 
     @JsonProperty("tagName")
