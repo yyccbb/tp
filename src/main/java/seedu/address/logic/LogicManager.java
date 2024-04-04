@@ -50,6 +50,7 @@ public class LogicManager implements Logic {
         CommandResult commandResult;
         StringUtil stringUtil = new StringUtil(model);
         Command command = addressBookParser.parseCommand(commandText);
+
         commandResult = command.execute(model);
 
         try {

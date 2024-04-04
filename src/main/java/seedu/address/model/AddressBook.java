@@ -172,10 +172,18 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     public String getTutorialTagListString() {
-        String s =  "Available Tutorial Tags: ";
-        for (TutorialTag tag : tutorialTags) {
-            s += " " + tag.getTagName();
+        StringBuilder sb = new StringBuilder("Available Tutorial Tags: [");
+
+        if (!tutorialTags.isEmpty()) {
+            for (TutorialTag tag : tutorialTags) {
+                sb.append(tag.getTagName()).append(", ");
+            }
+            sb.delete(sb.length() - 2, sb.length()); // Remove the last comma and space
+        } else {
+            return sb.append(" ]").toString();
         }
-        return s;
+
+        sb.append("]");
+        return sb.toString();
     }
 }

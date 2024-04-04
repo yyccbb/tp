@@ -28,7 +28,7 @@ public class EditTutTagListCommand extends Command {
 
     public static final String SAMPLE_COMMAND = COMMAND_WORD + " " + ADD_FLAG + " " + PREFIX_TAG + " WED10";
     public static final String MESSAGE_SUCCESS = "New tutorial tag added: %1$s";
-    public static final String MESSAGE_DUPLICATE_TUTORIALTAG = "This tutorialTag already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_TUTORIALTAG = "This tutorial tag already exists in the address book";
     private final String tagName;
     private final boolean isAdding;
 
@@ -47,7 +47,11 @@ public class EditTutTagListCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         if (isAdding) {
-            model.addTutorialTag(new TutorialTag(tagName, TagStatus.AVAILABLE));
+            TutorialTag tag = new TutorialTag(tagName, TagStatus.AVAILABLE);
+            if (model.hasTutorialTag(tag)) {
+                throw new CommandException(MESSAGE_DUPLICATE_TUTORIALTAG);
+            }
+            model.addTutorialTag(tag);
         }
         if (!isAdding) {
             model.deleteTutorialTag(new TutorialTag(tagName, TagStatus.AVAILABLE));
