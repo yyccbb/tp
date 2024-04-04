@@ -180,4 +180,7 @@ public class ModelManager implements Model {
         return addressBook.getTutorialTagList();
     }
 
+    public String getTutorialTagListString() {
+        return addressBook.getTutorialTagListString();
+    }
 }

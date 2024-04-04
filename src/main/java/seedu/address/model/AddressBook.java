@@ -170,4 +170,20 @@ public class AddressBook implements ReadOnlyAddressBook {
     public int hashCode() {
         return persons.hashCode();
     }
+
+    public String getTutorialTagListString() {
+        StringBuilder sb = new StringBuilder("Available Tutorial Tag(s): [");
+
+        if (!tutorialTags.isEmpty()) {
+            for (TutorialTag tag : tutorialTags) {
+                sb.append(tag.getTagName()).append(", ");
+            }
+            sb.delete(sb.length() - 2, sb.length()); // Remove the last comma and space
+        } else {
+            return sb.append(" ]").toString();
+        }
+
+        sb.append("]");
+        return sb.toString();
+    }
 }

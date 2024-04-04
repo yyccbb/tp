@@ -195,6 +195,11 @@ public class AddCommandTest {
         public ObservableList<TutorialTag> getTutorialTagList() {
             throw new AssertionError("This method should not be called.");
         };
+
+        @Override
+        public String getTutorialTagListString() {
+            throw new AssertionError("This method should not be called");
+        }
     }
 
     /**

@@ -22,10 +22,17 @@ import seedu.address.model.tag.TutorialTag;
  */
 public class EditTutTagListCommand extends Command {
 
+    /**
+     * Represents the subtype of the EditTutTagListCommand. ADD represents command to add an available
+     * tutorial tag, DELETE represents command to delete an available tutorial tag and LIST represents
+     * command to list all available tutorial tags.
+     */
+    public enum CommandSubtype { ADD, DELETE, LIST };
+
     public static final String COMMAND_WORD = "tuttag";
     public static final String ADD_FLAG = "add";
     public static final String DELETE_FLAG = "del";
-
+    public static final String LIST_FLAG = "list";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates a TutorialTag to be used with the specified "
             + "TagName.\n"
@@ -35,33 +42,50 @@ public class EditTutTagListCommand extends Command {
 
     public static final String SAMPLE_COMMAND = COMMAND_WORD + " " + ADD_FLAG + " " + PREFIX_TAG + " WED10";
     public static final String MESSAGE_SUCCESS = "New tutorial tag added: %1$s";
-    public static final String MESSAGE_DUPLICATE_TUTORIALTAG = "This tutorialTag already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_TUTORIALTAG = "This tutorial tag already exists in the address book";
+    public static final String EMPTY_TUTORIALTAGLIST_OUTPUT = "Available Tutorial Tag(s): [ ]";
     private final String tagName;
-    private final boolean isAdding;
+    private final CommandSubtype commandType;
 
     /**
      * Creates a new EditTutTagListCommand.
      *
      * @param tagName TagName of the tutorial tag to be added or deleted.
-     * @param isAdding whether the command is to add tutorial tag.
+     * @param commandType indicates the command subtype.
      */
-    public EditTutTagListCommand(String tagName, boolean isAdding) {
+    public EditTutTagListCommand(String tagName, CommandSubtype commandType) {
         this.tagName = tagName;
-        this.isAdding = isAdding;
+        this.commandType = commandType;
+    }
+
+    /**
+     * Creates a new EditTutTagListCommand.
+     *
+     * @param commandType indicates the command subtype.
+     */
+    public EditTutTagListCommand(CommandSubtype commandType) {
+        this.commandType = commandType;
+        this.tagName = null;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        if (isAdding) {
-            model.addTutorialTag(new TutorialTag(tagName, TagStatus.AVAILABLE));
+        if (commandType == CommandSubtype.ADD) {
+            TutorialTag tag = new TutorialTag(tagName, TagStatus.AVAILABLE);
+            if (model.hasTutorialTag(tag)) {
+                throw new CommandException(MESSAGE_DUPLICATE_TUTORIALTAG);
+            }
+            model.addTutorialTag(tag);
         }
-        if (!isAdding) {
+      
+        if (commandType == CommandSubtype.DELETE) {
             // Check if specified tutorial tag exists
             TutorialTag tag = new TutorialTag(tagName, TagStatus.AVAILABLE);
             if (!model.hasTutorialTag(tag)) {
                 throw new CommandException(Messages.MESSAGE_INVALID_TUTORIAL_TAG_VALUE + tagName);
             }
+
             model.deleteTutorialTag(new TutorialTag(tagName, TagStatus.AVAILABLE));
 
             // Remove the specified tag from all persons
@@ -76,7 +100,12 @@ public class EditTutTagListCommand extends Command {
             }
 
         }
-        return new CommandResult(model.getTutorialTagList().toString());
+
+        if (commandType == CommandSubtype.LIST) {
+            // nothing needs to be done
+        }
+
+        return new CommandResult(model.getTutorialTagListString());
     }
 
     /**
@@ -108,5 +137,9 @@ public class EditTutTagListCommand extends Command {
         return new ToStringBuilder(this)
                 .add("tagName", tagName)
                 .toString();
+    }
+
+    public static boolean isListCommand(CommandSubtype type) {
+        return type == CommandSubtype.LIST;
     }
 }

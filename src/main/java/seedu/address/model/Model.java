@@ -114,4 +114,7 @@ public interface Model {
 
     /** Returns an unmodifiable view of the filtered tutorial tag list */
     ObservableList<TutorialTag> getTutorialTagList();
+
+    /** Returns a String representing the filtered tutorial tag list */
+    String getTutorialTagListString();
 }
