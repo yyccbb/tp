@@ -10,6 +10,7 @@ import seedu.address.model.Model;
 public class ListTutTagCommand extends Command {
 
     public static final String COMMAND_WORD = "listtuttag";
+    public static final String EMPTY_TUTORIALTAGLIST_OUTPUT = "Available Tutorial Tags: [ ]";
 
     @Override
     public CommandResult execute(Model model) {

@@ -16,6 +16,7 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.logic.commands.ListTutTagCommand;
 import seedu.address.model.person.FieldContainsKeywordsPredicate;
 import seedu.address.testutil.AddressBookBuilder;
 
@@ -157,5 +158,10 @@ public class ModelManagerTest {
     @Test
     public void getFilteredTutorialTagList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getTutorialTagList().remove(0));
+    }
+
+    @Test
+    public void getTutorialTagListString() {
+        assertEquals(modelManager.getTutorialTagListString(), ListTutTagCommand.EMPTY_TUTORIALTAGLIST_OUTPUT);
     }
 }
