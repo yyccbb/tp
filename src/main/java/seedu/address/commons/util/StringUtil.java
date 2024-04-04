@@ -7,10 +7,27 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.Arrays;
 
+import javafx.collections.ObservableList;
+import seedu.address.model.Model;
+import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.TutorialTag;
+
 /**
  * Helper functions for handling strings.
  */
 public class StringUtil {
+
+    private static ObservableList<TutorialTag> tutorials;
+    private Model model;
+
+
+    /**
+     * Creates a StringUtil object with the given model.
+     */
+    public StringUtil(Model model) {
+        this.model = model;
+        this.tutorials = model.getTutorialTagList();
+    }
 
     /**
      * Returns true if the {@code sentence} contains the {@code word}.
@@ -37,6 +54,30 @@ public class StringUtil {
 
         return Arrays.stream(wordsInPreppedSentence)
                 .anyMatch(wordInPreppedSentence -> wordInPreppedSentence.toLowerCase().contains(preppedWord));
+    }
+
+    /**
+     * Returns true if the {@code tag} contains the {@code word}.
+     *   Ignores case, and performs subword matching if {@code word} is a subword of a valid tutorialtag,
+     *   else it performs a full word match.
+     * @param tag cannot be null
+     * @param word cannot be null, cannot be empty
+     */
+    public static boolean tagContainsWordIgnoreCase(Tag tag, String word) {
+        requireNonNull(tag);
+        requireNonNull(word);
+
+        String tagName = tag.getTagName().toLowerCase();
+        String preppedWord = word.trim();
+        checkArgument(!preppedWord.isEmpty(), "Word parameter cannot be empty");
+
+        for (TutorialTag tutorial : tutorials) {
+            String tutorialGroup = tutorial.getTagName().toLowerCase();
+            if (tutorialGroup.contains(preppedWord)) {
+                return tagName.contains(preppedWord) && tag.isTutorial();
+            }
+        }
+        return tagName.equalsIgnoreCase(preppedWord);
     }
 
     /**
