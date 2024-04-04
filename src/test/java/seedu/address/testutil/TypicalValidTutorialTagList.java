@@ -1,6 +1,7 @@
 package seedu.address.testutil;
 
 import static seedu.address.testutil.TypicalTutorialTag.THU10;
+import static seedu.address.testutil.TypicalTutorialTag.TUES08;
 import static seedu.address.testutil.TypicalTutorialTag.WED10;
 
 import javafx.collections.FXCollections;
@@ -20,6 +21,7 @@ public class TypicalValidTutorialTagList {
         ObservableList<TutorialTag> validTutorialTagList = FXCollections.observableArrayList();
         validTutorialTagList.add(WED10);
         validTutorialTagList.add(THU10);
+        validTutorialTagList.add(TUES08);
         return validTutorialTagList;
     }
 

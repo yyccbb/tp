@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP;
+import static seedu.address.logic.parser.CliSyntax.*;
 
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -19,6 +19,7 @@ public class AvailableCommand extends Command {
             + "Parameters: [FLAG] [TUTORIAL SLOT] \n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_GROUP + " TUES08 ";
+    public static final String SAMPLE_COMMAND = COMMAND_WORD + " " + PREFIX_GROUP + " WED10 ";
 
     private final TutorialTagContainsGroupPredicate predicate;
     private final TutorialTag tutorialGroup;
