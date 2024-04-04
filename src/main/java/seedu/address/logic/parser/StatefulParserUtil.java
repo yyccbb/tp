@@ -2,9 +2,13 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
@@ -12,6 +16,7 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.EditTutTagListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.Model;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Id;
 import seedu.address.model.person.Name;
@@ -23,13 +28,37 @@ import seedu.address.model.tag.TagStatus;
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
  */
-public class ParserUtil {
-
+public class StatefulParserUtil {
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    private static StatefulParserUtil instance = null;
+    private Model model;
+    private StatefulParserUtil(Model model) {
+        this.model = model;
+    }
+
+    /**
+     * Initializes the {@code StatefulParserUtil} singleton with a model.
+     */
+    public static void initialize(Model model) {
+        if (instance == null) {
+            instance = new StatefulParserUtil(model);
+        }
+    }
+
+    /**
+     * Get the instance of the {@code StatefulParserUtil} singleton.
+     */
+    public static StatefulParserUtil getInstance() {
+        if (instance == null) {
+            throw new IllegalStateException("Instance not initialized yet.");
+        }
+        return instance;
+    }
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
+     *
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
@@ -38,6 +67,50 @@ public class ParserUtil {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
+    }
+
+    /**
+     * Parses a {@code String} consisting of indices into a {@code Set<Index>}.
+     *
+     * @throws ParseException if any substring is not a valid index.
+     */
+    public static Set<Index> parseIndices(String oneBasedIndices) throws ParseException {
+        requireNonNull(oneBasedIndices);
+        String trimmedOneBasedIndices = oneBasedIndices.trim();
+
+        Set<Index> parsedIndices = new HashSet<>();
+        List<String> indicesList;
+        if (trimmedOneBasedIndices.equals("all")) {
+            Model model = StatefulParserUtil.getInstance().model;
+            int size = model.getFilteredPersonList().size();
+            indicesList = Stream.iterate(1, x -> x + 1)
+                    .limit(size)
+                    .map(Objects::toString)
+                    .collect(Collectors.toList());
+        } else {
+            indicesList = Arrays.asList(trimmedOneBasedIndices.split("\\s+"));
+        }
+
+        // Java Lambda expressions do not allow propagating of checked exceptions.
+        // To circumvent this, wrap the checked exception in an unchecked exception.
+        try {
+            parsedIndices = indicesList.stream().map(x -> {
+                try {
+                    return parseIndex(x);
+                } catch (ParseException e) {
+                    throw new RuntimeException(e);
+                }
+            }).collect(Collectors.toSet());
+        } catch (RuntimeException e) {
+            Throwable cause = e.getCause();
+            if (cause instanceof ParseException) {
+                throw (ParseException) cause;
+            } else {
+                throw e;
+            }
+        }
+
+        return parsedIndices;
     }
 
     /**
@@ -161,6 +234,18 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String} of tag names separated by whitespaces
+     * into a {@code Set<String>}, where each element corresponds to a
+     * trimmed tag name.
+     */
+    public static Set<String> parseTagNamesString(String tagNames) {
+        requireNonNull(tagNames);
+        final Set<String> tagNamesSet = new HashSet<>();
+        tagNamesSet.addAll(Arrays.asList(tagNames.split("\\s+")));
+        return tagNamesSet;
     }
 
     /**
