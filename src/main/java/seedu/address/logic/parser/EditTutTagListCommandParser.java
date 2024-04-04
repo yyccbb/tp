@@ -23,22 +23,28 @@ public class EditTutTagListCommandParser implements Parser<EditTutTagListCommand
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditTutTagListCommand.MESSAGE_USAGE));
         }
 
-        ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_TAG);
-
-        if (!ParserUtil.arePrefixesPresent(argMultimap, PREFIX_TAG)) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    EditTutTagListCommand.MESSAGE_USAGE));
-        }
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_TAG);
 
         String commandFlag = argMultimap.getPreamble();
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_TAG);
-        String tagName = argMultimap.getValue(PREFIX_TAG).get();
-
         try {
-            boolean isCreatingNewFlag = ParserUtil.isCreatingNewTag(commandFlag);
+            EditTutTagListCommand.CommandSubtype commandSubtype = StatefulParserUtil.isCreatingNewTag(commandFlag);
+
+            // if the EditTutTagListCommand is to list all available tutorial tags
+            if (EditTutTagListCommand.isListCommand(commandSubtype)) {
+                return new EditTutTagListCommand(commandSubtype);
+            }
+
+            // if the EditTutTagListCommand is not to list all available tutorial tags, PREFIX_TAG must be present
+            if (!StatefulParserUtil.arePrefixesPresent(argMultimap, PREFIX_TAG)) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        EditTutTagListCommand.MESSAGE_USAGE));
+            }
+
+            argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_TAG);
+            String tagName = argMultimap.getValue(PREFIX_TAG).get();
             Tag.isTagNameValid(tagName);
-            return new EditTutTagListCommand(tagName, isCreatingNewFlag);
+            return new EditTutTagListCommand(tagName, commandSubtype);
+
         } catch (ParseException e) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditTutTagListCommand.MESSAGE_USAGE));

@@ -17,4 +17,8 @@ public class TutorialTag extends Tag {
     public boolean isSameTutorialTag(TutorialTag tutorialTag) {
         return this.getTagName().equals(tutorialTag.getTagName());
     }
+    @Override
+    public String toString() {
+        return getTagName();
+    }
 }

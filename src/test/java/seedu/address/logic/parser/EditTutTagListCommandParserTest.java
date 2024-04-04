@@ -58,7 +58,8 @@ class EditTutTagListCommandParserTest {
         String userInput = VALID_EDIT_TUTORIAL_TAG_FLAG
                 + " " + VALID_TAG_FRIEND_DESC;
 
-        EditTutTagListCommand expectedCommand = new EditTutTagListCommand(VALID_TAG_FRIENDS, true);
+        EditTutTagListCommand expectedCommand = new EditTutTagListCommand(VALID_TAG_FRIENDS,
+                EditTutTagListCommand.CommandSubtype.ADD);
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }

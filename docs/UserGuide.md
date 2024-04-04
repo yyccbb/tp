@@ -7,7 +7,6 @@ title: User Guide
 Optimized for use via a command line interface, you can manage student assignments, attendance,
 tutor availability and much more with just a few keystrokes!
 
-
 * Table of Contents
 {:toc}
 
@@ -41,7 +40,6 @@ tutor availability and much more with just a few keystrokes!
 
    * `exit` : Exits the app.
 
-
 6. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -55,8 +53,11 @@ tutor availability and much more with just a few keystrokes!
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add stu /n NAME`, `NAME` is a parameter which can be used as `add stu /n John Doe`.
 
+* Items with `…` after them can be used multiple times including zero times.<br>
+  e.g. `[/t TAG…]` can be used as `/t friend` or `/t friend colleague` etc.
+
 * Items in square brackets are optional.<br>
-  e.g `/n NAME [/p PHONE]` can be used as `/n John Doe /p 91234567` or as `/n John Doe`.
+  e.g. `/n NAME [/p PHONE]` can be used as `/n John Doe /p 91234567` or as `/n John Doe`.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `/n NAME /i ID`, `/i ID /n NAME` is also acceptable.
@@ -119,18 +120,39 @@ Examples:
 Filters all persons whose contact details contain each of the specified keywords 
 under the specified flag and displays them as a list with index numbers.
 
-Format: `find [stu/ta] [/n NAME] [/i ID] [/p PHONE] [/e EMAIL]`
+Format: `find [stu/ta] [/n NAME] [/i ID] [/p PHONE] [/e EMAIL] [/t TAGS...]`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
+* The search is case-insensitive. e.g. `hans` will match `Hans`
 * The order of the keywords under each flag does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Prefixes will be matched e.g. `Han` will match `Hans`
+* For Tags:
+    * For tutorial tags, prefixes will be matched
+    * For other tags, it performs full word matching
+    * The search filters for persons meeting ANY criteria, (i.e. `OR` search).
+   
+    e.g. `find /t wed assignment1` will find all persons with the tutorial tag where `wed` is a subword or have tag `assignment1`
+
+
 * The search filters for persons meeting ALL criteria, (i.e. `AND` search).
-    e.g. `find stu /n John` will find all Students whose names contain `John`.
+
+  e.g. `find stu /n John` will find all Students whose names contain `John`.
 
 Examples:
-* `find John` returns `john` and `John Doe`
+* `find /n John` returns `john` and `John Doe`
 * `find ta` returns all TAs
   ![result for 'find ta'](images/findTaResult.png)
+
+### Locating available TAs for a tutorial group: `available` 
+
+Filters all replacement TAs who are available for a specified tutorial group.
+
+Format: `available /g TUTORIAL`
+
+* The search is case-sensitive and must match the specified tutorial group exactly.
+
+
+Examples:
+* `available /g TUES08` returns  all TAs who are available for tutorial group `TUES08`
 
 ### Deleting a person : `delete`
 
@@ -173,12 +195,13 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Tagging (WIP)
+## Tagging
 
 With TrAcker, you can track Student assignments, attendance, tutorial groups
 (along with as TA tutorial groups and availability) using tags.
 
-**(implementation TBC)**
+TrAcker allows use of three different types of tags : **Assignments, Attendance,** and **Tutorial** tags which can be attached to Students and TAs respectively.
+The different tag types along with their corresponding tag statuses are described below.
 
 ### Tag Status
 
@@ -186,9 +209,9 @@ With TrAcker, you can track Student assignments, attendance, tutorial groups
 |------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Assignment | `cg` : <mark style="background-color: green">COMPLETE_GOOD</mark><br/>`cb` : <mark style="background-color: orange">COMPLETE_BAD</mark><br/>`ig` : <mark style="background-color: grey">INCOMPLETE_GOOD</mark><br/>`ib` : <mark style="background-color:red">INCOMPLETE_BAD</mark> |
 | Attendance | `p` : <mark style="background-color:  green">PRESENT</mark><br/>`a` : <mark style="background-color:red">ABSENT</mark><br/>`awr` : <mark style="background-color:orange">ABSENT_WITH_REASON</mark>                                                                                 |
-| Tag 3      | 3-letter abbreviation of the day of the week, followed by the time in `HH` format (24h)<br/>Examples:<br/>`MON08` : <mark style="background-color: #3e7b91">MON08</mark><br/>`TUE12` : <mark style="background-color: #3e7b91">TUE08</mark>                                        |
+| Tutorial | `as` : <mark style="background-color: #3e7b91">ASSIGNED</mark><br/>`av` : <mark style="background-color: white">AVAILABLE</mark>                                                                                                                                                   |
 
-### Marking a tag : `mark` (WIP)
+### Marking a tag : `mark`
 
 Updates the status of the specified tag with the specified status. If the
 tag specified does not exist, a new tag with the tag name and tag status will be
@@ -201,8 +224,40 @@ Format: `mark INDEX /t TAG /ts TAGSTATUS`
 * `TAGSTATUS` must be one of the [above specified values](#tag-status)
 
 Examples:
-* `mark 1 /t Assignment1 /ts cg` updates the `Assignment1` tag (or adds it, if it does not exist)
+* `mark 1 /t Assignment1 /ts cg` updates the `Assignment1` tag (or adds it, if it is not already attached)
 to <mark style="background-color: green">COMPLETE_GOOD</mark> for the 1st person in the displayed list.
+* `mark 2 /t week1 /ts awr` updates the `week1` tag (or adds it, if it is not already attached) to
+<mark style="background-color: orange">ABSENT_WITH_REASON</mark> for the 2nd person in the displayed list.
+* `mark 3 /t TUE08 /ts as` updates the `TUE08` tag (or adds it, if it is not already attached) to
+<mark style="background-color: #3e7b91">ASSIGNED</mark> to assign the 3rd person in the displayed list to the 
+tutorial group TUE08.
+* 
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Note:** For **Tutorial** tags, the tutorial name must be that of a valid Tutorial tag in the list of available tutorial sessions defined with the [tuttag](#adding-a-tutorial--tuttag-add) command.
+For example, in the third example above, `TUE08` should be added as a tutorial tag first using `tuttag add /t TUE08`.
+
+</div>
+
+### Adding a Tutorial: `tuttag add`
+
+Creates a Tutorial tag to be used with the specified tag name.
+
+Format: `tuttag add /t TAG`
+
+Examples:
+
+* `tuttag add /t TUE08` adds TUE08 as a valid Tutorial tag.
+
+### Deleting a Tutorial: `tuttag del`
+
+Deletes the Tutorial tag corresponding to the specified tag name. If the specified tag does not exist, no change should happen.
+
+Format: `tuttag del /t TAG`
+
+Examples:
+
+* `tuttag del /t WED09` deletes WED09 as a valid Tutorial tag.
 
 ### Deleting a tag: `deletetag`
 

@@ -25,7 +25,7 @@ public class DeleteCommand extends Command {
             + ": Deletes the person(s) identified by the index number used in the displayed person list.\n"
             + "Parameters: INDEX (must be a positive integer) [OTHER_INDICES} \n"
             + "Example 1: " + COMMAND_WORD + " 1"
-            + "Example 2: " + COMMAND_WORD + " 1 5 3";
+            + " Example 2: " + COMMAND_WORD + " 1 5 3";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
 
@@ -73,7 +73,7 @@ public class DeleteCommand extends Command {
         // check whether index specified is within valid range
         List<Integer> invalidIndices = new ArrayList<>();
         for (Index index: indices) {
-            if (index.getZeroBased() >= lastShownList.size() || index.getZeroBased() < 0) {
+            if (index.getZeroBased() >= lastShownList.size()) {
                 invalidIndices.add(index.getOneBased());
             }
         }
