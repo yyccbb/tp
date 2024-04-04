@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.Messages;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
@@ -49,13 +51,17 @@ public class EditTutTagListCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         if (isAdding) {
             model.addTutorialTag(new TutorialTag(tagName, TagStatus.AVAILABLE));
         }
         if (!isAdding) {
-
+            // Check if specified tutorial tag exists
+            TutorialTag tag = new TutorialTag(tagName, TagStatus.AVAILABLE);
+            if (!model.hasTutorialTag(tag)) {
+                throw new CommandException(Messages.MESSAGE_INVALID_TUTORIAL_TAG_VALUE + tagName);
+            }
             model.deleteTutorialTag(new TutorialTag(tagName, TagStatus.AVAILABLE));
 
             // Remove the specified tag from all persons
