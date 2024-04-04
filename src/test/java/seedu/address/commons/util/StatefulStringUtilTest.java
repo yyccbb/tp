@@ -10,42 +10,42 @@ import java.io.FileNotFoundException;
 import org.junit.jupiter.api.Test;
 
 
-public class StringUtilTest {
+public class StatefulStringUtilTest {
     //---------------- Tests for isNonZeroUnsignedInteger --------------------------------------
-    protected StringUtil testStringUtil;
+    protected StatefulStringUtil testStatefulStringUtil;
 
 
     @Test
     public void isNonZeroUnsignedInteger() {
 
         // EP: empty strings
-        assertFalse(StringUtil.isNonZeroUnsignedInteger("")); // Boundary value
-        assertFalse(StringUtil.isNonZeroUnsignedInteger("  "));
+        assertFalse(StatefulStringUtil.isNonZeroUnsignedInteger("")); // Boundary value
+        assertFalse(StatefulStringUtil.isNonZeroUnsignedInteger("  "));
 
         // EP: not a number
-        assertFalse(StringUtil.isNonZeroUnsignedInteger("a"));
-        assertFalse(StringUtil.isNonZeroUnsignedInteger("aaa"));
+        assertFalse(StatefulStringUtil.isNonZeroUnsignedInteger("a"));
+        assertFalse(StatefulStringUtil.isNonZeroUnsignedInteger("aaa"));
 
         // EP: zero
-        assertFalse(StringUtil.isNonZeroUnsignedInteger("0"));
+        assertFalse(StatefulStringUtil.isNonZeroUnsignedInteger("0"));
 
         // EP: zero as prefix
-        assertTrue(StringUtil.isNonZeroUnsignedInteger("01"));
+        assertTrue(StatefulStringUtil.isNonZeroUnsignedInteger("01"));
 
         // EP: signed numbers
-        assertFalse(StringUtil.isNonZeroUnsignedInteger("-1"));
-        assertFalse(StringUtil.isNonZeroUnsignedInteger("+1"));
+        assertFalse(StatefulStringUtil.isNonZeroUnsignedInteger("-1"));
+        assertFalse(StatefulStringUtil.isNonZeroUnsignedInteger("+1"));
 
         // EP: numbers with white space
-        assertFalse(StringUtil.isNonZeroUnsignedInteger(" 10 ")); // Leading/trailing spaces
-        assertFalse(StringUtil.isNonZeroUnsignedInteger("1 0")); // Spaces in the middle
+        assertFalse(StatefulStringUtil.isNonZeroUnsignedInteger(" 10 ")); // Leading/trailing spaces
+        assertFalse(StatefulStringUtil.isNonZeroUnsignedInteger("1 0")); // Spaces in the middle
 
         // EP: number larger than Integer.MAX_VALUE
-        assertFalse(StringUtil.isNonZeroUnsignedInteger(Long.toString(Integer.MAX_VALUE + 1)));
+        assertFalse(StatefulStringUtil.isNonZeroUnsignedInteger(Long.toString(Integer.MAX_VALUE + 1)));
 
         // EP: valid numbers, should return true
-        assertTrue(StringUtil.isNonZeroUnsignedInteger("1")); // Boundary value
-        assertTrue(StringUtil.isNonZeroUnsignedInteger("10"));
+        assertTrue(StatefulStringUtil.isNonZeroUnsignedInteger("1")); // Boundary value
+        assertTrue(StatefulStringUtil.isNonZeroUnsignedInteger("10"));
     }
 
 
@@ -59,24 +59,26 @@ public class StringUtilTest {
 
     @Test
     public void containsWordIgnoreCase_nullWord_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> StringUtil.containsSubwordIgnoreCase("typical sentence", null));
+        assertThrows(NullPointerException.class, () -> StatefulStringUtil
+                .containsSubwordIgnoreCase("typical sentence", null));
     }
 
     @Test
     public void containsWordIgnoreCase_emptyWord_throwsIllegalArgumentException() {
         assertThrows(IllegalArgumentException.class, "Word parameter cannot be empty", ()
-            -> StringUtil.containsSubwordIgnoreCase("typical sentence", "  "));
+            -> StatefulStringUtil.containsSubwordIgnoreCase("typical sentence", "  "));
     }
 
     @Test
     public void containsWordIgnoreCase_multipleWords_throwsIllegalArgumentException() {
         assertThrows(IllegalArgumentException.class, "Word parameter should be a single word", ()
-            -> StringUtil.containsSubwordIgnoreCase("typical sentence", "aaa BBB"));
+            -> StatefulStringUtil.containsSubwordIgnoreCase("typical sentence", "aaa BBB"));
     }
 
     @Test
     public void containsWordIgnoreCase_nullSentence_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> StringUtil.containsSubwordIgnoreCase(null, "abc"));
+        assertThrows(NullPointerException.class, () -> StatefulStringUtil
+                .containsSubwordIgnoreCase(null, "abc"));
     }
 
     /*
@@ -108,23 +110,29 @@ public class StringUtilTest {
     public void containsWordIgnoreCase_validInputs_correctResult() {
 
         // Empty sentence
-        assertFalse(StringUtil.containsSubwordIgnoreCase("", "abc")); // Boundary case
-        assertFalse(StringUtil.containsSubwordIgnoreCase("    ", "123"));
+        assertFalse(StatefulStringUtil.containsSubwordIgnoreCase("", "abc")); // Boundary case
+        assertFalse(StatefulStringUtil.containsSubwordIgnoreCase("    ", "123"));
 
         // Matches a partial word only
-        assertTrue(StringUtil.containsSubwordIgnoreCase("aaa bbb ccc", "bb")); // Sentence word bigger than query word
-        assertFalse(StringUtil
+        assertTrue(StatefulStringUtil
+                .containsSubwordIgnoreCase("aaa bbb ccc", "bb")); // Sentence word bigger than query word
+        assertFalse(StatefulStringUtil
                 .containsSubwordIgnoreCase("aaa bbb ccc", "bbbb")); // Query word bigger than sentence word
 
         // Matches word in the sentence, different upper/lower case letters
-        assertTrue(StringUtil.containsSubwordIgnoreCase("aaa bBb ccc", "Bbb")); // First word (boundary case)
-        assertTrue(StringUtil.containsSubwordIgnoreCase("aaa bBb ccc@1", "CCc@1")); // Last word (boundary case)
-        assertTrue(StringUtil.containsSubwordIgnoreCase("  AAA   bBb   ccc  ", "aaa")); // Sentence has extra spaces
-        assertTrue(StringUtil.containsSubwordIgnoreCase("Aaa", "aaa")); // Only one word in sentence (boundary case)
-        assertTrue(StringUtil.containsSubwordIgnoreCase("aaa bbb ccc", "  ccc  ")); // Leading/trailing spaces
+        assertTrue(StatefulStringUtil
+                .containsSubwordIgnoreCase("aaa bBb ccc", "Bbb")); // First word (boundary case)
+        assertTrue(StatefulStringUtil
+                .containsSubwordIgnoreCase("aaa bBb ccc@1", "CCc@1")); // Last word (boundary case)
+        assertTrue(StatefulStringUtil
+                .containsSubwordIgnoreCase("  AAA   bBb   ccc  ", "aaa")); // Sentence has extra spaces
+        assertTrue(StatefulStringUtil
+                .containsSubwordIgnoreCase("Aaa", "aaa")); // Only one word in sentence (boundary case)
+        assertTrue(StatefulStringUtil
+                .containsSubwordIgnoreCase("aaa bbb ccc", "  ccc  ")); // Leading/trailing spaces
 
         // Matches multiple words in sentence
-        assertTrue(StringUtil.containsSubwordIgnoreCase("AAA bBb ccc  bbb", "bbB"));
+        assertTrue(StatefulStringUtil.containsSubwordIgnoreCase("AAA bBb ccc  bbb", "bbB"));
     }
 
     //---------------- Tests for getDetails --------------------------------------
@@ -135,13 +143,13 @@ public class StringUtilTest {
 
     @Test
     public void getDetails_exceptionGiven() {
-        assertTrue(StringUtil.getDetails(new FileNotFoundException("file not found"))
+        assertTrue(StatefulStringUtil.getDetails(new FileNotFoundException("file not found"))
             .contains("java.io.FileNotFoundException: file not found"));
     }
 
     @Test
     public void getDetails_nullGiven_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> StringUtil.getDetails(null));
+        assertThrows(NullPointerException.class, () -> StatefulStringUtil.getDetails(null));
     }
 
 
@@ -149,6 +157,6 @@ public class StringUtilTest {
 
     @Test
     public void testTagContainsWordIgnoreCase_nullWord_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> testStringUtil.tagContainsWordIgnoreCase(WED10, null));
+        assertThrows(NullPointerException.class, () -> testStatefulStringUtil.tagContainsWordIgnoreCase(WED10, null));
     }
 }

@@ -16,27 +16,26 @@ import seedu.address.model.tag.TutorialTag;
 /**
  * Helper functions for handling strings.
  */
-public class StringUtil {
-    private static StringUtil instance = null;
-    private static ObservableList<TutorialTag> validTutorials;
+public class StatefulStringUtil {
+    private static StatefulStringUtil instance = null;
     private Model model;
 
-    private StringUtil(Model model) {
+    private StatefulStringUtil(Model model) {
         this.model = model;
     }
 
     /**
-     * Initializes the StringUtil instance.
+     * Initializes the StatefulStringUtil instance.
      */
-    public static void initalize(Model model) {
+    public static void initialize(Model model) {
         if (instance == null) {
-            instance = new StringUtil(model);
+            instance = new StatefulStringUtil(model);
         }
     }
 
-    public static StringUtil getInstance() {
+    public static StatefulStringUtil getInstance() {
         if (instance == null) {
-            throw new NullPointerException("StringUtil has not been initialized");
+            throw new IllegalStateException("StatefulStringUtil has not been initialized");
         }
         return instance;
     }
@@ -82,7 +81,8 @@ public class StringUtil {
         String tagName = tag.getTagName().toLowerCase();
         String preppedWord = word.trim();
         checkArgument(!preppedWord.isEmpty(), "Word parameter cannot be empty");
-        validTutorials = instance.model.getTutorialTagList();
+        ObservableList<TutorialTag> validTutorials =
+                StatefulStringUtil.getInstance().model.getTutorialTagList();
 
         for (TutorialTag tutorial : validTutorials) {
             String tutorialGroup = tutorial.getTagName().toLowerCase();
@@ -106,7 +106,9 @@ public class StringUtil {
         String tagName = tag.getTagName();
         checkArgument(!tutorialGroup.isEmpty(), "Tutorial group parameter cannot be empty");
         checkArgument(!tutorialGroup.contains(" "), "Only use one word for tutorial group parameter");
-        validTutorials = instance.model.getTutorialTagList();
+
+        ObservableList<TutorialTag> validTutorials =
+                StatefulStringUtil.getInstance().model.getTutorialTagList();
 
         for (TutorialTag tutorial : validTutorials) {
             String validTutorialGroupTag = tutorial.getTagName();
