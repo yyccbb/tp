@@ -10,23 +10,35 @@ import java.util.Arrays;
 import javafx.collections.ObservableList;
 import seedu.address.model.Model;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.TagStatus;
 import seedu.address.model.tag.TutorialTag;
 
 /**
  * Helper functions for handling strings.
  */
 public class StringUtil {
-
-    private static ObservableList<TutorialTag> tutorials;
+    private static StringUtil instance = null;
+    private static ObservableList<TutorialTag> validTutorials;
     private Model model;
 
+    private StringUtil(Model model) {
+        this.model = model;
+    }
 
     /**
-     * Creates a StringUtil object with the given model.
+     * Initializes the StringUtil instance.
      */
-    public StringUtil(Model model) {
-        this.model = model;
-        this.tutorials = model.getTutorialTagList();
+    public static void initalize(Model model) {
+        if (instance == null) {
+            instance = new StringUtil(model);
+        }
+    }
+
+    public static StringUtil getInstance() {
+        if (instance == null) {
+            throw new NullPointerException("StringUtil has not been initialized");
+        }
+        return instance;
     }
 
     /**
@@ -70,14 +82,39 @@ public class StringUtil {
         String tagName = tag.getTagName().toLowerCase();
         String preppedWord = word.trim();
         checkArgument(!preppedWord.isEmpty(), "Word parameter cannot be empty");
+        validTutorials = instance.model.getTutorialTagList();
 
-        for (TutorialTag tutorial : tutorials) {
+        for (TutorialTag tutorial : validTutorials) {
             String tutorialGroup = tutorial.getTagName().toLowerCase();
             if (tutorialGroup.contains(preppedWord)) {
                 return tagName.contains(preppedWord) && tag.isTutorial();
             }
         }
         return tagName.equalsIgnoreCase(preppedWord);
+    }
+
+    /**
+     * Returns true if the {@code tag} contains the {@code tutorialGroup}.
+     *   Ignores case, and performs a full word match.
+     * @param tag cannot be null
+     * @param tutorialGroup cannot be null, cannot be empty
+     */
+    public static boolean containsTutorialGroup(Tag tag, String tutorialGroup) {
+        requireNonNull(tag);
+        requireNonNull(tutorialGroup);
+
+        String tagName = tag.getTagName();
+        checkArgument(!tutorialGroup.isEmpty(), "Tutorial group parameter cannot be empty");
+        checkArgument(!tutorialGroup.contains(" "), "Only use one word for tutorial group parameter");
+        validTutorials = instance.model.getTutorialTagList();
+
+        for (TutorialTag tutorial : validTutorials) {
+            String validTutorialGroupTag = tutorial.getTagName();
+            if (validTutorialGroupTag.equalsIgnoreCase(tutorialGroup)) {
+                return tagName.equalsIgnoreCase(tutorialGroup) && tag.getTagStatus() == TagStatus.AVAILABLE;
+            }
+        }
+        return false;
     }
 
     /**

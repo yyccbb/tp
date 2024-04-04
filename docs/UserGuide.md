@@ -53,8 +53,11 @@ tutor availability and much more with just a few keystrokes!
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add stu /n NAME`, `NAME` is a parameter which can be used as `add stu /n John Doe`.
 
+* Items with `…` after them can be used multiple times including zero times.<br>
+  e.g. `[/t TAG…]` can be used as `/t friend` or `/t friend colleague` etc.
+
 * Items in square brackets are optional.<br>
-  e.g `/n NAME [/p PHONE]` can be used as `/n John Doe /p 91234567` or as `/n John Doe`.
+  e.g. `/n NAME [/p PHONE]` can be used as `/n John Doe /p 91234567` or as `/n John Doe`.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `/n NAME /i ID`, `/i ID /n NAME` is also acceptable.
@@ -117,18 +120,39 @@ Examples:
 Filters all persons whose contact details contain each of the specified keywords 
 under the specified flag and displays them as a list with index numbers.
 
-Format: `find [stu/ta] [/n NAME] [/i ID] [/p PHONE] [/e EMAIL]`
+Format: `find [stu/ta] [/n NAME] [/i ID] [/p PHONE] [/e EMAIL] [/t TAGS...]`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
+* The search is case-insensitive. e.g. `hans` will match `Hans`
 * The order of the keywords under each flag does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Prefixes will be matched e.g. `Han` will match `Hans`
+* For Tags:
+    * For tutorial tags, prefixes will be matched
+    * For other tags, it performs full word matching
+    * The search filters for persons meeting ANY criteria, (i.e. `OR` search).
+   
+    e.g. `find /t wed assignment1` will find all persons with the tutorial tag where `wed` is a subword or have tag `assignment1`
+
+
 * The search filters for persons meeting ALL criteria, (i.e. `AND` search).
-    e.g. `find stu /n John` will find all Students whose names contain `John`.
+
+  e.g. `find stu /n John` will find all Students whose names contain `John`.
 
 Examples:
-* `find John` returns `john` and `John Doe`
+* `find /n John` returns `john` and `John Doe`
 * `find ta` returns all TAs
   ![result for 'find ta'](images/findTaResult.png)
+
+### Locating available TAs for a tutorial group: `available` 
+
+Filters all replacement TAs who are available for a specified tutorial group.
+
+Format: `available /g TUTORIAL`
+
+* The search is case-sensitive and must match the specified tutorial group exactly.
+
+
+Examples:
+* `available /g TUES08` returns  all TAs who are available for tutorial group `TUES08`
 
 ### Deleting a person : `delete`
 

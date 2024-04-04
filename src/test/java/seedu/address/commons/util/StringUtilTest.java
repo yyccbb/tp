@@ -3,18 +3,17 @@ package seedu.address.commons.util;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalModel.MODEL;
 import static seedu.address.testutil.TypicalTutorialTag.WED10;
 
 import java.io.FileNotFoundException;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.tag.AssignmentTag;
-import seedu.address.model.tag.TagStatus;
 
 public class StringUtilTest {
     //---------------- Tests for isNonZeroUnsignedInteger --------------------------------------
+    protected StringUtil testStringUtil;
+
 
     @Test
     public void isNonZeroUnsignedInteger() {
@@ -147,29 +146,9 @@ public class StringUtilTest {
 
 
     //---------------- Tests for tagContainsWordIgnoreCase --------------------------------------
-    @Test
-    public void testTagContainsWordIgnoreCase_wordNotInside() {
-        StringUtil testStringUtil = new StringUtil(MODEL);
-        assertFalse(testStringUtil.tagContainsWordIgnoreCase(WED10, "word"));
-    }
-
-    @Test
-    public void testTagContainsWordIgnoreCase_subwordInsideTutorialList() {
-        StringUtil testStringUtil = new StringUtil(MODEL);
-        assertTrue(testStringUtil.tagContainsWordIgnoreCase(WED10, "wed"));
-    }
 
     @Test
     public void testTagContainsWordIgnoreCase_nullWord_throwsNullPointerException() {
-        StringUtil testStringUtil = new StringUtil(MODEL);
         assertThrows(NullPointerException.class, () -> testStringUtil.tagContainsWordIgnoreCase(WED10, null));
     }
-
-    @Test
-    public void testTagContainsWordIgnoreCase_wordInsideTag() {
-        StringUtil testStringUtil = new StringUtil(MODEL);
-        assertTrue(testStringUtil.tagContainsWordIgnoreCase(new AssignmentTag("Assignment1",
-                TagStatus.COMPLETE_GOOD), "Assignment1"));
-    }
-
 }

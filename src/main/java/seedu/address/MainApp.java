@@ -44,6 +44,7 @@ public class MainApp extends Application {
     protected Logic logic;
     protected Storage storage;
     protected Model model;
+    protected StringUtil stringUtil;
     protected Config config;
 
     @Override
@@ -65,6 +66,9 @@ public class MainApp extends Application {
         logic = new LogicManager(model, storage);
 
         ui = new UiManager(logic);
+
+        StringUtil.initalize(model);
+
     }
 
     /**

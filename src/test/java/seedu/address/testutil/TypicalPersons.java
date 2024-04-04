@@ -61,7 +61,7 @@ public class TypicalPersons {
             .addTag("Assignment1", TagStatus.getTagStatus("cg")).build();
 
     public static final Person JOHN = new PersonBuilder().withType("ta").withName("John Doe").withId("A0111111D")
-            .withPhone("98765432").withEmail("john@example.com").addTag("W09", TagStatus.getTagStatus("av"))
+            .withPhone("98765432").withEmail("john@example.com").addTag("TUES08", TagStatus.getTagStatus("av"))
             .build();
 
     // Manually added - Person's details found in {@code CommandTestUtil}

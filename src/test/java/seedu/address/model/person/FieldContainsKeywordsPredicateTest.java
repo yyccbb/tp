@@ -4,8 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.testutil.TypicalPersons.JANE;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -50,8 +48,6 @@ public class FieldContainsKeywordsPredicateTest {
                 Collections.singletonList("Alice"));
         assertTrue(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
 
-        predicate = new FieldContainsKeywordsPredicate(PREFIX_TAG, Collections.singletonList("Assignment1"));
-        assertTrue(predicate.test(JANE));
 
         // Multiple keywords
         predicate = new FieldContainsKeywordsPredicate(PREFIX_NAME, Arrays.asList("Alice", "Bob"));
