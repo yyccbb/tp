@@ -6,6 +6,8 @@ import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
 
@@ -23,6 +25,9 @@ public class WarningWindow extends UiPart<Stage> {
     @FXML
     private Button okButton;
 
+    @FXML
+    private Button cancelButton;
+
     private boolean isOkClicked = false;
 
     /**
@@ -33,10 +38,33 @@ public class WarningWindow extends UiPart<Stage> {
         super(FXML, root);
         Scene scene = root.getScene();
         if (scene != null) {
+            okButton.arm();
+            cancelButton.disarm();
             okButton.setDefaultButton(true);
+            cancelButton.setDefaultButton(false);
         } else {
             logger.warning("Scene is null, unable to set default button.");
         }
+
+        scene.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
+            if (event.getCode() == KeyCode.LEFT) {
+                okButton.arm();
+                cancelButton.disarm();
+                okButton.setDefaultButton(true);
+                cancelButton.setDefaultButton(false);
+                event.consume();
+            }
+        });
+
+        scene.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
+            if (event.getCode() == KeyCode.RIGHT) {
+                cancelButton.arm();
+                okButton.disarm();
+                cancelButton.setDefaultButton(true);
+                okButton.setDefaultButton(false);
+                event.consume();
+            }
+        });
     }
 
     /**
