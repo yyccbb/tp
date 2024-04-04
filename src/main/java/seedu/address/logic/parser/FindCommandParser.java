@@ -39,7 +39,7 @@ public class FindCommandParser implements Parser<FindCommand> {
 
         List<FieldContainsKeywordsPredicate> predicates = new ArrayList<>();
 
-        PersonType type = ParserUtil.parseFindPersonType(argMultimap.getPreamble());
+        PersonType type = StatefulParserUtil.parseFindPersonType(argMultimap.getPreamble());
         if (type != null) {
             List<String> separated = Arrays.asList(type.toString().split("\\s+"));
             predicates.add(new FieldContainsKeywordsPredicate(separated));
@@ -47,7 +47,7 @@ public class FindCommandParser implements Parser<FindCommand> {
 
         List<Prefix> allPrefixes = Arrays.asList(PREFIX_NAME, PREFIX_ID, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_TAG);
         for (Prefix prefix: allPrefixes) {
-            if (ParserUtil.arePrefixesPresent(argMultimap, prefix)) {
+            if (StatefulParserUtil.arePrefixesPresent(argMultimap, prefix)) {
                 List<String> keywords = argMultimap.getAllValues(prefix);
                 List<String> separated = StringListUtil.separateWithSpaces(keywords);
                 predicates.add(new FieldContainsKeywordsPredicate(prefix, separated));

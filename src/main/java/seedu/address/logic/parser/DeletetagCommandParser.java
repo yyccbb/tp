@@ -25,13 +25,13 @@ public class DeletetagCommandParser implements Parser<DeletetagCommand> {
 
         Index index;
         try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
+            index = StatefulParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (IllegalValueException ive) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     DeletetagCommand.MESSAGE_USAGE), ive);
         }
 
-        if (!ParserUtil.arePrefixesPresent(argMultimap, PREFIX_TAG)) {
+        if (!StatefulParserUtil.arePrefixesPresent(argMultimap, PREFIX_TAG)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     DeletetagCommand.MESSAGE_USAGE));
         }

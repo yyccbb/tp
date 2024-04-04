@@ -30,18 +30,18 @@ public class MarkCommandParser implements Parser<MarkCommand> {
 
         Set<Index> indices;
         try {
-            indices = ParserUtil.parseIndices(argMultimap.getPreamble());
+            indices = StatefulParserUtil.parseIndices(argMultimap.getPreamble());
         } catch (IllegalValueException ive) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkCommand.MESSAGE_USAGE), ive);
         }
 
-        if (!ParserUtil.arePrefixesPresent(argMultimap, PREFIX_TAG, PREFIX_TAGSTATUS)) {
+        if (!StatefulParserUtil.arePrefixesPresent(argMultimap, PREFIX_TAG, PREFIX_TAGSTATUS)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkCommand.MESSAGE_USAGE));
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_TAG, PREFIX_TAGSTATUS);
         String tagNamesString = argMultimap.getValue(PREFIX_TAG).get();
-        Set<String> tagNames = ParserUtil.parseTagNamesString(tagNamesString);
+        Set<String> tagNames = StatefulParserUtil.parseTagNamesString(tagNamesString);
 
         String statusIdentifier = argMultimap.getValue(PREFIX_TAGSTATUS).get();
 

@@ -32,7 +32,6 @@ public class MarkCommand extends Command {
             + " assignment1 " + PREFIX_TAGSTATUS + " cg";
     public static final String SAMPLE_COMMAND_2 = COMMAND_WORD + " 1 2 " + PREFIX_TAG
             + " assignment2 assignment3 " + PREFIX_TAGSTATUS + " ig";
-    // to be updated
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Updates the status of the specified tag(s) "
             + "of specified contact entry(s) with the specified status.\n"
             + "If the tag(s) specified does not exist, a new tag with the tag name"

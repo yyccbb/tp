@@ -26,7 +26,7 @@ public class EditTutTagListCommandParser implements Parser<EditTutTagListCommand
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_TAG);
 
-        if (!ParserUtil.arePrefixesPresent(argMultimap, PREFIX_TAG)) {
+        if (!StatefulParserUtil.arePrefixesPresent(argMultimap, PREFIX_TAG)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     EditTutTagListCommand.MESSAGE_USAGE));
         }
@@ -36,7 +36,7 @@ public class EditTutTagListCommandParser implements Parser<EditTutTagListCommand
         String tagName = argMultimap.getValue(PREFIX_TAG).get();
 
         try {
-            boolean isCreatingNewFlag = ParserUtil.isCreatingNewTag(commandFlag);
+            boolean isCreatingNewFlag = StatefulParserUtil.isCreatingNewTag(commandFlag);
             Tag.isTagNameValid(tagName);
             return new EditTutTagListCommand(tagName, isCreatingNewFlag);
         } catch (ParseException e) {
