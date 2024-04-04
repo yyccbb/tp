@@ -16,7 +16,7 @@ public class AvailableCommand extends Command {
     public static final String COMMAND_WORD = "available";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all available TAs for the tutorial slot.\n"
-            + "Parameters: [FLAG] [TUTORIAL SLOT] \n"
+            + "Parameters: [FLAG] [TUTORIAL] \n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_GROUP + " TUES08 ";
     public static final String SAMPLE_COMMAND = COMMAND_WORD + " " + PREFIX_GROUP + " WED10 ";
