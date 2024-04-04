@@ -25,6 +25,10 @@ public class WarningWindow extends UiPart<Stage> {
 
     private boolean isOkClicked = false;
 
+    /**
+     * Constructor for Warning Window controller
+     * @param root
+     */
     public WarningWindow(Stage root) {
         super(FXML, root);
         Scene scene = root.getScene();
