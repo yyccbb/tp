@@ -69,7 +69,8 @@ public class PersonCard extends UiPart<Region> {
         type.getStyleClass().setAll(person.getType() == PersonType.TA ? "type-ta" : "type-stu");
         addTagsToContainer(person, Tag::isAssignment, assignmentTags);
         addTagsToContainer(person, Tag::isAttendance, attendanceTags);
-        addTagsToContainer(person, Tag::isTutorial, tutorialTags);
+        addTagsToContainer(person, Tag::isAssigned, tutorialTags);
+        addTagsToContainer(person, Tag::isAvailable, tutorialTags);
     }
 
     private void addTagsToContainer(Person person, Predicate<Tag> filterPredicate, FlowPane container) {
