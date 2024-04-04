@@ -63,16 +63,16 @@ public abstract class Tag {
         }
     }
 
+    public String getTagName() {
+        return tagName;
+    }
+
     public TagStatus getTagStatus() {
         return tagStatus;
     }
 
     public TagType getTagType() {
         return tagType;
-    }
-
-    public String getTagName() {
-        return tagName;
     }
 
     public static TagType getTagTypeWithTagStatus(TagStatus ts) {
