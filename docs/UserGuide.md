@@ -210,19 +210,30 @@ tutorial group TUE08.
 * 
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Note:** For **Tutorial** tags, the tutorial name must be a valid tutorial
-in the list of available tutorial sessions defined with the [tuttag](#adding-a-tutorial--tuttag-add) command.
-For example, in the third example above, `TUE08` should be added as a tutorial first using `tuttag add /t TUE08`.
+**:information_source: Note:** For **Tutorial** tags, the tutorial name must be that of a valid Tutorial tag in the list of available tutorial sessions defined with the [tuttag](#adding-a-tutorial--tuttag-add) command.
+For example, in the third example above, `TUE08` should be added as a tutorial tag first using `tuttag add /t TUE08`.
 
 </div>
 
 ### Adding a Tutorial: `tuttag add`
 
+Creates a Tutorial tag to be used with the specified tag name.
 
+Format: `tuttag add /t TAG`
+
+Examples:
+
+* `tuttag add /t TUE08` adds TUE08 as a valid Tutorial tag.
 
 ### Deleting a Tutorial: `tuttag del`
 
+Deletes the Tutorial tag corresponding to the specified tag name. If the specified tag does not exist, no change should happen.
 
+Format: `tuttag del /t TAG`
+
+Examples:
+
+* `tuttag del /t WED09` deletes WED09 as a valid Tutorial tag.
 
 ### Deleting a tag: `deletetag`
 
