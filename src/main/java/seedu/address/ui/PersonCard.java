@@ -35,6 +35,9 @@ public class PersonCard extends UiPart<Region> {
     private Label name;
     @FXML
     private Label id;
+
+    @FXML
+    private Label index;
     @FXML
     private Label phone;
     @FXML
@@ -57,6 +60,7 @@ public class PersonCard extends UiPart<Region> {
     public PersonCard(Person person, int displayedIndex) {
         super(FXML);
         this.person = person;
+        index.setText(Integer.toString(displayedIndex));
         name.setText(person.getName().fullName);
         id.setText(person.getId().value);
         phone.setText(person.getPhone().value);
@@ -70,10 +74,10 @@ public class PersonCard extends UiPart<Region> {
 
     private void addTagsToContainer(Person person, Predicate<Tag> filterPredicate, FlowPane container) {
         person.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
+                .sorted(Comparator.comparing(tag -> tag.getTagName()))
                 .filter(filterPredicate)
                 .forEach(tag -> {
-                    Label tagLabel = new Label(tag.tagName);
+                    Label tagLabel = new Label(tag.getTagName());
                     tagLabel.getStyleClass().addAll("label", tag.getTagStatus().toString().toLowerCase());
                     container.getChildren().add(tagLabel);
                 });

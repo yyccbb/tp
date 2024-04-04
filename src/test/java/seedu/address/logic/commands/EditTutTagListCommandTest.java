@@ -4,8 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalTutorialTag.WED10;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -15,84 +14,71 @@ import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.logic.Messages;
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.TutorialTag;
-import seedu.address.testutil.PersonBuilder;
 
-public class AddCommandTest {
+class EditTutTagListCommandTest {
+    static final String TAGNAME_WED10 = "WED10";
+    static final String TAGNAME_THU10 = "THU10";
 
     @Test
-    public void constructor_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddCommand(null));
+    public void execute_tutorialTagAcceptedByModel_addSuccessful() throws Exception {
+        EditTutTagListCommandTest.ModelStubAcceptingTutorialTagAdded modelStub =
+                new EditTutTagListCommandTest.ModelStubAcceptingTutorialTagAdded();
+
+        new EditTutTagListCommand(TAGNAME_WED10, true)
+                .execute(modelStub);
+
+        assertEquals(Arrays.asList(WED10), modelStub.tutorialTagAdded);
     }
 
     @Test
-    public void execute_getNeedsWarningPopup_returnsFalse() {
-        Person validPerson = new PersonBuilder().build();
+    public void execute_tutorialTagDeletedByModel_addSuccessful() throws Exception {
+        EditTutTagListCommandTest.ModelStubAcceptingTutorialTagAdded modelStub =
+                new EditTutTagListCommandTest.ModelStubAcceptingTutorialTagAdded();
 
-        AddCommand addCommand = new AddCommand(validPerson);
+        modelStub.addTutorialTag(WED10);
 
-        assertFalse(addCommand.getNeedsWarningPopup());
-    }
+        new EditTutTagListCommand(TAGNAME_WED10, false)
+                .execute(modelStub);
 
-    @Test
-    public void execute_personAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
-        Person validPerson = new PersonBuilder().build();
-
-        CommandResult commandResult = new AddCommand(validPerson).execute(modelStub);
-
-        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validPerson)),
-                commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
-    }
-
-    @Test
-    public void execute_duplicatePerson_throwsCommandException() {
-        Person validPerson = new PersonBuilder().build();
-        AddCommand addCommand = new AddCommand(validPerson);
-        ModelStub modelStub = new ModelStubWithPerson(validPerson);
-
-        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
+        assertFalse(modelStub.hasTutorialTag(WED10));
     }
 
     @Test
     public void equals() {
-        Person alice = new PersonBuilder().withId("A0123456B").build();
-        Person bob = new PersonBuilder().withId("A0012345B").build();
-        AddCommand addAliceCommand = new AddCommand(alice);
-        AddCommand addBobCommand = new AddCommand(bob);
+        EditTutTagListCommand addWed10Command = new EditTutTagListCommand(TAGNAME_WED10, true);
+        EditTutTagListCommand addThu10Command = new EditTutTagListCommand(TAGNAME_THU10, true);
 
         // same object -> returns true
-        assertTrue(addAliceCommand.equals(addAliceCommand));
+        assertTrue(addWed10Command.equals(addWed10Command));
 
         // same values -> returns true
-        AddCommand addAliceCommandCopy = new AddCommand(alice);
-        assertTrue(addAliceCommand.equals(addAliceCommandCopy));
+        EditTutTagListCommand addWed10CommandCopy = new EditTutTagListCommand(TAGNAME_WED10, true);
+        assertTrue(addWed10Command.equals(addWed10CommandCopy));
 
         // different types -> returns false
-        assertFalse(addAliceCommand.equals(1));
+        assertFalse(addWed10Command.equals(1));
 
         // null -> returns false
-        assertFalse(addAliceCommand.equals(null));
+        assertFalse(addWed10Command.equals(null));
 
-        // different person -> returns false
-        assertFalse(addAliceCommand.equals(addBobCommand));
+        // different tutorialTag -> returns false
+        assertFalse(addWed10Command.equals(addThu10Command));
     }
 
     @Test
     public void toStringMethod() {
-        AddCommand addCommand = new AddCommand(ALICE);
-        String expected = AddCommand.class.getCanonicalName() + "{toAdd=" + ALICE + "}";
-        assertEquals(expected, addCommand.toString());
+        EditTutTagListCommand editTutTagListCommand = new EditTutTagListCommand(TAGNAME_WED10, true);
+        String expected = EditTutTagListCommand.class.getCanonicalName() + "{tagName=" + TAGNAME_WED10 + "}";
+        assertEquals(expected, editTutTagListCommand.toString());
     }
 
     /**
@@ -193,45 +179,36 @@ public class AddCommandTest {
     }
 
     /**
-     * A Model stub that contains a single person.
-     */
-    private class ModelStubWithPerson extends ModelStub {
-        private final Person person;
-
-        ModelStubWithPerson(Person person) {
-            requireNonNull(person);
-            this.person = person;
-        }
-
-        @Override
-        public boolean hasPerson(Person person) {
-            requireNonNull(person);
-            return this.person.isSamePerson(person);
-        }
-    }
-
-    /**
      * A Model stub that always accept the person being added.
      */
-    private class ModelStubAcceptingPersonAdded extends ModelStub {
-        final ArrayList<Person> personsAdded = new ArrayList<>();
+    private class ModelStubAcceptingTutorialTagAdded extends ModelStub {
+        final ArrayList<TutorialTag> tutorialTagAdded = new ArrayList<>();
 
         @Override
-        public boolean hasPerson(Person person) {
-            requireNonNull(person);
-            return personsAdded.stream().anyMatch(person::isSamePerson);
+        public boolean hasTutorialTag(TutorialTag tutorialTag) {
+            requireNonNull(tutorialTag);
+            return tutorialTagAdded.stream().anyMatch(tutorialTag::isSameTutorialTag);
         }
 
         @Override
-        public void addPerson(Person person) {
-            requireNonNull(person);
-            personsAdded.add(person);
+        public void addTutorialTag(TutorialTag tutorialTag) {
+            requireNonNull(tutorialTag);
+            tutorialTagAdded.add(tutorialTag);
         }
 
         @Override
         public ReadOnlyAddressBook getAddressBook() {
             return new AddressBook();
         }
-    }
 
+        @Override
+        public ObservableList<TutorialTag> getTutorialTagList() {
+            return FXCollections.observableArrayList(tutorialTagAdded);
+        };
+
+        @Override
+        public void deleteTutorialTag(TutorialTag target) {
+            tutorialTagAdded.remove(target);
+        };
+    }
 }

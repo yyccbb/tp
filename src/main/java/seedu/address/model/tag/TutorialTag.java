@@ -13,4 +13,8 @@ public class TutorialTag extends Tag {
     public TutorialTag(String tagName, TagStatus tagStatus) {
         super(tagName, tagStatus);
     }
+
+    public boolean isSameTutorialTag(TutorialTag tutorialTag) {
+        return this.getTagName().equals(tutorialTag.getTagName());
+    }
 }

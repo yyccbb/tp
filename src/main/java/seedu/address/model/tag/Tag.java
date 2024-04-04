@@ -14,7 +14,7 @@ public abstract class Tag {
     public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric";
     public static final String VALIDATION_REGEX = "\\p{Alnum}+";
 
-    public final String tagName;
+    private final String tagName;
     private TagStatus tagStatus;
     private TagType tagType;
 
@@ -32,13 +32,13 @@ public abstract class Tag {
         checkArgument(isValidTagName(tagName), MESSAGE_CONSTRAINTS);
         this.tagName = tagName;
         this.tagStatus = tagStatus;
-        this.tagType = getTagType(tagStatus);
+        this.tagType = getTagTypeWithTagStatus(tagStatus);
     }
 
     /**
      * Creates a new Tag with specified tagName and tagStatus.
      *
-     * @param tagName Name of the tag to be created.
+     * @param tagName   Name of the tag to be created.
      * @param tagStatus Status of the tag.
      * @return A new tag of specific type corresponding to the TagStatus input.
      */
@@ -49,7 +49,7 @@ public abstract class Tag {
         // by default
         requireNonNull(tagStatus);
         checkArgument(isValidTagName(tagName), MESSAGE_CONSTRAINTS);
-        TagType tagType = getTagType(tagStatus);
+        TagType tagType = getTagTypeWithTagStatus(tagStatus);
 
         switch (tagType) {
         case ASSIGNMENT:
@@ -71,7 +71,11 @@ public abstract class Tag {
         return tagType;
     }
 
-    private static TagType getTagType(TagStatus ts) {
+    public String getTagName() {
+        return tagName;
+    }
+
+    public static TagType getTagTypeWithTagStatus(TagStatus ts) {
         switch (ts) {
         case COMPLETE_GOOD:
         case COMPLETE_BAD:
@@ -129,8 +133,8 @@ public abstract class Tag {
     }
 
     /**
-     * @param currTags current tag set to be updated.
-     * @param tagName name of the new tag.
+     * @param currTags  current tag set to be updated.
+     * @param tagName   name of the new tag.
      * @param tagStatus tagStatus of the new tag.
      * @return
      */
@@ -148,7 +152,7 @@ public abstract class Tag {
 
     /**
      * @param currTags current tag set to be updated.
-     * @param tagName name of the new tag.
+     * @param tagName  name of the new tag.
      * @return
      */
     public static Set<Tag> deleteTagFromTagSet(Set<Tag> currTags, String tagName) {
