@@ -47,6 +47,8 @@ public class DeleteCommand extends Command {
         List<Person> lastShownList = new ArrayList<>(model.getFilteredPersonList());
 
         StringBuilder resultStringBuilder;
+
+        checksInvalidIndices(lastShownList, indices);
         try {
             resultStringBuilder = indices.stream().map(x -> {
                 try {
@@ -63,20 +65,29 @@ public class DeleteCommand extends Command {
                 throw e;
             }
         }
+
         resultStringBuilder.deleteCharAt(resultStringBuilder.length() - 1); // remove the last '\n'
         return new CommandResult(resultStringBuilder.toString());
     }
+    private void checksInvalidIndices(List<Person> lastShownList, Set<Index> indices) throws CommandException {
+        // check whether index specified is within valid range
+        List<Integer> invalidIndices = new ArrayList<>();
+        for (Index index: indices) {
+            if (index.getZeroBased() >= lastShownList.size() || index.getZeroBased() < 0) {
+                invalidIndices.add(index.getOneBased());
+            }
+        }
+        if (invalidIndices.size() > 0) {
+            throw new CommandException(
+                    String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, invalidIndices));
+        }
+    }
 
     /**
-     * Deletes a single {@code Person}.
+     * Deletes a single {@code Person}. Index is guaranteed to be a valid index.
      */
     private StringBuilder executeHelper(Model model, List<Person> lastShownList, Index index) throws CommandException {
         requireAllNonNull(model, lastShownList, index);
-
-        // check whether index specified is within valid range
-        if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-        }
 
         Person personToDelete = lastShownList.get(index.getZeroBased());
         model.deletePerson(personToDelete);

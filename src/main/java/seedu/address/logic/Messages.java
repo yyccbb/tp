@@ -16,19 +16,13 @@ public class Messages {
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
     public static final String MESSAGE_INVALID_PERSON_TYPE = PersonType.MESSAGE_CONSTRAINTS;
-    public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid";
+    public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided %1$s is invalid";
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_ONE_PERSON_LISTED_OVERVIEW = "1 person listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
     public static final String MESSAGE_INVALID_TUTORIAL_TAG_VALUE =
             "Specified tutorial tag name is not allowed: ";
-
-    public static final String MESSAGE_BATCH_DELETE_TA_TUTORIALTAG = "No tutorial tag allowed for batchdelete TA.";
-
-    public static final String MESSAGE_INVALID_TUTORIALTAG = "Specified tutorial tag does not exist.";
-    public static final String MESSAGE_BATCH_DELETE_INVALID_TAG = "Specified tag is not a tutorial tag.";
-
 
     /**
      * Returns an error message indicating the duplicate prefixes.
