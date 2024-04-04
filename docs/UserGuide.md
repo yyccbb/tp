@@ -132,6 +132,18 @@ Examples:
 * `find ta` returns all TAs
   ![result for 'find ta'](images/findTaResult.png)
 
+### Locating available TAs for a tutorial group: `available` 
+
+Filters all replacement TAs who are available for a specified tutorial group.
+
+Format: `available [/g TUTORIAL_GROUP]`
+
+* The search is case-sensitive and must match the specified tutorial group exactly.
+
+
+Examples:
+* `available /g TUES08` returns  all TAs who are available to teach tutorial group `TUES08`
+
 ### Deleting a person : `delete`
 
 Deletes the specified person from the address book.
