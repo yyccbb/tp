@@ -255,7 +255,7 @@ class EditTutTagListCommandTest {
         public ObservableList<Person> getPersonList() {
             return new AddressBook().getPersonList();
         }
-      
+
         public String getTutorialTagListString() {
             return "Available Tutorial Tag(s): [ ]";
         }

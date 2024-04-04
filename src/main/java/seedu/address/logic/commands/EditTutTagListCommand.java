@@ -78,7 +78,7 @@ public class EditTutTagListCommand extends Command {
             }
             model.addTutorialTag(tag);
         }
-      
+
         if (commandType == CommandSubtype.DELETE) {
             // Check if specified tutorial tag exists
             TutorialTag tag = new TutorialTag(tagName, TagStatus.AVAILABLE);
