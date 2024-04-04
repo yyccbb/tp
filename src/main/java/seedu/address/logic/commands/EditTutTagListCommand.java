@@ -93,7 +93,7 @@ public class EditTutTagListCommand extends Command {
             for (Person person : entireList) {
                 Set<Tag> currTags = new HashSet<>(person.getTags());
                 assert person != null;
-                Person editedPerson = createEditedPerson(person, Tag.deleteTagFromTagSet(currTags, this.tagName));
+                Person editedPerson = createEditedPerson(person, Tag.removeTagFromTagSet(currTags, this.tagName));
 
                 // Update the person list
                 model.setPerson(person, editedPerson);

@@ -36,6 +36,7 @@ public class DeleteCommand extends Command {
      * @param indices set of indices whose contact entry are to be deleted.
      */
     public DeleteCommand(Set<Index> indices) {
+        requireNonNull(indices);
         this.needsWarningPopup = true;
         this.indices = indices;
     }

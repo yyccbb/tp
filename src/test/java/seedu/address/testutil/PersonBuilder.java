@@ -113,8 +113,8 @@ public class PersonBuilder {
     /**
      * Removes specified tag from the {@code Tag} of the {@code Person} that we are building.
      */
-    public PersonBuilder deleteTag(String tagName) {
-        this.tags = Tag.deleteTagFromTagSet(new HashSet<>(tags), tagName);
+    public PersonBuilder removeTag(String tagName) {
+        this.tags = Tag.removeTagFromTagSet(new HashSet<>(tags), tagName);
         return this;
     }
 
