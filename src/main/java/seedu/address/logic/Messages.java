@@ -24,6 +24,8 @@ public class Messages {
     public static final String MESSAGE_INVALID_TUTORIAL_TAG_VALUE =
             "Specified tutorial tag name is not allowed: ";
 
+    public static final String MESSAGE_AVAILABLE_TAS_OVERVIEW = "%1$d TAs available for the tutorial group.";
+
     /**
      * Returns an error message indicating the duplicate prefixes.
      */

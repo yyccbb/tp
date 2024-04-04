@@ -1,5 +1,10 @@
 package seedu.address.commons.util;
 
+import javafx.collections.ObservableList;
+import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.TagStatus;
+import seedu.address.model.tag.TutorialTag;
+
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
@@ -11,6 +16,13 @@ import java.util.Arrays;
  * Helper functions for handling strings.
  */
 public class StringUtil {
+
+
+    private static ObservableList<TutorialTag> validTutorials;
+
+    public StringUtil (ObservableList<TutorialTag> validTutorials) {
+        this.validTutorials = validTutorials;
+    }
 
     /**
      * Returns true if the {@code sentence} contains the {@code word}.
@@ -37,6 +49,23 @@ public class StringUtil {
 
         return Arrays.stream(wordsInPreppedSentence)
                 .anyMatch(wordInPreppedSentence -> wordInPreppedSentence.toLowerCase().contains(preppedWord));
+    }
+
+    public static boolean containsTutorialGroup(Tag tag, String tutorialGroup) {
+        requireNonNull(tag);
+        requireNonNull(tutorialGroup);
+
+        String tagName = tag.tagName;
+        checkArgument(!tutorialGroup.isEmpty(), "Tutorial group parameter cannot be empty");
+        checkArgument(!tutorialGroup.contains(" "), "Only use one word for tutorial group parameter");
+
+        for (TutorialTag tutorial : validTutorials) {
+            String validTutorialGroupTag = tutorial.tagName;
+            if (validTutorialGroupTag.equalsIgnoreCase(tutorialGroup)) {
+                return tagName.equalsIgnoreCase(tutorialGroup) && tag.getTagStatus() == TagStatus.AVAILABLE;
+            }
+        }
+        return false;
     }
 
     /**
