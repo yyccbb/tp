@@ -5,10 +5,13 @@ import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputControl;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
@@ -154,11 +157,14 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     public void handleWarning(WarningWindow warningWindow) {
-        if (!warningWindow.isShowing()) {
-            warningWindow.showAndWait();
-        } else {
-            warningWindow.focus();
-        }
+        Stage popupStage = warningWindow.getRoot();
+
+        // ensure that the warningWindow is always focused and must
+        // be interacted before the user can return to the main window
+        popupStage.initModality(Modality.APPLICATION_MODAL);
+        popupStage.initOwner(primaryStage);
+
+        warningWindow.showAndWait();
     }
 
     void show() {
@@ -175,6 +181,20 @@ public class MainWindow extends UiPart<Stage> {
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
         primaryStage.hide();
+    }
+
+    /**
+     * Gives the command text field focus and makes it editable
+     * whenever enter or slash keys are pressed.
+     */
+    @FXML
+    private void handleEnterReleased(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER || event.getCode() == KeyCode.SLASH) {
+            TextField commandInputField =
+                    (TextField) ((StackPane) this.commandBoxPlaceholder.getChildren().get(0)).getChildren().get(0);
+            commandInputField.requestFocus();
+            commandInputField.setEditable(true);
+        }
     }
 
     public PersonListPanel getPersonListPanel() {
