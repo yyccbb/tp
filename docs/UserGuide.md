@@ -136,7 +136,7 @@ Examples:
 
 Filters all replacement TAs who are available for a specified tutorial group.
 
-Format: `available [/g TUTORIAL_GROUP]`
+Format: `available /g TUTORIAL`
 
 * The search is case-sensitive and must match the specified tutorial group exactly.
 
