@@ -56,7 +56,7 @@ public class EditTutTagListCommand extends Command {
         if (!isAdding) {
             model.deleteTutorialTag(new TutorialTag(tagName, TagStatus.AVAILABLE));
         }
-        return new CommandResult(model.getTutorialTagListString());//model.getTutorialTagList().toString());
+        return new CommandResult(model.getTutorialTagListString());
     }
 
     @Override
@@ -72,5 +72,12 @@ public class EditTutTagListCommand extends Command {
 
         EditTutTagListCommand otherFindCommand = (EditTutTagListCommand) other;
         return tagName.equals(otherFindCommand.tagName);
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("tagName", tagName)
+                .toString();
     }
 }

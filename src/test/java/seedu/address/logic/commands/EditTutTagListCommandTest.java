@@ -215,5 +215,10 @@ class EditTutTagListCommandTest {
         public void deleteTutorialTag(TutorialTag target) {
             tutorialTagAdded.remove(target);
         };
+
+        @Override
+        public String getTutorialTagListString() {
+            return tutorialTagAdded.toString();
+        }
     }
 }
