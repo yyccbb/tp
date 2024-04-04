@@ -35,7 +35,7 @@ class EditTutTagListCommandTest {
         EditTutTagListCommandTest.ModelStubAcceptingTutorialTagAdded modelStub =
                 new EditTutTagListCommandTest.ModelStubAcceptingTutorialTagAdded();
 
-        new EditTutTagListCommand(TAGNAME_WED10, true)
+        new EditTutTagListCommand(TAGNAME_WED10, EditTutTagListCommand.CommandSubtype.ADD)
                 .execute(modelStub);
 
         assertEquals(Arrays.asList(WED10), modelStub.tutorialTagAdded);
@@ -48,7 +48,7 @@ class EditTutTagListCommandTest {
 
         modelStub.addTutorialTag(WED10);
 
-        new EditTutTagListCommand(TAGNAME_WED10, false)
+        new EditTutTagListCommand(TAGNAME_WED10, EditTutTagListCommand.CommandSubtype.DELETE)
                 .execute(modelStub);
 
         assertFalse(modelStub.hasTutorialTag(WED10));
@@ -61,7 +61,8 @@ class EditTutTagListCommandTest {
 
         modelStub.addTutorialTag(WED10);
 
-        EditTutTagListCommand command = new EditTutTagListCommand(TAGNAME_WED10, true);
+        EditTutTagListCommand command = new EditTutTagListCommand(TAGNAME_WED10,
+                EditTutTagListCommand.CommandSubtype.ADD);
 
         assertThrows(CommandException.class, () -> command.execute(modelStub));
     }
@@ -69,14 +70,17 @@ class EditTutTagListCommandTest {
 
     @Test
     public void equals() {
-        EditTutTagListCommand addWed10Command = new EditTutTagListCommand(TAGNAME_WED10, true);
-        EditTutTagListCommand addThu10Command = new EditTutTagListCommand(TAGNAME_THU10, true);
+        EditTutTagListCommand addWed10Command = new EditTutTagListCommand(TAGNAME_WED10,
+                EditTutTagListCommand.CommandSubtype.ADD);
+        EditTutTagListCommand addThu10Command = new EditTutTagListCommand(TAGNAME_THU10,
+                EditTutTagListCommand.CommandSubtype.ADD);
 
         // same object -> returns true
         assertTrue(addWed10Command.equals(addWed10Command));
 
         // same values -> returns true
-        EditTutTagListCommand addWed10CommandCopy = new EditTutTagListCommand(TAGNAME_WED10, true);
+        EditTutTagListCommand addWed10CommandCopy = new EditTutTagListCommand(TAGNAME_WED10,
+                EditTutTagListCommand.CommandSubtype.ADD);
         assertTrue(addWed10Command.equals(addWed10CommandCopy));
 
         // different types -> returns false
@@ -91,7 +95,8 @@ class EditTutTagListCommandTest {
 
     @Test
     public void toStringMethod() {
-        EditTutTagListCommand editTutTagListCommand = new EditTutTagListCommand(TAGNAME_WED10, true);
+        EditTutTagListCommand editTutTagListCommand = new EditTutTagListCommand(TAGNAME_WED10,
+                EditTutTagListCommand.CommandSubtype.ADD);
         String expected = EditTutTagListCommand.class.getCanonicalName() + "{tagName=" + TAGNAME_WED10 + "}";
         assertEquals(expected, editTutTagListCommand.toString());
     }

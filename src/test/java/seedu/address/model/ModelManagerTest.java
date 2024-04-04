@@ -16,7 +16,7 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.logic.commands.ListTutTagCommand;
+import seedu.address.logic.commands.EditTutTagListCommand;
 import seedu.address.model.person.FieldContainsKeywordsPredicate;
 import seedu.address.testutil.AddressBookBuilder;
 
@@ -162,6 +162,6 @@ public class ModelManagerTest {
 
     @Test
     public void getTutorialTagListString() {
-        assertEquals(modelManager.getTutorialTagListString(), ListTutTagCommand.EMPTY_TUTORIALTAGLIST_OUTPUT);
+        assertEquals(modelManager.getTutorialTagListString(), EditTutTagListCommand.EMPTY_TUTORIALTAGLIST_OUTPUT);
     }
 }

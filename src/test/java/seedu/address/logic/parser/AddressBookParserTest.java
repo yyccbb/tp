@@ -25,7 +25,6 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
-import seedu.address.logic.commands.ListTutTagCommand;
 import seedu.address.logic.commands.MarkCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.FieldContainsKeywordsPredicate;
@@ -108,11 +107,6 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_editTutTagList() throws Exception {
         assertTrue(parser.parseCommand(EditTutTagListCommand.SAMPLE_COMMAND) instanceof EditTutTagListCommand);
-    }
-
-    @Test
-    public void parseCommand_listTutTag() throws Exception {
-        assertTrue(parser.parseCommand(ListTutTagCommand.COMMAND_WORD) instanceof ListTutTagCommand);
     }
 
     @Test

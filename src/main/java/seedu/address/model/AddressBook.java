@@ -172,7 +172,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     public String getTutorialTagListString() {
-        StringBuilder sb = new StringBuilder("Available Tutorial Tags: [");
+        StringBuilder sb = new StringBuilder("Available Tutorial Tag(s): [");
 
         if (!tutorialTags.isEmpty()) {
             for (TutorialTag tag : tutorialTags) {
