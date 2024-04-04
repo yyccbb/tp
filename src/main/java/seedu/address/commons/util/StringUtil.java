@@ -8,6 +8,7 @@ import java.io.StringWriter;
 import java.util.Arrays;
 
 import javafx.collections.ObservableList;
+import seedu.address.model.Model;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.TagStatus;
 import seedu.address.model.tag.TutorialTag;
@@ -16,12 +17,28 @@ import seedu.address.model.tag.TutorialTag;
  * Helper functions for handling strings.
  */
 public class StringUtil {
-
-
+    private static StringUtil instance = null;
     private static ObservableList<TutorialTag> validTutorials;
+    private Model model;
 
-    public StringUtil(ObservableList<TutorialTag> validTutorials) {
-        this.validTutorials = validTutorials;
+    private StringUtil(Model model) {
+        this.model = model;
+    }
+
+    /**
+     * Initializes the StringUtil instance.
+     */
+    public static void initalize(Model model) {
+        if (instance == null) {
+            instance = new StringUtil(model);
+        }
+    }
+
+    public static StringUtil getInstance() {
+        if (instance == null) {
+            throw new NullPointerException("StringUtil has not been initialized");
+        }
+        return instance;
     }
 
     /**
@@ -65,6 +82,7 @@ public class StringUtil {
         String tagName = tag.getTagName().toLowerCase();
         String preppedWord = word.trim();
         checkArgument(!preppedWord.isEmpty(), "Word parameter cannot be empty");
+        validTutorials = instance.model.getTutorialTagList();
 
         for (TutorialTag tutorial : validTutorials) {
             String tutorialGroup = tutorial.getTagName().toLowerCase();
@@ -88,6 +106,7 @@ public class StringUtil {
         String tagName = tag.getTagName();
         checkArgument(!tutorialGroup.isEmpty(), "Tutorial group parameter cannot be empty");
         checkArgument(!tutorialGroup.contains(" "), "Only use one word for tutorial group parameter");
+        validTutorials = instance.model.getTutorialTagList();
 
         for (TutorialTag tutorial : validTutorials) {
             String validTutorialGroupTag = tutorial.getTagName();

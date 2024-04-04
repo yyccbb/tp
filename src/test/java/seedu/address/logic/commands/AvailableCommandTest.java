@@ -6,11 +6,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.TypicalModel.MODEL;
 import static seedu.address.testutil.TypicalTutorialTag.THU10;
 import static seedu.address.testutil.TypicalTutorialTag.WED10;
-import static seedu.address.testutil.TypicalValidTutorialTagList.VALID_TUTORIAL_TAG_LIST;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -47,7 +45,7 @@ public class AvailableCommandTest {
     @Test
     public void execute_validTutorialTag_success() throws CommandException {
         Model model = MODEL;
-        StringUtil testStringUtil = new StringUtil(VALID_TUTORIAL_TAG_LIST);
+        //StringUtil testStringUtil = new StringUtil(VALID_TUTORIAL_TAG_LIST);
         TutorialTagContainsGroupPredicate predicate = new TutorialTagContainsGroupPredicate("WED10");
         AvailableCommand command = new AvailableCommand(predicate, WED10);
 

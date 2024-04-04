@@ -4,11 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.JOHN;
-import static seedu.address.testutil.TypicalValidTutorialTagList.VALID_TUTORIAL_TAG_LIST;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.commons.util.StringUtil;
 
 public class TutorialTagContainsGroupPredicateTest {
 
@@ -36,7 +34,7 @@ public class TutorialTagContainsGroupPredicateTest {
 
     @Test
     public void test_test() {
-        StringUtil testStringUtil = new StringUtil(VALID_TUTORIAL_TAG_LIST);
+        //StringUtil testStringUtil = new StringUtil(VALID_TUTORIAL_TAG_LIST);
         TutorialTagContainsGroupPredicate predicate = new TutorialTagContainsGroupPredicate("TUES08");
 
         // Person with matching tutorial group
