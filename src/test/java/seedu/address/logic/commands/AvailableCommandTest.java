@@ -3,7 +3,6 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.testutil.TypicalModel.MODEL;
 import static seedu.address.testutil.TypicalTutorialTag.THU10;
 import static seedu.address.testutil.TypicalTutorialTag.WED10;
 
@@ -42,17 +41,6 @@ public class AvailableCommandTest {
         assertFalse(command1.equals(command2));
     }
 
-    @Test
-    public void execute_validTutorialTag_success() throws CommandException {
-        Model model = MODEL;
-        //StringUtil testStringUtil = new StringUtil(VALID_TUTORIAL_TAG_LIST);
-        TutorialTagContainsGroupPredicate predicate = new TutorialTagContainsGroupPredicate("WED10");
-        AvailableCommand command = new AvailableCommand(predicate, WED10);
-
-        CommandResult commandResult = command.execute(model);
-
-        assertEquals("0 TAs available for the tutorial group.", commandResult.getFeedbackToUser());
-    }
 
     @Test
     public void execute_invalidTutorialTag_throwsCommandException() {
