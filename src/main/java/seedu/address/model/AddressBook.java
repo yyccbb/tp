@@ -170,4 +170,12 @@ public class AddressBook implements ReadOnlyAddressBook {
     public int hashCode() {
         return persons.hashCode();
     }
+
+    public String getTutorialTagListString() {
+        String s =  "Available Tutorial Tags: ";
+        for (TutorialTag tag : tutorialTags) {
+            s += " " + tag.getTagName();
+        }
+        return s;
+    }
 }

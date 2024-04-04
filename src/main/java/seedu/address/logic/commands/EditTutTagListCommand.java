@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.tag.TagStatus;
 import seedu.address.model.tag.TutorialTag;
@@ -21,7 +22,7 @@ public class EditTutTagListCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates a TutorialTag to be used with the specified "
             + "TagName.\n"
-            + "Parameters: MODE (must be either '-a' for adding tags and '-d' for deleting tags) "
+            + "Parameters: MODE (must be either 'add' for adding tags and 'del' for deleting tags) "
             + PREFIX_TAG + " [TAGNAME]\n"
             + "Example: " + COMMAND_WORD + " " + ADD_FLAG + " " + PREFIX_TAG + " THU10\n";
 
@@ -43,7 +44,7 @@ public class EditTutTagListCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         if (isAdding) {
             model.addTutorialTag(new TutorialTag(tagName, TagStatus.AVAILABLE));
@@ -51,7 +52,7 @@ public class EditTutTagListCommand extends Command {
         if (!isAdding) {
             model.deleteTutorialTag(new TutorialTag(tagName, TagStatus.AVAILABLE));
         }
-        return new CommandResult(model.getTutorialTagList().toString());
+        return new CommandResult(model.getTutorialTagListString());//model.getTutorialTagList().toString());
     }
 
     @Override
@@ -67,12 +68,5 @@ public class EditTutTagListCommand extends Command {
 
         EditTutTagListCommand otherFindCommand = (EditTutTagListCommand) other;
         return tagName.equals(otherFindCommand.tagName);
-    }
-
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this)
-                .add("tagName", tagName)
-                .toString();
     }
 }
