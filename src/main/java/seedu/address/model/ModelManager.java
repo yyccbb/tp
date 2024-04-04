@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
+import javafx.collections.ObservableArray;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
@@ -114,6 +115,10 @@ public class ModelManager implements Model {
     }
 
     //=========== Filtered Person List Accessors =============================================================
+
+
+    @Override
+    public ObservableList<Person> getPersonList() { return addressBook.getPersonList(); }
 
     /**
      * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of

@@ -3,8 +3,14 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.Model;
+import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.TagStatus;
 import seedu.address.model.tag.TutorialTag;
 
@@ -49,9 +55,31 @@ public class EditTutTagListCommand extends Command {
             model.addTutorialTag(new TutorialTag(tagName, TagStatus.AVAILABLE));
         }
         if (!isAdding) {
+
             model.deleteTutorialTag(new TutorialTag(tagName, TagStatus.AVAILABLE));
+
+            // Remove the specified tag from all persons
+            List<Person> entireList = model.getPersonList();
+            for (Person person : entireList) {
+                Set<Tag> currTags = new HashSet<>(person.getTags());
+                assert person != null;
+                Person editedPerson = createEditedPerson(person, Tag.deleteTagFromTagSet(currTags, this.tagName));
+
+                // Update the person list
+                model.setPerson(person, editedPerson);
+            }
+
         }
         return new CommandResult(model.getTutorialTagList().toString());
+    }
+
+    /**
+     * Creates and returns a {@code Person} with the details of {@code personToEdit}
+     */
+    private static Person createEditedPerson(Person personToEdit, Set<Tag> newTags) {
+        assert personToEdit != null;
+        return Person.of(personToEdit.getType(), personToEdit.getName(), personToEdit.getId(),
+                personToEdit.getPhone(), personToEdit.getEmail(), newTags);
     }
 
     @Override
