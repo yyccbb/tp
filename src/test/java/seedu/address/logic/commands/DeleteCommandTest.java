@@ -58,13 +58,35 @@ public class DeleteCommandTest {
     }
 
     @Test
+    public void execute_validMultipleIndexUnfilteredList_success() {
+        Person personToDelete1 = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person personToDelete2 = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
+        Index[] indexArr = {INDEX_FIRST_PERSON, INDEX_SECOND_PERSON};
+        Set<Index> indexSet = new HashSet<>(Arrays.asList(indexArr));
+        DeleteCommand deleteCommand = new DeleteCommand(indexSet);
+
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
+                Messages.format(personToDelete1)) + "\n" + String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
+                Messages.format(personToDelete2));
+        System.out.println(expectedMessage);
+
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.deletePerson(personToDelete1);
+        expectedModel.deletePerson(personToDelete2);
+
+        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
     public void execute_invalidSingleIndexUnfilteredList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
         Index[] indexArr = {outOfBoundIndex};
         Set<Index> indexSet = new HashSet<>(Arrays.asList(indexArr));
         DeleteCommand deleteCommand = new DeleteCommand(indexSet);
 
-        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(deleteCommand, model,
+                String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
+                        "[" + outOfBoundIndex.getOneBased() + "]"));
     }
 
     @Test
@@ -98,7 +120,9 @@ public class DeleteCommandTest {
         // ensures that outOfBoundIndex is still in bounds of address book list
         DeleteCommand deleteCommand = new DeleteCommand(indexSet);
 
-        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(deleteCommand, model,
+                String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
+                        "[" + INDEX_SECOND_PERSON.getOneBased() + "]"));
     }
 
     @Test
