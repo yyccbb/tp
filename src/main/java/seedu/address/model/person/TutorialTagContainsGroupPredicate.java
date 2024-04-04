@@ -33,8 +33,8 @@ public class TutorialTagContainsGroupPredicate implements Predicate<Person> {
             return false;
         }
 
-        TutorialTagContainsGroupPredicate otherNameContainsKeywordsPredicate
-                = (TutorialTagContainsGroupPredicate) other;
+        TutorialTagContainsGroupPredicate otherNameContainsKeywordsPredicate =
+                (TutorialTagContainsGroupPredicate) other;
         return tutorialGroup.equals(otherNameContainsKeywordsPredicate.tutorialGroup);
     }
 

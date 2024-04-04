@@ -1,16 +1,16 @@
 package seedu.address.commons.util;
 
-import javafx.collections.ObservableList;
-import seedu.address.model.tag.Tag;
-import seedu.address.model.tag.TagStatus;
-import seedu.address.model.tag.TutorialTag;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.Arrays;
+
+import javafx.collections.ObservableList;
+import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.TagStatus;
+import seedu.address.model.tag.TutorialTag;
 
 /**
  * Helper functions for handling strings.
@@ -20,7 +20,7 @@ public class StringUtil {
 
     private static ObservableList<TutorialTag> validTutorials;
 
-    public StringUtil (ObservableList<TutorialTag> validTutorials) {
+    public StringUtil(ObservableList<TutorialTag> validTutorials) {
         this.validTutorials = validTutorials;
     }
 
@@ -75,6 +75,12 @@ public class StringUtil {
         return tagName.equalsIgnoreCase(preppedWord);
     }
 
+    /**
+     * Returns true if the {@code tag} contains the {@code tutorialGroup}.
+     *   Ignores case, and performs a full word match.
+     * @param tag cannot be null
+     * @param tutorialGroup cannot be null, cannot be empty
+     */
     public static boolean containsTutorialGroup(Tag tag, String tutorialGroup) {
         requireNonNull(tag);
         requireNonNull(tutorialGroup);

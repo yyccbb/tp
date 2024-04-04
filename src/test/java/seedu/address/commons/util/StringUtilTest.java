@@ -3,8 +3,8 @@ package seedu.address.commons.util;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalModel.MODEL;
 import static seedu.address.testutil.TypicalTutorialTag.WED10;
+import static seedu.address.testutil.TypicalValidTutorialTagList.VALID_TUTORIAL_TAG_LIST;
 
 import java.io.FileNotFoundException;
 
@@ -149,25 +149,25 @@ public class StringUtilTest {
     //---------------- Tests for tagContainsWordIgnoreCase --------------------------------------
     @Test
     public void testTagContainsWordIgnoreCase_wordNotInside() {
-        StringUtil testStringUtil = new StringUtil(MODEL.getTutorialTagList());
+        StringUtil testStringUtil = new StringUtil(VALID_TUTORIAL_TAG_LIST);
         assertFalse(testStringUtil.tagContainsWordIgnoreCase(WED10, "word"));
     }
 
     @Test
     public void testTagContainsWordIgnoreCase_subwordInsideTutorialList() {
-        StringUtil testStringUtil = new StringUtil(MODEL.getTutorialTagList());
+        StringUtil testStringUtil = new StringUtil(VALID_TUTORIAL_TAG_LIST);
         assertTrue(testStringUtil.tagContainsWordIgnoreCase(WED10, "wed"));
     }
 
     @Test
     public void testTagContainsWordIgnoreCase_nullWord_throwsNullPointerException() {
-        StringUtil testStringUtil = new StringUtil(MODEL.getTutorialTagList());
+        StringUtil testStringUtil = new StringUtil(VALID_TUTORIAL_TAG_LIST);
         assertThrows(NullPointerException.class, () -> testStringUtil.tagContainsWordIgnoreCase(WED10, null));
     }
 
     @Test
     public void testTagContainsWordIgnoreCase_wordInsideTag() {
-        StringUtil testStringUtil = new StringUtil(MODEL.getTutorialTagList());
+        StringUtil testStringUtil = new StringUtil(VALID_TUTORIAL_TAG_LIST);
         assertTrue(testStringUtil.tagContainsWordIgnoreCase(new AssignmentTag("Assignment1",
                 TagStatus.COMPLETE_GOOD), "Assignment1"));
     }

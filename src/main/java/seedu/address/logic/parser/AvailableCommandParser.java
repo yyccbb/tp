@@ -5,11 +5,13 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP;
 
 import seedu.address.logic.commands.AvailableCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-
 import seedu.address.model.person.TutorialTagContainsGroupPredicate;
 import seedu.address.model.tag.TagStatus;
 import seedu.address.model.tag.TutorialTag;
 
+/**
+ * Parses input arguments and creates a new AvailableCommand object
+ */
 public class AvailableCommandParser implements Parser<AvailableCommand> {
 
     /**

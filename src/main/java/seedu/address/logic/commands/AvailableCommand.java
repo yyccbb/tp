@@ -22,6 +22,10 @@ public class AvailableCommand extends Command {
 
     private final TutorialTagContainsGroupPredicate predicate;
     private final TutorialTag tutorialGroup;
+
+    /**
+     * Creates an AvailableCommand to find all available TAs for the tutorial group.
+     */
     public AvailableCommand(TutorialTagContainsGroupPredicate predicate, TutorialTag tutorialGroup) {
         this.predicate = predicate;
         this.tutorialGroup = tutorialGroup;
@@ -31,7 +35,7 @@ public class AvailableCommand extends Command {
         requireNonNull(model);
 
         if (!model.hasTutorialTag(tutorialGroup)) {
-                throw new CommandException(Messages.MESSAGE_INVALID_TUTORIAL_TAG_VALUE + tutorialGroup.getTagName());
+            throw new CommandException(Messages.MESSAGE_INVALID_TUTORIAL_TAG_VALUE + tutorialGroup.getTagName());
         }
 
         model.updateFilteredPersonList(predicate);
