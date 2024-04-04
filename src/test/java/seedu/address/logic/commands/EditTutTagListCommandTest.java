@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static seedu.address.testutil.TypicalTutorialTag.WED10;
 
 import java.nio.file.Path;
@@ -17,11 +18,13 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.exceptions.DuplicateTutorialTagException;
 import seedu.address.model.tag.TutorialTag;
 
 class EditTutTagListCommandTest {
@@ -51,6 +54,19 @@ class EditTutTagListCommandTest {
 
         assertFalse(modelStub.hasTutorialTag(WED10));
     }
+
+    @Test
+    public void execute_tutorialAddDuplicateTutorialTag_addFailed() throws Exception {
+        EditTutTagListCommandTest.ModelStubAcceptingTutorialTagAdded modelStub =
+                new EditTutTagListCommandTest.ModelStubAcceptingTutorialTagAdded();
+
+        modelStub.addTutorialTag(WED10);
+
+        EditTutTagListCommand command = new EditTutTagListCommand(TAGNAME_WED10, true);
+
+        assertThrows(CommandException.class, () -> command.execute(modelStub));
+    }
+
 
     @Test
     public void equals() {

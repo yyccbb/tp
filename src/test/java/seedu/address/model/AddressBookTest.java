@@ -144,8 +144,14 @@ public class AddressBookTest {
     }
 
     @Test
-    void getTutorialTagListString() {
+    void getTutorialTagListString_forEmptyAddressBook() {
         assertEquals(addressBook.getTutorialTagListString(), "Available Tutorial Tags: [ ]");
+    }
+
+    @Test
+    void getTutorialTagListString_forNonEmptyAddressBook() {
+        addressBook.addTutorialTag(WED10);
+        assertEquals(addressBook.getTutorialTagListString(), "Available Tutorial Tags: [WED10]");
     }
 
     /**
