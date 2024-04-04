@@ -1,0 +1,19 @@
+#okButton, #cancelButton, #warningMessage {
+    -fx-text-fill: black;
+}
+
+#okButton, #cancelButton {
+    -fx-background-color: #e0e0e0;
+}
+
+#okButton, #cancelButton:hover {
+    -fx-background-color: grey;
+}
+
+#okButton, #cancelButton:armed {
+    -fx-background-color: grey;
+}
+
+#warningMessageContainer {
+    -fx-background-color: white;
+}

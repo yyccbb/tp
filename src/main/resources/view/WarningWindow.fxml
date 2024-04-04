@@ -16,7 +16,7 @@
     <scene>
         <Scene>
             <stylesheets>
-                <URL value="@HelpWindow.css" />
+                <URL value="@WarningWindow.css" />
             </stylesheets>
 
             <HBox alignment="CENTER" fx:id="warningMessageContainer">
@@ -27,10 +27,18 @@
                         </HBox.margin>
                     </Label>
                     <!-- OK Button -->
-                    <Button fx:id="okButton" text="OK" onAction="#okClicked" />
+                    <Button fx:id="okButton" text="OK" mnemonicParsing="false" onAction="#okClicked">
+                        <HBox.margin>
+                            <Insets left="5.0" />
+                        </HBox.margin>
+                    </Button>
 
                     <!-- Cancel Button -->
-                    <Button fx:id="cancelButton" text="Cancel" onAction="#cancelClicked" />
+                    <Button fx:id="cancelButton" text="Cancel" mnemonicParsing="false" onAction="#cancelClicked">
+                        <HBox.margin>
+                            <Insets left="5.0" />
+                        </HBox.margin>
+                    </Button>
                 </children>
                 <opaqueInsets>
                     <Insets bottom="10.0" left="5.0" right="10.0" top="5.0" />

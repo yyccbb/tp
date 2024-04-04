@@ -3,6 +3,8 @@ package seedu.address.ui;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
@@ -18,10 +20,23 @@ public class WarningWindow extends UiPart<Stage> {
     @FXML
     private Label warningMessage;
 
+    @FXML
+    private Button okButton;
+
     private boolean isOkClicked = false;
 
+    /**
+     * Constructor for Warning Window controller
+     * @param root
+     */
     public WarningWindow(Stage root) {
         super(FXML, root);
+        Scene scene = root.getScene();
+        if (scene != null) {
+            okButton.setDefaultButton(true);
+        } else {
+            logger.warning("Scene is null, unable to set default button.");
+        }
     }
 
     /**
