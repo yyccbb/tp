@@ -143,6 +143,17 @@ public class AddressBookTest {
         assertEquals(addressBook.hashCode(), addressBook.hashCode());
     }
 
+    @Test
+    void getTutorialTagListString_forEmptyAddressBook() {
+        assertEquals(addressBook.getTutorialTagListString(), "Available Tutorial Tag(s): [ ]");
+    }
+
+    @Test
+    void getTutorialTagListString_forNonEmptyAddressBook() {
+        addressBook.addTutorialTag(WED10);
+        assertEquals(addressBook.getTutorialTagListString(), "Available Tutorial Tag(s): [WED10]");
+    }
+
     /**
      * A stub ReadOnlyAddressBook whose persons list can violate interface constraints.
      */
@@ -162,5 +173,4 @@ public class AddressBookTest {
             return getTutorialTagList();
         };
     }
-
 }

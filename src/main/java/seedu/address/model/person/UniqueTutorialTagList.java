@@ -113,6 +113,10 @@ public class UniqueTutorialTagList implements Iterable<TutorialTag> {
         return internalList.toString();
     }
 
+    public boolean isEmpty() {
+        return internalList.isEmpty();
+    }
+
     /**
      * Returns true if {@code tutorialTags} contains only unique tutorial tags.
      */

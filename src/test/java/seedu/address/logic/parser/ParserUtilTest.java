@@ -1,7 +1,6 @@
 package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
@@ -208,8 +207,9 @@ public class ParserUtilTest {
 
     @Test
     public void parseEditTutTagListCommandFlag() throws Exception {
-        assert(isCreatingNewTag(EditTutTagListCommand.ADD_FLAG));
-        assertFalse(isCreatingNewTag(EditTutTagListCommand.DELETE_FLAG));
+        assert(isCreatingNewTag(EditTutTagListCommand.ADD_FLAG) == EditTutTagListCommand.CommandSubtype.ADD);
+        assert(isCreatingNewTag(EditTutTagListCommand.DELETE_FLAG) == EditTutTagListCommand.CommandSubtype.DELETE);
+        assert(isCreatingNewTag(EditTutTagListCommand.LIST_FLAG) == EditTutTagListCommand.CommandSubtype.LIST);
         String invalidCommandFlag = "";
         assertThrows(ParseException.class, () -> isCreatingNewTag(invalidCommandFlag));
     }

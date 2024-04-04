@@ -175,13 +175,17 @@ public class ParserUtil {
      * @param flag Command flag on whether the EditTutTagListCommand
      * @throws IllegalArgumentException
      */
-    public static boolean isCreatingNewTag(String flag) throws ParseException {
+    public static EditTutTagListCommand.CommandSubtype isCreatingNewTag(String flag) throws ParseException {
         if (flag.equals(EditTutTagListCommand.ADD_FLAG)) {
-            return true;
+            return EditTutTagListCommand.CommandSubtype.ADD;
         }
 
         if (flag.equals(EditTutTagListCommand.DELETE_FLAG)) {
-            return false;
+            return EditTutTagListCommand.CommandSubtype.DELETE;
+        }
+
+        if (flag.equals(EditTutTagListCommand.LIST_FLAG)) {
+            return EditTutTagListCommand.CommandSubtype.LIST;
         }
 
         throw new ParseException(Messages.MESSAGE_INVALID_COMMAND_FORMAT);

@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.TypicalTutorialTag.WED10;
 
@@ -17,6 +18,7 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
@@ -33,7 +35,7 @@ class EditTutTagListCommandTest {
         EditTutTagListCommandTest.ModelStubAcceptingTutorialTagAdded modelStub =
                 new EditTutTagListCommandTest.ModelStubAcceptingTutorialTagAdded();
 
-        new EditTutTagListCommand(TAGNAME_WED10, true)
+        new EditTutTagListCommand(TAGNAME_WED10, EditTutTagListCommand.CommandSubtype.ADD)
                 .execute(modelStub);
 
         assertEquals(Arrays.asList(WED10), modelStub.tutorialTagAdded);
@@ -46,22 +48,49 @@ class EditTutTagListCommandTest {
 
         modelStub.addTutorialTag(WED10);
 
-        new EditTutTagListCommand(TAGNAME_WED10, false)
+        new EditTutTagListCommand(TAGNAME_WED10, EditTutTagListCommand.CommandSubtype.DELETE)
                 .execute(modelStub);
 
         assertFalse(modelStub.hasTutorialTag(WED10));
     }
 
     @Test
+    public void execute_tutorialAddDuplicateTutorialTag_addFailed() throws Exception {
+        EditTutTagListCommandTest.ModelStubAcceptingTutorialTagAdded modelStub =
+                new EditTutTagListCommandTest.ModelStubAcceptingTutorialTagAdded();
+
+        modelStub.addTutorialTag(WED10);
+
+        EditTutTagListCommand command = new EditTutTagListCommand(TAGNAME_WED10,
+                EditTutTagListCommand.CommandSubtype.ADD);
+
+        assertThrows(CommandException.class, () -> command.execute(modelStub));
+    }
+
+    @Test
+    public void execute_listIsFiltered_showsEverything() throws Exception {
+        EditTutTagListCommandTest.ModelStubAcceptingTutorialTagAdded modelStub =
+                new EditTutTagListCommandTest.ModelStubAcceptingTutorialTagAdded();
+        EditTutTagListCommand command = new EditTutTagListCommand(EditTutTagListCommand.CommandSubtype.LIST);
+        CommandResult result = command.execute(modelStub);
+        CommandResult expectedResult = new CommandResult(EditTutTagListCommand.EMPTY_TUTORIALTAGLIST_OUTPUT);
+        assertEquals(expectedResult, result);
+    }
+
+
+    @Test
     public void equals() {
-        EditTutTagListCommand addWed10Command = new EditTutTagListCommand(TAGNAME_WED10, true);
-        EditTutTagListCommand addThu10Command = new EditTutTagListCommand(TAGNAME_THU10, true);
+        EditTutTagListCommand addWed10Command = new EditTutTagListCommand(TAGNAME_WED10,
+                EditTutTagListCommand.CommandSubtype.ADD);
+        EditTutTagListCommand addThu10Command = new EditTutTagListCommand(TAGNAME_THU10,
+                EditTutTagListCommand.CommandSubtype.ADD);
 
         // same object -> returns true
         assertTrue(addWed10Command.equals(addWed10Command));
 
         // same values -> returns true
-        EditTutTagListCommand addWed10CommandCopy = new EditTutTagListCommand(TAGNAME_WED10, true);
+        EditTutTagListCommand addWed10CommandCopy = new EditTutTagListCommand(TAGNAME_WED10,
+                EditTutTagListCommand.CommandSubtype.ADD);
         assertTrue(addWed10Command.equals(addWed10CommandCopy));
 
         // different types -> returns false
@@ -76,7 +105,8 @@ class EditTutTagListCommandTest {
 
     @Test
     public void toStringMethod() {
-        EditTutTagListCommand editTutTagListCommand = new EditTutTagListCommand(TAGNAME_WED10, true);
+        EditTutTagListCommand editTutTagListCommand = new EditTutTagListCommand(TAGNAME_WED10,
+                EditTutTagListCommand.CommandSubtype.ADD);
         String expected = EditTutTagListCommand.class.getCanonicalName() + "{tagName=" + TAGNAME_WED10 + "}";
         assertEquals(expected, editTutTagListCommand.toString());
     }
@@ -176,6 +206,11 @@ class EditTutTagListCommandTest {
         public ObservableList<TutorialTag> getTutorialTagList() {
             throw new AssertionError("This method should not be called.");
         };
+
+        @Override
+        public String getTutorialTagListString() {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
@@ -210,5 +245,10 @@ class EditTutTagListCommandTest {
         public void deleteTutorialTag(TutorialTag target) {
             tutorialTagAdded.remove(target);
         };
+
+        @Override
+        public String getTutorialTagListString() {
+            return "Available Tutorial Tag(s): [ ]";
+        }
     }
 }
