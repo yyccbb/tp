@@ -44,12 +44,16 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public CommandResult execute(String commandText) throws CommandException, ParseException {
+    public Command parseCommand(String commandText) throws CommandException, ParseException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
+        Command command = addressBookParser.parseCommand(commandText);
+        return command;
+    }
 
+    @Override
+    public CommandResult execute(Command command) throws CommandException, ParseException {
         CommandResult commandResult;
         StringUtil stringUtil = new StringUtil(model.getTutorialTagList());
-        Command command = addressBookParser.parseCommand(commandText);
         commandResult = command.execute(model);
 
         try {
