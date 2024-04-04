@@ -75,7 +75,7 @@ public class EditTutTagListCommand extends Command {
             model.deleteTutorialTag(new TutorialTag(tagName, TagStatus.AVAILABLE));
         }
 
-        if (commandType == CommandSubtype.DELETE) {
+        if (commandType == CommandSubtype.LIST) {
             // nothing needs to be done
         }
 

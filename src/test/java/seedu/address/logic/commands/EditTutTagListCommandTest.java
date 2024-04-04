@@ -67,6 +67,16 @@ class EditTutTagListCommandTest {
         assertThrows(CommandException.class, () -> command.execute(modelStub));
     }
 
+    @Test
+    public void execute_listIsFiltered_showsEverything() throws Exception {
+        EditTutTagListCommandTest.ModelStubAcceptingTutorialTagAdded modelStub =
+                new EditTutTagListCommandTest.ModelStubAcceptingTutorialTagAdded();
+        EditTutTagListCommand command = new EditTutTagListCommand(EditTutTagListCommand.CommandSubtype.LIST);
+        CommandResult result = command.execute(modelStub);
+        CommandResult expectedResult = new CommandResult(EditTutTagListCommand.EMPTY_TUTORIALTAGLIST_OUTPUT);
+        assertEquals(expectedResult, result);
+    }
+
 
     @Test
     public void equals() {
@@ -238,7 +248,7 @@ class EditTutTagListCommandTest {
 
         @Override
         public String getTutorialTagListString() {
-            return tutorialTagAdded.toString();
+            return "Available Tutorial Tag(s): [ ]";
         }
     }
 }
