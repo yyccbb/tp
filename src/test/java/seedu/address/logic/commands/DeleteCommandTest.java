@@ -10,6 +10,10 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
@@ -30,15 +34,19 @@ public class DeleteCommandTest {
     @Test
     public void execute_getNeedsWarningPopup_returnsTrue() {
 
-        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);
+        Index[] indexArr = {INDEX_FIRST_PERSON};
+        Set<Index> indexSet = new HashSet<>(Arrays.asList(indexArr));
+        DeleteCommand deleteCommand = new DeleteCommand(indexSet);
 
         assertTrue(deleteCommand.getNeedsWarningPopup());
     }
 
     @Test
-    public void execute_validIndexUnfilteredList_success() {
+    public void execute_validSingleIndexUnfilteredList_success() {
         Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);
+        Index[] indexArr = {INDEX_FIRST_PERSON};
+        Set<Index> indexSet = new HashSet<>(Arrays.asList(indexArr));
+        DeleteCommand deleteCommand = new DeleteCommand(indexSet);
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
                 Messages.format(personToDelete));
@@ -50,19 +58,23 @@ public class DeleteCommandTest {
     }
 
     @Test
-    public void execute_invalidIndexUnfilteredList_throwsCommandException() {
+    public void execute_invalidSingleIndexUnfilteredList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
-        DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
+        Index[] indexArr = {outOfBoundIndex};
+        Set<Index> indexSet = new HashSet<>(Arrays.asList(indexArr));
+        DeleteCommand deleteCommand = new DeleteCommand(indexSet);
 
         assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
     @Test
-    public void execute_validIndexFilteredList_success() {
+    public void execute_validSingleIndexFilteredList_success() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
         Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);
+        Index[] indexArr = {INDEX_FIRST_PERSON};
+        Set<Index> indexSet = new HashSet<>(Arrays.asList(indexArr));
+        DeleteCommand deleteCommand = new DeleteCommand(indexSet);
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
                 Messages.format(personToDelete));
@@ -75,28 +87,36 @@ public class DeleteCommandTest {
     }
 
     @Test
-    public void execute_invalidIndexFilteredList_throwsCommandException() {
+    public void execute_invalidSingleIndexFilteredList_throwsCommandException() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
         Index outOfBoundIndex = INDEX_SECOND_PERSON;
-        // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
 
-        DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
+        Index[] indexArr = {outOfBoundIndex};
+        Set<Index> indexSet = new HashSet<>(Arrays.asList(indexArr));
+        // ensures that outOfBoundIndex is still in bounds of address book list
+        DeleteCommand deleteCommand = new DeleteCommand(indexSet);
 
         assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
     @Test
     public void equals() {
-        DeleteCommand deleteFirstCommand = new DeleteCommand(INDEX_FIRST_PERSON);
-        DeleteCommand deleteSecondCommand = new DeleteCommand(INDEX_SECOND_PERSON);
+        Index[] firstPersonIndexArr = {INDEX_FIRST_PERSON};
+        Set<Index> firstPersonIndexSet = new HashSet<>(Arrays.asList(firstPersonIndexArr));
+        Index[] secondPersonIndexArr = {INDEX_SECOND_PERSON};
+        Set<Index> secondPersonIndexSet = new HashSet<>(Arrays.asList(secondPersonIndexArr));
+
+
+        DeleteCommand deleteFirstCommand = new DeleteCommand(firstPersonIndexSet);
+        DeleteCommand deleteSecondCommand = new DeleteCommand(secondPersonIndexSet);
 
         // same object -> returns true
         assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
 
         // same values -> returns true
-        DeleteCommand deleteFirstCommandCopy = new DeleteCommand(INDEX_FIRST_PERSON);
+        DeleteCommand deleteFirstCommandCopy = new DeleteCommand(firstPersonIndexSet);
         assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
 
         // different types -> returns false
@@ -112,8 +132,10 @@ public class DeleteCommandTest {
     @Test
     public void toStringMethod() {
         Index targetIndex = Index.fromOneBased(1);
-        DeleteCommand deleteCommand = new DeleteCommand(targetIndex);
-        String expected = DeleteCommand.class.getCanonicalName() + "{targetIndex=" + targetIndex + "}";
+        Index[] indexArr = {targetIndex};
+        Set<Index> indexSet = new HashSet<>(Arrays.asList(indexArr));
+        DeleteCommand deleteCommand = new DeleteCommand(indexSet);
+        String expected = DeleteCommand.class.getCanonicalName() + "{index=[" + targetIndex + "]}";
         assertEquals(expected, deleteCommand.toString());
     }
 

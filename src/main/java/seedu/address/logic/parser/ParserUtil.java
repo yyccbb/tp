@@ -2,9 +2,12 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
@@ -38,6 +41,40 @@ public class ParserUtil {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
+    }
+
+    /**
+     * Parses a {@code String} consisting of indices into a {@code Set<Index>}.
+     *
+     * @throws ParseException if any substring is not a valid index.
+     */
+    public static Set<Index> parseIndices(String oneBasedIndices) throws ParseException {
+        requireNonNull(oneBasedIndices);
+        String trimmedOneBasedIndices = oneBasedIndices.trim();
+
+        Set<Index> parsedIndices = new HashSet<>();
+        List<String> indicesList = Arrays.asList(trimmedOneBasedIndices.split("\\s+"));
+
+        // Java Lambda expressions do not allow propagating of checked exceptions.
+        // To circumvent this, wrap the checked exception in an unchecked exception.
+        try {
+            parsedIndices = indicesList.stream().map(x -> {
+                try {
+                    return parseIndex(x);
+                } catch (ParseException e) {
+                    throw new RuntimeException(e);
+                }
+            }).collect(Collectors.toSet());
+        } catch (RuntimeException e) {
+            Throwable cause = e.getCause();
+            if (cause instanceof ParseException) {
+                throw (ParseException) cause;
+            } else {
+                throw e;
+            }
+        }
+
+        return parsedIndices;
     }
 
     /**

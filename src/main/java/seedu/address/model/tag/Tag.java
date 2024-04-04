@@ -75,10 +75,6 @@ public abstract class Tag {
         return tagType;
     }
 
-    public String getTagName() {
-        return tagName;
-    }
-
     public static TagType getTagTypeWithTagStatus(TagStatus ts) {
         switch (ts) {
         case COMPLETE_GOOD:

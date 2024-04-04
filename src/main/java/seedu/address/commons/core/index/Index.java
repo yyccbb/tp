@@ -57,9 +57,13 @@ public class Index {
         if (!(other instanceof Index)) {
             return false;
         }
-
         Index otherIndex = (Index) other;
-        return zeroBasedIndex == otherIndex.zeroBasedIndex;
+        return this.zeroBasedIndex == otherIndex.zeroBasedIndex;
+    }
+
+    @Override
+    public int hashCode() {
+        return this.zeroBasedIndex;
     }
 
     @Override
