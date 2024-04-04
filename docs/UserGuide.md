@@ -7,7 +7,6 @@ title: User Guide
 Optimized for use via a command line interface, you can manage student assignments, attendance,
 tutor availability and much more with just a few keystrokes!
 
-
 * Table of Contents
 {:toc}
 
@@ -40,7 +39,6 @@ tutor availability and much more with just a few keystrokes!
    * `clear` : Deletes all contacts.
 
    * `exit` : Exits the app.
-
 
 6. Refer to the [Features](#features) below for details of each command.
 
@@ -185,12 +183,13 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Tagging (WIP)
+## Tagging
 
 With TrAcker, you can track Student assignments, attendance, tutorial groups
 (along with as TA tutorial groups and availability) using tags.
 
-**(implementation TBC)**
+TrAcker allows use of three different types of tags : **Assignments, Attendance,** and **Tutorial** tags which can be attached to Students and TAs respectively.
+The different tag types along with their corresponding tag statuses are described below.
 
 ### Tag Status
 
@@ -198,9 +197,9 @@ With TrAcker, you can track Student assignments, attendance, tutorial groups
 |------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Assignment | `cg` : <mark style="background-color: green">COMPLETE_GOOD</mark><br/>`cb` : <mark style="background-color: orange">COMPLETE_BAD</mark><br/>`ig` : <mark style="background-color: grey">INCOMPLETE_GOOD</mark><br/>`ib` : <mark style="background-color:red">INCOMPLETE_BAD</mark> |
 | Attendance | `p` : <mark style="background-color:  green">PRESENT</mark><br/>`a` : <mark style="background-color:red">ABSENT</mark><br/>`awr` : <mark style="background-color:orange">ABSENT_WITH_REASON</mark>                                                                                 |
-| Tag 3      | 3-letter abbreviation of the day of the week, followed by the time in `HH` format (24h)<br/>Examples:<br/>`MON08` : <mark style="background-color: #3e7b91">MON08</mark><br/>`TUE12` : <mark style="background-color: #3e7b91">TUE08</mark>                                        |
+| Tutorial | `as` : <mark style="background-color: #3e7b91">ASSIGNED</mark><br/>`av` : <mark style="background-color: white">AVAILABLE</mark>                                                                                                                                                   |
 
-### Marking a tag : `mark` (WIP)
+### Marking a tag : `mark`
 
 Updates the status of the specified tag with the specified status. If the
 tag specified does not exist, a new tag with the tag name and tag status will be
@@ -213,8 +212,40 @@ Format: `mark INDEX /t TAG /ts TAGSTATUS`
 * `TAGSTATUS` must be one of the [above specified values](#tag-status)
 
 Examples:
-* `mark 1 /t Assignment1 /ts cg` updates the `Assignment1` tag (or adds it, if it does not exist)
+* `mark 1 /t Assignment1 /ts cg` updates the `Assignment1` tag (or adds it, if it is not already attached)
 to <mark style="background-color: green">COMPLETE_GOOD</mark> for the 1st person in the displayed list.
+* `mark 2 /t week1 /ts awr` updates the `week1` tag (or adds it, if it is not already attached) to
+<mark style="background-color: orange">ABSENT_WITH_REASON</mark> for the 2nd person in the displayed list.
+* `mark 3 /t TUE08 /ts as` updates the `TUE08` tag (or adds it, if it is not already attached) to
+<mark style="background-color: #3e7b91">ASSIGNED</mark> to assign the 3rd person in the displayed list to the 
+tutorial group TUE08.
+* 
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Note:** For **Tutorial** tags, the tutorial name must be that of a valid Tutorial tag in the list of available tutorial sessions defined with the [tuttag](#adding-a-tutorial--tuttag-add) command.
+For example, in the third example above, `TUE08` should be added as a tutorial tag first using `tuttag add /t TUE08`.
+
+</div>
+
+### Adding a Tutorial: `tuttag add`
+
+Creates a Tutorial tag to be used with the specified tag name.
+
+Format: `tuttag add /t TAG`
+
+Examples:
+
+* `tuttag add /t TUE08` adds TUE08 as a valid Tutorial tag.
+
+### Deleting a Tutorial: `tuttag del`
+
+Deletes the Tutorial tag corresponding to the specified tag name. If the specified tag does not exist, no change should happen.
+
+Format: `tuttag del /t TAG`
+
+Examples:
+
+* `tuttag del /t WED09` deletes WED09 as a valid Tutorial tag.
 
 ### Deleting a tag: `deletetag`
 
