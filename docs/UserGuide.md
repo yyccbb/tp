@@ -324,8 +324,9 @@ Action | Format, Examples
 **Clear** | `clear`                                                                                                                                
 **Exit** | `exit`
 **Mark** | `mark ( all \| INDEX [OTHER_INDICES...] ) /t TAG [OTHER_TAGS...] /ts TAG_STATUS`<br> e.g., `mark 1 /t Assignment1 /ts cg`              
-**Tutorial Tag Add/Delete** | `tuttag (add \| del) /t TAG`<br> e.g., `tuttag add /t TUE08`                                                                           
-**Tutorial Tag List** | `tuttag list`                                                                                                                          
+**Create Valid Tutorial Tag** | `tuttag add /t TAG`<br> e.g., `tuttag add /t TUE08`
+**Delete Valid Tutorial Tag** | `tuttag del /t TAG`<br> e.g., `tuttag del /t WED09`
+**List Valid Tutorial Tags** | `tuttag list`                                                                                                                     
 **Remove Tag** | `removetag INDEX /t TAG`<br> e.g., `removetag 1 /t Assignment1`                                                                        
 **Available** | `available /g TUTORIAL`<br> e.g., `available /g TUES08`                                                                                
 **Help** | `help`                                                                                                                                 
