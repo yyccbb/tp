@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Represents a Tag in the address book.
@@ -165,10 +166,23 @@ public abstract class Tag {
      * @param tagName  name of the new tag.
      * @return
      */
-    public static Set<Tag> deleteTagFromTagSet(Set<Tag> currTags, String tagName) {
+    public static Set<Tag> removeTagFromTagSet(Set<Tag> currTags, String tagName) {
         // remove the potentially existing Tag of the same name from the hashset.
         Tag newTag = Tag.createTag(tagName, TagStatus.DEFAULT_STATUS);
         currTags.remove(newTag);
+        return currTags;
+    }
+
+    /**
+     * Removes the tags with the specified tag names from the current set of tags.
+     * @param currTags
+     * @param tagNames
+     * @return
+     */
+    public static Set<Tag> removeTagsFromTagSet(Set<Tag> currTags, Set<String> tagNames) {
+        currTags.removeAll(tagNames.stream()
+                .map(x -> Tag.createTag(x, TagStatus.DEFAULT_STATUS))
+                .collect(Collectors.toSet()));
         return currTags;
     }
 
