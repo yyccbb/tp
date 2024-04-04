@@ -31,7 +31,7 @@ public class AvailableCommand extends Command {
         requireNonNull(model);
 
         if (!model.hasTutorialTag(tutorialGroup)) {
-                throw new CommandException(Messages.MESSAGE_INVALID_TUTORIAL_TAG_VALUE + tutorialGroup.tagName);
+                throw new CommandException(Messages.MESSAGE_INVALID_TUTORIAL_TAG_VALUE + tutorialGroup.getTagName());
         }
 
         model.updateFilteredPersonList(predicate);

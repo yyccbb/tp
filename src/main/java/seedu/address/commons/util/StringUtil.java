@@ -51,16 +51,40 @@ public class StringUtil {
                 .anyMatch(wordInPreppedSentence -> wordInPreppedSentence.toLowerCase().contains(preppedWord));
     }
 
+    /**
+     * Returns true if the {@code tag} contains the {@code word}.
+     *   Ignores case, and performs subword matching if {@code word} is a subword of a valid tutorialtag,
+     *   else it performs a full word match.
+     * @param tag cannot be null
+     * @param word cannot be null, cannot be empty
+     */
+    public static boolean tagContainsWordIgnoreCase(Tag tag, String word) {
+        requireNonNull(tag);
+        requireNonNull(word);
+
+        String tagName = tag.getTagName().toLowerCase();
+        String preppedWord = word.trim();
+        checkArgument(!preppedWord.isEmpty(), "Word parameter cannot be empty");
+
+        for (TutorialTag tutorial : validTutorials) {
+            String tutorialGroup = tutorial.getTagName().toLowerCase();
+            if (tutorialGroup.contains(preppedWord)) {
+                return tagName.contains(preppedWord) && tag.isTutorial();
+            }
+        }
+        return tagName.equalsIgnoreCase(preppedWord);
+    }
+
     public static boolean containsTutorialGroup(Tag tag, String tutorialGroup) {
         requireNonNull(tag);
         requireNonNull(tutorialGroup);
 
-        String tagName = tag.tagName;
+        String tagName = tag.getTagName();
         checkArgument(!tutorialGroup.isEmpty(), "Tutorial group parameter cannot be empty");
         checkArgument(!tutorialGroup.contains(" "), "Only use one word for tutorial group parameter");
 
         for (TutorialTag tutorial : validTutorials) {
-            String validTutorialGroupTag = tutorial.tagName;
+            String validTutorialGroupTag = tutorial.getTagName();
             if (validTutorialGroupTag.equalsIgnoreCase(tutorialGroup)) {
                 return tagName.equalsIgnoreCase(tutorialGroup) && tag.getTagStatus() == TagStatus.AVAILABLE;
             }

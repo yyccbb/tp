@@ -10,13 +10,13 @@ class JsonAdaptedTagTest {
 
     @Test
     public void getTagName() {
-        JsonAdaptedTutorialTag wed10 = new JsonAdaptedTutorialTag(WED10.tagName);
-        assertEquals(wed10.getTagName(), WED10.tagName);
+        JsonAdaptedTutorialTag wed10 = new JsonAdaptedTutorialTag(WED10.getTagName());
+        assertEquals(wed10.getTagName(), WED10.getTagName());
     }
 
     @Test
     public void createJsonAdaptedTutorialTagFromTutorialTag() {
         JsonAdaptedTutorialTag wed10 = new JsonAdaptedTutorialTag(WED10);
-        assertEquals(wed10.getTagName(), WED10.tagName);
+        assertEquals(wed10.getTagName(), WED10.getTagName());
     }
 }

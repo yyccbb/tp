@@ -8,7 +8,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.Tag;
 
 /**
- * Parses input arguments and creates a new FindCommand object
+ * Parses input arguments and creates a new EditTutTagListCommand object
  */
 public class EditTutTagListCommandParser implements Parser<EditTutTagListCommand> {
 

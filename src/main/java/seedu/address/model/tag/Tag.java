@@ -14,7 +14,7 @@ public abstract class Tag {
     public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric";
     public static final String VALIDATION_REGEX = "\\p{Alnum}+";
 
-    public final String tagName;
+    private final String tagName;
     private TagStatus tagStatus;
     private TagType tagType;
 
@@ -38,7 +38,7 @@ public abstract class Tag {
     /**
      * Creates a new Tag with specified tagName and tagStatus.
      *
-     * @param tagName Name of the tag to be created.
+     * @param tagName   Name of the tag to be created.
      * @param tagStatus Status of the tag.
      * @return A new tag of specific type corresponding to the TagStatus input.
      */
@@ -69,6 +69,10 @@ public abstract class Tag {
 
     public TagType getTagType() {
         return tagType;
+    }
+
+    public String getTagName() {
+        return tagName;
     }
 
     public static TagType getTagTypeWithTagStatus(TagStatus ts) {
@@ -129,8 +133,8 @@ public abstract class Tag {
     }
 
     /**
-     * @param currTags current tag set to be updated.
-     * @param tagName name of the new tag.
+     * @param currTags  current tag set to be updated.
+     * @param tagName   name of the new tag.
      * @param tagStatus tagStatus of the new tag.
      * @return
      */
@@ -148,7 +152,7 @@ public abstract class Tag {
 
     /**
      * @param currTags current tag set to be updated.
-     * @param tagName name of the new tag.
+     * @param tagName  name of the new tag.
      * @return
      */
     public static Set<Tag> deleteTagFromTagSet(Set<Tag> currTags, String tagName) {

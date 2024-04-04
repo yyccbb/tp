@@ -4,6 +4,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.List;
 import java.util.function.Predicate;
@@ -54,6 +55,10 @@ public class FieldContainsKeywordsPredicate implements Predicate<Person> {
         } else if (this.prefix.equals(PREFIX_EMAIL)) {
             return keywords.stream()
                     .anyMatch(keyword -> StringUtil.containsSubwordIgnoreCase(person.getEmail().value, keyword));
+        } else if (this.prefix.equals(PREFIX_TAG)) {
+            return keywords.stream()
+                        .anyMatch(keyword -> person.getTags().stream()
+                                .anyMatch(tag -> StringUtil.tagContainsWordIgnoreCase(tag, keyword)));
         } else {
             return false;
         }
