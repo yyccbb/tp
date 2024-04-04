@@ -259,17 +259,17 @@ Examples:
 
 * `tuttag del /t WED09` deletes WED09 as a valid Tutorial tag.
 
-### Deleting a tag: `deletetag`
+### Removing a tag: `removetag`
 
-Deletes an individual tag from a person. If the specified tag does not exist, no change should happen.
+Removes an individual tag from a person. If the specified tag does not exist, no change should happen.
 
-Format: `deletetag INDEX /t TAG`
+Format: `removetag INDEX /t TAG`
 
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `deletetag 1 /t Assignment1` deletes the `Assignment1` tag from the 1st person in the displayed list.
+* `removetag 1 /t Assignment1` removes the `Assignment1` tag from the 1st person in the displayed list.
 
 --------------------------------------------------------------------------------------------------------------------
 
