@@ -22,13 +22,13 @@ import seedu.address.model.tag.Tag;
  */
 public class DeletetagCommand extends Command {
 
-    public static final String COMMAND_WORD = "deletetag";
+    public static final String COMMAND_WORD = "removetag";
     public static final String SAMPLE_COMMAND = COMMAND_WORD + " 1 " + PREFIX_TAG + " assignment1 ";
     // to be updated
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes the specified tag from the specified"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Removes the specified tag from the specified"
             + " contact entry.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + PREFIX_TAG + " [TAG]\n"
+            + PREFIX_TAG + " TAG\n"
             + "Example: " + SAMPLE_COMMAND;
 
     public static final String MESSAG_DELETETAG_SUCCESS = "Updated Person: %1$s";

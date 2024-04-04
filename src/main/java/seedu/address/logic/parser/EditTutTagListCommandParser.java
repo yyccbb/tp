@@ -27,7 +27,7 @@ public class EditTutTagListCommandParser implements Parser<EditTutTagListCommand
 
         String commandFlag = argMultimap.getPreamble();
         try {
-            EditTutTagListCommand.CommandSubtype commandSubtype = ParserUtil.isCreatingNewTag(commandFlag);
+            EditTutTagListCommand.CommandSubtype commandSubtype = StatefulParserUtil.isCreatingNewTag(commandFlag);
 
             // if the EditTutTagListCommand is to list all available tutorial tags
             if (EditTutTagListCommand.isListCommand(commandSubtype)) {
@@ -35,7 +35,7 @@ public class EditTutTagListCommandParser implements Parser<EditTutTagListCommand
             }
 
             // if the EditTutTagListCommand is not to list all available tutorial tags, PREFIX_TAG must be present
-            if (!ParserUtil.arePrefixesPresent(argMultimap, PREFIX_TAG)) {
+            if (!StatefulParserUtil.arePrefixesPresent(argMultimap, PREFIX_TAG)) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                         EditTutTagListCommand.MESSAGE_USAGE));
             }

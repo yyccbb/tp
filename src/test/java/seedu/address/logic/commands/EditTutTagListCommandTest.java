@@ -176,6 +176,11 @@ class EditTutTagListCommandTest {
         }
 
         @Override
+        public ObservableList<Person> getPersonList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Person> getFilteredPersonList() {
             throw new AssertionError("This method should not be called.");
         }
@@ -247,6 +252,10 @@ class EditTutTagListCommandTest {
         };
 
         @Override
+        public ObservableList<Person> getPersonList() {
+            return new AddressBook().getPersonList();
+        }
+
         public String getTutorialTagListString() {
             return "Available Tutorial Tag(s): [ ]";
         }

@@ -142,11 +142,21 @@ public abstract class Tag {
         // Instead of retrieving the Tag sharing the same name and update it,
         // remove the potentially existing Tag of the same name from the hashset
         // and then add in a new Tag with the same tagName but updated tagStatus.
-        // This is to avoid having linearly check through the hashset to retrieve
-        // the existing Tag
+        // This is because Java Set does not provide a get() method.
         Tag newTag = Tag.createTag(tagName, tagStatus);
         currTags.remove(newTag);
         currTags.add(Tag.createTag(tagName, tagStatus));
+        return currTags;
+    }
+
+    /**
+     * Merges the current set of tags with a new set of tags sharing the same status,
+     * identified by their tag names, updating the tag status of existing tags in the
+     * process.
+     * {@code updateTagsWithNewTag} method is called on each new tag.
+     */
+    public static Set<Tag> updateTagsWithNewTags(Set<Tag> currTags, Set<String> tagNames, TagStatus tagStatus) {
+        tagNames.forEach(x -> updateTagsWithNewTag(currTags, x, tagStatus));
         return currTags;
     }
 

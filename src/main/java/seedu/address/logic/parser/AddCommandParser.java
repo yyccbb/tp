@@ -33,17 +33,17 @@ public class AddCommandParser implements Parser<AddCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_ID, PREFIX_PHONE,
                         PREFIX_EMAIL);
 
-        if (!ParserUtil.arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ID, PREFIX_PHONE,
+        if (!StatefulParserUtil.arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ID, PREFIX_PHONE,
                 PREFIX_EMAIL)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_ID, PREFIX_PHONE, PREFIX_EMAIL);
-        PersonType type = ParserUtil.parsePersonType(argMultimap.getPreamble());
-        Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-        Id id = ParserUtil.parseId(argMultimap.getValue(PREFIX_ID).get());
-        Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
-        Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
+        PersonType type = StatefulParserUtil.parsePersonType(argMultimap.getPreamble());
+        Name name = StatefulParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
+        Id id = StatefulParserUtil.parseId(argMultimap.getValue(PREFIX_ID).get());
+        Phone phone = StatefulParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
+        Email email = StatefulParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
 
         Person person = Person.of(type, name, id, phone, email, new HashSet<Tag>());
 
