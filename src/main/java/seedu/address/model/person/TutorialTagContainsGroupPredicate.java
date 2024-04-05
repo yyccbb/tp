@@ -2,7 +2,7 @@ package seedu.address.model.person;
 
 import java.util.function.Predicate;
 
-import seedu.address.commons.util.StringUtil;
+import seedu.address.commons.util.StatefulStringUtil;
 import seedu.address.commons.util.ToStringBuilder;
 
 
@@ -19,7 +19,7 @@ public class TutorialTagContainsGroupPredicate implements Predicate<Person> {
     @Override
     public boolean test(Person person) {
         return person.getTags().stream()
-                .anyMatch(tag -> StringUtil.containsTutorialGroup(tag, tutorialGroup));
+                .anyMatch(tag -> StatefulStringUtil.containsTutorialGroup(tag, tutorialGroup));
     }
 
     @Override
