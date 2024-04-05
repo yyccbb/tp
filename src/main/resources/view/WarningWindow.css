@@ -14,6 +14,13 @@
     -fx-background-color: grey;
 }
 
+
+#okButton:focused, #cancelButton:focused {
+    -fx-border-color: #3e7b91;
+    -fx-border-radius: 2;
+
+}
+
 #okButton:armed {
     -fx-background-color: grey;
 }

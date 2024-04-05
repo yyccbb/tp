@@ -38,30 +38,22 @@ public class WarningWindow extends UiPart<Stage> {
         super(FXML, root);
         Scene scene = root.getScene();
         if (scene != null) {
-            okButton.arm();
-            cancelButton.disarm();
-            okButton.setDefaultButton(true);
-            cancelButton.setDefaultButton(false);
+            cancelButton.setCancelButton(true);
+            cancelButton.requestFocus();
         } else {
             logger.warning("Scene is null, unable to set default button.");
         }
 
         scene.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
             if (event.getCode() == KeyCode.LEFT) {
-                okButton.arm();
-                cancelButton.disarm();
-                okButton.setDefaultButton(true);
-                cancelButton.setDefaultButton(false);
+                okButton.requestFocus();
                 event.consume();
             }
         });
 
         scene.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
             if (event.getCode() == KeyCode.RIGHT) {
-                cancelButton.arm();
-                okButton.disarm();
-                cancelButton.setDefaultButton(true);
-                okButton.setDefaultButton(false);
+                cancelButton.requestFocus();
                 event.consume();
             }
         });
