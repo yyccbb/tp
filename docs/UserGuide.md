@@ -253,11 +253,13 @@ Examples:
 
 Deletes the Tutorial tag corresponding to the specified tag name. If the specified tag does not exist, no change should happen.
 
+Warning: All persons with the specified Tutorial tag will also have the tag removed.
+
 Format: `tuttag del /t TAG`
 
 Examples:
 
-* `tuttag del /t WED09` deletes WED09 as a valid Tutorial tag.
+* `tuttag del /t WED09` deletes WED09 as a valid Tutorial tag, and removes the WED09 tag from all persons.
 
 ### Listing All Tutorials: `tuttag list`
 
