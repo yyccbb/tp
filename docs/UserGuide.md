@@ -118,7 +118,7 @@ Examples:
    `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 /n Betsy Crower` Edits the name of the 2nd person to be `Betsy Crower`.
 
-### Locating persons by name: `find`
+### Locating persons: `find`
 
 Filters all persons whose contact details contain each of the specified keywords 
 under the specified flag and displays them as a list with index numbers.
