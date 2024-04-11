@@ -128,7 +128,7 @@ Format: `find [stu | ta] [/n NAME] [/i ID] [/p PHONE] [/e EMAIL] [/t TAGS...]`
 * At least one of the optional fields must be provided.
 * The search is case-insensitive. e.g. `hans` will match `Hans`
 * The order of the keywords under each flag does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Prefixes will be matched e.g. `Han` will match `Hans`
+* Subwords will be matched e.g. `Han` will match `Hans`
 * For Tags:
     * For tutorial tags, subword matching is performed
     * For other tags, it performs full word matching
