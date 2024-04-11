@@ -151,7 +151,7 @@ Examples:
 Deletes the person(s) specified by their indices from the displayed person list. A popup will appear to confirm the 
 deletion.
 
-Format: `delete (all | INDEX [OTHER_INDICES...])`
+Format: `delete ( all | INDEX [OTHER_INDICES...] )`
 
 * Deletes the person(s) at the specified `INDEX`s.
 * If `all` is used, all persons in the displayed list are deleted.
@@ -271,14 +271,15 @@ Format: `tuttag list`
 
 Removes an individual tag from a person. If the specified tag does not exist, no change should happen.
 
-Format: `removetag INDEX /t TAG`
+Format: `removetag ( all | INDEX [OTHER_INDICES...] ) /t TAG`
 
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `removetag 1 /t Assignment1` removes the `Assignment1` tag from the 1st person in the displayed list.
-
+* `removetag 1  /t Assignment1` removes the `Assignment1` tag from the 1st person in the displayed list.
+* `removetag 2  3 /t Assignment2` removes the `Assignment2` tag from the 2nd and 3rd person in the displayed list.
+* `removetag all /t Assignment3` removes the `Assignment3` tag from every person in the displayed list.
 ### Locating available TAs for a tutorial group: `available`
 
 Filters all replacement TAs who are available for a specified tutorial group.
