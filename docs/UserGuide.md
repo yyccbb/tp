@@ -86,9 +86,14 @@ Format:
 
 * To add a TA,<br>
   `add ta /n NAME /i ID /p PHONE /e EMAIL`
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-All persons are saved as either Students or TAs. If the type of the person is not specified, the person will be 
-saved as a Student by default.
+<div markdown="span" class="alert alert-primary">
+
+:bulb: **Notes:**<br>
+
+* All persons are saved as either Students or TAs. If the type of the person is not specified, the person will be
+  saved as a Student by default.
+* Each person's ID is unique, so you cannot add 2 people with the same ID.
+
 </div>
 
 Examples:
