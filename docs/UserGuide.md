@@ -70,7 +70,7 @@ tutor availability and much more with just a few keystrokes!
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
@@ -78,7 +78,7 @@ Format: `help`
 
 ### Adding a Student or TA: `add stu`, `add ta`
 
-Adds a Student (TA) to the address book.
+Adds a Student/TA to the address book.
 
 Format:
 * To add a Student,<br>
@@ -87,7 +87,7 @@ Format:
 * To add a TA,<br>
   `add ta /n NAME /i ID /p PHONE /e EMAIL]`
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-All persons are saved as either Students or TAs
+Every person is saved as either a Student or TA.
 </div>
 
 Examples:
@@ -152,7 +152,7 @@ Format: `available /g TUTORIAL`
 
 
 Examples:
-* `available /g TUES08` returns  all TAs who are available for tutorial group `TUES08`
+* `available /g TUE08` returns  all TAs who are available for tutorial group `TUE08`
 
 ### Deleting a person : `delete`
 
@@ -210,6 +210,20 @@ The different tag types along with their corresponding tag statuses are describe
 | Assignment | `cg` : <mark style="background-color: green">COMPLETE_GOOD</mark><br/>`cb` : <mark style="background-color: orange">COMPLETE_BAD</mark><br/>`ig` : <mark style="background-color: grey">INCOMPLETE_GOOD</mark><br/>`ib` : <mark style="background-color:red">INCOMPLETE_BAD</mark> |
 | Attendance | `p` : <mark style="background-color:  green">PRESENT</mark><br/>`a` : <mark style="background-color:red">ABSENT</mark><br/>`awr` : <mark style="background-color:orange">ABSENT_WITH_REASON</mark>                                                                                 |
 | Tutorial | `as` : <mark style="background-color: #3e7b91">ASSIGNED</mark><br/>`av` : <mark style="background-color: white">AVAILABLE</mark>                                                                                                                                                   |
+
+### Tag Name
+Tag names have the following constraints:
+- must be alphanumeric 
+- no whitespace between words in the tag
+- all tag names must be unique. 
+
+Here are some recommended tag names for the various tag types. 
+
+| Tag type   | Examples of recommended tag names |
+|------------|-----------------------------------|
+| Assignment | `Assignment1` `v1.1Issues`        |
+| Attendance | `Week1` `Week2`                   |
+| Tutorial   | `TUE08` `WED10` `THU09`           |
 
 ### Marking a tag : `mark`
 
