@@ -151,7 +151,7 @@ Examples:
 Deletes the person(s) specified by their indices from the displayed person list. A popup will appear to confirm the 
 deletion.
 
-Format: `delete ( all | INDEX [OTHER_INDICES...] )`
+Format: `delete (all | INDEX [OTHER_INDICES...])`
 
 * Deletes the person(s) at the specified `INDEX`s.
 * If `all` is used, all persons in the displayed list are deleted.
@@ -271,7 +271,7 @@ Format: `tuttag list`
 
 Removes an individual tag from a person. If the specified tag does not exist, no change should happen.
 
-Format: `removetag ( all | INDEX [OTHER_INDICES...] ) /t TAG`
+Format: `removetag (all | INDEX [OTHER_INDICES...]) /t TAG`
 
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
