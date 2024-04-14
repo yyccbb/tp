@@ -7,6 +7,7 @@ import java.util.stream.Stream;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonType;
+import seedu.address.model.tag.Tag;
 
 /**
  * Container for user visible messages.
@@ -25,6 +26,8 @@ public class Messages {
             "Specified tutorial tag name is not allowed: ";
 
     public static final String MESSAGE_AVAILABLE_TAS_OVERVIEW = "%1$d TAs available for the tutorial group.";
+
+    public static final String MESSAGE_INVALID_TAG_NAME = Tag.MESSAGE_CONSTRAINTS;
 
     /**
      * Returns an error message indicating the duplicate prefixes.

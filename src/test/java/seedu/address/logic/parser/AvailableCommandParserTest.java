@@ -18,11 +18,20 @@ public class AvailableCommandParserTest {
 
     @Test
     public void parse_emptyArg_throwsParseException() {
+
+        String invalidTagName = "sfsdfsdff";
+
         assertParseFailure(parser, "     ",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AvailableCommand.MESSAGE_USAGE));
 
-        assertParseFailure(parser, "sfsdfsdff",
+        assertParseFailure(parser, invalidTagName,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AvailableCommand.MESSAGE_USAGE));
+
+        assertParseFailure(parser, "",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AvailableCommand.MESSAGE_USAGE));
+
+        assertParseFailure(parser, " /g ",
+                String.format(AvailableCommand.MESSAGE_NON_EMPTY_GROUP_NAME));
     }
     @Test
     public void parse_validArgs_returnsAvailableCommand() throws ParseException {

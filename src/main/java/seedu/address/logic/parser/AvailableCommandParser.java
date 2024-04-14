@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.commons.util.AppUtil.checkArgument;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP;
 
@@ -31,9 +32,12 @@ public class AvailableCommandParser implements Parser<AvailableCommand> {
 
         Optional<String> group = argMultimap.getValue(PREFIX_GROUP);
 
-        if (group.isEmpty()) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, AvailableCommand.MESSAGE_USAGE));
+        try {
+            checkArgument(!group.isEmpty(), String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    AvailableCommand.MESSAGE_USAGE));
+            checkArgument(!group.get().equals(""), AvailableCommand.MESSAGE_NON_EMPTY_GROUP_NAME);
+        } catch (IllegalArgumentException e) {
+            throw new ParseException(e.getMessage());
         }
 
         String tutorialGroup = argMultimap.getValue(PREFIX_GROUP).get();
