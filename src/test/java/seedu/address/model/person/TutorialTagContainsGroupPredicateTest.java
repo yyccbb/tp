@@ -2,6 +2,7 @@ package seedu.address.model.person;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.testutil.TypicalPersons.JANE;
 
 import org.junit.jupiter.api.Test;
 
@@ -28,5 +29,11 @@ public class TutorialTagContainsGroupPredicateTest {
 
         // different tutorial group -> returns false
         assertFalse(predicate1.equals(predicate2));
+    }
+
+    @Test
+    public void test_student_returnsFalse() {
+        TutorialTagContainsGroupPredicate predicate = new TutorialTagContainsGroupPredicate("W10");
+        assertFalse(predicate.test(JANE));
     }
 }
