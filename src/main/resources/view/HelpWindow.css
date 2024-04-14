@@ -10,6 +10,11 @@
     -fx-background-color: grey;
 }
 
+#copyButton:focused{
+    -fx-border-color: #3e7b91;
+    -fx-border-radius: 2;
+}
+
 #copyButton:armed {
     -fx-background-color: grey;
 }

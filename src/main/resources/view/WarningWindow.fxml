@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.stage.Stage?>
 
-<fx:root resizable="false" title="Warning" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root resizable="false" title="Warning" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
     <icons>
         <Image url="@/images/warning_icon.png" />
     </icons>
@@ -19,7 +19,7 @@
                 <URL value="@WarningWindow.css" />
             </stylesheets>
 
-            <HBox alignment="CENTER" fx:id="warningMessageContainer">
+            <HBox fx:id="warningMessageContainer" alignment="CENTER">
                 <children>
                     <Label fx:id="warningMessage" text="Label">
                         <HBox.margin>
@@ -27,14 +27,14 @@
                         </HBox.margin>
                     </Label>
                     <!-- OK Button -->
-                    <Button fx:id="okButton" text="OK" mnemonicParsing="false" onAction="#okClicked">
+                    <Button fx:id="okButton" mnemonicParsing="false" onAction="#okClicked" text="OK">
                         <HBox.margin>
                             <Insets left="5.0" />
                         </HBox.margin>
                     </Button>
 
                     <!-- Cancel Button -->
-                    <Button fx:id="cancelButton" text="Cancel" mnemonicParsing="false" onAction="#cancelClicked">
+                    <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#cancelClicked" text="Cancel">
                         <HBox.margin>
                             <Insets left="5.0" />
                         </HBox.margin>
@@ -50,4 +50,3 @@
         </Scene>
     </scene>
 </fx:root>
-

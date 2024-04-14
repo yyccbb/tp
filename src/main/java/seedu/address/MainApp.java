@@ -12,7 +12,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.Version;
 import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.commons.util.ConfigUtil;
-import seedu.address.commons.util.StringUtil;
+import seedu.address.commons.util.StatefulStringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
 import seedu.address.logic.parser.StatefulParserUtil;
@@ -45,7 +45,7 @@ public class MainApp extends Application {
     protected Logic logic;
     protected Storage storage;
     protected Model model;
-    protected StringUtil stringUtil;
+    protected StatefulStringUtil statefulStringUtil;
     protected Config config;
 
     @Override
@@ -68,7 +68,7 @@ public class MainApp extends Application {
 
         ui = new UiManager(logic);
 
-        StringUtil.initalize(model);
+        StatefulStringUtil.initialize(model);
 
         StatefulParserUtil.initialize(model);
     }
@@ -139,7 +139,7 @@ public class MainApp extends Application {
         try {
             ConfigUtil.saveConfig(initializedConfig, configFilePathUsed);
         } catch (IOException e) {
-            logger.warning("Failed to save config file : " + StringUtil.getDetails(e));
+            logger.warning("Failed to save config file : " + StatefulStringUtil.getDetails(e));
         }
         return initializedConfig;
     }
@@ -170,7 +170,7 @@ public class MainApp extends Application {
         try {
             storage.saveUserPrefs(initializedPrefs);
         } catch (IOException e) {
-            logger.warning("Failed to save config file : " + StringUtil.getDetails(e));
+            logger.warning("Failed to save config file : " + StatefulStringUtil.getDetails(e));
         }
 
         return initializedPrefs;
@@ -188,7 +188,7 @@ public class MainApp extends Application {
         try {
             storage.saveUserPrefs(model.getUserPrefs());
         } catch (IOException e) {
-            logger.severe("Failed to save preferences " + StringUtil.getDetails(e));
+            logger.severe("Failed to save preferences " + StatefulStringUtil.getDetails(e));
         }
     }
 }

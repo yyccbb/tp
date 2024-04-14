@@ -4,23 +4,24 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIENDS;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAGNAMES_SET_FRIENDS;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND_DESC;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.testutil.TypicalIndexes.INDEX_2_SET;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.DeletetagCommand;
+import seedu.address.logic.commands.RemovetagCommand;
 import seedu.address.model.tag.Tag;
 
-class DeletetagCommandParserTest {
+class RemovetagCommandParserTest {
     private static final String MESSAGE_INVALID_FORMAT =
-            String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeletetagCommand.MESSAGE_USAGE);
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, RemovetagCommand.MESSAGE_USAGE);
 
-    private DeletetagCommandParser parser = new DeletetagCommandParser();
+    private RemovetagCommandParser parser = new RemovetagCommandParser();
 
     @Test
     public void parse_missingParts_failure() {
@@ -62,7 +63,7 @@ class DeletetagCommandParserTest {
         Index targetIndex = INDEX_SECOND_PERSON;
         String userInput = targetIndex.getOneBased() + VALID_TAG_FRIEND_DESC;
 
-        DeletetagCommand expectedCommand = new DeletetagCommand(targetIndex, VALID_TAG_FRIENDS);
+        RemovetagCommand expectedCommand = new RemovetagCommand(INDEX_2_SET, VALID_TAGNAMES_SET_FRIENDS);
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }

@@ -9,7 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import java.util.List;
 import java.util.function.Predicate;
 
-import seedu.address.commons.util.StringUtil;
+import seedu.address.commons.util.StatefulStringUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.parser.Prefix;
 
@@ -42,23 +42,28 @@ public class FieldContainsKeywordsPredicate implements Predicate<Person> {
     public boolean test(Person person) {
         if (this.prefix == null) { // type
             return keywords.stream()
-                    .anyMatch(keyword -> StringUtil.containsSubwordIgnoreCase(person.getType().name(), keyword));
+                    .anyMatch(keyword -> StatefulStringUtil
+                            .containsSubwordIgnoreCase(person.getType().name(), keyword));
         } else if (this.prefix.equals(PREFIX_NAME)) {
             return keywords.stream()
-                    .anyMatch(keyword -> StringUtil.containsSubwordIgnoreCase(person.getName().fullName, keyword));
+                    .anyMatch(keyword -> StatefulStringUtil
+                            .containsSubwordIgnoreCase(person.getName().fullName, keyword));
         } else if (this.prefix.equals(PREFIX_ID)) {
             return keywords.stream()
-                    .anyMatch(keyword -> StringUtil.containsSubwordIgnoreCase(person.getId().value, keyword));
+                    .anyMatch(keyword -> StatefulStringUtil
+                            .containsSubwordIgnoreCase(person.getId().value, keyword));
         } else if (this.prefix.equals(PREFIX_PHONE)) {
             return keywords.stream()
-                    .anyMatch(keyword -> StringUtil.containsSubwordIgnoreCase(person.getPhone().value, keyword));
+                    .anyMatch(keyword -> StatefulStringUtil
+                            .containsSubwordIgnoreCase(person.getPhone().value, keyword));
         } else if (this.prefix.equals(PREFIX_EMAIL)) {
             return keywords.stream()
-                    .anyMatch(keyword -> StringUtil.containsSubwordIgnoreCase(person.getEmail().value, keyword));
+                    .anyMatch(keyword -> StatefulStringUtil
+                            .containsSubwordIgnoreCase(person.getEmail().value, keyword));
         } else if (this.prefix.equals(PREFIX_TAG)) {
             return keywords.stream()
                         .anyMatch(keyword -> person.getTags().stream()
-                                .anyMatch(tag -> StringUtil.tagContainsWordIgnoreCase(tag, keyword)));
+                                .anyMatch(tag -> StatefulStringUtil.tagContainsWordIgnoreCase(tag, keyword)));
         } else {
             return false;
         }

@@ -40,7 +40,9 @@ tutor availability and much more with just a few keystrokes!
 
    * `exit` : Exits the app.
 
-6. Refer to the [Features](#features) below for details of each command.
+6. If a command is not recognized, a message containing the correct usage of the command will be shown.
+
+7. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -53,11 +55,16 @@ tutor availability and much more with just a few keystrokes!
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add stu /n NAME`, `NAME` is a parameter which can be used as `add stu /n John Doe`.
 
-* Items with `…` after them can be used multiple times including zero times.<br>
-  e.g. `[/t TAG…]` can be used as `/t friend` or `/t friend colleague` etc.
+* Items with `...` after them can be used multiple times including zero times.<br>
+  e.g. `[/t TAG...]` can be used as `/t friend` or `/t friend colleague` etc.
 
 * Items in square brackets are optional.<br>
   e.g. `/n NAME [/p PHONE]` can be used as `/n John Doe /p 91234567` or as `/n John Doe`.
+
+* Vertical bar (pipe) is used to denote alternatives.<br>
+
+* Pipe symbol and square brackets `[|]` separate alternative optional items.<br>
+  e.g. in `add [stu | ta] /n NAME`, `stu` and `ta` are alternatives, and at most one of them should be used.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `/n NAME /i ID`, `/i ID /n NAME` is also acceptable.
@@ -68,31 +75,30 @@ tutor availability and much more with just a few keystrokes!
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
-### Viewing help : `help`
-
-Shows a message explaining how to access the help page.
-
-![help message](images/helpMessage.png)
-
-Format: `help`
 
 ### Adding a Student or TA: `add stu`, `add ta`
 
-Adds a Student/TA to the address book.
+Adds a Student (TA) to the address book.
 
 Format:
 * To add a Student,<br>
-  `add stu /n NAME /i ID /p PHONE /e EMAIL`
+  `add [stu] /n NAME /i ID /p PHONE /e EMAIL`
 
 * To add a TA,<br>
-  `add ta /n NAME /i ID /p PHONE /e EMAIL]`
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-Every person is saved as either a Student or TA.
+  `add ta /n NAME /i ID /p PHONE /e EMAIL`
+<div markdown="span" class="alert alert-primary">
+
+:bulb: **Notes:**<br>
+
+* All persons are saved as either Students or TAs. If the type of the person is not specified, the person will be
+  saved as a Student by default.
+* Each person's ID is unique, so you cannot add 2 people with the same ID.
+
 </div>
 
 Examples:
 * `add stu /n Alex Yeoh /i A0777777L /p 87438807 /e alexyeoh@example.com`
-* `add ta /n Charlotte Oliveiro A2222222P /p 93210283 /e charlotte@example.com`
+* `add ta /n Charlotte Oliveiro /i A2222222P /p 93210283 /e charlotte@example.com`
 
 ### Listing all persons : `list`
 
@@ -106,13 +112,15 @@ Edits an existing person in the address book.
 
 Format: `edit INDEX [/n NAME] [/p PHONE] [/e EMAIL]`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list.
+  The index **must be a positive integer** 1, 2, 3, ...​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* A person's `ID` cannot be edited.
+* A person's `type` (`stu` or `ta`) and `ID` cannot be edited.
 
 Examples:
-*  `edit 1 /p 91234567 /e johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
+*  `edit 1 /p 91234567 /e johndoe@example.com` Edits the phone number and email address of the 1st person to be 
+   `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 /n Betsy Crower` Edits the name of the 2nd person to be `Betsy Crower`.
 
 ### Locating persons by name: `find`
@@ -120,13 +128,14 @@ Examples:
 Filters all persons whose contact details contain each of the specified keywords 
 under the specified flag and displays them as a list with index numbers.
 
-Format: `find [stu/ta] [/n NAME] [/i ID] [/p PHONE] [/e EMAIL] [/t TAGS...]`
+Format: `find [stu | ta] [/n NAME] [/i ID] [/p PHONE] [/e EMAIL] [/t TAGS...]`
 
+* At least one of the optional fields must be provided.
 * The search is case-insensitive. e.g. `hans` will match `Hans`
 * The order of the keywords under each flag does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Prefixes will be matched e.g. `Han` will match `Hans`
 * For Tags:
-    * For tutorial tags, prefixes will be matched
+    * For tutorial tags, subword matching is performed
     * For other tags, it performs full word matching
     * The search filters for persons meeting ANY criteria, (i.e. `OR` search).
    
@@ -142,25 +151,15 @@ Examples:
 * `find ta` returns all TAs
   ![result for 'find ta'](images/findTaResult.png)
 
-### Locating available TAs for a tutorial group: `available` 
+### Deleting persons : `delete`
 
-Filters all replacement TAs who are available for a specified tutorial group.
+Deletes the person(s) specified by their indices from the displayed person list. A popup will appear to confirm the 
+deletion.
 
-Format: `available /g TUTORIAL`
+Format: `delete (all | INDEX [OTHER_INDICES...])`
 
-* The search is case-sensitive and must match the specified tutorial group exactly.
-
-
-Examples:
-* `available /g TUE08` returns  all TAs who are available for tutorial group `TUE08`
-
-### Deleting a person : `delete`
-
-Deletes the specified person from the address book.
-
-Format: `delete INDEX`
-
-* Deletes the person at the specified `INDEX`.
+* Deletes the person(s) at the specified `INDEX`s.
+* If `all` is used, all persons in the displayed list are deleted.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
@@ -189,16 +188,17 @@ TrAcker data is saved in the hard disk automatically after any command that chan
 TrAcker data is saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+If your changes to the data file makes its format invalid, TrAcker will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause the TrAcker  to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Tagging
 
-With TrAcker, you can track Student assignments, attendance, tutorial groups
-(along with as TA tutorial groups and availability) using tags.
+With TrAcker tags, you can track assignment status, tutorial attendance and tutorial groups students are attending.
+For TAs, you can track their tutorial slots assigned and their availability for replacing other TAs in case 
+substitutions are needed.
 
 TrAcker allows use of three different types of tags : **Assignments, Attendance,** and **Tutorial** tags which can be attached to Students and TAs respectively.
 The different tag types along with their corresponding tag statuses are described below.
@@ -211,44 +211,35 @@ The different tag types along with their corresponding tag statuses are describe
 | Attendance | `p` : <mark style="background-color:  green">PRESENT</mark><br/>`a` : <mark style="background-color:red">ABSENT</mark><br/>`awr` : <mark style="background-color:orange">ABSENT_WITH_REASON</mark>                                                                                 |
 | Tutorial | `as` : <mark style="background-color: #3e7b91">ASSIGNED</mark><br/>`av` : <mark style="background-color: white">AVAILABLE</mark>                                                                                                                                                   |
 
-### Tag Name
-Tag names have the following constraints:
-- must be alphanumeric 
-- no whitespace between words in the tag
-- all tag names must be unique. 
-
-Here are some recommended tag names for the various tag types. 
-
-| Tag type   | Examples of recommended tag names |
-|------------|-----------------------------------|
-| Assignment | `Assignment1` `v1.1Issues`        |
-| Attendance | `Week1` `Week2`                   |
-| Tutorial   | `TUE08` `WED10` `THU09`           |
-
 ### Marking a tag : `mark`
 
 Updates the status of the specified tag with the specified status. If the
 tag specified does not exist, a new tag with the tag name and tag status will be
 created.
 
-Format: `mark INDEX /t TAG /ts TAGSTATUS`
+Format: `mark ( all | INDEX [OTHER_INDICES...] ) /t TAG [OTHER_TAGS...] /ts TAG_STATUS`
 
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
-* `TAGSTATUS` must be one of the [above specified values](#tag-status)
+* When `all` is used, the command will apply to all persons in the displayed list.
+* When multiple `TAG`s are specified, the same `TAG_STATUS` will be applied to all the tags.
+* `TAG_STATUS` must be one of the [above specified values](#tag-status)
 
 Examples:
 * `mark 1 /t Assignment1 /ts cg` updates the `Assignment1` tag (or adds it, if it is not already attached)
 to <mark style="background-color: green">COMPLETE_GOOD</mark> for the 1st person in the displayed list.
-* `mark 2 /t week1 /ts awr` updates the `week1` tag (or adds it, if it is not already attached) to
-<mark style="background-color: orange">ABSENT_WITH_REASON</mark> for the 2nd person in the displayed list.
-* `mark 3 /t TUE08 /ts as` updates the `TUE08` tag (or adds it, if it is not already attached) to
-<mark style="background-color: #3e7b91">ASSIGNED</mark> to assign the 3rd person in the displayed list to the 
+* `mark 2 3 /t week1 week2 /ts awr` updates the `week1` and `week2` tags (or adds them, if any one of them is not 
+  already 
+  attached) to
+<mark style="background-color: orange">ABSENT_WITH_REASON</mark> for the 2nd and 3rd persons in the displayed list.
+* `mark all /t TUE08 /ts as` updates the `TUE08` tag (or adds it, if it is not already attached) to
+<mark style="background-color: #3e7b91">ASSIGNED</mark> to assign every person in the displayed list to the 
 tutorial group TUE08.
-* 
+
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Note:** For **Tutorial** tags, the tutorial name must be that of a valid Tutorial tag in the list of available tutorial sessions defined with the [tuttag](#adding-a-tutorial--tuttag-add) command.
+**:information_source: Note:** For **Tutorial** tags, the tutorial name must be that of a valid Tutorial tag in the 
+list of available tutorial sessions defined with the [tuttag](#adding-a-tutorial--tuttag-add) command.
 For example, in the third example above, `TUE08` should be added as a tutorial tag first using `tuttag add /t TUE08`.
 
 </div>
@@ -267,11 +258,13 @@ Examples:
 
 Deletes the Tutorial tag corresponding to the specified tag name. If the specified tag does not exist, no change should happen.
 
+Warning: All persons with the specified Tutorial tag will also have the tag removed.
+
 Format: `tuttag del /t TAG`
 
 Examples:
 
-* `tuttag del /t WED09` deletes WED09 as a valid Tutorial tag.
+* `tuttag del /t WED09` deletes WED09 as a valid Tutorial tag, and removes the WED09 tag from all persons.
 
 ### Listing All Tutorials: `tuttag list`
 
@@ -291,12 +284,32 @@ Format: `removetag INDEX /t TAG`
 Examples:
 * `removetag 1 /t Assignment1` removes the `Assignment1` tag from the 1st person in the displayed list.
 
+### Locating available TAs for a tutorial group: `available`
+
+Filters all replacement TAs who are available for a specified tutorial group.
+
+Format: `available /g TUTORIAL`
+
+* The search is case-sensitive and must match the specified tutorial group exactly.
+
+Examples:
+* `available /g TUES08` returns all TAs who are available for tutorial group `TUES08`
+
+### Viewing help : `help`
+
+Shows a message explaining how to access the help page.
+
+![help message](images/helpMessage.png)
+
+Format: `help`
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
 
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**Q**: How do I transfer my data to another computer?<br>
+**A**: Install the app in the other computer and overwrite the data file it creates with the file that 
+contains the data of your previous TrAcker home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -308,12 +321,19 @@ Examples:
 
 ## Command summary
 
-Action | Format, Examples
---------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list`
-**Help** | `help`
+Action | Format, Examples                                                                                                                       
+--------|----------------------------------------------------------------------------------------------------------------------------------------
+**Add** | `add [stu \| ta] /n NAME /i ID /p PHONE /e EMAIL ​` <br> e.g., `add stu /n Alex Yeoh /i A0777777L /p 87438807 /e alexyeoh@example.com` 
+**List** | `list`                                                                                                                                 
+**Edit** | `edit INDEX [/n NAME] [/p PHONE] [/e EMAIL] ​`<br> e.g.,`edit 1 /p 91234567 /e johndoe@example.com`                                    
+**Find** | `find [stu \| ta] [/n NAME] [/i ID] [/p PHONE] [/e EMAIL] [/t TAGS...]`<br> e.g., `find /t wed assignment1`                            
+**Delete** | `delete (all \| INDEX [OTHER_INDICES...])`<br> e.g., `delete 3`                                                                        
+**Clear** | `clear`                                                                                                                                
+**Exit** | `exit`
+**Mark** | `mark ( all \| INDEX [OTHER_INDICES...] ) /t TAG [OTHER_TAGS...] /ts TAG_STATUS`<br> e.g., `mark 1 /t Assignment1 /ts cg`              
+**Create Valid Tutorial Tag** | `tuttag add /t TAG`<br> e.g., `tuttag add /t TUE08`
+**Delete Valid Tutorial Tag** | `tuttag del /t TAG`<br> e.g., `tuttag del /t WED09`
+**List Valid Tutorial Tags** | `tuttag list`                                                                                                                     
+**Remove Tag** | `removetag INDEX /t TAG`<br> e.g., `removetag 1 /t Assignment1`                                                                        
+**Available** | `available /g TUTORIAL`<br> e.g., `available /g TUES08`                                                                                
+**Help** | `help`                                                                                                                                 
