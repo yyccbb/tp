@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static seedu.address.commons.util.AppUtil.checkArgument;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_TAG_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP;
 
 import java.util.Optional;
@@ -9,6 +10,7 @@ import java.util.Optional;
 import seedu.address.logic.commands.AvailableCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.TutorialTagContainsGroupPredicate;
+import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.TagStatus;
 import seedu.address.model.tag.TutorialTag;
 
@@ -41,6 +43,10 @@ public class AvailableCommandParser implements Parser<AvailableCommand> {
         }
 
         String tutorialGroup = argMultimap.getValue(PREFIX_GROUP).get();
+
+        if (!Tag.isValidTagName(tutorialGroup)) {
+            throw new ParseException(MESSAGE_INVALID_TAG_NAME);
+        }
 
         TutorialTag tutorialTag = new TutorialTag(tutorialGroup, TagStatus.AVAILABLE);
 
