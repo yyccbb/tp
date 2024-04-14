@@ -1,0 +1,27 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor LOGIC_COLOR_T4
+skinparam classBackgroundColor LOGIC_COLOR
+
+package "Tagging"{
+Class "{abstract}\nPerson" as Person
+Class Student
+Class Ta
+Class "{abstract}\nTag" as Tag
+Class AssignmentTag
+Class AttendanceTag
+Class TutorialTag
+}
+
+Student -up-|> Person
+Ta -up-|> Person
+Student --> "*" AssignmentTag
+Student --> "*" AttendanceTag
+Student --> "*" TutorialTag
+Ta --> "*" TutorialTag
+
+AssignmentTag -up--|> Tag
+AttendanceTag -up--|> Tag
+TutorialTag -up---|> Tag
+@enduml

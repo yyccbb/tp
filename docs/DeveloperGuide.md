@@ -152,6 +152,16 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Tagging system
+
+TrAcker helps users track assignment status, tutorial attendance and tutorial groups via the Tagging system.
+The class diagram below depicts how different types of Tags are implemented:
+
+<img src="images/TaggingClassDiagram.png" width="550" />
+
+We use a `Set<Tag>` to store the set of tags for each Student / TA, such that Tags are uniquely identified
+by their `tagName`. Note that TAs may only have `TutorialTag`.
+
 ### Available Command
 
 TrAcker allows users to find available TAs for a specific tutorial group. The `AvailableCommandParser` parses the user's input and creates an `AvailableCommand` containing a `TutorialTagContainsGroupPredicate`. The `AvailableCommand` is then executed by `LogicManager` to update the `FilterPersonList` in the `Model`. This retrieves the list of available TAs for the specified tutorial group.
