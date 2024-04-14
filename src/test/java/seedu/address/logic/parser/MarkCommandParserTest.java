@@ -76,7 +76,6 @@ class MarkCommandParserTest {
         String userInput = targetIndex.getOneBased() + TAG_ASS3_TAGSTATUS_COMPLETE_BAD;
         MarkCommand expectedCommand =
                 new MarkCommand(targetIndexSet, VALID_TAGNAMES_SET_ASS3, TagStatus.COMPLETE_BAD);
-        System.out.println(expectedCommand.equals(parser.parse(userInput)));
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // multiple tag names
@@ -101,7 +100,6 @@ class MarkCommandParserTest {
         String userInput = targetIndexString + TAG_ASS3_TAGSTATUS_COMPLETE_BAD;
         MarkCommand expectedCommand =
                 new MarkCommand(targetIndexSet, VALID_TAGNAMES_SET_ASS3, TagStatus.COMPLETE_BAD);
-        System.out.println(expectedCommand.equals(parser.parse(userInput)));
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // multiple tag names
