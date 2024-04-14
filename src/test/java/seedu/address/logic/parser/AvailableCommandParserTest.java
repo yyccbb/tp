@@ -20,6 +20,9 @@ public class AvailableCommandParserTest {
     public void parse_emptyArg_throwsParseException() {
         assertParseFailure(parser, "     ",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AvailableCommand.MESSAGE_USAGE));
+
+        assertParseFailure(parser, "sfsdfsdff",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AvailableCommand.MESSAGE_USAGE));
     }
     @Test
     public void parse_validArgs_returnsAvailableCommand() throws ParseException {

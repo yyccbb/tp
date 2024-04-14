@@ -3,6 +3,8 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP;
 
+import java.util.Optional;
+
 import seedu.address.logic.commands.AvailableCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.TutorialTagContainsGroupPredicate;
@@ -26,6 +28,13 @@ public class AvailableCommandParser implements Parser<AvailableCommand> {
         }
 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_GROUP);
+
+        Optional<String> group = argMultimap.getValue(PREFIX_GROUP);
+
+        if (group.isEmpty()) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, AvailableCommand.MESSAGE_USAGE));
+        }
 
         String tutorialGroup = argMultimap.getValue(PREFIX_GROUP).get();
 
