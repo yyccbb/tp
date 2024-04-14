@@ -155,6 +155,13 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Available Command
+
+TrAcker allows users to find available TAs for a specific tutorial group. The `AvailableCommandParser` parses the user's input and creates an `AvailableCommand` containing a `TutorialTagContainsGroupPredicate`. The `AvailableCommand` is then executed by `LogicManager` to update the `FilterPersonList` in the `Model`. This retrieves the list of available TAs for the specified tutorial group.
+The workflow is shown below.
+
+![AvailableActivityDiagram](images/AvailableActivityDiagram.png)
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
@@ -238,10 +245,6 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Cons: We must ensure that the implementation of each individual command are correct.
 
 _{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
 
 
 --------------------------------------------------------------------------------------------------------------------
