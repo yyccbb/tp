@@ -20,9 +20,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Design**
-
 <div markdown="span" class="alert alert-primary">
-
 :bulb: **Tip:** The `.puml` files used to create diagrams in this document `docs/diagrams` folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
 </div>
 
@@ -31,7 +29,6 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 <img src="images/ArchitectureDiagram.png" width="280" />
 
 The ***Architecture Diagram*** given above explains the high-level design of the App.
-
 Given below is a quick overview of main components and how they interact with each other.
 
 **Main components of the architecture**
