@@ -9,21 +9,27 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AvailableCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.EditTutTagListCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.MarkCommand;
+import seedu.address.logic.commands.RemovetagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.FieldContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
@@ -52,7 +58,9 @@ public class AddressBookParserTest {
     public void parseCommand_delete() throws Exception {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
                 DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
-        assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), command);
+        Index[] indexArr = {INDEX_FIRST_PERSON};
+        Set<Index> indexSet = new HashSet<>(Arrays.asList(indexArr));
+        assertEquals(new DeleteCommand(indexSet), command);
     }
 
     @Test
@@ -95,6 +103,21 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_mark() throws Exception {
         assertTrue(parser.parseCommand(MarkCommand.SAMPLE_COMMAND) instanceof MarkCommand);
+    }
+
+    @Test
+    public void parseCommand_removetag() throws Exception {
+        assertTrue(parser.parseCommand(RemovetagCommand.SAMPLE_COMMAND) instanceof RemovetagCommand);
+    }
+
+    @Test
+    public void parseCommand_available() throws Exception {
+        assertTrue(parser.parseCommand(AvailableCommand.SAMPLE_COMMAND) instanceof AvailableCommand);
+    }
+
+    @Test
+    public void parseCommand_editTutTagList() throws Exception {
+        assertTrue(parser.parseCommand(EditTutTagListCommand.SAMPLE_COMMAND) instanceof EditTutTagListCommand);
     }
 
     @Test

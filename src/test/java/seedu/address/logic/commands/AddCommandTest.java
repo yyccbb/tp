@@ -24,6 +24,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.TutorialTag;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
@@ -31,6 +32,15 @@ public class AddCommandTest {
     @Test
     public void constructor_nullPerson_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new AddCommand(null));
+    }
+
+    @Test
+    public void execute_getNeedsWarningPopup_returnsFalse() {
+        Person validPerson = new PersonBuilder().build();
+
+        AddCommand addCommand = new AddCommand(validPerson);
+
+        assertFalse(addCommand.getNeedsWarningPopup());
     }
 
     @Test
@@ -150,6 +160,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public ObservableList<Person> getPersonList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Person> getFilteredPersonList() {
             throw new AssertionError("This method should not be called.");
         }
@@ -162,6 +177,28 @@ public class AddCommandTest {
         @Override
         public void persistentUpdateFilteredList(List<? extends Predicate<Person>> predicates) {
             throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteTutorialTag(TutorialTag target) {
+            throw new AssertionError("This method should not be called.");
+        };
+        @Override
+        public void addTutorialTag(TutorialTag tutorialTag) {
+            throw new AssertionError("This method should not be called.");
+        };
+        @Override
+        public boolean hasTutorialTag(TutorialTag tutorialTag) {
+            throw new AssertionError("This method should not be called.");
+        };
+        @Override
+        public ObservableList<TutorialTag> getTutorialTagList() {
+            throw new AssertionError("This method should not be called.");
+        };
+
+        @Override
+        public String getTutorialTagListString() {
+            throw new AssertionError("This method should not be called");
         }
     }
 

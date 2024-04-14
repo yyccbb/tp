@@ -16,6 +16,10 @@ repositories {
     maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
 }
 
+run {
+    enableAssertions = true
+}
+
 checkstyle {
     toolVersion = '10.2'
 }
@@ -67,7 +71,7 @@ dependencies {
 
 shadowJar {
     archiveBaseName = 'TrAcker'
-    archiveClassifier = 'v1.3trial'
+    archiveClassifier = 'v1.3'
 }
 
 defaultTasks 'clean', 'test'

@@ -5,14 +5,18 @@ import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputControl;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
+import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -78,6 +82,7 @@ public class MainWindow extends UiPart<Stage> {
 
     /**
      * Sets the accelerator of a MenuItem.
+     *
      * @param keyCombination the KeyCombination value of the accelerator
      */
     private void setAccelerator(MenuItem menuItem, KeyCombination keyCombination) {
@@ -147,6 +152,21 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Opens the warning window or focuses on it if it's already opened.
+     */
+    @FXML
+    public void handleWarning(WarningWindow warningWindow) {
+        Stage popupStage = warningWindow.getRoot();
+
+        // ensure that the warningWindow is always focused and must
+        // be interacted before the user can return to the main window
+        popupStage.initModality(Modality.APPLICATION_MODAL);
+        popupStage.initOwner(primaryStage);
+
+        warningWindow.showAndWait();
+    }
+
     void show() {
         primaryStage.show();
     }
@@ -163,34 +183,67 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
+    /**
+     * Gives the command text field focus and makes it editable
+     * whenever enter or slash keys are pressed.
+     */
+    @FXML
+    private void handleEnterReleased(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER || event.getCode() == KeyCode.SLASH) {
+            TextField commandInputField =
+                    (TextField) ((StackPane) this.commandBoxPlaceholder.getChildren().get(0)).getChildren().get(0);
+            commandInputField.requestFocus();
+            commandInputField.setEditable(true);
+        }
+    }
+
     public PersonListPanel getPersonListPanel() {
         return personListPanel;
     }
 
     /**
      * Executes the command and returns the result.
-     *
-     * @see seedu.address.logic.Logic#execute(String)
      */
     private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
         try {
-            CommandResult commandResult = logic.execute(commandText);
-            logger.info("Result: " + commandResult.getFeedbackToUser());
-            resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+            Command command = logic.parseCommand(commandText);
 
-            if (commandResult.isShowHelp()) {
-                handleHelp();
+            if (command.getNeedsWarningPopup()) {
+                WarningWindow warningWindow = new WarningWindow();
+                warningWindow.setMessage(commandText + " - Click OK to confirm.");
+                handleWarning(warningWindow);
+                if (warningWindow.isOkClicked()) {
+                    return unsafeExecuteCommand(command);
+                } else {
+                    CommandResult commandResult = new CommandResult("Execution of " + commandText
+                            + " aborted", false, false);
+                    logger.info("Result: " + commandResult.getFeedbackToUser());
+                    resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+                    return commandResult;
+                }
+            } else {
+                return unsafeExecuteCommand(command);
             }
-
-            if (commandResult.isExit()) {
-                handleExit();
-            }
-
-            return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("An error occurred while executing command: " + commandText);
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
         }
+    }
+
+    private CommandResult unsafeExecuteCommand(Command command) throws CommandException, ParseException {
+        CommandResult commandResult = logic.execute(command);
+        logger.info("Result: " + commandResult.getFeedbackToUser());
+        resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+
+        if (commandResult.isShowHelp()) {
+            handleHelp();
+        }
+
+        if (commandResult.isExit()) {
+            handleExit();
+        }
+
+        return commandResult;
     }
 }

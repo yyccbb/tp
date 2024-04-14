@@ -7,6 +7,7 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalTutorialTag.WED10;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -15,6 +16,7 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.logic.commands.EditTutTagListCommand;
 import seedu.address.model.person.FieldContainsKeywordsPredicate;
 import seedu.address.testutil.AddressBookBuilder;
 
@@ -128,5 +130,38 @@ public class ModelManagerTest {
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
         assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs)));
+    }
+
+    @Test
+    public void hasTutorialTag_nullTutorialTag_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.hasTutorialTag(null));
+    }
+
+    @Test
+    public void hasTutorialTag_tutorialTagNotInAddressBook_returnsFalse() {
+        assertFalse(modelManager.hasTutorialTag(WED10));
+    }
+
+    @Test
+    public void hasTutorialTag_tutorialTagInAddressBook_returnsTrue() {
+        modelManager.addTutorialTag(WED10);
+        assertTrue(modelManager.hasTutorialTag(WED10));
+    }
+
+    @Test
+    public void deleteTutorialTag_success() {
+        modelManager.addTutorialTag(WED10);
+        modelManager.deleteTutorialTag(WED10);
+        assertFalse(modelManager.hasTutorialTag(WED10));
+    }
+
+    @Test
+    public void getFilteredTutorialTagList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getTutorialTagList().remove(0));
+    }
+
+    @Test
+    public void getTutorialTagListString() {
+        assertEquals(modelManager.getTutorialTagListString(), EditTutTagListCommand.EMPTY_TUTORIALTAGLIST_OUTPUT);
     }
 }

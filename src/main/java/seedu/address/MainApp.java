@@ -12,9 +12,10 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.Version;
 import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.commons.util.ConfigUtil;
-import seedu.address.commons.util.StringUtil;
+import seedu.address.commons.util.StatefulStringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
+import seedu.address.logic.parser.StatefulParserUtil;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -44,6 +45,7 @@ public class MainApp extends Application {
     protected Logic logic;
     protected Storage storage;
     protected Model model;
+    protected StatefulStringUtil statefulStringUtil;
     protected Config config;
 
     @Override
@@ -65,6 +67,10 @@ public class MainApp extends Application {
         logic = new LogicManager(model, storage);
 
         ui = new UiManager(logic);
+
+        StatefulStringUtil.initialize(model);
+
+        StatefulParserUtil.initialize(model);
     }
 
     /**
@@ -83,6 +89,8 @@ public class MainApp extends Application {
                 logger.info("Creating a new data file " + storage.getAddressBookFilePath()
                         + " populated with a sample AddressBook.");
             }
+            // need to check the initial data against the tutorial tag list to remove the invalid TutoiralTags
+            // (TutorialTags that are not in the UniqueTutorialTagList yet have been attached to contact entries)
             initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
         } catch (DataLoadingException e) {
             logger.warning("Data file at " + storage.getAddressBookFilePath() + " could not be loaded."
@@ -131,7 +139,7 @@ public class MainApp extends Application {
         try {
             ConfigUtil.saveConfig(initializedConfig, configFilePathUsed);
         } catch (IOException e) {
-            logger.warning("Failed to save config file : " + StringUtil.getDetails(e));
+            logger.warning("Failed to save config file : " + StatefulStringUtil.getDetails(e));
         }
         return initializedConfig;
     }
@@ -162,7 +170,7 @@ public class MainApp extends Application {
         try {
             storage.saveUserPrefs(initializedPrefs);
         } catch (IOException e) {
-            logger.warning("Failed to save config file : " + StringUtil.getDetails(e));
+            logger.warning("Failed to save config file : " + StatefulStringUtil.getDetails(e));
         }
 
         return initializedPrefs;
@@ -180,7 +188,7 @@ public class MainApp extends Application {
         try {
             storage.saveUserPrefs(model.getUserPrefs());
         } catch (IOException e) {
-            logger.severe("Failed to save preferences " + StringUtil.getDetails(e));
+            logger.severe("Failed to save preferences " + StatefulStringUtil.getDetails(e));
         }
     }
 }

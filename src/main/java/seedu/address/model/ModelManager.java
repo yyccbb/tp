@@ -13,6 +13,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.TutorialTag;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -31,7 +32,6 @@ public class ModelManager implements Model {
         requireAllNonNull(addressBook, userPrefs);
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
-
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
@@ -114,6 +114,11 @@ public class ModelManager implements Model {
 
     //=========== Filtered Person List Accessors =============================================================
 
+    @Override
+    public ObservableList<Person> getPersonList() {
+        return addressBook.getPersonList();
+    }
+
     /**
      * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
      * {@code versionedAddressBook}
@@ -133,7 +138,7 @@ public class ModelManager implements Model {
     public void persistentUpdateFilteredList(List<? extends Predicate<Person>> predicates) {
         Predicate<Person> combinedPredicate = predicates.stream()
                 .<Predicate<Person>>map(p -> (Predicate<Person>) p)
-                .reduce(Predicate::or)
+                .reduce(Predicate::and)
                 .orElse(person -> true);
         filteredPersons.setPredicate(combinedPredicate);
     }
@@ -154,4 +159,28 @@ public class ModelManager implements Model {
                 && filteredPersons.equals(otherModelManager.filteredPersons);
     }
 
+    @Override
+    public void deleteTutorialTag(TutorialTag tutorialTag) {
+        addressBook.removeTutorialTag(tutorialTag);
+    }
+
+    @Override
+    public void addTutorialTag(TutorialTag tutorialTag) {
+        addressBook.addTutorialTag(tutorialTag);
+    }
+
+    @Override
+    public boolean hasTutorialTag(TutorialTag tutorialTag) {
+        requireNonNull(tutorialTag);
+        return addressBook.hasTutorialTag(tutorialTag);
+    }
+
+    @Override
+    public ObservableList<TutorialTag> getTutorialTagList() {
+        return addressBook.getTutorialTagList();
+    }
+
+    public String getTutorialTagListString() {
+        return addressBook.getTutorialTagListString();
+    }
 }

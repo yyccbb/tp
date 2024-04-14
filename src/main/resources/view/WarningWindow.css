@@ -1,0 +1,34 @@
+#okButton, #cancelButton, #warningMessage {
+    -fx-text-fill: black;
+}
+
+#okButton, #cancelButton {
+    -fx-background-color: #e0e0e0;
+}
+
+#okButton:hover {
+    -fx-background-color: grey;
+}
+
+#cancelButton:hover {
+    -fx-background-color: grey;
+}
+
+
+#okButton:focused, #cancelButton:focused {
+    -fx-border-color: #3e7b91;
+    -fx-border-radius: 2;
+
+}
+
+#okButton:armed {
+    -fx-background-color: grey;
+}
+
+#cancelButton:armed {
+    -fx-background-color: grey;
+}
+
+#warningMessageContainer {
+    -fx-background-color: white;
+}
