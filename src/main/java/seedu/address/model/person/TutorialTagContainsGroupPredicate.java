@@ -18,6 +18,9 @@ public class TutorialTagContainsGroupPredicate implements Predicate<Person> {
 
     @Override
     public boolean test(Person person) {
+        if (person.getType() != PersonType.TA) {
+            return false;
+        }
         return person.getTags().stream()
                 .anyMatch(tag -> StatefulStringUtil.containsTutorialGroup(tag, tutorialGroup));
     }
