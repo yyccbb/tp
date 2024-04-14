@@ -32,6 +32,12 @@ public class AvailableCommandParser implements Parser<AvailableCommand> {
 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_GROUP);
 
+        String preamble = argMultimap.getPreamble();
+        if (!preamble.equals("")) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, AvailableCommand.MESSAGE_USAGE));
+        }
+
         Optional<String> group = argMultimap.getValue(PREFIX_GROUP);
 
         try {

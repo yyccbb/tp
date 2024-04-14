@@ -45,8 +45,15 @@ public class AvailableCommandParserTest {
     }
 
     @Test
+    public void parse_nonemptyPreamble_throwsParseException() throws ParseException {
+        String input = " non-empty preamble " + PREFIX_GROUP + " TUES08";
+        assertParseFailure(parser, input, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                AvailableCommand.MESSAGE_USAGE));
+    }
+
+    @Test
     public void parse_validArgs_returnsAvailableCommand() throws ParseException {
-        String args = " available " + PREFIX_GROUP + " TUES08 ";
+        String args = " " + PREFIX_GROUP + " TUES08";
         AvailableCommand expectedAvailableCommand = new AvailableCommand(
                 new TutorialTagContainsGroupPredicate("TUES08"), TUES08);
 
