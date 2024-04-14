@@ -1,11 +1,16 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.commons.util.AppUtil.checkArgument;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_TAG_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP;
+
+import java.util.Optional;
 
 import seedu.address.logic.commands.AvailableCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.TutorialTagContainsGroupPredicate;
+import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.TagStatus;
 import seedu.address.model.tag.TutorialTag;
 
@@ -27,7 +32,27 @@ public class AvailableCommandParser implements Parser<AvailableCommand> {
 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_GROUP);
 
+        String preamble = argMultimap.getPreamble();
+        if (!preamble.equals("")) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, AvailableCommand.MESSAGE_USAGE));
+        }
+
+        Optional<String> group = argMultimap.getValue(PREFIX_GROUP);
+
+        try {
+            checkArgument(!group.isEmpty(), String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    AvailableCommand.MESSAGE_USAGE));
+            checkArgument(!group.get().equals(""), AvailableCommand.MESSAGE_NON_EMPTY_GROUP_NAME);
+        } catch (IllegalArgumentException e) {
+            throw new ParseException(e.getMessage());
+        }
+
         String tutorialGroup = argMultimap.getValue(PREFIX_GROUP).get();
+
+        if (!Tag.isValidTagName(tutorialGroup)) {
+            throw new ParseException(MESSAGE_INVALID_TAG_NAME);
+        }
 
         TutorialTag tutorialTag = new TutorialTag(tutorialGroup, TagStatus.AVAILABLE);
 

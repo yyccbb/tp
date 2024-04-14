@@ -19,6 +19,8 @@ public class AvailableCommand extends Command {
             + "Parameters: [FLAG] [TUTORIAL] \n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_GROUP + " TUES08 ";
+
+    public static final String MESSAGE_NON_EMPTY_GROUP_NAME = "Tutorial group name parameter cannot be empty";
     public static final String SAMPLE_COMMAND = COMMAND_WORD + " " + PREFIX_GROUP + " WED10 ";
 
     private final TutorialTagContainsGroupPredicate predicate;
