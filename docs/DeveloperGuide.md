@@ -155,6 +155,16 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Tagging system
+
+TrAcker helps users track assignment status, tutorial attendance and tutorial groups via the Tagging system.
+The class diagram below depicts how different types of Tags are implemented:
+
+<img src="images/TaggingClassDiagram.png" width="550" />
+
+We use a `Set<Tag>` to store the set of tags for each Student / TA, such that Tags are uniquely identified
+by their `tagName`. Note that TAs may only have `TutorialTag`.
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
