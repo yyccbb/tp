@@ -249,7 +249,7 @@ have the tag. The `Assignment1` tag of <mark style="background-color: green">COM
 to the contact if they previously did not have the tag.
 * `mark 2 3 /t week1 week2 /ts awr` updates the `week1` and `week2` tags to
 <mark style="background-color: orange">ABSENT_WITH_REASON</mark> for the 2nd and 3rd persons in the displayed list
-if they already have the tag. Both tags with specified status would be added to the twp contacts if any of them
+if they already have the tag. Both tags with specified status would be added to the two contacts if any of them
 previously did not have the tags.
 * `mark all /t TUE08 /ts as` updates the `TUE08` tag to <mark style="background-color: #3e7b91">ASSIGNED</mark> to
 assign every person in the displayed list to the tutorial group TUE08 if they already have the tag. The `TUE08` tag
