@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.commons.util.AppUtil.checkArgument;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
@@ -41,8 +42,9 @@ public class FindCommandParser implements Parser<FindCommand> {
 
         PersonType type = StatefulParserUtil.parseFindPersonType(argMultimap.getPreamble());
         if (type != null) {
-            List<String> separated = Arrays.asList(type.toString().split("\\s+"));
-            predicates.add(new FieldContainsKeywordsPredicate(separated));
+            List<String> keyword = new ArrayList<>();
+            keyword.add(type.toString());
+            predicates.add(new FieldContainsKeywordsPredicate(keyword));
         }
 
         List<Prefix> allPrefixes = Arrays.asList(PREFIX_NAME, PREFIX_ID, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_TAG);
@@ -50,6 +52,13 @@ public class FindCommandParser implements Parser<FindCommand> {
             if (StatefulParserUtil.arePrefixesPresent(argMultimap, prefix)) {
                 List<String> keywords = argMultimap.getAllValues(prefix);
                 List<String> separated = StringListUtil.separateWithSpaces(keywords);
+                try {
+                    for (String keyword : separated) {
+                        checkArgument(!keyword.isEmpty(), "Word parameter cannot be empty");
+                    }
+                } catch (IllegalArgumentException e) {
+                    throw new ParseException(e.getMessage());
+                }
                 predicates.add(new FieldContainsKeywordsPredicate(prefix, separated));
             }
         }

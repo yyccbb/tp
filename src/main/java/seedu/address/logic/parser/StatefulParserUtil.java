@@ -258,7 +258,7 @@ public class StatefulParserUtil {
 
     /**
      * @param flag Command flag on whether the EditTutTagListCommand
-     * @throws IllegalArgumentException
+     * @throws ParseException
      */
     public static EditTutTagListCommand.CommandSubtype isCreatingNewTag(String flag) throws ParseException {
         if (flag.equals(EditTutTagListCommand.ADD_FLAG)) {
