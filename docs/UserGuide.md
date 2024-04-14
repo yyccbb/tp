@@ -159,7 +159,9 @@ deletion.
 Format: `delete (all | INDEX [OTHER_INDICES...])`
 
 * Deletes the person(s) at the specified `INDEX`s.
-* If `all` is used, all persons in the displayed list are deleted.
+* If `all` is used, all persons in the displayed list are deleted. The displayed list might be the same as the full
+list. For example, if the `delete all` command is used after a `find NAME` command, all contacts found by
+the `find NAME` command would be deleted but not those excluded from the displayed list.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
@@ -241,15 +243,17 @@ Format: `mark ( all | INDEX [OTHER_INDICES...] ) /t TAG [OTHER_TAGS...] /ts TAG_
 * `TAG_STATUS` must be one of the [above specified values](#tag-status)
 
 Examples:
-* `mark 1 /t Assignment1 /ts cg` updates the `Assignment1` tag (or adds it, if it is not already attached)
-to <mark style="background-color: green">COMPLETE_GOOD</mark> for the 1st person in the displayed list.
-* `mark 2 3 /t week1 week2 /ts awr` updates the `week1` and `week2` tags (or adds them, if any one of them is not 
-  already 
-  attached) to
-<mark style="background-color: orange">ABSENT_WITH_REASON</mark> for the 2nd and 3rd persons in the displayed list.
-* `mark all /t TUE08 /ts as` updates the `TUE08` tag (or adds it, if it is not already attached) to
-<mark style="background-color: #3e7b91">ASSIGNED</mark> to assign every person in the displayed list to the 
-tutorial group TUE08.
+* `mark 1 /t Assignment1 /ts cg` updates the `Assignment1` tag
+to <mark style="background-color: green">COMPLETE_GOOD</mark> for the 1st person in the displayed list if they already
+have the tag. The `Assignment1` tag of <mark style="background-color: green">COMPLETE_GOOD</mark> status would be added
+to the contact if they previously did not have the tag.
+* `mark 2 3 /t week1 week2 /ts awr` updates the `week1` and `week2` tags to
+<mark style="background-color: orange">ABSENT_WITH_REASON</mark> for the 2nd and 3rd persons in the displayed list
+if they already have the tag. Both tags with specified status would be added to the two contacts if any of them
+previously did not have the tags.
+* `mark all /t TUE08 /ts as` updates the `TUE08` tag to <mark style="background-color: #3e7b91">ASSIGNED</mark> to
+assign every person in the displayed list to the tutorial group TUE08 if they already have the tag. The `TUE08` tag
+with specified status would be added to any listed contact that previously did not have the tag.
 
 <div markdown="block" class="alert alert-info">
 
