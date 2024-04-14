@@ -20,9 +20,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Design**
-
 <div markdown="span" class="alert alert-primary">
-
 :bulb: **Tip:** The `.puml` files used to create diagrams in this document `docs/diagrams` folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
 </div>
 
@@ -31,7 +29,6 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 <img src="images/ArchitectureDiagram.png" width="280" />
 
 The ***Architecture Diagram*** given above explains the high-level design of the App.
-
 Given below is a quick overview of main components and how they interact with each other.
 
 **Main components of the architecture**
@@ -165,6 +162,13 @@ The class diagram below depicts how different types of Tags are implemented:
 We use a `Set<Tag>` to store the set of tags for each Student / TA, such that Tags are uniquely identified
 by their `tagName`. Note that TAs may only have `TutorialTag`.
 
+### Available Command
+
+TrAcker allows users to find available TAs for a specific tutorial group. The `AvailableCommandParser` parses the user's input and creates an `AvailableCommand` containing a `TutorialTagContainsGroupPredicate`. The `AvailableCommand` is then executed by `LogicManager` to update the `FilterPersonList` in the `Model`. This retrieves the list of available TAs for the specified tutorial group.
+The workflow is shown below.
+
+![AvailableActivityDiagram](images/AvailableActivityDiagram.png)
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
@@ -249,10 +253,6 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -272,14 +272,14 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* head TA of CS2103T
-* has a need to manage a significant number of contacts
+* Head TA of CS2103T
+* has a need to manage a significant number of contacts of students and other TAs
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage students and tutors faster than a typical mouse/GUI driven app
+**Value proposition**: manage students and TAs faster than a typical mouse/GUI driven app
 
 
 ### User stories
