@@ -78,7 +78,7 @@ tutor availability and much more with just a few keystrokes!
 
 ### Adding a Student or TA: `add stu`, `add ta`
 
-Adds a Student (TA) to the address book.
+Adds a Student/TA to the address book.
 
 Format:
 * To add a Student,<br>
@@ -90,7 +90,7 @@ Format:
 
 :bulb: **Notes:**<br>
 
-* All persons are saved as either Students or TAs. If the type of the person is not specified, the person will be
+* Every person is saved either as a Student or TA. If the type of the person is not specified, the person will be
   saved as a Student by default.
 * Each person's ID is unique, so you cannot add 2 people with the same ID.
 
@@ -211,6 +211,21 @@ The different tag types along with their corresponding tag statuses are describe
 | Attendance | `p` : <mark style="background-color:  green">PRESENT</mark><br/>`a` : <mark style="background-color:red">ABSENT</mark><br/>`awr` : <mark style="background-color:orange">ABSENT_WITH_REASON</mark>                                                                                 |
 | Tutorial | `as` : <mark style="background-color: #3e7b91">ASSIGNED</mark><br/>`av` : <mark style="background-color: white">AVAILABLE</mark>                                                                                                                                                   |
 
+### Tag Name
+Tag names have the following constraints:
+- must be alphanumeric
+- no whitespace between words in the tag
+- all tag names must be unique.
+
+Here are some recommended tag names for the various tag types.
+
+| Tag type   | Examples of recommended tag names |
+|------------|-----------------------------------|
+| Assignment | `Assignment1` `v1.1Issues`        |
+| Attendance | `Week1` `Week2`                   |
+| Tutorial   | `TUE08` `WED10` `THU09`           |
+
+
 ### Marking a tag : `mark`
 
 Updates the status of the specified tag with the specified status. If the
@@ -293,7 +308,7 @@ Format: `available /g TUTORIAL`
 * The search is case-sensitive and must match the specified tutorial group exactly.
 
 Examples:
-* `available /g TUES08` returns all TAs who are available for tutorial group `TUES08`
+* `available /g TUE08` returns all TAs who are available for tutorial group `TUE08`
 
 ### Viewing help : `help`
 
@@ -321,19 +336,19 @@ contains the data of your previous TrAcker home folder.
 
 ## Command summary
 
-Action | Format, Examples                                                                                                                       
---------|----------------------------------------------------------------------------------------------------------------------------------------
-**Add** | `add [stu \| ta] /n NAME /i ID /p PHONE /e EMAIL ​` <br> e.g., `add stu /n Alex Yeoh /i A0777777L /p 87438807 /e alexyeoh@example.com` 
-**List** | `list`                                                                                                                                 
-**Edit** | `edit INDEX [/n NAME] [/p PHONE] [/e EMAIL] ​`<br> e.g.,`edit 1 /p 91234567 /e johndoe@example.com`                                    
-**Find** | `find [stu \| ta] [/n NAME] [/i ID] [/p PHONE] [/e EMAIL] [/t TAGS...]`<br> e.g., `find /t wed assignment1`                            
-**Delete** | `delete (all \| INDEX [OTHER_INDICES...])`<br> e.g., `delete 3`                                                                        
-**Clear** | `clear`                                                                                                                                
-**Exit** | `exit`
-**Mark** | `mark ( all \| INDEX [OTHER_INDICES...] ) /t TAG [OTHER_TAGS...] /ts TAG_STATUS`<br> e.g., `mark 1 /t Assignment1 /ts cg`              
-**Create Valid Tutorial Tag** | `tuttag add /t TAG`<br> e.g., `tuttag add /t TUE08`
-**Delete Valid Tutorial Tag** | `tuttag del /t TAG`<br> e.g., `tuttag del /t WED09`
-**List Valid Tutorial Tags** | `tuttag list`                                                                                                                     
-**Remove Tag** | `removetag INDEX /t TAG`<br> e.g., `removetag 1 /t Assignment1`                                                                        
-**Available** | `available /g TUTORIAL`<br> e.g., `available /g TUES08`                                                                                
-**Help** | `help`                                                                                                                                 
+| Action                        | Format, Examples                                                                                                                      |
+|-------------------------------|---------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**                       | `add [stu \ ta] /n NAME /i ID /p PHONE /e EMAIL ​` <br> e.g., `add stu /n Alex Yeoh /i A0777777L /p 87438807 /e alexyeoh@example.com` | 
+| **List**                      | `list`                                                                                                                                |
+| **Edit**                      | `edit INDEX [/n NAME] [/p PHONE] [/e EMAIL] ​`<br> e.g.,`edit 1 /p 91234567 /e johndoe@example.com`                                   |
+| **Find**                      | `find [stu \ ta] [/n NAME] [/i ID] [/p PHONE] [/e EMAIL] [/t TAGS...]`<br> e.g., `find /t wed assignment1`                            | 
+| **Delete**                    | `delete (all \ INDEX [OTHER_INDICES...])`<br> e.g., `delete 3                                                                         | `                                                                        
+| **Clear**                     | `clear`                                                                                                                               |
+| **Exit**                      | `exit`                                                                                                                                |
+| **Mark**                      | `mark ( all \ INDEX [OTHER_INDICES...] ) /t TAG [OTHER_TAGS...] /ts TAG_STATUS`<br> e.g., `mark 1 /t Assignment1 /ts cg`              |               
+| **Create Valid Tutorial Tag** | `tuttag add /t TAG`<br> e.g., `tuttag add /t TUE08`                                                                                   |
+| **Delete Valid Tutorial Tag** | `tuttag del /t TAG`<br> e.g., `tuttag del /t WED09`                                                                                   |
+| **List Valid Tutorial Tags**  | `tuttag list`                                                                                                                         |
+| **Remove Tag**                | `removetag INDEX /t TAG`<br> e.g., `removetag 1 /t Assignment1`                                                                       |
+| **Available**                 | `available /g TUTORIAL`<br> e.g., `available /g TUES08`                                                                               |
+| **Help**                      | `help`                                                                                                                                |
