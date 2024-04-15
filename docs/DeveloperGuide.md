@@ -151,7 +151,7 @@ This section describes some noteworthy details on how certain features unique to
 TrAcker helps users track assignment status, tutorial attendance and tutorial groups via the Tagging system.
 The class diagram below depicts how different types of Tags are implemented:
 
-<img src="images/TaggingClassDiagram.png" width="550" />
+<img src="images/TaggingClassDiagram.png" width="550"/>
 
 We use a `Set<Tag>` to store the set of tags for each Student / TA, such that Tags are uniquely identified
 by their `tagName`. Note that TAs may only have `TutorialTag`.
@@ -161,7 +161,7 @@ by their `tagName`. Note that TAs may only have `TutorialTag`.
 Users may only mark persons with valid TutorialTags they have previously defined using ``tuttag add``.
 The following activity diagram depicts a typical flow of how a user would add a new tutorial group.
 
-<img src="images/TuttagActivityDiagram.png" />
+<img src="images/TuttagActivityDiagram.png"/>
 
 ### Available Command
 
@@ -169,6 +169,25 @@ TrAcker allows users to find available TAs for a specific tutorial group. The `A
 The workflow is shown below.
 
 ![AvailableActivityDiagram](images/AvailableActivityDiagram.png)
+
+### Find Command
+
+The `find` command filters persons in the current displayed list based on the user specified flags.
+Here we provide a brief summary of the specific behaviour of the `find` command:
+* The search is case-insensitive
+* When searching by name, we perform subword matching e.g. `Han` will match `Hans`
+* Between optional fields supplied, an AND search is performed (e.g. `find stu /n John /i 6Z` will find all
+Students who have both a name containing `John` and an ID containing `6Z`.)
+* For multiple values supplied to the same field, an OR search is performed.
+* **Searching by Tags:**
+  * For TutorialTags, subword matching is performed (e.g. `find /t wed assignment1` will find all
+  persons with a TutorialTag where `wed` is a subword or an `assignment1` tag.)
+    * This is to make it easier for TAs to search by the day of the week for Tutorial tags.
+  * As follows, for other types of tags, full word matching is performed.
+
+The below sequence diagram depicts the process of a user executing the `find` command:
+
+![FindSequenceDiagram](images/FindSequenceDiagram.png)
 
 ### \[Proposed\] Undo/redo feature
 
