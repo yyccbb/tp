@@ -36,8 +36,9 @@ public class EditTutTagListCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates a TutorialTag to be used with the specified "
             + "TagName.\n"
-            + "Parameters: MODE (must be either 'add' for adding tags or 'del' for deleting tags) "
-            + PREFIX_TAG + " [TAGNAME]\n"
+            + "Parameters: MODE (must be 'add' for adding tags, 'del' for deleting tags or 'list' for listing "
+            + "existing tags) "
+            + PREFIX_TAG + " TAGNAME\n"
             + "Example: " + COMMAND_WORD + " " + ADD_FLAG + " " + PREFIX_TAG + " THU10\n";
 
     public static final String SAMPLE_COMMAND = COMMAND_WORD + " " + ADD_FLAG + " " + PREFIX_TAG + " WED10";

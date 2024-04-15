@@ -27,7 +27,8 @@ public class RemovetagCommand extends Command {
     // to be updated
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Removes the specified tag from the specified"
             + " contact entry.\n"
-            + "Parameters: INDEX (must be a positive integer) "
+            + "Parameters: (all | INDEX (must be a positive integer within the size of the displayed list) "
+            + "[OTHER_INDICES]) "
             + PREFIX_TAG + " TAG\n"
             + "Example: " + SAMPLE_COMMAND;
 
