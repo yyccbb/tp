@@ -1,0 +1,23 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+start
+:User enters "tuttag add /t TUE08";
+
+:EditTutTagListCommandParser parses input;
+
+if () then ([command is valid])
+    :Updates UniqueTutorialTagList with new TutorialTag;;
+    :User enters "mark all /t TUE08 /ts as";
+    :MarkCommandParser parses input;
+    if () then ([command is valid])
+    :Every person in displayed list gets "TUE08" TutorialTag with TagStatus "ASSIGNED";
+    else ([command is invalid])
+    :Display error message;
+    endif
+else ([command is invalid])
+    :Display error message;
+endif
+stop
+@enduml

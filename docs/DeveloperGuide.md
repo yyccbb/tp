@@ -162,6 +162,13 @@ The class diagram below depicts how different types of Tags are implemented:
 We use a `Set<Tag>` to store the set of tags for each Student / TA, such that Tags are uniquely identified
 by their `tagName`. Note that TAs may only have `TutorialTag`.
 
+### Tutorial Tags
+
+Users may only mark persons with valid TutorialTags they have previously defined using ``tuttag add``.
+The following activity diagram depicts a typical flow of how a user would add a new tutorial group.
+
+<img src="images/TutTagActivityDiagram.png" width="550" />
+
 ### Available Command
 
 TrAcker allows users to find available TAs for a specific tutorial group. The `AvailableCommandParser` parses the user's input and creates an `AvailableCommand` containing a `TutorialTagContainsGroupPredicate`. The `AvailableCommand` is then executed by `LogicManager` to update the `FilterPersonList` in the `Model`. This retrieves the list of available TAs for the specified tutorial group.
