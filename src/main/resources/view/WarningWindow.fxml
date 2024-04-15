@@ -27,14 +27,14 @@
                         </HBox.margin>
                     </Label>
                     <!-- OK Button -->
-                    <Button fx:id="okButton" mnemonicParsing="false" onAction="#okClicked" text="OK">
+                    <Button fx:id="okButton" mnemonicParsing="false" onAction="#okClicked" text="OK" prefWidth="80" prefHeight="40">
                         <HBox.margin>
                             <Insets left="5.0" />
                         </HBox.margin>
                     </Button>
 
                     <!-- Cancel Button -->
-                    <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#cancelClicked" text="Cancel">
+                    <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#cancelClicked" text="Cancel" prefWidth="80" prefHeight="40">
                         <HBox.margin>
                             <Insets left="5.0" />
                         </HBox.margin>

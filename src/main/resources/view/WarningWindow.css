@@ -15,10 +15,15 @@
 }
 
 
-#okButton:focused, #cancelButton:focused {
+#okButton:focused {
     -fx-border-color: #3e7b91;
     -fx-border-radius: 2;
+}
 
+
+#cancelButton:focused {
+    -fx-border-color: #3e7b91;
+    -fx-border-radius: 2;
 }
 
 #okButton:armed {
