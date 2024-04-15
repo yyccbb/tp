@@ -30,11 +30,11 @@ tutor availability and much more with just a few keystrokes!
    Some example commands you can try:
    * `list` : Lists all contacts.
    
-   * `add stu /n John Doe /i A0123456Y /p 91234567 /e johndoe@example.com` : Adds the Student `John Doe` to your contact list.
+   * `add stu /n John Doe /i A0123456Y /p 91234567 /e johndoe@ex.com` : Adds the Student `John Doe` to your contact list.
    
-   * `add ta /n Jane Smith /i A0654321Y /p 97654321 /e janesmith@example.com` : Adds the TA `Jane Smith` to your contact list.
+   * `add ta /n Jane Smith /i A0654321Y /p 97654321 /e janesmith@ex.com` : Adds the TA `Jane Smith` to your contact list.
    
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+   * `delete 3` : Deletes the 3rd contact shown in the displayed list.
 
    * `clear` : Deletes all contacts.
 
@@ -53,26 +53,29 @@ tutor availability and much more with just a few keystrokes!
 **:information_source: Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add stu /n NAME`, `NAME` is a parameter which can be used as `add stu /n John Doe`.
+  e.g. in `add stu /n NAME`, `NAME` is a parameter that can be used as `add stu /n John Doe`.
 
-* Items with `...` after them can be used multiple times including zero times.<br>
-  e.g. `[/t TAG...]` can be used as `/t friend` or `/t friend colleague` etc.
+* Parameters with `...` after them can be supplied by the user for zero, one or more times.<br>
+  e.g. `[/t TAG...]` can be used as `/t Assignment1` or `/t Assignment1 Assignment2`(`Assignment1` and `Assignment2`
+would be treated as two different tags. Refer to the [Tagging](#Tagging) section for more information) etc.
 
 * Items in square brackets are optional.<br>
   e.g. `/n NAME [/p PHONE]` can be used as `/n John Doe /p 91234567` or as `/n John Doe`.
 
-* Vertical bar (pipe) is used to denote alternatives.<br>
+* Vertical bar (pipe) `|` is used to denote alternatives.<br>
 
-* Pipe symbol and square brackets `[|]` separate alternative optional items.<br>
-  e.g. in `add [stu | ta] /n NAME`, `stu` and `ta` are alternatives, and at most one of them should be used.
+* Pipe symbol and square brackets together `[|]` denote alternative items that are optional.<br>
+  e.g. in `add [stu | ta] /n NAME`, `stu` and `ta` are alternatives, either exactly one or none of them should be used.
 
-* Parameters can be in any order.<br>
-  e.g. if the command specifies `/n NAME /i ID`, `/i ID /n NAME` is also acceptable.
+* Parameters can be supplied in any order.<br>
+  e.g. if the command specifies `/n NAME /i ID`, `/i ID /n NAME` is also acceptable and has the same effect.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`)
+will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
-* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+* If you are using a PDF version of this document, be careful when copying and pasting commands that span across
+multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
 
