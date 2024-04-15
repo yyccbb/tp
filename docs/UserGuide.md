@@ -371,25 +371,25 @@ contains the data of your previous TrAcker home folder.
 
 ## Known issues
 
-1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.<br>
+* **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.<br>
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
 
-| Action                        | Format, Examples                                                                                                                       |
-|-------------------------------|----------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**                       | `add [stu \| ta] /n NAME /i ID /p PHONE /e EMAIL ​` <br> e.g., `add stu /n Alex Yeoh /i A0777777L /p 87438807 /e alexyeoh@example.com` |
-| **List**                      | `list`                                                                                                                                 |
-| **Edit**                      | `edit INDEX [/n NAME] [/p PHONE] [/e EMAIL] ​`<br> e.g.,`edit 1 /p 91234567 /e johndoe@example.com`                                    |
-| **Find**                      | `find [stu \| ta] [/n NAME] [/i ID] [/p PHONE] [/e EMAIL] [/t TAGS...]`<br> e.g., `find /t wed assignment1`                            |
-| **Delete**                    | `delete (all \| INDEX [OTHER_INDICES...])`<br> e.g., `delete 3`                                                                        |
-| **Clear**                     | `clear`                                                                                                                                |
-| **Exit**                      | `exit`                                                                                                                                 |
-| **Mark**                      | `mark (all \| INDEX [OTHER_INDICES...]) /t TAG [OTHER_TAGS...] /ts TAG_STATUS`<br> e.g., `mark 1 /t Assignment1 /ts cg`                |
-| **Create Valid Tutorial Tag** | `tuttag add /t TAG`<br> e.g., `tuttag add /t TUE08`                                                                                    |
-| **Delete Valid Tutorial Tag** | `tuttag del /t TAG`<br> e.g., `tuttag del /t WED09`                                                                                    |
-| **List Valid Tutorial Tags**  | `tuttag list`                                                                                                                          |
-| **Remove Tag**                | `removetag INDEX /t TAG`<br> e.g., `removetag 1 /t Assignment1`                                                                        |
-| **Available**                 | `available /g TUTORIAL`<br> e.g., `available /g TUES08`                                                                                |
-| **Help**                      | `help`                                                                                                                                 |
+| Action                        | Format, Examples                                                                                                                         |
+|-------------------------------|------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**                       | add [stu &#124; ta] /n NAME /i ID /p PHONE /e EMAIL ​ <br> e.g., `add stu /n Alex Yeoh /i A0777777L /p 87438807 /e alexyeoh@example.com` |
+| **List**                      | list                                                                                                                                     |
+| **Edit**                      | edit INDEX [/n NAME] [/p PHONE] [/e EMAIL] ​ <br> e.g.,`edit 1 /p 91234567 /e johndoe@example.com`                                       |
+| **Find**                      | find [stu &#124;  ta] [/n NAME] [/i ID] [/p PHONE] [/e EMAIL] [/t TAGS...]<br> e.g., `find /t wed assignment1`                           |
+| **Delete**                    | delete (all &#124; INDEX [OTHER_INDICES...]) <br> e.g., `delete 3`                                                                       |
+| **Clear**                     | clear                                                                                                                                    |
+| **Exit**                      | exit                                                                                                                                     |
+| **Mark**                      | mark (all &#124; INDEX [OTHER_INDICES...]) /t TAG [OTHER_TAGS...] /ts TAG_STATUS<br> e.g., `mark 1 /t Assignment1 /ts cg`                |
+| **Create Valid Tutorial Tag** | tuttag add /t TAG <br> e.g., `tuttag add /t TUE08`                                                                                       |
+| **Delete Valid Tutorial Tag** | tuttag del /t TAG <br> e.g., `tuttag del /t WED09`                                                                                       |
+| **List Valid Tutorial Tags**  | tuttag list                                                                                                                              |
+| **Remove Tag**                | removetag INDEX /t TAG <br> e.g., `removetag 1 /t Assignment1`                                                                           |
+| **Available**                 | available /g TUTORIAL <br> e.g., `available /g TUES08`                                                                                   |
+| **Help**                      | help                                                                                                                                     |
