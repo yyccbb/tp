@@ -66,7 +66,8 @@ public class MarkCommandTest {
         MarkCommand markCommand = new MarkCommand(outOfBoundIndexSet, VALID_TAGNAMES_SET_ASS1_ASS2,
                 TagStatus.COMPLETE_GOOD);
 
-        assertCommandFailure(markCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(markCommand, model, String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
+                model.getFilteredPersonList().size() + 1));
     }
 
     /**
@@ -84,7 +85,8 @@ public class MarkCommandTest {
         MarkCommand markCommand = new MarkCommand(outOfBoundIndexSet, VALID_TAGNAMES_SET_ASS1_ASS2,
                 TagStatus.COMPLETE_GOOD);
 
-        assertCommandFailure(markCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(markCommand, model, String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
+                outOfBoundIndex.getOneBased()));
     }
 
     @Test

@@ -68,7 +68,8 @@ public class MarkCommand extends Command {
 
         // check whether index specified is within valid range
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
+                    index.getOneBased()));
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
@@ -89,6 +90,8 @@ public class MarkCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         // need not check for duplicate indices because a Set is used
+
+        //
 
         // only tutorial tags with predefined tag names are allowed
         if (Tag.getTagTypeWithTagStatus(tagStatus) == TagType.TUTORIAL) {
