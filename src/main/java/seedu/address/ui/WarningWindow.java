@@ -40,6 +40,8 @@ public class WarningWindow extends UiPart<Stage> {
         if (scene != null) {
             cancelButton.setCancelButton(true);
             cancelButton.requestFocus();
+            okButton.disarm();
+            cancelButton.arm();
         } else {
             logger.warning("Scene is null, unable to set default button.");
         }
@@ -47,6 +49,8 @@ public class WarningWindow extends UiPart<Stage> {
         scene.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
             if (event.getCode() == KeyCode.LEFT) {
                 okButton.requestFocus();
+                okButton.arm();
+                cancelButton.disarm();
                 event.consume();
             }
         });
@@ -54,7 +58,19 @@ public class WarningWindow extends UiPart<Stage> {
         scene.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
             if (event.getCode() == KeyCode.RIGHT) {
                 cancelButton.requestFocus();
+                cancelButton.arm();
+                okButton.disarm();
                 event.consume();
+            }
+        });
+
+        scene.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                if (scene != null && scene.getFocusOwner() instanceof Button) {
+                    Button focusedButton = (Button) scene.getFocusOwner();
+                    focusedButton.fire();
+                    event.consume();
+                }
             }
         });
     }

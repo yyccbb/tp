@@ -71,7 +71,7 @@ dependencies {
 
 shadowJar {
     archiveBaseName = 'TrAcker'
-    archiveClassifier = 'v1.3'
+    archiveClassifier = 'v1.4test'
 }
 
 defaultTasks 'clean', 'test'
