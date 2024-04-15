@@ -63,12 +63,13 @@ public class StatefulParserUtil {
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
         String trimmedIndex = oneBasedIndex.trim();
+        if (!StatefulStringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
+            throw new ParseException(MESSAGE_INVALID_INDEX);
+        }
+
         int intIndex = Integer.parseInt(trimmedIndex);
         Model model = StatefulParserUtil.getInstance().model;
         if (intIndex > model.getFilteredPersonList().size()) {
-            throw new ParseException(MESSAGE_INVALID_INDEX);
-        }
-        if (!StatefulStringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
         return Index.fromOneBased(intIndex);
