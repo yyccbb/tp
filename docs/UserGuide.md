@@ -235,7 +235,7 @@ Here are some recommended tag names for the various tag types.
 
 | Tag type   | Examples of recommended tag names |
 |------------|-----------------------------------|
-| Assignment | `Assignment1` `v1.1Issues`        |
+| Assignment | `Assignment1` `MockPE`            |
 | Attendance | `Week1` `Week2`                   |
 | Tutorial   | `TUE08` `WED10` `THU09`           |
 
