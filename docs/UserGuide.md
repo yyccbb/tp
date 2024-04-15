@@ -3,9 +3,9 @@ layout: page
 title: User Guide
 ---
 
-Welcome to **TrAcker**! This is a **handy contact management app** built for Computer Science Head Teaching Assistants 
+Welcome to **TrAcker**! This is a *handy contact management app* built for *Computer Science Head Teaching Assistants* 
 (CS Head TAs) in NUS. Optimised for use via a command line interface, you can manage student assignments, attendance,
-tutor availability and much more with **just a few keystrokes**!
+tutor availability and much more with *just a few keystrokes*!
 
 * Table of Contents
 {:toc}
@@ -21,7 +21,7 @@ sequentially to get yourself up to speed.
 
 Throughout the user guide, we have added some extra information for additional clarity!
 
-<div markdown="span" class="alert alert-primary">:information_source: **Info:**
+<div markdown="span" class="alert alert-info">:information_source: **Info:**
 I am here to provide you with additional information about the commands!
 </div>
 
@@ -33,7 +33,7 @@ I am here to help you with extra tips!
 I am here to warn you of potential risks or issues!
 </div>
 
-If you are an :star::star::star: **experienced user**, skip ahead to [Command Summary](#Command-Summary) 
+If you are an :star::star::star: **experienced user**, skip ahead to [Command summary](#command-summary) 
 for a quick refresher. 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -50,7 +50,6 @@ for a quick refresher.
    command to run the application.<br>
    The GUI with some sample data should appear in a few seconds: <br>
    ![Ui](images/Ui.png)
-
 
 5. Type the command in the command box and press Enter to execute it.<br>
    Some example commands you can try:
@@ -69,13 +68,13 @@ for a quick refresher.
 
 6. If a command is not recognized, a message containing the correct usage of the command will be shown.
 
-7. Refer to the [Features](#Basic-Features) below for details of each command.
+7. Head to [Features](#basic-features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Basic Features
 
-While using TrAcker for the first time might be overwhelming, fret not as we are here to guide you through :sun:. Let's 
+While using TrAcker for the first time might be overwhelming, fret not as we are here :sun: to guide you through. Let's 
 go through the basic commands to get you started!
 
 <div markdown="span" class="alert alert-primary">
@@ -127,15 +126,10 @@ Format:
 
 * To add a TA,<br>
   `add ta /n NAME /i ID /p PHONE /e EMAIL`
-<div markdown="span" class="alert alert-primary">
-
-:bulb: **Notes:**<br>
 
 * Every person is saved either as a Student or TA. If the type of the person is not specified, the person will be
   saved as a Student by default.<br>
 * Each person's ID is unique, so you cannot add 2 people with the same ID.<br>
-
-</div>
 
 Examples:
 * `add stu /n Alex Yeoh /i A0777777L /p 87438807 /e alexyeoh@ex.com`
@@ -176,11 +170,13 @@ Format: `find [stu | ta] [/n NAME] [/i ID] [/p PHONE] [/e EMAIL] [/t TAGS...]`
 * The search is case-insensitive. e.g. `hans` will match `Hans`
 * The order of the keywords under each flag does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Subwords will be matched e.g. `Han` will match `Hans`
-* Between optional fields supplied, the search filters for persons meeting criteria specified for ALL fields at the same time, (i.e. `AND` search).
-    
-    e.g. `find stu /n John /i 6Z` will find all Students who have both a name containing `John` and an ID containing `6Z`. 
-* For multiple values (split by space) supplied to the same optional field, the search filters for persons meeting ANY criteria, (i.e. `OR` search).
 
+<div markdown="span" class="alert alert-info">:information_source: **Info:** <br>
+
+* Between optional fields supplied, the search filters for persons meeting criteria specified for ALL fields at the 
+same time, (i.e. `AND` search). e.g. `find stu /n John /i 6Z` will find all Students who have both a name containing 
+`John` and an ID containing `6Z`. <br>
+* For multiple values (split by space) supplied to the same optional field, the search filters for persons meeting ANY criteria, (i.e. `OR` search).
     e.g. `find stu /n John Smith` will find all Students who have either a name containing `John` or a name containing `Smith`.
 
 * When performing search for the `TAGS` field (more information on tags [here](#tagging)):
@@ -191,6 +187,7 @@ Format: `find [stu | ta] [/n NAME] [/i ID] [/p PHONE] [/e EMAIL] [/t TAGS...]`
 or an `assignment1` tag<br>
     e.g. `find stu /n John /t wed assignment1` will find all persons with a name containing `John` AND
 either a tutorial tag where `wed` is a subword or an `assignment1` tag
+</div>
 
 Examples:
 * `find ta` returns all TAs
@@ -220,7 +217,7 @@ Examples:
 :bulb: **Warning Popup:**<br>
 
 * Oops! It looks like you're about to perform an action that could lead to unintended data loss. No worries though - 
-we've got your back! To make sure everything stays safe and sound, we just need a quick confirmation from you.
+we've got your back! To make sure everything stays safe and sound, we just need a quick confirmation from you. <br>
 * We have introduced toggling using your left and right arrow keys, as well as the enter key for increased efficiency.
 
 </div>
@@ -250,11 +247,10 @@ Advanced users are welcome to update data directly by editing that data file.
 **While the app is running**, edits to the `addressbook.json` file will not be reflected in the UI. 
 To view the changes, rerun the application.
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file renders its format invalid, TrAcker will discard all existing data and start with an 
-empty data file in the next run. Hence, it is recommended to have a backup of the data file before editing it. 
-
-Furthermore, certain edits can cause TrAcker to behave in unexpected ways (e.g., if a value entered is outside the 
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:** <br/>
+* If your changes to the data file renders its format invalid, TrAcker will discard all existing data and start with an 
+empty data file in the next run. Hence, it is recommended to have a backup of the data file before editing it. <br/>
+* Furthermore, certain edits can cause TrAcker to behave in unexpected ways (e.g., if a value entered is outside the 
 acceptable range). Therefore, please edit the data file only if you are confident that you can update it correctly.
 </div>
 
@@ -262,8 +258,10 @@ acceptable range). Therefore, please edit the data file only if you are confiden
 
 ## Tagging
 
-With TrAcker tags, you can conveniently track students' assignment completion status, their assigned tutorial groups as well as their tutorial attendance records. 
-You are also able to track TA's assigned tutorial slots and their availability for other tutorial slots in case substitutions are needed.
+Forget the hassle :hammer: of managing administrative tasks as the Head TA! With TrAcker tags, you can conveniently track 
+students' assignment completion status, their assigned tutorial groups as well as their tutorial attendance records. 
+You are also able to track TA's assigned tutorial slots and their availability for other tutorial slots in case 
+substitutions are needed.
 
 TrAcker allows the use of three different types of tags - **Assignment, Attendance,** and **Tutorial** - 
 which can be attached to Students and TAs.
@@ -427,7 +425,7 @@ contains the data of your previous TrAcker home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Known Issues 
+## Known issues 
 
 :hammer: Heads-up, we're aware of a few hiccups that some users might be experiencing. Don't worry, our team is 
 working hard to squash those bugs! Meanwhile, here are some workarounds for you:
@@ -436,7 +434,7 @@ working hard to squash those bugs! Meanwhile, here are some workarounds for you:
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Command Summary
+## Command summary
 
 | Action                        | Format, Examples                                                                                                                         |
 |-------------------------------|------------------------------------------------------------------------------------------------------------------------------------------|
