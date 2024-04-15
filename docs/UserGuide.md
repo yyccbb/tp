@@ -336,7 +336,7 @@ contains the data of your previous TrAcker home folder.
 ## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
-2. **While the app is running**, edits to the `addressbook.json` file while not be reflected in the UI. To view the changes, rerun the application. 
+2. **While the app is running**, edits to the `addressbook.json` file will not be reflected in the UI. To view the changes, rerun the application. 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
