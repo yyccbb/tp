@@ -174,6 +174,18 @@ public abstract class Tag {
     }
 
     /**
+     * @param currTags current tag set to be updated.
+     * @param tagName  name of the new tutorial tag.
+     * @return
+     */
+    public static Set<Tag> removeTutTagFromTagSet(Set<Tag> currTags, String tagName) {
+        // remove the potentially existing Tag of the same name from the hashset.
+        Tag newTag = Tag.createTag(tagName, TagStatus.DEFAULT_STATUS);
+        currTags.removeIf(tag -> tag.isTutorial() && tag.equals(newTag));
+        return currTags;
+    }
+
+    /**
      * Removes the tags with the specified tag names from the current set of tags.
      * @param currTags
      * @param tagNames

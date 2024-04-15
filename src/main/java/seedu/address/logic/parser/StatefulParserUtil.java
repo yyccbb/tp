@@ -29,7 +29,7 @@ import seedu.address.model.tag.TagStatus;
  * Contains utility methods used for parsing strings in the various *Parser classes.
  */
 public class StatefulParserUtil {
-    public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_INDEX = "Index is out of bounds or not an unsigned positive integer.";
     private static StatefulParserUtil instance = null;
     private Model model;
     private StatefulParserUtil(Model model) {
@@ -66,7 +66,13 @@ public class StatefulParserUtil {
         if (!StatefulStringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
-        return Index.fromOneBased(Integer.parseInt(trimmedIndex));
+
+        int intIndex = Integer.parseInt(trimmedIndex);
+        Model model = StatefulParserUtil.getInstance().model;
+        if (intIndex > model.getFilteredPersonList().size()) {
+            throw new ParseException(MESSAGE_INVALID_INDEX);
+        }
+        return Index.fromOneBased(intIndex);
     }
 
     /**

@@ -21,13 +21,13 @@ public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a Student / TA to the address book.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a Student / TA to TrAcker.\n"
             + "Parameters: "
-            + "PERSON TYPE [" + TYPE_STU + "/" + TYPE_TA + "] "
+            + "[" + TYPE_STU + " | " + TYPE_TA + "] "
             + PREFIX_NAME + " NAME "
             + PREFIX_ID + " ID "
             + PREFIX_PHONE + " PHONE "
-            + PREFIX_EMAIL + " EMAIL "
+            + PREFIX_EMAIL + " EMAIL \n"
             + "Example: " + COMMAND_WORD + " "
             + TYPE_STU + " "
             + PREFIX_NAME + " John Doe "

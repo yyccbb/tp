@@ -1,7 +1,7 @@
 package seedu.address.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.ID_DESC_AMY;
@@ -9,6 +9,7 @@ import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.AMY;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
@@ -18,10 +19,13 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
+import seedu.address.commons.util.StatefulStringUtil;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.StatefulParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -60,8 +64,9 @@ public class LogicManagerTest {
 
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
+        initializeStatefulUtils();
         String deleteCommand = "delete 9";
-        assertCommandException(deleteCommand, String.format(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, "[9]"));
+        assertParseException(deleteCommand, String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
     }
 
     @Test
@@ -85,6 +90,15 @@ public class LogicManagerTest {
     @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredPersonList().remove(0));
+    }
+
+    /**
+     * Initializes the singleton classes with sample model for testing.
+     */
+    private void initializeStatefulUtils() {
+        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        StatefulParserUtil.initialize(model);
+        StatefulStringUtil.initialize(model);
     }
 
     /**
