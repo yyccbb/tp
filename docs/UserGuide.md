@@ -293,7 +293,7 @@ Format: `tuttag list`
 
 ### Removing a tag: `removetag`
 
-Removes an individual tag from a person. If the specified tag does not exist, no change should happen.
+Removes an individual tag from a person. If the specified tag does not exist, the person's tags should remain unchanged.
 
 Format: `removetag (all | INDEX [OTHER_INDICES...]) /t TAG`
 
