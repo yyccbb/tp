@@ -3,12 +3,38 @@ layout: page
 title: User Guide
 ---
 
-Welcome to **TrAcker**! This is a *handy contact management app* built for Computer Science Head Teaching Assistants 
-(CS Head TAs) in NUS. Optimized for use via a command line interface, you can manage student assignments, attendance,
-tutor availability and much more with *just a few keystrokes*!
+Welcome to **TrAcker**! This is a **handy contact management app** built for Computer Science Head Teaching Assistants 
+(CS Head TAs) in NUS. Optimised for use via a command line interface, you can manage student assignments, attendance,
+tutor availability and much more with **just a few keystrokes**!
 
 * Table of Contents
 {:toc}
+
+--------------------------------------------------------------------------------------------------------------------
+
+## About this User Guide
+
+We designed this User Guide to bring you through the functionalities of TrAcker step-by-step!
+
+If you are a :star: **first-time user**, we're excited to have you onboard! We recommend you to follow our User Guide 
+sequentially to get yourself up to speed. 
+
+Throughout the user guide, we have added some extra information for additional clarity!
+
+<div markdown="span" class="alert alert-primary">:information_source: **Info:**
+I am here to provide you with additional information about the commands!
+</div>
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tips:**
+I am here to help you with extra tips!
+</div>
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+I am here to warn you of potential risks or issues!
+</div>
+
+If you are an :star::star::star: **experienced user**, skip ahead to [Command Summary](#Command-Summary) 
+for a quick refresher. 
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -28,7 +54,6 @@ tutor availability and much more with *just a few keystrokes*!
 5. Type the command in the command box and press Enter to execute it.<br>
    Some example commands you can try:
 
-
    * `list` : Lists all contacts.
    
    * `add stu /n John Doe /i A0123456Y /p 91234567 /e johndoe@ex.com` : Adds the Student `John Doe` to your contact list.
@@ -41,30 +66,32 @@ tutor availability and much more with *just a few keystrokes*!
 
    * `exit` : Exits the app.
 
-
 6. If a command is not recognized, a message containing the correct usage of the command will be shown.
 
-7. Refer to the [Features](#features) below for details of each command.
+7. Refer to the [Features](#Basic-Features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Basic Features
 
+While using TrAcker for the first time might be overwhelming, fret not as we are here to guide you through :sun:. Let's 
+go through the basic commands to get you started!
+
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Notes about the command format:**<br>
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
+* Words in `UPPER_CASE` are the parameters to be supplied.<br>
   e.g. in `add stu /n NAME`, `NAME` is a parameter that can be used as `add stu /n John Doe`.
 
-* Parameters with `...` after them can be supplied by the user for zero, one or more times.<br>
+* Parameters with `...` after them can be supplied zero, one or more times.<br>
   e.g. `[/t TAG...]` can be used as `/t Assignment1` or `/t Assignment1 Assignment2`(`Assignment1` and `Assignment2`
 would be treated as two different tags. Refer to the [Tagging](#tagging) section for more information).
 
 * Items in square brackets are optional.<br>
   e.g. `/n NAME [/p PHONE]` can be used as `/n John Doe /p 91234567` or as `/n John Doe`.
 
-* Vertical bar (pipe) `|` is used to denote alternatives.<br>
+* The vertical bar or pipe `|` is used to denote alternatives.<br>
 
 * Pipe symbol and square brackets together `[|]` denote alternative items that are optional.<br>
   e.g. in `add [stu | ta] /n NAME`, `stu` and `ta` are alternatives, either exactly one or none of them should be used.
@@ -125,14 +152,15 @@ Examples:
 
 ### Listing all persons : `list`
 
-Shows a list of all persons in TrAcker (undo any filtering by [find](#locating-persons-find) command).
+Shows a list of all persons in TrAcker. With this command, you can undo any filtering by previous 
+[find](#locating-persons-find) commands.
 
 Format: `list`
 
 ### Locating persons: `find`
 
-Filters all persons whose contact details contain each of the specified keywords 
-under the specified flag and displays them as a list with index numbers.
+Filters all persons whose contact details contain the specified keywords under the specified flag and 
+displays them as a list with index numbers.
 
 Format: `find [stu | ta] [/n NAME] [/i ID] [/p PHONE] [/e EMAIL] [/t TAGS...]`
 
@@ -160,7 +188,6 @@ Examples:
 
 * `find /n John` returns `john` and `John Doe`
 
-
 ### Deleting persons : `delete`
 
 Deletes the person(s) specified by their indices from the displayed person list. A popup will appear to confirm the 
@@ -179,6 +206,16 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the full contact list.
 * `find /n Betsy` followed by `delete 1` deletes the 1st person in the results of the `find /n Betsy` command.
 
+<div markdown="span" class="alert alert-primary">
+
+:bulb: **Warning Popup:**<br>
+
+* Oops! It looks like you're about to perform an action that could lead to unintended data loss. No worries though - 
+we've got your back! To make sure everything stays safe and sound, we just need a quick confirmation from you.
+* We have introduced toggling using your left and right arrow keys, as well as the enter key for increased efficiency.
+
+</div>
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
@@ -193,17 +230,23 @@ Format: `exit`
 
 ### Saving the data
 
+Worried about data loss? That is not an issue with TrAcker. <br/>
+
 TrAcker data is saved in the hard disk automatically after each command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-TrAcker saves its data as a JSON file `[JAR file location]/data/addressbook.json` automatically. Advanced users are welcome to update data directly by editing that data file.
-**While the app is running**, edits to the `addressbook.json` file will not be reflected in the UI. To view the changes, rerun the application.
+TrAcker saves its data as a JSON file `[JAR file location]/data/addressbook.json` automatically. 
+Advanced users are welcome to update data directly by editing that data file.
+**While the app is running**, edits to the `addressbook.json` file will not be reflected in the UI. 
+To view the changes, rerun the application.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file renders its format invalid, TrAcker will discard all existing data and start with an empty data file in the next run. Hence, it is recommended to have a backup of the data file before editing it. 
+If your changes to the data file renders its format invalid, TrAcker will discard all existing data and start with an 
+empty data file in the next run. Hence, it is recommended to have a backup of the data file before editing it. 
 
-Furthermore, certain edits can cause TrAcker to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, please edit the data file only if you are confident that you can update it correctly.
+Furthermore, certain edits can cause TrAcker to behave in unexpected ways (e.g., if a value entered is outside the 
+acceptable range). Therefore, please edit the data file only if you are confident that you can update it correctly.
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -213,7 +256,8 @@ Furthermore, certain edits can cause TrAcker to behave in unexpected ways (e.g.,
 With TrAcker tags, you can conveniently track students' assignment completion status, their assigned tutorial groups as well as their tutorial attendance records. 
 You are also able to track TA's assigned tutorial slots and their availability for other tutorial slots in case substitutions are needed.
 
-TrAcker allows the use of three different types of tags : **Assignments, Attendance,** and **Tutorial** tags which can be attached to Students and TAs respectively.
+TrAcker allows the use of three different types of tags - **Assignment, Attendance,** and **Tutorial** - 
+which can be attached to Students and TAs.
 The different tag types along with their corresponding tag statuses are described below.
 
 ### Tag Status
@@ -279,7 +323,7 @@ with specified status would be added to any listed contact that previously did n
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Note:** For **Tutorial** tags, the tutorial name must be that of a valid Tutorial tag in the 
-list of available tutorial sessions defined with the [tuttag](#adding-a-tutorial--tuttag-add) command.
+list of available tutorial sessions defined with the [tuttag](#adding-a-tutorial-tuttag-add) command.
 For example, in the third example above, `TUE08` should be added as a tutorial tag first using [`tuttag add /t TUE08`](#adding-a-tutorial-tuttag-add).
 
 </div>
@@ -340,7 +384,7 @@ Examples:
 
 ### Viewing help : `help`
 
-Prompts a popup containing the link to access the user guide.
+Prompts a popup containing the link to the user guide.
 
 ![help message](images/helpMessage.png)
 
@@ -350,19 +394,25 @@ Format: `help`
 
 ## FAQ
 
+Welcome to our FAQ section! Here, we've gathered answers to the questions we hear most often from our users. 
+If you can't find what you're looking for, feel free to reach out to us directly.
+
 **Q**: How do I transfer my data to another computer?<br>
 **A**: Install the app in the other computer and overwrite the data file it creates with the file that 
 contains the data of your previous TrAcker home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Known issues
+## Known Issues 
+
+:hammer: Heads-up, we're aware of a few hiccups that some users might be experiencing. Don't worry, our team is 
+working hard to squash those bugs! Meanwhile, here are some workarounds for you:
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.<br>
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Command summary
+## Command Summary
 
 | Action                        | Format, Examples                                                                                                                           |
 |-------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------|
