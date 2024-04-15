@@ -28,6 +28,8 @@ tutor availability and much more with just a few keystrokes!
 
 5. Type the command in the command box and press Enter to execute it.<br>
    Some example commands you can try:
+
+
    * `list` : Lists all contacts.
    
    * `add stu /n John Doe /i A0123456Y /p 91234567 /e johndoe@ex.com` : Adds the Student `John Doe` to your contact list.
@@ -39,6 +41,7 @@ tutor availability and much more with just a few keystrokes!
    * `clear` : Deletes all contacts.
 
    * `exit` : Exits the app.
+
 
 6. If a command is not recognized, a message containing the correct usage of the command will be shown.
 
@@ -155,6 +158,7 @@ either a tutorial tag where `wed` is a subword or an `assignment1` tag
 Examples:
 * `find ta` returns all TAs
   ![result for 'find ta'](images/findTaResult.png)
+
 * `find /n John` returns `john` and `John Doe`
 
 
@@ -165,16 +169,16 @@ deletion.
 
 Format: `delete (all | INDEX [OTHER_INDICES...])`
 
-* Deletes the person(s) at the specified `INDEX`s.
-* If `all` is used, all persons in the displayed list are deleted. The displayed list might be the same as the full
-list. For example, if the `delete all` command is used after a `find NAME` command, all contacts found by
-the `find NAME` command would be deleted but not those excluded from the displayed list.
+* Deletes the person(s) at the specified `INDEX`.
+* If `all` is used, all persons in the displayed list are deleted. The displayed list might not be the same as the full
+list. For example, if the `delete all` command is used after a [`find NAME`](#locating-persons-find) command,
+all contacts found by the `find NAME` command would be deleted but not those excluded from the displayed list.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `list` followed by `delete 2` deletes the 2nd person in the full contact list.
+* `find /n Betsy` followed by `delete 1` deletes the 1st person in the results of the `find /n Betsy` command.
 
 ### Clearing all entries : `clear`
 
@@ -190,41 +194,41 @@ Format: `exit`
 
 ### Saving the data
 
-TrAcker data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+TrAcker data is saved in the hard disk automatically after each command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-TrAcker data is saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+TrAcker saves its data as a JSON file `[JAR file location]/data/addressbook.json` automatically. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, TrAcker will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the TrAcker  to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+If your changes to the data file renders its format invalid, TrAcker will discard all existing data and start with an empty data file in the next run. Hence, it is recommended to have a backup of the data file before editing it. 
+
+Furthermore, certain edits can cause TrAcker to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, please edit the data file only if you are confident that you can update it correctly.
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Tagging
 
-With TrAcker tags, you can track assignment status, tutorial attendance and tutorial groups students are attending.
-For TAs, you can track their tutorial slots assigned and their availability for replacing other TAs in case 
-substitutions are needed.
+With TrAcker tags, you can conveniently track students' assignment completion status, their assigned tutorial groups as well as their tutorial attendance records. 
+You are also able to track TA's assigned tutorial slots and their availability for other tutorial slots in case substitutions are needed.
 
-TrAcker allows use of three different types of tags : **Assignments, Attendance,** and **Tutorial** tags which can be attached to Students and TAs respectively.
+TrAcker allows the use of three different types of tags : **Assignments, Attendance,** and **Tutorial** tags which can be attached to Students and TAs respectively.
 The different tag types along with their corresponding tag statuses are described below.
 
 ### Tag Status
 
-| Tag type   | Status                                                                                                                                                                                                                                                                             |
-|------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Assignment | `cg` : <mark style="background-color: green">COMPLETE_GOOD</mark><br/>`cb` : <mark style="background-color: orange">COMPLETE_BAD</mark><br/>`ig` : <mark style="background-color: grey">INCOMPLETE_GOOD</mark><br/>`ib` : <mark style="background-color:red">INCOMPLETE_BAD</mark> |
-| Attendance | `p` : <mark style="background-color:  green">PRESENT</mark><br/>`a` : <mark style="background-color:red">ABSENT</mark><br/>`awr` : <mark style="background-color:orange">ABSENT_WITH_REASON</mark>                                                                                 |
-| Tutorial | `as` : <mark style="background-color: #3e7b91">ASSIGNED</mark><br/>`av` : <mark style="background-color: white">AVAILABLE</mark>                                                                                                                                                   |
+| Tag type   | Status                                                                                                                                                                                                                                                                                                                                                                                             |
+|------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Assignment | `cg` : <mark style="background-color: green">COMPLETE_GOOD</mark> (completed before deadline)<br/>`cb` : <mark style="background-color: orange">COMPLETE_BAD</mark> (completed after deadline)<br/>`ig` : <mark style="background-color: grey">INCOMPLETE_GOOD</mark> (incomplete before deadline)<br/>`ib` : <mark style="background-color:red">INCOMPLETE_BAD</mark> (incomplete after deadline) |
+| Attendance | `p` : <mark style="background-color:  green">PRESENT</mark><br/>`a` : <mark style="background-color:red">ABSENT</mark><br/>`awr` : <mark style="background-color:orange">ABSENT_WITH_REASON</mark>                                                                                                                                                                                                 |
+| Tutorial | `as` : <mark style="background-color: #3e7b91">ASSIGNED</mark><br/>`av` : <mark style="background-color: white">AVAILABLE</mark>                                                                                                                                                                                                                                                                   |
 
 ### Tag Name
-Tag names have the following constraints:
+Regardless of tag type, tag names must abide by the following constraints:
 - must be alphanumeric
 - no whitespace between words in the tag
-- all tag names must be unique.
+- tags attached to each person must have unique names (each person can only have one tag of a specific name, regardless of tag types. But tags of the same name can be attached to different contacts)
 
 Here are some recommended tag names for the various tag types.
 
@@ -237,9 +241,19 @@ Here are some recommended tag names for the various tag types.
 
 ### Marking a tag : `mark`
 
-Updates the status of the specified tag with the specified status. If the
-tag specified does not exist, a new tag with the tag name and tag status will be
-created.
+Updates the status of the specified tag with the specified status for the specified person(s). If the
+tag specified does not yet exist for the person(s), a new tag with the tag name and tag status will be
+created and attached to the person(s).
+
+<div markdown="span" class="alert alert-primary">
+
+:bulb: **Notes:**<br>
+
+* The type of the tag(s) to be updated/created are specified through their tag status<br>
+* If a tag is to be marked with the status `cg`, `cb`, `ig` or `ib`, it would be identified as an assignment tag and displayed together with other assignmetn tags in the UI. Similarly for attendance and tutorial tags.<br>
+* If a specific person(s) already has a tag with the same tag name as the tag that is to be marked, but his existing tag has a different tag type as the type identified by new status from the mark command, his original tag would then be replaced by the tag with new type and status but the same tag name.
+
+</div>
 
 Format: `mark ( all | INDEX [OTHER_INDICES...] ) /t TAG [OTHER_TAGS...] /ts TAG_STATUS`
 
@@ -266,13 +280,13 @@ with specified status would be added to any listed contact that previously did n
 
 **:information_source: Note:** For **Tutorial** tags, the tutorial name must be that of a valid Tutorial tag in the 
 list of available tutorial sessions defined with the [tuttag](#adding-a-tutorial--tuttag-add) command.
-For example, in the third example above, `TUE08` should be added as a tutorial tag first using `tuttag add /t TUE08`.
+For example, in the third example above, `TUE08` should be added as a tutorial tag first using [`tuttag add /t TUE08`](#adding-a-tutorial-tuttag-add).
 
 </div>
 
 ### Adding a Tutorial: `tuttag add`
 
-Creates a Tutorial tag to be used with the specified tag name.
+Adds the specified Tutorial tag to the list of valid Tutorial tags. Tutorial tags (identified by Tutorial tag names) not from the valid Tutorial tag list cannot be used.
 
 Format: `tuttag add /t TAG`
 
@@ -282,25 +296,25 @@ Examples:
 
 ### Deleting a Tutorial: `tuttag del`
 
-Deletes the Tutorial tag corresponding to the specified tag name. If the specified tag does not exist, no change should happen.
+Deletes the specified Tutorial tag from the valid Tutorial tag list. If the specified tag does not exist in the list, no change would happen.
 
-Warning: All persons with the specified Tutorial tag will also have the tag removed.
+Warning: All persons with the Tutorial tag (identified by tag name, regardless of tag status) will also have the Tutorial tag removed should this command execute successfully.
 
 Format: `tuttag del /t TAG`
 
 Examples:
 
-* `tuttag del /t WED09` deletes WED09 as a valid Tutorial tag, and removes the WED09 tag from all persons.
+* `tuttag del /t WED09` deletes WED09 from the valid Tutorial tag list, and removes the WED09 Tutorial tag from all persons.
 
 ### Listing All Tutorials: `tuttag list`
 
-Lists all Tutorial tags in TrAcker.
+Lists all valid Tutorial tags in TrAcker.
 
 Format: `tuttag list`
 
 ### Removing a tag: `removetag`
 
-Removes an individual tag from a person. If the specified tag does not exist, the person's tags should remain unchanged.
+Removes an individual tag of the specified tag name (regardless of tag type) from a person. If the specified tag does not exist, the person's tags would remain unchanged.
 
 Format: `removetag (all | INDEX [OTHER_INDICES...]) /t TAG`
 
@@ -311,9 +325,11 @@ Examples:
 * `removetag 1  /t Assignment1` removes the `Assignment1` tag from the 1st person in the displayed list.
 * `removetag 2  3 /t Assignment2` removes the `Assignment2` tag from the 2nd and 3rd person in the displayed list.
 * `removetag all /t Assignment3` removes the `Assignment3` tag from every person in the displayed list.
+
+
 ### Locating available TAs for a tutorial group: `available`
 
-Filters all replacement TAs who are available for a specified tutorial group.
+Filters and lists all TAs who are available for (and not assigned to) a specified tutorial session to serve as replacement TAs.
 
 Format: `available /g TUTORIAL`
 
@@ -324,7 +340,7 @@ Examples:
 
 ### Viewing help : `help`
 
-Shows a message explaining how to access the help page.
+Prompts a popup containing the link to access the user guide.
 
 ![help message](images/helpMessage.png)
 
@@ -342,8 +358,8 @@ contains the data of your previous TrAcker home folder.
 
 ## Known issues
 
-1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
-2. **While the app is running**, edits to the `addressbook.json` file will not be reflected in the UI. To view the changes, rerun the application. 
+1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.<br>
+2. **While the app is running**, edits to the `addressbook.json` file will not be reflected in the UI. To view the changes, rerun the application.<br>
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
