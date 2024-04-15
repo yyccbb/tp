@@ -30,11 +30,11 @@ tutor availability and much more with just a few keystrokes!
    Some example commands you can try:
    * `list` : Lists all contacts.
    
-   * `add stu /n John Doe /i A0123456Y /p 91234567 /e johndoe@example.com` : Adds the Student `John Doe` to your contact list.
+   * `add stu /n John Doe /i A0123456Y /p 91234567 /e johndoe@ex.com` : Adds the Student `John Doe` to your contact list.
    
-   * `add ta /n Jane Smith /i A0654321Y /p 97654321 /e janesmith@example.com` : Adds the TA `Jane Smith` to your contact list.
+   * `add ta /n Jane Smith /i A0654321Y /p 97654321 /e janesmith@ex.com` : Adds the TA `Jane Smith` to your contact list.
    
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+   * `delete 3` : Deletes the 3rd contact shown in the displayed list.
 
    * `clear` : Deletes all contacts.
 
@@ -53,26 +53,30 @@ tutor availability and much more with just a few keystrokes!
 **:information_source: Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add stu /n NAME`, `NAME` is a parameter which can be used as `add stu /n John Doe`.
+  e.g. in `add stu /n NAME`, `NAME` is a parameter that can be used as `add stu /n John Doe`.
 
-* Items with `...` after them can be used multiple times including zero times.<br>
-  e.g. `[/t TAG...]` can be used as `/t friend` or `/t friend colleague` etc.
+* Parameters with `...` after them can be supplied by the user for zero, one or more times.<br>
+  e.g. `[/t TAG...]` can be used as `/t Assignment1` or `/t Assignment1 Assignment2`(`Assignment1` and `Assignment2`
+would be treated as two different tags. Refer to the [Tagging](#tagging) section for more information).
 
 * Items in square brackets are optional.<br>
   e.g. `/n NAME [/p PHONE]` can be used as `/n John Doe /p 91234567` or as `/n John Doe`.
 
-* Vertical bar (pipe) is used to denote alternatives.<br>
+* Vertical bar (pipe) `|` is used to denote alternatives.<br>
 
-* Pipe symbol and square brackets `[|]` separate alternative optional items.<br>
-  e.g. in `add [stu | ta] /n NAME`, `stu` and `ta` are alternatives, and at most one of them should be used.
+* Pipe symbol and square brackets together `[|]` denote alternative items that are optional.<br>
+  e.g. in `add [stu | ta] /n NAME`, `stu` and `ta` are alternatives, either exactly one or none of them should be used.
+  Refer to the [Add](#adding-a-student-or-ta-add-stu-add-ta) command section for more information).
 
-* Parameters can be in any order.<br>
-  e.g. if the command specifies `/n NAME /i ID`, `/i ID /n NAME` is also acceptable.
+* Parameters can be supplied in any order.<br>
+  e.g. if the command specifies `/n NAME /i ID`, `/i ID /n NAME` is also acceptable and has the same effect.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`)
+will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
-* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+* If you are using a PDF version of this document, be careful when copying and pasting commands that span across
+multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
 
@@ -91,20 +95,14 @@ Format:
 :bulb: **Notes:**<br>
 
 * Every person is saved either as a Student or TA. If the type of the person is not specified, the person will be
-  saved as a Student by default.
-* Each person's ID is unique, so you cannot add 2 people with the same ID.
+  saved as a Student by default.<br>
+* Each person's ID is unique, so you cannot add 2 people with the same ID.<br>
 
 </div>
 
 Examples:
-* `add stu /n Alex Yeoh /i A0777777L /p 87438807 /e alexyeoh@example.com`
-* `add ta /n Charlotte Oliveiro /i A2222222P /p 93210283 /e charlotte@example.com`
-
-### Listing all persons : `list`
-
-Shows a list of all persons in TrAcker.
-
-Format: `list`
+* `add stu /n Alex Yeoh /i A0777777L /p 87438807 /e alexyeoh@ex.com`
+* `add ta /n Charlotte Oliveiro /i A2222222P /p 93210283 /e charlotte@ex.com`
 
 ### Editing a person : `edit`
 
@@ -119,9 +117,15 @@ Format: `edit INDEX [/n NAME] [/p PHONE] [/e EMAIL]`
 * A person's `type` (`stu` or `ta`) and `ID` cannot be edited.
 
 Examples:
-*  `edit 1 /p 91234567 /e johndoe@example.com` Edits the phone number and email address of the 1st person to be 
+*  `edit 1 /p 91234567 /e johndoe@example.com` Edits the phone number and email address of the 1st person to be
    `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 /n Betsy Crower` Edits the name of the 2nd person to be `Betsy Crower`.
+
+### Listing all persons : `list`
+
+Shows a list of all persons in TrAcker (undo any filtering by [find](#locating-persons-find) command).
+
+Format: `list`
 
 ### Locating persons: `find`
 
@@ -130,26 +134,29 @@ under the specified flag and displays them as a list with index numbers.
 
 Format: `find [stu | ta] [/n NAME] [/i ID] [/p PHONE] [/e EMAIL] [/t TAGS...]`
 
-* At least one of the optional fields must be provided.
+* At least one of the optional fields must be supplied.
 * The search is case-insensitive. e.g. `hans` will match `Hans`
 * The order of the keywords under each flag does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Subwords will be matched e.g. `Han` will match `Hans`
-* For Tags:
+* Between optional fields supplied, the search filters for 
+persons meeting criteria specified for ALL fields at the same time, (i.e. `AND` search).
+    
+    e.g. `find stu /n John /i 6Z` will find all Students who have both a name containing `John` and an ID containing `6Z`. 
+* When performing search for the `TAGS` field (more information on tags [here](#tagging)):
     * For tutorial tags, subword matching is performed
-    * For other tags, it performs full word matching
+    * For other types of tags, it performs full word matching
     * The search filters for persons meeting ANY criteria, (i.e. `OR` search).
-   
-    e.g. `find /t wed assignment1` will find all persons with the tutorial tag where `wed` is a subword or have tag `assignment1`
-
-
-* The search filters for persons meeting ALL criteria, (i.e. `AND` search).
-
-  e.g. `find stu /n John` will find all Students whose names contain `John`.
+    
+    e.g. `find /t wed assignment1` will find all persons with a tutorial tag where `wed` is a subword
+or an `assignment1` tag<br>
+    e.g. `find stu /n John /t wed assignment1` will find all persons with a name containing `John` AND
+either a tutorial tag where `wed` is a subword or an `assignment1` tag
 
 Examples:
-* `find /n John` returns `john` and `John Doe`
 * `find ta` returns all TAs
   ![result for 'find ta'](images/findTaResult.png)
+* `find /n John` returns `john` and `John Doe`
+
 
 ### Deleting persons : `delete`
 
