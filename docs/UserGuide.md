@@ -199,7 +199,8 @@ TrAcker data is saved in the hard disk automatically after each command that cha
 ### Editing the data file
 
 TrAcker saves its data as a JSON file `[JAR file location]/data/addressbook.json` automatically. Advanced users are welcome to update data directly by editing that data file.
-**While the app is running**, edits to the `addressbook.json` file will not be reflected in the UI. To view the changes, rerun the application.<br>
+**While the app is running**, edits to the `addressbook.json` file will not be reflected in the UI. To view the changes, rerun the application.
+
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file renders its format invalid, TrAcker will discard all existing data and start with an empty data file in the next run. Hence, it is recommended to have a backup of the data file before editing it. 
 
