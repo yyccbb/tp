@@ -33,7 +33,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
+**`Main`** (consisting of classes [`Main`](https://github.com/AY2324S2-CS2103T-T11-4/tp/blob/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2324S2-CS2103T-T11-4/tp/blob/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
@@ -65,13 +65,13 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2324S2-CS2103T-T11-4/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2324S2-CS2103T-T11-4/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -82,7 +82,7 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2324S2-CS2103T-T11-4/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -112,7 +112,7 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2324S2-CS2103T-T11-4/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
@@ -133,7 +133,7 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2324S2-CS2103T-T11-4/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
@@ -416,7 +416,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 6.  **(Performance)** The app should be able to support at minimum a contacts list of 200 without affecting performance.
 7.  **(Performance)** The app should be able to run smoothly even on low-end hardware configurations.
 8.  **(Process)** The project is expected to adhere to a schedule that adds updates incrementally at least once every two weeks.
-9.  **(Project scope)** The product should be focused on the needs of our target user, head teaching assistants.
+9.  **(Project scope)** The product should be focused on the needs of our target user, CS Head Teaching Assistants.
 10. **(Documentation)** Comprehensive user guide should be provided, with detailed instructions on how to use each command.
 11. **(Documentation)** Comprehensive developer guide should be created to facilitate ongoing maintenance of the app.
 
@@ -425,53 +425,50 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Tutor**: A teaching assistant for CS2103T
 * **Student**: A student taking CS2103T
-* **Tag**: A label that can be attached to the student. It is used to mark the attendance for a specific week.
-* **Attendance Status**: The current state of a student's attendance.
-* **Contact Entry**: Contact information of either a student or a tutor, containing the name, phone number, email. For students, they also have an attendance status.
+* **Tag**: A label that can be attached to the student/TA. It can represent a Tutorial Group, Attendance or Assignment.
+* **Tag Status**: The current status of a student's tag. More details can be found in the User Guide. 
+* **Contact Entry**: Contact information of either a student or a TA, containing the name, ID, phone number, email. 
 
 --------------------------------------------------------------------------------------------------------------------
 ## **Appendix: Planned Enhancements**
 
 Team size: 5
 
-1. **Improve user flow for `delete` command:** Currently after entering the `delete` command,
-the warning popup shows up before input validation is done (e.g. if user enters `delete 24`, but 24
-is an invalid index, the warning popup still shows up before any error message). The user flow can be simplified
-by doing input validation before creating a warning popup.
-
-
-2. **Restrict actions on TutorialTags for clarity:** As of now, there is nothing restricting users from doing
+1. **Restrict actions on TutorialTags for clarity:** As of now, there is nothing restricting users from doing
 `tuttag add /t TUE08` followed by `mark 1 /t TUE08 /ts cg`, i.e. the TutorialTag `TUE08` is being treated as an AssignmentTag
 by being assigned the TagStatus `cg`, and is moved to the first row. This can be confusing if users forget their Tutorial / Assignment tags.
 For future versions of TrAcker we intend to make the distinction between different types of tags clearer by restricting the possible TagStatus
 of TutorialTags.
 
 
-3. **Restrict TutorialTag status for Students:** Currently Students get have a TutorialTag marked as "AVAILABLE"
-by entering for instance `mark 1 /t TUE08 /ts av`. However this is likely not very useful for TAs and becomes problematic if the same Student
+2. **Restrict TutorialTag status for Students:** Currently Students get have a TutorialTag marked as "AVAILABLE"
+by entering for instance `mark 1 /t TUE08 /ts av`. However, this is likely not very useful for TAs and becomes problematic if the same Student
 is to be assigned the tutorial group `TUE08`. Thus we plan to also restrict Students to only be able to have TutorialTags with an
 ASSIGNED TagStatus.
 
 
-4. **Enhance information prompts:** Some of the information / error message in TrAcker can be improved for clarity.
+3. **Enhance information prompts:** Some of the information / error messages in TrAcker can be improved for clarity.
 For example running the `clear` command leaves the previous information still in the information prompt. For future versions of TrAcker
 we plan to clear out the information panel in order to show messages relevant the current command being run.
 
 
-5. **Improve GUI to handle longer inputs:** One of the limitations of TrAcker's current GUI is that long input text
+4. **Improve GUI to handle longer inputs:** One of the limitations of TrAcker's current GUI is that long input text
 gets truncated if the window size is small (or, on extreme inputs, text can be truncated in a full-sized window). We
 intend to work on enhancing the flexibility of our GUI in order to handle longer input lengths by adding a scroll pane if lengths
 are too long.
 
 
-6. **Making Phone Number an optional field:** Currently, TrAcker functions similarly to an address book where phone number is a
-compulsory field when adding a person. However students' phone numbers may not be available nor relevant data which TAs require. Thus in order
-to make the process of adding students smoother, we plan to make the phone number field optional in future.
+5. **Making Phone Number an optional field:** Currently, TrAcker functions similarly to an address book where phone number is a
+compulsory field when adding a person. However, students' phone numbers may not be available nor relevant data which TAs require. Thus in order
+to make the process of adding students smoother, we plan to make the phone number field optional in the future.
 
+6. **Making parsing of phone number and email stricter:** Currently, TrAcker does not limit the number of characters in the phone number field,
+and accepts any string with '@' as a valid email input. We plan to accept only 3-15 characters in the phone number field, and
+accept only valid email addresses in the future. 
 
 7. **Import / Export from .csv:** Currently TrAcker relies on users manually adding student / TA data using the `add` command.
 This can be quite time-consuming, especially if users are trying to migrate student / TA data from existing systems in .csv format.
-Thus we plan to include a feature to import data from .csv format (where all required fields are filled in). Similarly we also intend to
+Thus we plan to include a feature to import data from .csv format (where all required fields are filled in). Similarly, we also intend to
 develop an Export feature for users to export their list of Student / TA data into .csv format for added convenience.
 
 ## **Appendix: Instructions for manual testing**
