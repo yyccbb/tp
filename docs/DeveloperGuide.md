@@ -434,44 +434,41 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 Team size: 5
 
-1. **Improve user flow for `delete` command:** Currently after entering the `delete` command,
-the warning popup shows up before input validation is done (e.g. if user enters `delete 24`, but 24
-is an invalid index, the warning popup still shows up before any error message). The user flow can be simplified
-by doing input validation before creating a warning popup.
-
-
-2. **Restrict actions on TutorialTags for clarity:** As of now, there is nothing restricting users from doing
+1. **Restrict actions on TutorialTags for clarity:** As of now, there is nothing restricting users from doing
 `tuttag add /t TUE08` followed by `mark 1 /t TUE08 /ts cg`, i.e. the TutorialTag `TUE08` is being treated as an AssignmentTag
 by being assigned the TagStatus `cg`, and is moved to the first row. This can be confusing if users forget their Tutorial / Assignment tags.
 For future versions of TrAcker we intend to make the distinction between different types of tags clearer by restricting the possible TagStatus
 of TutorialTags.
 
 
-3. **Restrict TutorialTag status for Students:** Currently Students get have a TutorialTag marked as "AVAILABLE"
-by entering for instance `mark 1 /t TUE08 /ts av`. However this is likely not very useful for TAs and becomes problematic if the same Student
+2. **Restrict TutorialTag status for Students:** Currently Students get have a TutorialTag marked as "AVAILABLE"
+by entering for instance `mark 1 /t TUE08 /ts av`. However, this is likely not very useful for TAs and becomes problematic if the same Student
 is to be assigned the tutorial group `TUE08`. Thus we plan to also restrict Students to only be able to have TutorialTags with an
 ASSIGNED TagStatus.
 
 
-4. **Enhance information prompts:** Some of the information / error message in TrAcker can be improved for clarity.
+3. **Enhance information prompts:** Some of the information / error messages in TrAcker can be improved for clarity.
 For example running the `clear` command leaves the previous information still in the information prompt. For future versions of TrAcker
 we plan to clear out the information panel in order to show messages relevant the current command being run.
 
 
-5. **Improve GUI to handle longer inputs:** One of the limitations of TrAcker's current GUI is that long input text
+4. **Improve GUI to handle longer inputs:** One of the limitations of TrAcker's current GUI is that long input text
 gets truncated if the window size is small (or, on extreme inputs, text can be truncated in a full-sized window). We
 intend to work on enhancing the flexibility of our GUI in order to handle longer input lengths by adding a scroll pane if lengths
 are too long.
 
 
-6. **Making Phone Number an optional field:** Currently, TrAcker functions similarly to an address book where phone number is a
-compulsory field when adding a person. However students' phone numbers may not be available nor relevant data which TAs require. Thus in order
-to make the process of adding students smoother, we plan to make the phone number field optional in future.
+5. **Making Phone Number an optional field:** Currently, TrAcker functions similarly to an address book where phone number is a
+compulsory field when adding a person. However, students' phone numbers may not be available nor relevant data which TAs require. Thus in order
+to make the process of adding students smoother, we plan to make the phone number field optional in the future.
 
+6. **Making parsing of phone number and email stricter:** Currently, TrAcker does not limit the number of characters in the phone number field,
+and accepts any string with '@' as a valid email input. We plan to accept only 3-15 characters in the phone number field, and
+accept only valid email addresses in the future. 
 
 7. **Import / Export from .csv:** Currently TrAcker relies on users manually adding student / TA data using the `add` command.
 This can be quite time-consuming, especially if users are trying to migrate student / TA data from existing systems in .csv format.
-Thus we plan to include a feature to import data from .csv format (where all required fields are filled in). Similarly we also intend to
+Thus we plan to include a feature to import data from .csv format (where all required fields are filled in). Similarly, we also intend to
 develop an Export feature for users to export their list of Student / TA data into .csv format for added convenience.
 
 ## **Appendix: Instructions for manual testing**

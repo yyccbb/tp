@@ -3,9 +3,9 @@ layout: page
 title: User Guide
 ---
 
-**TrAcker** is a handy contact management app built for CS Head Teaching Assistants (TAs) in NUS.
-Optimized for use via a command line interface, you can manage student assignments, attendance,
-tutor availability and much more with just a few keystrokes!
+Welcome to **TrAcker**! This is a *handy contact management app* built for Computer Science Head Teaching Assistants 
+(CS Head TAs) in NUS. Optimized for use via a command line interface, you can manage student assignments, attendance,
+tutor availability and much more with *just a few keystrokes*!
 
 * Table of Contents
 {:toc}
@@ -21,8 +21,7 @@ tutor availability and much more with just a few keystrokes!
 3. Copy the file to the folder you want to use as the _home folder_ for your **TrAcker** app.
 
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar TrAcker.jar` 
-   command to 
-   run the application.<br>
+   command to run the application.<br>
    The GUI with some sample data should appear in a few seconds: <br>
    ![Ui](images/Ui.png)
 
@@ -74,8 +73,8 @@ would be treated as two different tags. Refer to the [Tagging](#tagging) section
 * Parameters can be supplied in any order.<br>
   e.g. if the command specifies `/n NAME /i ID`, `/i ID /n NAME` is also acceptable and has the same effect.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`)
-will be ignored.<br>
+* Extraneous parameters for single-word commands that do not take in parameters 
+(specifically `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span across
@@ -109,7 +108,7 @@ Examples:
 
 ### Editing a person : `edit`
 
-Edits an existing person in the address book.
+Edits an existing person in the contact book.
 
 Format: `edit INDEX [/n NAME] [/p PHONE] [/e EMAIL]`
 
@@ -251,7 +250,7 @@ created and attached to the person(s).
 :bulb: **Notes:**<br>
 
 * The type of the tag(s) to be updated/created are specified through their tag status<br>
-* If a tag is to be marked with the status `cg`, `cb`, `ig` or `ib`, it would be identified as an assignment tag and displayed together with other assignmetn tags in the UI. Similarly for attendance and tutorial tags.<br>
+* If a tag is to be marked with the status `cg`, `cb`, `ig` or `ib`, it would be identified as an assignment tag and displayed together with other assignment tags in the UI. Similarly for attendance and tutorial tags.<br>
 * If a specific person(s) already has a tag with the same tag name as the tag that is to be marked, but his existing tag has a different tag type as the type identified by new status from the mark command, his original tag would then be replaced by the tag with new type and status but the same tag name.
 
 </div>
