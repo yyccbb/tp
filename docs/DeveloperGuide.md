@@ -189,6 +189,23 @@ The below sequence diagram depicts the process of a user executing the `find` co
 
 ![FindSequenceDiagram](images/FindSequenceDiagram.png)
 
+### Stateful Utility Classes
+
+The `ParserUtil` and `StringUtil` classes were originally classes that provide utility
+APIs for parsing and string operations. Upon noticing the need that some parsing and string
+operations require state information of the current model, both classes are updated to record
+the state information and follow the singleton pattern. They are renamed `StatefulParserUtil` and
+`StatefulStringUtil`.
+<br>
+
+For both classes,
+* An `initialize()` method is provided to initialize with the current model. This method should only
+be called once.
+* An `getInstance()` method is provided to access the private field `model` that
+captures the state information
+* Some utility methods can now use the state information (e.g. the current filtered list of persons)
+to achieve their functionalities.
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
