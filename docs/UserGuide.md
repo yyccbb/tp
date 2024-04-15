@@ -280,13 +280,13 @@ with specified status would be added to any listed contact that previously did n
 
 **:information_source: Note:** For **Tutorial** tags, the tutorial name must be that of a valid Tutorial tag in the 
 list of available tutorial sessions defined with the [tuttag](#adding-a-tutorial--tuttag-add) command.
-For example, in the third example above, `TUE08` should be added as a tutorial tag first using `tuttag add /t TUE08`.
+For example, in the third example above, `TUE08` should be added as a tutorial tag first using [`tuttag add /t TUE08`](#adding-a-tutorial-tuttag-add).
 
 </div>
 
 ### Adding a Tutorial: `tuttag add`
 
-Creates a Tutorial tag to be used with the specified tag name.
+Adds the specified Tutorial tag to the list of valid Tutorial tags. Tutorial tags (identified by Tutorial tag names) not from the valid Tutorial tag list cannot be used.
 
 Format: `tuttag add /t TAG`
 
@@ -296,25 +296,25 @@ Examples:
 
 ### Deleting a Tutorial: `tuttag del`
 
-Deletes the Tutorial tag corresponding to the specified tag name. If the specified tag does not exist, no change should happen.
+Deletes the specified Tutorial tag from the valid Tutorial tag list. If the specified tag does not exist in the list, no change would happen.
 
-Warning: All persons with the specified Tutorial tag will also have the tag removed.
+Warning: All persons with the Tutorial tag (identified by tag name, regardless of tag status) will also have the Tutorial tag removed should this command execute successfully.
 
 Format: `tuttag del /t TAG`
 
 Examples:
 
-* `tuttag del /t WED09` deletes WED09 as a valid Tutorial tag, and removes the WED09 tag from all persons.
+* `tuttag del /t WED09` deletes WED09 from the valid Tutorial tag list, and removes the WED09 Tutorial tag from all persons.
 
 ### Listing All Tutorials: `tuttag list`
 
-Lists all Tutorial tags in TrAcker.
+Lists all valid Tutorial tags in TrAcker.
 
 Format: `tuttag list`
 
 ### Removing a tag: `removetag`
 
-Removes an individual tag from a person. If the specified tag does not exist, the person's tags should remain unchanged.
+Removes an individual tag of the specified tag name (regardless of tag type) from a person. If the specified tag does not exist, the person's tags would remain unchanged.
 
 Format: `removetag (all | INDEX [OTHER_INDICES...]) /t TAG`
 
@@ -325,9 +325,11 @@ Examples:
 * `removetag 1  /t Assignment1` removes the `Assignment1` tag from the 1st person in the displayed list.
 * `removetag 2  3 /t Assignment2` removes the `Assignment2` tag from the 2nd and 3rd person in the displayed list.
 * `removetag all /t Assignment3` removes the `Assignment3` tag from every person in the displayed list.
+
+
 ### Locating available TAs for a tutorial group: `available`
 
-Filters all replacement TAs who are available for a specified tutorial group.
+Filters and lists all TAs who are available for (and not assigned to) a specified tutorial session to serve as replacement TAs.
 
 Format: `available /g TUTORIAL`
 
@@ -338,7 +340,7 @@ Examples:
 
 ### Viewing help : `help`
 
-Shows a message explaining how to access the help page.
+Prompts a popup containing the link to access the user guide.
 
 ![help message](images/helpMessage.png)
 
@@ -356,8 +358,8 @@ contains the data of your previous TrAcker home folder.
 
 ## Known issues
 
-1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
-2. **While the app is running**, edits to the `addressbook.json` file will not be reflected in the UI. To view the changes, rerun the application. 
+1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.<br>
+2. **While the app is running**, edits to the `addressbook.json` file will not be reflected in the UI. To view the changes, rerun the application.<br>
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
