@@ -26,6 +26,7 @@ tutor availability and much more with just a few keystrokes!
    The GUI with some sample data should appear in a few seconds: <br>
    ![Ui](images/Ui.png)
 
+
 5. Type the command in the command box and press Enter to execute it.<br>
    Some example commands you can try:
 
@@ -50,6 +51,13 @@ tutor availability and much more with just a few keystrokes!
 --------------------------------------------------------------------------------------------------------------------
 
 ## Basic Features
+
+<div markdown="span" class="alert alert-primary">
+
+:bulb: **Tip:**<br>
+
+* You can press `Enter` or `/` to activate input field and start typing when the TrAcker window is in focus. This is provided that there is no popup window demanding attention.
+</div>
 
 <div markdown="block" class="alert alert-info">
 
@@ -141,14 +149,16 @@ Format: `find [stu | ta] [/n NAME] [/i ID] [/p PHONE] [/e EMAIL] [/t TAGS...]`
 * The search is case-insensitive. e.g. `hans` will match `Hans`
 * The order of the keywords under each flag does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Subwords will be matched e.g. `Han` will match `Hans`
-* Between optional fields supplied, the search filters for 
-persons meeting criteria specified for ALL fields at the same time, (i.e. `AND` search).
+* Between optional fields supplied, the search filters for persons meeting criteria specified for ALL fields at the same time, (i.e. `AND` search).
     
     e.g. `find stu /n John /i 6Z` will find all Students who have both a name containing `John` and an ID containing `6Z`. 
+* For multiple values (split by space) supplied to the same optional field, the search filters for persons meeting ANY criteria, (i.e. `OR` search).
+
+    e.g. `find stu /n John Smith` will find all Students who have either a name containing `John` or a name containing `Smith`.
+
 * When performing search for the `TAGS` field (more information on tags [here](#tagging)):
     * For tutorial tags, subword matching is performed
     * For other types of tags, it performs full word matching
-    * The search filters for persons meeting ANY criteria, (i.e. `OR` search).
     
     e.g. `find /t wed assignment1` will find all persons with a tutorial tag where `wed` is a subword
 or an `assignment1` tag<br>
@@ -276,7 +286,9 @@ previously did not have the tags.
 assign every person in the displayed list to the tutorial group TUE08 if they already have the tag. The `TUE08` tag
 with specified status would be added to any listed contact that previously did not have the tag.
 
-<div markdown="block" class="alert alert-info">
+<div markdown="span" class="alert alert-primary">
+
+:bulb: **Note:**<br>
 
 **:information_source: Note:** For **Tutorial** tags, the tutorial name must be that of a valid Tutorial tag in the 
 list of available tutorial sessions defined with the [tuttag](#adding-a-tutorial--tuttag-add) command.
