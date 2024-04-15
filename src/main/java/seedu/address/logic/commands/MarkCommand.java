@@ -36,8 +36,8 @@ public class MarkCommand extends Command {
             + "of specified contact entry(s) with the specified status.\n"
             + "If the tag(s) specified does not exist, a new tag with the tag name"
             + " and tag status would be created.\n"
-            + "Parameters: INDEX (must be a positive integer within the size of the displayed list) "
-            + "[OTHER_INDICES} "
+            + "Parameters: (all | INDEX (must be a positive integer within the size of the displayed list) "
+            + "[OTHER_INDICES]) "
             + PREFIX_TAG + " TAG_NAME [OTHER_TAG_NAMES] " + PREFIX_TAGSTATUS + " TAG_STATUS\n"
             + "Example 1: " + SAMPLE_COMMAND + "\n"
             + "Example 2: " + SAMPLE_COMMAND_2;

@@ -121,7 +121,7 @@ Edits an existing person in the contact book.
 Format: `edit INDEX [/n NAME] [/p PHONE] [/e EMAIL]`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list.
-  The index **must be a positive integer** 1, 2, 3, ...​
+  The index **must be a positive integer** within the size of the displayed list.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * A person's `type` (`stu` or `ta`) and `ID` cannot be edited.
@@ -182,8 +182,7 @@ Format: `delete (all | INDEX [OTHER_INDICES...])`
 * If `all` is used, all persons in the displayed list are deleted. The displayed list might not be the same as the full
 list. For example, if the `delete all` command is used after a [`find NAME`](#locating-persons-find) command,
 all contacts found by the `find NAME` command would be deleted but not those excluded from the displayed list.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* The index **must be a positive integer** within the size of the displayed list.
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the full contact list.
@@ -265,10 +264,10 @@ created and attached to the person(s).
 
 </div>
 
-Format: `mark ( all | INDEX [OTHER_INDICES...] ) /t TAG [OTHER_TAGS...] /ts TAG_STATUS`
+Format: `mark (all | INDEX [OTHER_INDICES...]) /t TAG [OTHER_TAGS...] /ts TAG_STATUS`
 
 * The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* The index **must be a positive integer** within the size of the displayed list.
 * When `all` is used, the command will apply to all persons in the displayed list.
 * When multiple `TAG`s are specified, the same `TAG_STATUS` will be applied to all the tags.
 * `TAG_STATUS` must be one of the [above specified values](#tag-status)
@@ -331,7 +330,8 @@ Removes an individual tag of the specified tag name (regardless of tag type) fro
 Format: `removetag (all | INDEX [OTHER_INDICES...]) /t TAG`
 
 * The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* The index **must be a positive integer** within the size of the displayed list.
+* If the person does not have the specified tag, the command will leave the person unchanged.
 
 Examples:
 * `removetag 1  /t Assignment1` removes the `Assignment1` tag from the 1st person in the displayed list.
