@@ -311,6 +311,7 @@ Examples:
 Deletes the specified Tutorial tag from the valid Tutorial tag list. If the specified tag does not exist in the list, no change would happen.
 
 Warning: All persons with the Tutorial tag (identified by tag name, regardless of tag status) will also have the Tutorial tag removed should this command execute successfully.
+However, if the tag the person has is of the same specified tag name but of a tag type other than Tutorial (it is an Assignment or Attendance tag), this tag would not be removed. 
 
 Format: `tuttag del /t TAG`
 
@@ -344,6 +345,17 @@ Examples:
 Filters and lists all TAs who are available for (and not assigned to) a specified tutorial session to serve as replacement TAs.
 
 Format: `available /g TUTORIAL`
+
+<div markdown="span" class="alert alert-primary">
+
+:bulb: **Notes:**<br>
+
+* Only one Tutorial tag name can be specified per `available` command.
+* Thus, after each `/g` flag, there can only be one Tutorial tag name specified, i.e. `available /g WED10 THU10` is an invalid input
+* There can also only be one '/g' flag supplied per `available` command. If more than one `/g` flag is supplied within the same `available` command, 
+only the tag name after the last `/g` will be processed, i.e. in `available /g WED10 /g THU10`, only `THU10
+will be taken in as a parameter while `WED10` will be ignored.
+</div>
 
 * The search is case-sensitive and must match the specified tutorial group exactly.
 
